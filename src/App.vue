@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+
+function a(ab: number) {
+  ab++;
+  console.log(ab);
+}
+
+console.log(a(1));
 </script>
 
 <template>
