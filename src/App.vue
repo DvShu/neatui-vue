@@ -1,37 +1,62 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import GiteeIcon from "./app_components/GiteeIcon.vue";
+import GithubIcon from "./app_components/GithubIcon.vue";
+/* regist:auto_add */
 
-function a(ab: number) {
-  ab++;
-  console.log(ab);
+function handleLink(platform: string) {
+  let url = ''
+  if (platform === 'gitee') {
+    url = ''
+  } else {
+
+  }
 }
-
-console.log(a(1));
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <section class="nt-container nt-layout-vertical">
+    <header class="nt-header app-header">
+      <div></div>
+      <div class="app-header-right">
+        <GithubIcon class="git-repo-icon"></GithubIcon>
+        <GiteeIcon class="git-repo-icon ml-10"></GiteeIcon>
+      </div>
+    </header>
+    <section class="nt-container">
+      <aside class="nt-aside">Aside</aside>
+      <main class="nt-main">Main</main>
+    </section>
+  </section>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style lang="less">
+.ml-10 {
+  margin-left: 10px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+#app {
+  height: 100%;
+
+  .app-header {
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .app-header-right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .git-repo-icon {
+    font-size: 24px;
+    color: white;
+    transition: font-size 0.15s;
+    cursor: pointer;
+    &:hover {
+      font-size: 30px;
+    }
+  }
 }
 </style>

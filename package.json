@@ -1,21 +1,16 @@
 {
-  "name": "@fly_dream/neatui-vue",
+  "name": "@asteres/neatui-vue",
+  "description": "基于 Vue3 的 UI 组件库",
   "version": "0.0.1",
   "type": "module",
-  "author": "DvShu <tenny.shu@foxmail.com>",
-  "license": "MulanPSL-2.0",
-  "homepage": "https://dvshu.github.io/neatui-vue/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DvShu/neatui-vue.git"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --ext .vue src"
+    "g:c": "node scripts/index.js template"
   },
   "devDependencies": {
+    "@types/node": "^20.11.5",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "@vitejs/plugin-vue": "^5.0.3",
@@ -23,6 +18,7 @@
     "eslint": "^8.56.0",
     "eslint-config-alloy": "^5.1.2",
     "eslint-plugin-vue": "^9.20.1",
+    "less": "^4.2.0",
     "prettier": "^3.2.4",
     "typescript": "^5.3.3",
     "vite": "^5.0.11",
@@ -35,12 +31,5 @@
   },
   "files": [
     "lib"
-  ],
-  "keywords": [
-    "vue",
-    "vue3",
-    "ui",
-    "component",
-    "library"
   ]
 }
