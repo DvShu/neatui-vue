@@ -1,6 +1,6 @@
 import path from "path";
-import { write } from "ph-utils/file";
 import { mkdir, readFile } from "fs/promises";
+import { write } from "ph-utils/file";
 
 const srcPath = path.join(process.cwd(), "src");
 const templatePath = path.join(srcPath, "components");
@@ -35,7 +35,6 @@ async function createComponentTemplate(name) {
 		`import "../style/${snakeName}/index.css";`,
 		"\r\n",
 		"/* regist:auto_add */",
-		"\r\n",
 	];
 	mainContent = mainContent.replace(
 		"/* regist:auto_add */",
@@ -50,7 +49,7 @@ async function createComponentTemplate(name) {
 	// 增加导出
 	let exportContent = await readFile(path.join(srcPath, "index.ts"), "utf-8");
 	exportContent = exportContent.trim();
-	exportContent += `\r\nexport * as ${name} from "./components/${name}.vue"\r\n`;
+	exportContent += `\r\nexport { default as ${name} } from "./components/${name}.vue"\r\n`;
 	await write(path.join(srcPath, "index.ts"), exportContent);
 
 	// 增加引入
@@ -59,9 +58,11 @@ async function createComponentTemplate(name) {
 		`import { ${name} } from "./index";`,
 		"\r\n",
 		"/* regist:auto_add */",
-		"\r\n",
 	];
-	appContent = appContent.replace("/* regist:auto_add */", newAppContent);
+	appContent = appContent.replace(
+		"/* regist:auto_add */",
+		newAppContent.join(""),
+	);
 	await write(path.join(srcPath, "App.vue"), appContent);
 	console.log("创建成功");
 }
