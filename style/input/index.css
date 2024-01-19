@@ -2,9 +2,8 @@
   outline: none;
   box-sizing: border-box;
   height: var(--nt-form-edit-height, 32px);
-  line-height: var(--nt-form-edit-height, 32px);
   border: 1px solid #dedede;
-  transition: border-color .3s;
+  transition: border-color 0.3s;
   background-color: transparent;
   text-align: inherit;
   padding: 0 5px;
