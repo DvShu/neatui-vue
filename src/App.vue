@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import GiteeIcon from './app_components/GiteeIcon.vue';
 import GithubIcon from './app_components/GithubIcon.vue';
-import { MaskCloseIcon } from './index';
-import { SearchIcon } from './index';
-/* regist:auto_add */
+import { MaskCloseIcon, SearchIcon, Input, vClickoutside } from './index';
 
 function handleLink(platform: string) {
   let url = '';
@@ -14,12 +13,25 @@ function handleLink(platform: string) {
   }
   window.open(url);
 }
+
+function handleSearchOutside() {
+  console.log('outside');
+}
 </script>
 
 <template>
   <section class="nt-container nt-layout-vertical">
     <header class="nt-header app-header">
-      <div class="vertical-center app-header-left"></div>
+      <div class="vertical-center app-header-left">
+        <div class="logo-wrapper">
+          <img src="/icon.png" alt="neatui" />
+        </div>
+        <div class="ml-10">
+          <div v-clickoutside="handleSearchOutside">
+            <input type="text" placeholder="搜索" class="nt-input" />
+          </div>
+        </div>
+      </div>
       <div class="vertical-center app-header-right">
         <GithubIcon
           class="git-repo-icon"
@@ -33,11 +45,7 @@ function handleLink(platform: string) {
     </header>
     <section class="nt-container">
       <aside class="nt-aside">Aside</aside>
-      <main class="nt-main">
-        Main
-        <MaskCloseIcon></MaskCloseIcon>
-        <SearchIcon></SearchIcon>
-      </main>
+      <main class="nt-main">Main</main>
     </section>
   </section>
 </template>
@@ -54,7 +62,6 @@ function handleLink(platform: string) {
   height: 100%;
 
   .app-header {
-    background-color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -73,6 +80,16 @@ function handleLink(platform: string) {
     &:hover {
       font-size: 30px;
     }
+  }
+
+  .logo-wrapper {
+    width: calc(var(--nt-aside-width) - 10px);
+    border-right: 1px solid #dedede;
+    box-sizing: border-box;
+  }
+
+  .nt-input {
+    width: 200px;
   }
 }
 </style>

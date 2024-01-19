@@ -1,16 +1,20 @@
 {
-  "root": true,
-  "extends": ["alloy", "alloy/vue", "alloy/typescript"],
-  "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "parser": {
-      "js": "@typescript-eslint/parser",
-      "jsx": "@typescript-eslint/parser",
+	"root": true,
+	"extends": ["alloy", "alloy/vue", "alloy/typescript"],
+	"parser": "vue-eslint-parser",
+	"parserOptions": {
+		"parser": {
+			"js": "@typescript-eslint/parser",
+			"jsx": "@typescript-eslint/parser",
 
-      "ts": "@typescript-eslint/parser",
-      "tsx": "@typescript-eslint/parser"
+			"ts": "@typescript-eslint/parser",
+			"tsx": "@typescript-eslint/parser"
 
-      // Leave the template parser unspecified, so that it could be determined by `<script lang="...">`
-    }
-  }
+			// Leave the template parser unspecified, so that it could be determined by `<script lang="...">`
+		}
+	},
+	"rules": {
+		"no-eq-null": "off",
+		"eqeqeq": ["error", "smart"]
+	}
 }

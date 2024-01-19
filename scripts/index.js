@@ -34,12 +34,9 @@ async function createComponentTemplate(name) {
 	const newMainContent = [
 		`import "../style/${snakeName}/index.css";`,
 		"\r\n",
-		"/* regist:auto_add */",
+		"import App",
 	];
-	mainContent = mainContent.replace(
-		"/* regist:auto_add */",
-		newMainContent.join(""),
-	);
+	mainContent = mainContent.replace("import App", newMainContent.join(""));
 	await write(path.join(srcPath, "main.ts"), mainContent);
 
 	// 新建组件
@@ -54,15 +51,14 @@ async function createComponentTemplate(name) {
 
 	// 增加引入
 	let appContent = await readFile(path.join(srcPath, "App.vue"), "utf-8");
-	const newAppContent = [
-		`import { ${name} } from "./index";`,
-		"\r\n",
-		"/* regist:auto_add */",
-	];
-	appContent = appContent.replace(
-		"/* regist:auto_add */",
-		newAppContent.join(""),
-	);
+	const matches = appContent.match(/import {(.*)} from '\.\/index'/);
+	if (matches) {
+		const newContent = `${matches[1].trim()}, ${name}`;
+		appContent = appContent.replace(
+			matches[0],
+			`import { ${newContent} } from './index'`,
+		);
+	}
 	await write(path.join(srcPath, "App.vue"), appContent);
 	console.log("创建成功");
 }

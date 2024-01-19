@@ -1,18 +1,18 @@
 :root {
   /* button、input 元素高度 */
-  --ph-form-edit-height: 32px;
+  --nt-form-edit-height: 32px;
   /* 主题(primary)颜色 */
-  --ph-primary-color: #4998f6;
+  --nt-primary-color: #4998f6;
   /* 表示错误(error)的颜色 */
-  --ph-error-color: #ed3f13;
+  --nt-error-color: #ed3f13;
   /* 表示成功(success)的颜色 */
-  --ph-success-color: #19bf6c;
+  --nt-success-color: #19bf6c;
   /* 表示警告(warn)的颜色 */
-  --ph-warn-color: #f90;
+  --nt-warn-color: #f90;
   /* 表示信息(info)的颜色 */
-  --ph-info-color: #999;
+  --nt-info-color: #999;
   /* header高度 */
-  --ph-header-height: 50px;
-  /* 侧边栏高度 */
-  --ph-aside-height: 240px;
+  --nt-header-height: 50px;
+  /* 侧边栏宽度 */
+  --nt-aside-width: 240px;
 }

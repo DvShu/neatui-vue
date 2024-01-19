@@ -6,7 +6,7 @@
   height: 100%;
 }
 .nt-container .nt-container {
-  height: calc(100% - var(--ph-header-height));
+  height: calc(100% - var(--nt-header-height));
 }
 .nt-container.nt-layout-vertical {
   flex-direction: column;
@@ -15,7 +15,7 @@
 .nt-aside {
   overflow: auto;
   box-sizing: border-box;
-  width: 240px;
+  width: var(--nt-aside-width);
   flex-shrink: 0;
   border-right: 1px solid #dedede;
   padding: 10px;
@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--ph-header-height);
+  height: var(--nt-header-height);
 }
 .nt-main {
   width: 100%;
