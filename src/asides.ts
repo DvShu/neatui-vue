@@ -7,7 +7,15 @@ export interface AsideItem {
 const asids: AsideItem[] = [
   {
     name: '$introduce',
-    text: '功能介绍',
+    text: '介绍',
+  },
+  {
+    name: '$usage',
+    text: '快速上手',
+  },
+  {
+    name: '---',
+    text: '',
   },
 ];
 export default asids;

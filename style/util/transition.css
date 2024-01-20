@@ -1,0 +1,9 @@
+.nt-opacity-enter-active,
+.nt-opacity-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.nt-opacity-enter-from,
+.nt-opacity-leave-to {
+  opacity: 0;
+}

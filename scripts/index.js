@@ -63,11 +63,43 @@ async function createComponentTemplate(name) {
 	console.log("创建成功");
 }
 
+async function createDocTemplate(name) {
+	// 生成文档组件模板
+	const docTemplateContents = [
+		"<template>",
+		`\t<div id="${name}" class="doc-wrapper">`,
+		'\t\t<div class="doc-main"></div>',
+		'\t\t<CodePreview title="介绍"></CodePreview>',
+		"\t</div>",
+		"</template>",
+		'<script setup lang="ts">',
+		"import CodePreview from '../app_components/CodePreview.vue';",
+		"</script>",
+	];
+	await write(
+		path.join(srcPath, "views", `${name}.vue`),
+		docTemplateContents.join("\r\n"),
+	);
+
+	// 引入生成
+	let oldApp = await readFile(path.join(srcPath, "App.vue"), "utf-8");
+	oldApp = oldApp
+		.replace(
+			"/* regist:auto_add */",
+			`import ${name} from './views/${name}.vue';\r\n/* regist:auto_add */`,
+		)
+		.replace("</main>", `\t<${name} />\r\n\t\t\t</main>`);
+	await write(path.join(srcPath, "App.vue"), oldApp);
+}
+
 (async () => {
 	const argv = process.argv;
 
 	if (argv[2] === "template") {
 		// 创建组件模板
 		await createComponentTemplate(argv[3]);
+	} else if (argv[2] === "docTemplate") {
+		// 创建文档模板
+		await createDocTemplate(argv[3]);
 	}
 })();
