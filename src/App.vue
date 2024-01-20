@@ -1,23 +1,37 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref, nextTick } from 'vue';
 import GiteeIcon from './app_components/GiteeIcon.vue';
 import GithubIcon from './app_components/GithubIcon.vue';
 import { MaskCloseIcon, SearchIcon, Input, vClickoutside } from './index';
 import asids from './asides';
 import type { AsideItem } from './asides';
 import { debounce } from 'ph-utils/web';
-import Introduce from './views/Introduce.vue';
-import Usage from './views/Usage.vue';
-/* regist:auto_add */
 
 const searchText = ref('');
 const searchResultList = ref<AsideItem[]>([]);
 const activeAside = ref('introduce');
+const $container = ref<HTMLElement>();
+
+const modules = import.meta.glob('./views/*.html', { as: 'raw' });
+
+function loadModule() {
+  modules[`./views/${activeAside.value}.html`]()
+    .then((mod) => {
+      if ($container.value != null) {
+        $container.value.innerHTML = mod;
+      }
+      return nextTick();
+    })
+    .then(() => {
+      window.Prism.highlightAll(true);
+    });
+}
 
 function doSearch() {
   if (searchText.value === '') {
     searchResultList.value = [];
   } else {
+    console.log(searchText.value);
     const searchReg = new RegExp(searchText.value, 'i');
     searchResultList.value = asids.filter(
       (item) => searchReg.test(item.name) || searchReg.test(item.text),
@@ -47,6 +61,22 @@ function handleSearchFocus(dir: 'in' | 'out') {
     searchResultList.value = [];
   }
 }
+
+function handleToggleDoc(name: string) {
+  if (name !== activeAside.value) {
+    activeAside.value = name;
+    loadModule();
+  }
+}
+
+function handleSearchItem(name: string) {
+  handleToggleDoc(name);
+  searchText.value = '';
+}
+
+onMounted(() => {
+  loadModule();
+});
 </script>
 
 <template>
@@ -69,8 +99,12 @@ function handleSearchFocus(dir: 'in' | 'out') {
             />
             <Transition name="nt-opacity">
               <ul v-if="searchResultList.length > 0" class="search-menu-list">
-                <li v-for="aside in asids" :key="aside.name">
-                  <span v-if="!aside.name.startsWith('$')"
+                <li
+                  v-for="aside in searchResultList"
+                  :key="aside.name"
+                  @click="handleSearchItem(aside.name)"
+                >
+                  <span v-if="aside.showName"
                     >{{ aside.name }}&nbsp;-&nbsp;</span
                   >
                   <span>{{ aside.text }}</span>
@@ -101,20 +135,16 @@ function handleSearchFocus(dir: 'in' | 'out') {
               aside.name !== '---' ? 'aside-item' : 'aside-divider',
               activeAside === aside.name ? 'aside-item--active' : '',
             ]"
+            @click="handleToggleDoc(aside.name)"
           >
             <template v-if="aside.name !== '---'"
-              ><span v-if="!aside.name.startsWith('$')"
-                >{{ aside.name }}&nbsp;</span
-              >
+              ><span v-if="aside.showName">{{ aside.name }}&nbsp;</span>
               <span>{{ aside.text }}</span></template
             >
           </li>
         </ul>
       </aside>
-      <main class="nt-main app-main">
-        <Introduce></Introduce>
-        <Usage />
-      </main>
+      <main ref="$container" class="nt-main app-main"></main>
     </section>
   </section>
 </template>
@@ -149,6 +179,10 @@ p {
   font-size: 16px;
   line-height: 1.4;
   color: #333;
+}
+.ul-list {
+  padding: 0 40px;
+  list-style: circle;
 }
 #app {
   height: 100%;
@@ -201,9 +235,12 @@ p {
       border-bottom: 1px solid #dedede;
       cursor: pointer;
       background-color: white;
-      transition: background-color 0.3s;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
       &:hover {
-        background-color: #efefef;
+        color: #4fc08d;
+        background-color: #ebfff0;
       }
     }
   }
@@ -244,9 +281,9 @@ p {
     height: 100%;
     flex-grow: 1;
     font-size: 16px;
+    overflow-y: auto;
   }
-
-  .preview-wrapper {
+  .doc-main .preview-wrapper {
     flex-shrink: 0;
     width: 376px;
     height: 90%;

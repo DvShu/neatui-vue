@@ -1,0 +1,41 @@
+<div id="usage" class="doc-wrapper">
+  <div class="nt-scroll-bar doc-main">
+    <h2>依赖介绍</h2>
+    <p>
+      UI库除了依赖于 Vue3 外，还依赖于
+      <a href="https://gitee.com/towardly/ph/wikis/Home"
+        >ph-utils: 一个自己整理的一些常用的工具类</a
+      >
+    </p>
+    <h2>安装</h2>
+    <pre><code class="language-shell">npm i ph-utils @asteres/neatui-vue</code></pre>
+    <h2>按需引入</h2>
+    <p>当前按需引入只支持在 Vite 中配合自动导入实现</p>
+    <p>
+      安装依赖<a href="https://www.npmjs.com/package/unplugin-vue-components"
+        >unplugin-vue-components</a
+      >
+      +
+      <a href="https://www.npmjs.com/package/neatui-vue-resolver"
+        >neatui-vue-resolver</a
+      >
+    </p>
+    <pre><code class="language-shell">npm i unplugin-vue-components neatui-vue-resolver -D</code></pre>
+    <h3>Vite</h3>
+    在 vite.config.ts 的 plugins 添加如下代码：
+    <pre><code class="language-js">
+      import Components from 'unplugin-vue-components/vite'
+      import NeatuiResolver from 'neatui-vue-resolver'
+
+      plugins: [
+        // ...
+        Components({
+          dts: 'src/components.d.ts',
+          resolvers: [NeatuiResolver()],
+        }),
+      ]
+    </code></pre>
+    <h2>浏览器兼容性</h2>
+    <p>所有的组件尽量保证 ios 能够兼容到11</p>
+  </div>
+</div>

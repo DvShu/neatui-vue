@@ -1,0 +1,19 @@
+.nt-scroll-bar {
+  /* 滑块背景色 */
+  --nt-scrollbar-bg: #ccc;
+  /* 滑块宽度 */
+  --nt-scrollbar-width: 10px;
+  /* 鼠标悬浮时滑块颜色 */
+  --nt-scrollbar-hover: #4fc08d;
+  overflow: auto;
+}
+.nt-scroll-bar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: calc(var(--nt-scrollbar-width) / 2);
+}
+.nt-scroll-bar::-webkit-scrollbar {
+  width: var(--nt-scrollbar-width);
+}
+.nt-scroll-bar::-webkit-scrollbar-thumb:hover {
+  background: var(--nt-scrollbar-hover);
+}
