@@ -66,30 +66,24 @@ async function createComponentTemplate(name) {
 async function createDocTemplate(name) {
 	// 生成文档组件模板
 	const docTemplateContents = [
-		"<template>",
-		`\t<div id="${name}" class="doc-wrapper">`,
-		'\t\t<div class="doc-main"></div>',
-		'\t\t<CodePreview title="介绍"></CodePreview>',
+		`<div id="${name}" class="doc-wrapper">`,
+		`\t<div class="nt-scrollbar doc-main">`,
+		"\t\t<h2>主题定制</h2>",
+		"\t\t<h3>样式变量</h3>",
+		"\t\t<p>组件提供了下列 CSS 变量，可用于自定义样式，</p>",
+		'\t\t<table class="nt-table">',
+		"\t\t\t<thead><tr><th>名称</th><th>描述</th><th>默认值</th></tr></thead>",
+		"\t\t\t<tbody>",
+		"\t\t\t\t<tr><td>--nt-</td><td></td>css变量<td></td>0</tr>",
+		"\t\t\t</tbody>",
+		"\t\t</table>",
 		"\t</div>",
-		"</template>",
-		'<script setup lang="ts">',
-		"import CodePreview from '../app_components/CodePreview.vue';",
-		"</script>",
+		"</div>",
 	];
 	await write(
-		path.join(srcPath, "views", `${name}.vue`),
+		path.join(srcPath, "views", `${name}.html`),
 		docTemplateContents.join("\r\n"),
 	);
-
-	// 引入生成
-	let oldApp = await readFile(path.join(srcPath, "App.vue"), "utf-8");
-	oldApp = oldApp
-		.replace(
-			"/* regist:auto_add */",
-			`import ${name} from './views/${name}.vue';\r\n/* regist:auto_add */`,
-		)
-		.replace("</main>", `\t<${name} />\r\n\t\t\t</main>`);
-	await write(path.join(srcPath, "App.vue"), oldApp);
 }
 
 (async () => {

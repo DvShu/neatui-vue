@@ -2,14 +2,14 @@
 import { onMounted, ref, nextTick } from 'vue';
 import GiteeIcon from './app_components/GiteeIcon.vue';
 import GithubIcon from './app_components/GithubIcon.vue';
-import { MaskCloseIcon, SearchIcon, Input, vClickoutside } from './index';
+import { MaskCloseIcon, SearchIcon, Input, vClickoutside, Table } from './index';
 import asids from './asides';
 import type { AsideItem } from './asides';
 import { debounce } from 'ph-utils/web';
 
 const searchText = ref('');
 const searchResultList = ref<AsideItem[]>([]);
-const activeAside = ref('introduce');
+const activeAside = ref('css_util');
 const $container = ref<HTMLElement>();
 
 const modules = import.meta.glob('./views/*.html', { as: 'raw' });
@@ -23,7 +23,7 @@ function loadModule() {
       return nextTick();
     })
     .then(() => {
-      window.Prism.highlightAll(true);
+      window.Prism.highlightAll();
     });
 }
 
@@ -31,7 +31,6 @@ function doSearch() {
   if (searchText.value === '') {
     searchResultList.value = [];
   } else {
-    console.log(searchText.value);
     const searchReg = new RegExp(searchText.value, 'i');
     searchResultList.value = asids.filter(
       (item) => searchReg.test(item.name) || searchReg.test(item.text),
@@ -104,9 +103,7 @@ onMounted(() => {
                   :key="aside.name"
                   @click="handleSearchItem(aside.name)"
                 >
-                  <span v-if="aside.showName"
-                    >{{ aside.name }}&nbsp;-&nbsp;</span
-                  >
+                  <span v-if="aside.showName">{{ aside.name }} - </span>
                   <span>{{ aside.text }}</span>
                 </li>
               </ul>
@@ -184,14 +181,24 @@ p {
   padding: 0 40px;
   list-style: circle;
 }
+
+.pc-doc-previewer {
+  display: flex;
+  align-items: stretch;
+}
+.pc-doc,
+.pc-previewer {
+  width: calc((100% - 30px) / 2);
+}
+.pc-previewer {
+  margin-left: 30px;
+  .nt-container {
+    border: 1px solid #dedede;
+    height: 100%;
+  }
+}
 #app {
   height: 100%;
-
-  .app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
   .app-header-right,
   .app-header-left {

@@ -11,8 +11,4 @@
   --nt-warn-color: #f90;
   /* 表示信息(info)的颜色 */
   --nt-info-color: #999;
-  /* header高度 */
-  --nt-header-height: 50px;
-  /* 侧边栏宽度 */
-  --nt-aside-width: 240px;
 }

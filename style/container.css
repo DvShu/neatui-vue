@@ -1,4 +1,10 @@
 .nt-container {
+  /* header高度 */
+  --nt-header-height: 50px;
+  /* footer高度 */
+  --nt-footer-height: var(--nt-header-height, 50px);
+  /* 侧边栏宽度 */
+  --nt-aside-width: 240px;
   display: flex;
   flex-flow: row nowrap;
   box-sizing: border-box;
@@ -28,6 +34,12 @@
   align-items: center;
   justify-content: space-between;
   height: var(--nt-header-height);
+}
+.nt-footer {
+  padding: 10px;
+  box-sizing: border-box;
+  border-top: 1px solid #dedede;
+  height: var(--nt-footer-height);
 }
 .nt-main {
   width: 100%;
