@@ -1,30 +1,25 @@
 <script setup lang="ts">
-import { onMounted, ref, nextTick } from 'vue';
+import { onMounted, ref, nextTick, defineAsyncComponent } from 'vue';
 import GiteeIcon from './app_components/GiteeIcon.vue';
 import GithubIcon from './app_components/GithubIcon.vue';
-import { MaskCloseIcon, SearchIcon, Input, vClickoutside, Table } from './index';
+import {
+  MaskCloseIcon,
+  SearchIcon,
+  Input,
+  vClickoutside,
+  Table,
+  FontIcon,
+} from './index';
 import asids from './asides';
 import type { AsideItem } from './asides';
 import { debounce } from 'ph-utils/web';
 
 const searchText = ref('');
 const searchResultList = ref<AsideItem[]>([]);
-const activeAside = ref('css_util');
-const $container = ref<HTMLElement>();
+const activeAside = ref('Container');
 
-const modules = import.meta.glob('./views/*.html', { as: 'raw' });
-
-function loadModule() {
-  modules[`./views/${activeAside.value}.html`]()
-    .then((mod) => {
-      if ($container.value != null) {
-        $container.value.innerHTML = mod;
-      }
-      return nextTick();
-    })
-    .then(() => {
-      window.Prism.highlightAll();
-    });
+function loadComponent(name: string) {
+  return defineAsyncComponent(() => import(`./views/${name}.vue`));
 }
 
 function doSearch() {
@@ -64,7 +59,6 @@ function handleSearchFocus(dir: 'in' | 'out') {
 function handleToggleDoc(name: string) {
   if (name !== activeAside.value) {
     activeAside.value = name;
-    loadModule();
   }
 }
 
@@ -72,10 +66,6 @@ function handleSearchItem(name: string) {
   handleToggleDoc(name);
   searchText.value = '';
 }
-
-onMounted(() => {
-  loadModule();
-});
 </script>
 
 <template>
@@ -103,7 +93,9 @@ onMounted(() => {
                   :key="aside.name"
                   @click="handleSearchItem(aside.name)"
                 >
-                  <span v-if="aside.showName">{{ aside.name }} - </span>
+                  <span v-if="aside.showName !== false"
+                    >{{ aside.name }} -
+                  </span>
                   <span>{{ aside.text }}</span>
                 </li>
               </ul>
@@ -135,13 +127,17 @@ onMounted(() => {
             @click="handleToggleDoc(aside.name)"
           >
             <template v-if="aside.name !== '---'"
-              ><span v-if="aside.showName">{{ aside.name }}&nbsp;</span>
+              ><span v-if="aside.showName !== false"
+                >{{ aside.name }}&nbsp;</span
+              >
               <span>{{ aside.text }}</span></template
             >
           </li>
         </ul>
       </aside>
-      <main ref="$container" class="nt-main app-main"></main>
+      <main class="nt-main app-main">
+        <component :is="loadComponent(activeAside)"></component>
+      </main>
     </section>
   </section>
 </template>
@@ -290,10 +286,11 @@ p {
     font-size: 16px;
     overflow-y: auto;
   }
-  .doc-main .preview-wrapper {
+  .preview-wrapper {
     flex-shrink: 0;
-    width: 376px;
+    width: 375px;
     height: 90%;
+    max-height: 667px;
     border-radius: 5px;
     border: 1px solid #dedede;
     margin-left: 20px;
@@ -307,9 +304,25 @@ p {
   }
 
   .preview-container {
-    height: clac(100% - 50px);
+    height: calc(100% - 50px);
     padding: 10px;
     overflow-y: auto;
+  }
+
+  .icon-list {
+    display: flex;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+  }
+  .icon-item {
+    width: 100px;
+    height: 90px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: #e5e9f2;
+    }
   }
 }
 </style>

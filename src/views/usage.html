@@ -23,48 +23,42 @@
     </p>
     <pre><code class="language-shell">npm install unplugin-vue-components neatui-vue-resolver -D</code></pre>
     <p>在 vite.config.ts 的 plugins 添加如下代码：</p>
-    <pre><code class="language-js">
-      import Components from 'unplugin-vue-components/vite'
-      import NeatuiResolver from 'neatui-vue-resolver'
+    <pre><code class="language-js">import Components from 'unplugin-vue-components/vite'
+import NeatuiResolver from 'neatui-vue-resolver'
 
-      plugins: [
-        // ...
-        Components({
-          dts: 'src/components.d.ts',
-          resolvers: [NeatuiResolver()],
-        }),
-      ]
-    </code></pre>
+plugins: [
+  // ...
+  Components({
+    dts: 'src/components.d.ts',
+    resolvers: [NeatuiResolver()],
+  }),
+]</code></pre>
     <p>当然如果不想自动引入，也可以手动引入组件和样式文件，例如：</p>
-    <pre><code class="language-js">
-      import { Button } from 'neatui-vue'
-      import 'neatui-vue/style/button/index.css'
-    </code></pre>
+    <pre><code class="language-js">import { Button } from 'neatui-vue'
+import 'neatui-vue/style/button/index.css'</code></pre>
     <h3>3. 全局CSS样式</h3>
     <p>组件库的样式全部使用 CSS 变量控制，为了让样式可控变得简单化，所以需要手动引入全局变量文件</p>
     <p在入口文件，如 main.ts 中引入</p>
     <pre><code class="language-js">import 'neatui-vue/style/vars.css';</code></pre>
     <p>该变量样式文件包含如下内容</p>
-    <pre><code class="language-css">
-      :root {
-        /* button、input 元素高度 */
-        --nt-form-edit-height: 32px;
-        /* 主题(primary)颜色 */
-        --nt-primary-color: #4998f6;
-        /* 表示错误(error)的颜色 */
-        --nt-error-color: #ed3f13;
-        /* 表示成功(success)的颜色 */
-        --nt-success-color: #19bf6c;
-        /* 表示警告(warn)的颜色 */
-        --nt-warn-color: #f90;
-        /* 表示信息(info)的颜色 */
-        --nt-info-color: #999;
-        /* header高度 */
-        --nt-header-height: 50px;
-        /* 侧边栏宽度 */
-        --nt-aside-width: 240px;
-      }
-    </code></pre>
+    <pre><code class="language-css">:root {
+  /* button、input 元素高度 */
+  --nt-form-edit-height: 32px;
+  /* 主题(primary)颜色 */
+  --nt-primary-color: #4998f6;
+  /* 表示错误(error)的颜色 */
+  --nt-error-color: #ed3f13;
+  /* 表示成功(success)的颜色 */
+  --nt-success-color: #19bf6c;
+  /* 表示警告(warn)的颜色 */
+  --nt-warn-color: #f90;
+  /* 表示信息(info)的颜色 */
+  --nt-info-color: #999;
+  /* header高度 */
+  --nt-header-height: 50px;
+  /* 侧边栏宽度 */
+  --nt-aside-width: 240px;
+}</code></pre>
     <h2>样式修改</h2>
     <h3>修改全局变量</h3>
     <p>这之后如果想要修改样式，在需要在该引入的地方，重新引入一个新的样式表，然后覆盖上面的样式即可</p>
@@ -72,18 +66,14 @@
     <ul class="ul-list">
       <li>
         <p>1. 在 main.ts 引入样式表</p>
-        <pre><code class="language-js">
-        import 'neatui-vue/style/vars.css';
-        import './style.css'
-        </code></pre>
+        <pre><code class="language-js">import 'neatui-vue/style/vars.css';
+import './style.css'</code></pre>
       </li>
       <li>
         <p>2. 在 style.css 中添加样式</p>
-        <pre><code class="language-css">
-        :root {
-          --nt-aside-width: 200px;
-        }
-        </code></pre>
+        <pre><code class="language-css">:root {
+  --nt-aside-width: 200px;
+}</code></pre>
       </li>
     </ul>
     <p>通过上面就能修改，当然也能在侧边栏的样式的地方，手动覆盖变量也能实现</p>
@@ -91,11 +81,9 @@
     <p>组件所有的样式都基本只有一层，所以如果要修改样式，在需要套一个层级就能修改</p>
     <p>比如想修改 Button 样式, 只需要给根节点添加一个样式，例如: #app</p>
     <p>然后就能修改样式，如下：</p>
-    <pre><code class="language-css">
-      #app .nt-button {
-        background-color: red;
-      }
-    </code></pre>
+    <pre><code class="language-css">#app .nt-button {
+  background-color: red;
+}</code></pre>
     <h2>浏览器兼容性</h2>
     <p>所有的组件尽量保证 ios 能够兼容到11</p>
   </div>
