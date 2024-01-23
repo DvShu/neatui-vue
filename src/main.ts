@@ -7,6 +7,9 @@ import "../style/input/index.css";
 import "../style/util/transition.css";
 import "../style/util/scrollbar.css";
 import "../style/table/index.css";
+import "../style/util/animation.css";
+import "../style/button/index.css";
+import "../style/message/index.css";
 import App from "./App.vue";
 
 createApp(App).mount("#app");

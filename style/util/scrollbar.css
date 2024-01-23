@@ -1,19 +1,23 @@
 .nt-scrollbar {
   /* 滑块背景色 */
   --nt-scrollbar-bg: #ccc;
-  /* 滑块宽度 */
-  --nt-scrollbar-width: 10px;
+  /* 滑块尺寸, 水平滚动条时为高度，垂直时为宽度 */
+  --nt-scrollbar-size: 10px;
   /* 鼠标悬浮时滑块颜色 */
-  --nt-scrollbar-hover: var(--nt-primary-color);
+  --nt-scrollbar-hover: var(--nt-scrollbar-bg);
   overflow: auto;
 }
 .nt-scrollbar::-webkit-scrollbar-thumb {
   background: #ccc;
-  border-radius: calc(var(--nt-scrollbar-width) / 2);
+  border-radius: calc(var( --nt-scrollbar-size) / 2);
 }
 .nt-scrollbar::-webkit-scrollbar {
-  width: var(--nt-scrollbar-width);
+  width: var( --nt-scrollbar-size);
 }
 .nt-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--nt-scrollbar-hover);
+}
+.nt-scrollbar-x::-webkit-scrollbar {
+  height: var( --nt-scrollbar-size);
+  width: auto;
 }

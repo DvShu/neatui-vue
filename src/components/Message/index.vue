@@ -1,0 +1,109 @@
+<template>
+  <Transition
+    name="nt-message-fade"
+    appear
+    @before-leave="onClose"
+    @after-leave="$emit('destroy')"
+  >
+    <div
+      v-show="visible"
+      :id="id"
+      :style="bindStyle"
+      :class="['nt-message', `nt-message-${type}`, customClass]"
+    >
+      <div>
+        <component :is="icon" class="nt-message-icon"></component>
+        <span class="nt-message-content">{{ message }}</span>
+      </div>
+    </div>
+  </Transition>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+import type { CSSProperties } from 'vue';
+
+import ErrorIcon from '../ErrorIcon.vue';
+import SuccessIcon from '../SuccessIcon.vue';
+import WarnIcon from '../WarnIcon.vue';
+import InfoIcon from '../InfoIcon.vue';
+
+const props = withDefaults(
+  defineProps<{
+    /** 关闭时的回调函数 */
+    onClose: () => void;
+    /** 消息显示持续时间, 单位为毫秒。设为 0 则不会自动关闭，默认为3000 */
+    duration?: number;
+    /** 消息类型, info, success, warn, error */
+    type?: string;
+    customClass?: string;
+    zindex?: number;
+    offset?: number;
+    message: string;
+    id: string;
+    width?: string;
+  }>(),
+  {
+    duration: 3000,
+    type: 'info',
+    customClass: '',
+    zindex: 1000,
+    offset: 20,
+    width: '',
+  },
+);
+
+defineEmits(['destroy']);
+
+const visible = ref(false); // 是否显示消息
+
+const bindStyle = computed<CSSProperties>(() => ({
+  top: `${props.offset}px`,
+  zIndex: props.zindex,
+  width: props.width === '' ? undefined : props.width,
+}));
+
+const icon = computed(() => {
+  if (props.type === 'success') {
+    return SuccessIcon;
+  } else if (props.type === 'warn') {
+    return WarnIcon;
+  } else if (props.type === 'error') {
+    return ErrorIcon;
+  }
+  return InfoIcon;
+});
+
+function close() {
+  visible.value = false;
+}
+
+defineExpose({
+  close,
+});
+
+onMounted(() => {
+  visible.value = true;
+  if (props.duration > 0) {
+    setTimeout(() => {
+      visible.value = false;
+    }, props.duration);
+  }
+});
+</script>
+
+<style>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

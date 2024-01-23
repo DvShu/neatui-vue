@@ -1,10 +1,18 @@
-<div id="reset" class="doc-wrapper">
+<template>
   <div class="nt-scrollbar doc-main">
     <p>组件默认是没有进行样式重置，但是也提供了样式重置文件，可以手动引入</p>
-    <pre><code class="language-js">import 'neatui-vue/style/reset.css"></code></pre>
+    <SourceCode code="import 'neatui-vue/style/reset.css'"></SourceCode>
     <p>建议将样式重置放在最开始引入。</p>
     <p>重置样式包含如下内容：</p>
-    <pre><code class="language-css">/* 一般开发网页的时候，都是按照100%来开发 */
+    <SourceCode lang="css" :code="resetCode"></SourceCode>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import SourceCode from '../app_components/SourceCode.vue';
+
+const resetCode = `
+/* 一般开发网页的时候，都是按照100%来开发 */
 html,
 body {
   height: 100%;
@@ -45,6 +53,6 @@ a:hover {
 }
 a:active {
   color: #64a7f7; /* less tint(#4998f6, 15%) */
-}</code></pre>
-  </div>
-</div>
+}
+`;
+</script>

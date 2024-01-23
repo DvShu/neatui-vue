@@ -9,14 +9,18 @@ import {
   vClickoutside,
   Table,
   FontIcon,
+  LoadingIcon,
+  Button,
 } from './index';
 import asids from './asides';
 import type { AsideItem } from './asides';
-import { debounce } from 'ph-utils/web';
+import { debounce, query } from 'ph-utils/web';
+
+const queryName = query()['name'];
 
 const searchText = ref('');
 const searchResultList = ref<AsideItem[]>([]);
-const activeAside = ref('Container');
+const activeAside = ref(queryName == null ? 'usage' : queryName);
 
 function loadComponent(name: string) {
   return defineAsyncComponent(() => import(`./views/${name}.vue`));
@@ -136,7 +140,9 @@ function handleSearchItem(name: string) {
         </ul>
       </aside>
       <main class="nt-main app-main">
-        <component :is="loadComponent(activeAside)"></component>
+        <div class="doc-wrapper">
+          <component :is="loadComponent(activeAside)"></component>
+        </div>
       </main>
     </section>
   </section>

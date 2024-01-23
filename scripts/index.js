@@ -1,6 +1,7 @@
 import path from "path";
 import { mkdir, readFile } from "fs/promises";
 import { write } from "ph-utils/file";
+import { isBlank } from "ph-utils";
 
 const srcPath = path.join(process.cwd(), "src");
 const templatePath = path.join(srcPath, "components");
@@ -51,12 +52,21 @@ async function createComponentTemplate(name) {
 
 	// 增加引入
 	let appContent = await readFile(path.join(srcPath, "App.vue"), "utf-8");
-	const matches = appContent.match(/import {(.*)} from '\.\/index'/);
+	const matches = appContent.match(
+		/import\s*\{\s*([^}]*)\}\s*from\s*'\.\/index'\s*;/,
+	);
 	if (matches) {
-		const newContent = `${matches[1].trim()}, ${name}`;
+		const oldImport = matches[1].split(",");
+		const newImport = [];
+		for (let importItem of oldImport) {
+			importItem = importItem.trim();
+			if (!isBlank(importItem)) {
+				newImport.push(importItem);
+			}
+		}
 		appContent = appContent.replace(
 			matches[0],
-			`import { ${newContent} } from './index'`,
+			`import { ${newImport.join(",")} } from './index'`,
 		);
 	}
 	await write(path.join(srcPath, "App.vue"), appContent);
@@ -66,26 +76,21 @@ async function createComponentTemplate(name) {
 async function createDocTemplate(name) {
 	// 生成文档组件模板
 	const docTemplateContents = [
-		`<div id="${name}" class="doc-wrapper">`,
+		"<template>",
 		`\t<div class="nt-scrollbar doc-main">`,
-		"\t\t<h2>主题定制</h2>",
-		"\t\t<h3>样式变量</h3>",
-		"\t\t<p>组件提供了下列 CSS 变量，可用于自定义样式，</p>",
-		'\t\t<table class="nt-table">',
-		"\t\t\t<thead><tr><th>名称</th><th>描述</th><th>默认值</th></tr></thead>",
-		"\t\t\t<tbody>",
-		"\t\t\t\t<tr><td>--nt-</td><td>css变量</td><td>0</td></tr>",
-		"\t\t\t</tbody>",
-		"\t\t</table>",
+		"\t\t<ThemeTable></ThemeTable>",
 		"\t</div>",
-		'\t<div class="preview-wrapper">',
-		`\t\t<div class="preview-header center">${name}</div>`,
-		'\t\t<div class="preview-container"></div>',
-		"\t</div>",
-		"</div>",
+		`\t<CodePreview title="${name}"></CodePreview>`,
+		"</template>",
+		"\r\n",
+		'<script lang="ts" setup>',
+		"import SourceCode from '../app_components/SourceCode.vue';",
+		"import CodePreview from '../app_components/CodePreview.vue';",
+		"import ThemeTable from '../app_components/ThemeTable.vue';",
+		"</script>",
 	];
 	await write(
-		path.join(srcPath, "views", `${name}.html`),
+		path.join(srcPath, "views", `${name}.vue`),
 		docTemplateContents.join("\r\n"),
 	);
 }

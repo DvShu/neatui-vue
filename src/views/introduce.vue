@@ -1,4 +1,4 @@
-<div id="introduce" class="doc-wrapper">
+<template>
   <div class="nt-scrollbar doc-main">
     <h3>介绍</h3>
     <p>
@@ -42,4 +42,4 @@
       </li>
     </ul>
   </div>
-</div>
+</template>
