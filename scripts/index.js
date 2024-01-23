@@ -1,7 +1,6 @@
 import path from "path";
 import { mkdir, readFile } from "fs/promises";
 import { write } from "ph-utils/file";
-import { isBlank } from "ph-utils";
 
 const srcPath = path.join(process.cwd(), "src");
 const templatePath = path.join(srcPath, "components");
@@ -50,30 +49,6 @@ async function createComponentTemplate(name) {
 	exportContent += `\r\nexport { default as ${name} } from "./components/${name}.vue"\r\n`;
 	await write(path.join(srcPath, "index.ts"), exportContent);
 
-	// 增加引入
-	let appContent = await readFile(path.join(srcPath, "App.vue"), "utf-8");
-	const matches = appContent.match(
-		/import\s*\{\s*([^}]*)\}\s*from\s*'\.\/index'\s*;/,
-	);
-	if (matches) {
-		const oldImport = matches[1].split(",");
-		const newImport = [];
-		for (let importItem of oldImport) {
-			importItem = importItem.trim();
-			if (!isBlank(importItem)) {
-				newImport.push(importItem);
-			}
-		}
-		appContent = appContent.replace(
-			matches[0],
-			`import { ${newImport.join(",")} } from './index'`,
-		);
-	}
-	await write(path.join(srcPath, "App.vue"), appContent);
-	console.log("创建成功");
-}
-
-async function createDocTemplate(name) {
 	// 生成文档组件模板
 	const docTemplateContents = [
 		"<template>",
@@ -87,12 +62,14 @@ async function createDocTemplate(name) {
 		"import SourceCode from '../app_components/SourceCode.vue';",
 		"import CodePreview from '../app_components/CodePreview.vue';",
 		"import ThemeTable from '../app_components/ThemeTable.vue';",
+		`import ${name} from '../components/${name}.vue'`,
 		"</script>",
 	];
 	await write(
 		path.join(srcPath, "views", `${name}.vue`),
 		docTemplateContents.join("\r\n"),
 	);
+	console.log("创建成功");
 }
 
 (async () => {
@@ -101,8 +78,5 @@ async function createDocTemplate(name) {
 	if (argv[2] === "template") {
 		// 创建组件模板
 		await createComponentTemplate(argv[3]);
-	} else if (argv[2] === "docTemplate") {
-		// 创建文档模板
-		await createDocTemplate(argv[3]);
 	}
 })();

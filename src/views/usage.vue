@@ -40,7 +40,7 @@
     <p>在入口文件，如 main.ts 中引入</p>
     <SourceCode code="import 'neatui-vue/style/vars.css';"></SourceCode>
     <p>该变量样式文件包含如下内容</p>
-    <SourceCode :code="code3" lang="css"></SourceCode>
+    <SourceCode :code="varsCode" lang="css"></SourceCode>
     <h2>样式修改</h2>
     <h3>修改全局变量</h3>
     <p>
@@ -72,6 +72,7 @@
 
 <script lang="ts" setup>
 import SourceCode from '../app_components/SourceCode.vue';
+import varsCode from '../../style/vars.css?raw';
 
 const code1 = `
 import Components from 'unplugin-vue-components/vite'
@@ -89,23 +90,6 @@ plugins: [
 const code2 = `
 import { Button } from 'neatui-vue'
 import 'neatui-vue/style/button/index.css'
-`;
-
-const code3 = `
-:root {
-  /* button、input 元素高度 */
-  --nt-form-edit-height: 32px;
-  /* 主题(primary)颜色 */
-  --nt-primary-color: #4998f6;
-  /* 表示错误(error)的颜色 */
-  --nt-error-color: #ed3f13;
-  /* 表示成功(success)的颜色 */
-  --nt-success-color: #19bf6c;
-  /* 表示警告(warn)的颜色 */
-  --nt-warn-color: #f90;
-  /* 表示信息(info)的颜色 */
-  --nt-info-color: #999;
-}
 `;
 
 const code4 = `

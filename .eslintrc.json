@@ -18,6 +18,7 @@
   },
   "rules": {
     "no-eq-null": "off",
-    "eqeqeq": ["error", "smart"]
+    "eqeqeq": ["error", "smart"],
+    "vue/eqeqeq": ["error", "smart"]
   }
 }

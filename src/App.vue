@@ -1,30 +1,23 @@
 <script setup lang="ts">
-import { onMounted, ref, nextTick, defineAsyncComponent } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
 import GiteeIcon from './app_components/GiteeIcon.vue';
 import GithubIcon from './app_components/GithubIcon.vue';
-import {
-  MaskCloseIcon,
-  SearchIcon,
-  Input,
-  vClickoutside,
-  Table,
-  FontIcon,
-  LoadingIcon,
-  Button,
-} from './index';
 import asids from './asides';
 import type { AsideItem } from './asides';
-import { debounce, query } from 'ph-utils/web';
+import { debounce } from 'ph-utils/web';
+import { isBlank } from 'ph-utils';
 
-const queryName = query()['name'];
+let pageName = location.pathname.substring(1);
+if (isBlank(pageName)) {
+  pageName = 'usage';
+}
 
 const searchText = ref('');
 const searchResultList = ref<AsideItem[]>([]);
-const activeAside = ref(queryName == null ? 'usage' : queryName);
 
-function loadComponent(name: string) {
-  return defineAsyncComponent(() => import(`./views/${name}.vue`));
-}
+const ContentComponent = defineAsyncComponent(
+  () => import(`./views/${pageName}.vue`),
+);
 
 function doSearch() {
   if (searchText.value === '') {
@@ -61,14 +54,13 @@ function handleSearchFocus(dir: 'in' | 'out') {
 }
 
 function handleToggleDoc(name: string) {
-  if (name !== activeAside.value) {
-    activeAside.value = name;
+  if (name !== pageName) {
+    location.href = '/' + name;
   }
 }
 
 function handleSearchItem(name: string) {
   handleToggleDoc(name);
-  searchText.value = '';
 }
 </script>
 
@@ -126,7 +118,7 @@ function handleSearchItem(name: string) {
             :key="aside.name"
             :class="[
               aside.name !== '---' ? 'aside-item' : 'aside-divider',
-              activeAside === aside.name ? 'aside-item--active' : '',
+              pageName === aside.name ? 'aside-item--active' : '',
             ]"
             @click="handleToggleDoc(aside.name)"
           >
@@ -141,7 +133,7 @@ function handleSearchItem(name: string) {
       </aside>
       <main class="nt-main app-main">
         <div class="doc-wrapper">
-          <component :is="loadComponent(activeAside)"></component>
+          <ContentComponent></ContentComponent>
         </div>
       </main>
     </section>
