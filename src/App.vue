@@ -308,19 +308,34 @@ p {
   }
 
   .icon-list {
-    display: flex;
-    border: 1px solid #dedede;
-    border-radius: 5px;
+    display: inline-flex;
+    border-top: 1px solid #dedede;
+    border-left: 1px solid #dedede;
   }
   .icon-item {
     width: 100px;
     height: 90px;
     cursor: pointer;
     background-color: #fff;
+    color: #666;
     transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
     &:hover {
-      background-color: #e5e9f2;
+      background-color: #f5f5f5;
     }
+
+    .nt-icon {
+      font-size: 20px;
+    }
+  }
+
+  .icon-name {
+    font-size: 14px;
+    margin-top: 5px;
   }
 }
 </style>

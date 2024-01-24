@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue';
-import { defineComponent, h } from 'vue';
+import { defineComponent, h, defineAsyncComponent } from 'vue';
 import { isBlank } from 'ph-utils';
 
 function parseAttributes(child: Element) {
@@ -12,20 +12,54 @@ function parseAttributes(child: Element) {
   return attrs;
 }
 
+const parseComponent = function (name: string) {
+  if (name.startsWith('nt-')) {
+    let tagname = parseAsyncComponentName(name);
+    return defineAsyncComponent(() => import(`../components/${tagname}.vue`));
+  }
+  return name;
+};
+
+function parseAsyncComponentName(tagName: string): string {
+  if (tagName.startsWith('nt-')) {
+    let name = tagName.substring(3);
+    if (name === 'base-icon') {
+      return 'Icon';
+    } else {
+      let nameItmes = name.split('-');
+      nameItmes = nameItmes.map(
+        (item) => item[0].toUpperCase() + item.substring(1),
+      );
+      name = nameItmes.join('');
+      return name;
+    }
+  }
+  return tagName;
+}
+
 function renderChildren(children: HTMLCollection) {
   const renderCompts: VNode[] = [];
   for (const child of children) {
+    const component = parseComponent(child.localName);
     if (child.children.length === 0) {
-      renderCompts.push(
-        h(child.localName, parseAttributes(child), child.textContent as string),
-      );
+      if (child.localName.startsWith('nt-')) {
+        renderCompts.push(
+          h(component, parseAttributes(child), {
+            default: () => child.textContent,
+          }),
+        );
+      } else {
+        renderCompts.push(
+          h(component, parseAttributes(child), {
+            default: () => child.textContent,
+          }),
+        );
+      }
     } else {
       renderCompts.push(
-        h(
-          child.localName,
-          parseAttributes(child),
-          renderChildren(child.children),
-        ),
+        h(component, parseAttributes(child), {
+          default: () => renderChildren(child.children),
+        }),
       );
     }
   }
