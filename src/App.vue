@@ -273,14 +273,17 @@ p {
   .app-main {
     overflow: hidden;
     padding: 30px 50px;
+  }
+
+  .doc-wrapper {
     display: grid;
     gap: 20px;
     grid-template-columns: auto 200px;
+    height: 100%;
   }
 
   .doc-main {
     height: 100%;
-    flex-grow: 1;
     font-size: 16px;
     overflow-y: auto;
   }

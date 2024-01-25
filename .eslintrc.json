@@ -19,6 +19,7 @@
   "rules": {
     "no-eq-null": "off",
     "eqeqeq": ["error", "smart"],
-    "vue/eqeqeq": ["error", "smart"]
+    "vue/eqeqeq": ["error", "smart"],
+    "no-param-reassign": "off"
   }
 }

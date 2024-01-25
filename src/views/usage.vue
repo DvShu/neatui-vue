@@ -1,5 +1,5 @@
 <template>
-  <div ref="$el" class="nt-scrollbar doc-main">
+  <DocMain>
     <h1>使用介绍</h1>
     <p>
       UI库除了依赖于 Vue3 外，还依赖于
@@ -67,15 +67,16 @@
     <SourceCode :code="code6" lang="css"> </SourceCode>
     <h2>浏览器兼容性</h2>
     <p>所有的组件尽量保证 ios 能够兼容到11</p>
-  </div>
+  </DocMain>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import SourceCode from '../app_components/SourceCode.vue';
 import varsCode from '../../style/vars.css?raw';
+import DocMain from '../app_components/DocMain.vue';
 
-const $el = ref<HTMLDivElement>();
+const $scollEl = ref<HTMLDivElement>();
 
 const code1 = `
 import Components from 'unplugin-vue-components/vite'
@@ -111,85 +112,4 @@ const code6 = `
   background-color: red;
 }
 `;
-
-interface HElOffsetIntf {
-  tag: 'H2' | 'H3';
-  offset: [number, number];
-  children: HElOffsetIntf[];
-}
-
-function updateElEndOffset(
-  els: HElOffsetIntf[],
-  index: number,
-  offset: number,
-) {
-  const oldOffset = els[index].offset;
-  els[index].offset = [oldOffset[0], offset];
-}
-
-onMounted(() => {
-  if ($el.value != null) {
-    const startTop = $el.value.offsetTop;
-    const scrollHeight = $el.value.scrollHeight;
-    const $h = $el.value.querySelectorAll(
-      'h2,h3',
-    ) as NodeListOf<HTMLDivElement>;
-    console.log($h);
-    const titleEls: HElOffsetIntf[] = [];
-    let index1 = -1;
-    let index2 = -1;
-    for (const $hitem of $h) {
-      const itemTop = $hitem.offsetTop - startTop;
-      if ($hitem.tagName === 'H2') {
-        if (index1 !== -1) {
-          if (index2 !== -1) {
-            updateElEndOffset(titleEls[index1].children, index2, itemTop);
-          }
-          updateElEndOffset(titleEls, index1, itemTop);
-        }
-        titleEls.push({
-          tag: 'H2',
-          offset: [itemTop, -1],
-          children: [],
-        });
-        index2 = -1;
-        index1++;
-      } else {
-        if (index2 === -1 || index1 === -1) {
-          if (index1 !== -1) {
-            titleEls[index1].children.push({
-              tag: 'H3',
-              offset: [itemTop, -1],
-              children: [],
-            });
-            index2++;
-          }
-          if (index1 === -1) {
-            titleEls.push({
-              tag: 'H3',
-              offset: [itemTop, -1],
-              children: [],
-            });
-            updateElEndOffset(titleEls, index1, itemTop);
-            index1++;
-          }
-        } else {
-          updateElEndOffset(titleEls[index1].children, index2, itemTop);
-          titleEls[index1].children.push({
-            tag: 'H3',
-            offset: [itemTop, -1],
-            children: [],
-          });
-          index2++;
-        }
-      }
-    }
-    if (index1 !== -1) {
-      updateElEndOffset(titleEls, index1, scrollHeight);
-      if (index2 !== -1) {
-        updateElEndOffset(titleEls[index1].children, index2, scrollHeight);
-      }
-    }
-  }
-});
 </script>

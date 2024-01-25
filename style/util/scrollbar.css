@@ -6,18 +6,19 @@
   /* 鼠标悬浮时滑块颜色 */
   --nt-scrollbar-hover: var(--nt-scrollbar-bg);
   overflow: auto;
+  scroll-behavior: smooth;
 }
 .nt-scrollbar::-webkit-scrollbar-thumb {
   background: #ccc;
-  border-radius: calc(var( --nt-scrollbar-size) / 2);
+  border-radius: calc(var(--nt-scrollbar-size) / 2);
 }
 .nt-scrollbar::-webkit-scrollbar {
-  width: var( --nt-scrollbar-size);
+  width: var(--nt-scrollbar-size);
 }
 .nt-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--nt-scrollbar-hover);
 }
 .nt-scrollbar-x::-webkit-scrollbar {
-  height: var( --nt-scrollbar-size);
+  height: var(--nt-scrollbar-size);
   width: auto;
 }
