@@ -1,6 +1,6 @@
 <template>
   <div class="nt-scrollbar doc-main">
-    <h3>介绍</h3>
+    <h1>介绍</h1>
     <p>
       Neat UI 是一个基于 Vue3 的轻量级的 UI 组件库，提供基础的 UI
       组件，方便开发。

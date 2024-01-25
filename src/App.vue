@@ -132,9 +132,7 @@ function handleSearchItem(name: string) {
         </ul>
       </aside>
       <main class="nt-main app-main">
-        <div class="doc-wrapper">
-          <ContentComponent></ContentComponent>
-        </div>
+        <ContentComponent></ContentComponent>
       </main>
     </section>
   </section>
@@ -152,6 +150,11 @@ function handleSearchItem(name: string) {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+h1 {
+  margin-top: 0;
+  font-size: 32px;
+  margin-bottom: 15px;
 }
 h2 {
   font-weight: 700;
@@ -269,13 +272,10 @@ p {
 
   .app-main {
     overflow: hidden;
-  }
-  .doc-wrapper {
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 30px 50px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: auto 200px;
   }
 
   .doc-main {
