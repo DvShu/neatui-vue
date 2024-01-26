@@ -1,0 +1,25 @@
+.nt-card {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 20px 0px;
+  border-radius: 4px;
+  border: 1px solid var(--nt-border-color);
+  background-color: #ffffff;
+  overflow: hidden;
+  color: #333;
+}
+
+.nt-card__header {
+  border-bottom: 1px solid var(--nt-border-color);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nt-card__footer {
+  border-top: 1px solid var(--nt-border-color);
+  box-sizing: border-box;
+}
+.nt-card__header,
+.nt-card__body,
+.nt-card__footer {
+  padding: 15px;
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="nt-scrollbar doc-main">
+  <DocMain :has-aside="false">
     <h1>介绍</h1>
     <p>
       Neat UI 是一个基于 Vue3 的轻量级的 UI 组件库，提供基础的 UI
@@ -41,5 +41,9 @@
         选项卡可以在下面弹出、而在移动端可以考虑从底部弹出，做不同的针对适配。
       </li>
     </ul>
-  </div>
+  </DocMain>
 </template>
+
+<script setup lang="ts">
+import DocMain from '../app_components/DocMain.vue';
+</script>

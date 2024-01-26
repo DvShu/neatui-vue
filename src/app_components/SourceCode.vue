@@ -3,7 +3,12 @@
     <pre
       :class="['nt-scrollbar', 'nt-scrollbar-x', 'language-' + lang]"
     ><code :class="'language-' + lang" v-html="highlightCode"></code></pre>
-    <Button type="text" class="code-bopy-btn" @click="handleCopy">
+    <Button
+      v-if="showCopy"
+      type="text"
+      class="code-bopy-btn"
+      @click="handleCopy"
+    >
       <CopyIcon></CopyIcon>
     </Button>
   </div>
@@ -20,9 +25,11 @@ const props = withDefaults(
   defineProps<{
     lang?: string;
     code: string;
+    showCopy: boolean;
   }>(),
   {
     lang: 'typescript',
+    showCopy: true,
   },
 );
 
@@ -58,9 +65,5 @@ onMounted(() => {
       color: var(--nt-primary-color);
     }
   }
-}
-pre[class*='language-'] {
-  position: relative;
-  padding: 10px;
 }
 </style>

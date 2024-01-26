@@ -11,4 +11,6 @@
   --nt-warn-color: #f90;
   /* 表示信息(info)的颜色 */
   --nt-info-color: #999;
+  /* 边框颜色 */
+  --nt-border-color: #dedede;
 }

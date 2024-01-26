@@ -179,21 +179,6 @@ p {
   list-style: circle;
 }
 
-.pc-doc-previewer {
-  display: flex;
-  align-items: stretch;
-}
-.pc-doc,
-.pc-previewer {
-  width: calc((100% - 30px) / 2);
-}
-.pc-previewer {
-  margin-left: 30px;
-  .nt-container {
-    border: 1px solid #dedede;
-    height: 100%;
-  }
-}
 #app {
   height: 100%;
 

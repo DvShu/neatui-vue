@@ -1,5 +1,5 @@
 <template>
-  <DocMain :has-aside="false">
+  <DocMain>
     <h1>使用介绍</h1>
     <p>
       UI库除了依赖于 Vue3 外，还依赖于
@@ -71,12 +71,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
 import SourceCode from '../app_components/SourceCode.vue';
 import varsCode from '../../style/vars.css?raw';
 import DocMain from '../app_components/DocMain.vue';
-
-const $scollEl = ref<HTMLDivElement>();
 
 const code1 = `
 import Components from 'unplugin-vue-components/vite'
