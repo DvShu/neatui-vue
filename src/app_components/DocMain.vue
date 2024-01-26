@@ -7,7 +7,7 @@
       <li v-for="item in asides" :key="item.text">
         <a
           :class="{
-            'sub-aside-lin--active': currAside === item.text,
+            'aside-item--active': currAside === item.text,
             'sub-aside-link': true,
           }"
           :href="'#' + item.text"
@@ -54,24 +54,15 @@ function updateElEndOffset(
 }
 
 const handleScroll = debounce(() => {
-  console.log('scroll');
   checkAside();
-});
+}, 200);
 
 function checkAside() {
   let offset = 0;
   if (scollEl.value != null) {
     offset = scollEl.value.scrollTop;
-    console.log('-----');
-    console.log(scollEl.value.scrollTop);
-    console.log(scollEl.value.scrollHeight);
-    console.log('------');
-    // if (asides.value.length > 0) {
-    //   offset -= asides.value[0].offset[0];
-    // }
   }
 
-  console.log(offset);
   let text = '';
   let index = -1;
   for (let i = 0, len = asides.value.length; i < len; i++) {
@@ -89,51 +80,42 @@ function checkAside() {
 
 onMounted(() => {
   if (props.hasAside) {
-    if (scollEl.value != null) {
-      const startTop = scollEl.value.offsetTop;
-      const scrollHeight = scollEl.value.scrollHeight;
-      console.log(scrollHeight);
-      console.log(scollEl.value.offsetHeight);
-      const $h = scollEl.value.querySelectorAll(
-        'h2,h3',
-      ) as NodeListOf<HTMLDivElement>;
-      const titleEls: HElOffsetIntf[] = [];
-      let lastIndex = -1;
-      for (const $hitem of $h) {
-        const text = $hitem.textContent;
-        if (text != null) {
-          $hitem.id = text;
-          console.log($hitem.offsetTop);
-          const itemTop = $hitem.offsetTop - startTop;
-          titleEls.push({
-            text,
-            offset: [itemTop, -1],
-          });
-          if (lastIndex !== -1) {
-            updateElEndOffset(titleEls, lastIndex, itemTop);
+    nextTick(() => {
+      if (scollEl.value != null) {
+        const startTop = scollEl.value.offsetTop;
+        const scrollHeight = scollEl.value.scrollHeight;
+        const $h = scollEl.value.querySelectorAll(
+          'h2,h3',
+        ) as NodeListOf<HTMLDivElement>;
+        const titleEls: HElOffsetIntf[] = [];
+        let lastIndex = -1;
+        for (const $hitem of $h) {
+          const text = $hitem.textContent;
+          if (text != null) {
+            $hitem.id = text;
+            const itemTop = $hitem.offsetTop - startTop;
+            titleEls.push({
+              text,
+              offset: [itemTop, -1],
+            });
+            if (lastIndex !== -1) {
+              updateElEndOffset(titleEls, lastIndex, itemTop);
+            }
+            lastIndex++;
           }
-          lastIndex++;
+        }
+        if (lastIndex !== -1) {
+          updateElEndOffset(titleEls, lastIndex, scrollHeight);
+        }
+        titleEls.sort((a, b) => a.offset[0] - b.offset[0]);
+        asides.value = titleEls;
+        checkAside();
+        if (asides.value.length > 0) {
+          scollEl.value.addEventListener('scroll', handleScroll);
         }
       }
-      if (lastIndex !== -1) {
-        updateElEndOffset(titleEls, lastIndex, scrollHeight);
-      }
-      titleEls.sort((a, b) => a.offset[0] - b.offset[0]);
-      console.log(titleEls);
-      asides.value = titleEls;
-      checkAside();
-      if (asides.value.length > 0) {
-        scollEl.value.addEventListener('scroll', handleScroll);
-      }
-    }
+    });
   }
-
-  nextTick(() => {
-    console.log(scollEl.value?.scrollHeight);
-  });
-  // setTimeout(() => {
-  //   console.log(scollEl.value?.scrollHeight);
-  // }, 5000);
 });
 
 onUnmounted(() => {
@@ -148,11 +130,11 @@ onUnmounted(() => {
   font-size: 13px;
   color: #333;
   transition: color 0.3s;
+  display: inline-block;
+  width: 100%;
+  padding: 3px 5px;
   &:hover {
     color: var(--nt-primary-color);
   }
-}
-.sub-aside-lin--active {
-  color: var(--nt-primary-color);
 }
 </style>

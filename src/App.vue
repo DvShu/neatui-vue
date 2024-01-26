@@ -243,8 +243,8 @@ p {
         background-color 0.3s,
         color 0.3s;
       &:hover {
-        color: #4fc08d;
-        background-color: #ebfff0;
+        color: var(--nt-primary-color);
+        background-color: rgba(64, 155, 258, 0.1);
       }
     }
   }
@@ -255,13 +255,13 @@ p {
     font-size: 14px;
     transition: color 0.3s;
     &:hover {
-      color: #4fc08d;
+      color: var(--nt-primary-color);
     }
   }
   .aside-item--active {
-    color: #4fc08d;
+    color: var(--nt-primary-color);
     font-weight: bold;
-    background-color: #ebfff0;
+    background-color: rgba(64, 155, 258, 0.1);
   }
 
   .aside-divider {

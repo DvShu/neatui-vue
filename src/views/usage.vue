@@ -1,5 +1,5 @@
 <template>
-  <DocMain>
+  <DocMain :has-aside="false">
     <h1>使用介绍</h1>
     <p>
       UI库除了依赖于 Vue3 外，还依赖于
