@@ -25,7 +25,7 @@ const props = withDefaults(
   defineProps<{
     lang?: string;
     code: string;
-    showCopy: boolean;
+    showCopy?: boolean;
   }>(),
   {
     lang: 'typescript',

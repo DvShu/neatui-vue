@@ -271,6 +271,7 @@ p {
     height: 100%;
     font-size: 16px;
     overflow-y: auto;
+    padding-right: 5px;
   }
   .preview-wrapper {
     flex-shrink: 0;

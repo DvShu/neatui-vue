@@ -4,12 +4,16 @@
       <h3>{{ title }}</h3>
     </template>
     <template v-slot:header-extra>
-      <Button type="text" class="expand-btn">
-        <CopyIcon />
-      </Button>
-      <Button type="text" class="expand-btn">
-        <ExpandIcon />
-      </Button>
+      <Tooltip text="复制代码" position="bottom" @click="handleCopy">
+        <Button type="text" class="expand-btn">
+          <CopyIcon />
+        </Button>
+      </Tooltip>
+      <Tooltip text="查看源代码" position="bottom" align="right">
+        <Button type="text" class="expand-btn" @click="showCode = !showCode">
+          <ExpandIcon />
+        </Button>
+      </Tooltip>
     </template>
     <template v-slot:default>
       <div class="code-description"><slot name="description"></slot></div>
@@ -18,21 +22,29 @@
           <slot name="preview"></slot>
         </CodeRender>
       </div>
-      <SourceCode :code="code" :lang="lang" :show-copy="false"></SourceCode>
+      <SourceCode
+        v-if="showCode"
+        :code="code"
+        :lang="lang"
+        :show-copy="false"
+      ></SourceCode>
     </template>
   </Card>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, h } from 'vue';
+import { ref } from 'vue';
 import SourceCode from './SourceCode.vue';
 import CodeRender from './CodeRender.vue';
 import Card from '../components/Card.vue';
 import Button from '../components/Button.vue';
 import ExpandIcon from './ExpandIcon.vue';
 import CopyIcon from './CopyIcon.vue';
+import Tooltip from '../components/Tooltip.vue';
+import { copy } from 'ph-utils/copy';
+import Message from '../components/Message/index';
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title: string;
     code: string;
@@ -42,50 +54,13 @@ withDefaults(
     lang: 'js',
   },
 );
-// defineOptions(
-//   defineComponent({
-//     name: 'PcCodePreview',
-//     props: {
-//       code: {
-//         type: String,
-//         required: true,
-//       },
-//       lang: {
-//         type: String,
-//         required: false,
-//         default: 'js',
-//       },
-//     },
-//     setup(props, { slots }) {
-//       const renderChildren =
-//         slots.default == null ? undefined : (slots as any).default();
-//       return () =>
-//         h('div', { class: 'pc-doc-previewer' }, [
-//           h(
-//             'div',
-//             { class: 'pc-doc' },
-//             h(SourceCode, {
-//               lang: props.lang,
-//               code: props.code,
-//             }),
-//           ),
-//           h(
-//             'div',
-//             {
-//               class: 'pc-previewer',
-//             },
-//             h(
-//               CodeRender,
-//               {
-//                 code: props.code,
-//               },
-//               renderChildren,
-//             ),
-//           ),
-//         ]);
-//     },
-//   }),
-// );
+
+const showCode = ref(false);
+
+async function handleCopy() {
+  await copy(props.code);
+  Message.success('复制成功');
+}
 </script>
 
 <style lang="less">

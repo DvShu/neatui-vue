@@ -13,3 +13,4 @@ export { default as ErrorIcon } from "./components/ErrorIcon.vue";
 export { default as SuccessIcon } from "./components/SuccessIcon.vue";
 export { default as Message } from "./components/Message/index";
 export { default as Card } from "./components/Card.vue"
+export { default as Tooltip } from "./components/Tooltip.vue"

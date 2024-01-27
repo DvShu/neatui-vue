@@ -11,6 +11,7 @@ import "../style/util/animation.css";
 import "../style/button/index.css";
 import "../style/message/index.css";
 import "../style/card/index.css";
+import "../style/tooltip/index.css";
 import App from "./App.vue";
 
 createApp(App).mount("#app");
