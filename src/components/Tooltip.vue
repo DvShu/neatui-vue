@@ -2,13 +2,13 @@
   <div
     :class="[
       'nt-tooltip',
-      `nt-tooltip--${position}`,
+      `nt-tooltip--${placement}`,
       align ? `nt-tooltip-align-${align}` : '',
     ]"
   >
     <slot></slot>
-    <div v-if="text" class="nt-tooltip-text">
-      <span v-if="text">{{ text }}</span>
+    <div v-if="title" class="nt-tooltip-text">
+      <span v-if="title">{{ title }}</span>
       <template v-else> <slot name="text"></slot></template>
     </div>
   </div>
@@ -16,14 +16,18 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    text?: string;
-    /** 提示框的边框位置是否和内容边框位置对齐, 默认为 false */
-    align?: 'left' | 'right';
+    title?: string;
     /** 提示框的边框位置, 默认为 'top' */
-    position?: 'top' | 'bottom';
+    placement?:
+      | 'topStart'
+      | 'top'
+      | 'topEnd'
+      | 'bottomStart'
+      | 'bottom'
+      | 'bottomEnd';
   }>(),
   {
-    position: 'top',
+    placement: 'top',
   },
 );
 </script>

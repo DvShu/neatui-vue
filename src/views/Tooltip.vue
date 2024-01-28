@@ -1,51 +1,55 @@
 <template>
-  <div class="nt-scrollbar doc-main" style="padding: 50px">
-    <Tooltip text="这是提示文本这是提示文本">
-      <span>悬浮提示</span>
-    </Tooltip>
-    <div style="height: 50px"></div>
-    <div></div>
-    <div></div>
-    <a href="#" data-title="漠白 · GitLab">GitLab</a>
-    <ThemeTable></ThemeTable>
-  </div>
-  <CodePreview title="Tooltip"></CodePreview>
+  <DocMain>
+    <h1>Tooltip 文字提示</h1>
+    <p>常用于展示鼠标 hover 时的提示信息。</p>
+    <p>
+      可用来代替系统默认的 title
+      提示，通常用于针对一个图标按钮的鼠标悬浮显示简单说明
+    </p>
+    <p>该提示使用纯 CSS 实现，所以气泡框位置通常需要手动设置</p>
+    <CodeExample>
+      <PcCodePreview lang="html" :code="code0" title="基础用法">
+        <template v-slot:description>
+          <p>
+            使用 title 属性来决定 hover 时的提示信息。 由 placement
+            属性决定展示位置:
+            topStart、top[默认]、topEnd、bottomStart、bottom、bottomEnd
+          </p>
+        </template>
+      </PcCodePreview>
+    </CodeExample>
+    <ThemeTable :rows="vars"></ThemeTable>
+  </DocMain>
 </template>
 
 <script lang="ts" setup>
-import SourceCode from '../app_components/SourceCode.vue';
-import CodePreview from '../app_components/CodePreview.vue';
 import ThemeTable from '../app_components/ThemeTable.vue';
 import Tooltip from '../components/Tooltip.vue';
+import DocMain from '../app_components/DocMain.vue';
+import CodeExample from '../app_components/CodeExample.vue';
+import PcCodePreview from '../app_components/PcCodePreview.vue';
+
+const code0 =
+  '<nt-tooltip placement="topStart" title="prompt text"><nt-button>左上</nt-button<nt-tooltip>';
+
+const code1 = [
+  `
+<nt-tooltip placement="topStart" title="prompt text">左上<nt-tooltip>
+<nt-tooltip placement="top" title="prompt text">左上<nt-tooltip>
+<nt-tooltip placement="topEnd" title="prompt text">左上<nt-tooltip>
+<nt-tooltip placement="bottomStart" title="prompt text">左上<nt-tooltip>
+<nt-tooltip placement="bottom" title="prompt text">左上<nt-tooltip>
+<nt-tooltip placement="bottomEnd" title="prompt text">左上<nt-tooltip>
+`,
+];
+
+const vars = [
+  {
+    name: '',
+    description: '',
+    default: '',
+  },
+];
 </script>
 
-<style>
-a {
-  position: relative;
-  margin: 0 20px;
-}
-a:after {
-  content: '漠白 · GitLab';
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  transform: translate(-50%, 0);
-  color: #fff;
-  text-shadow: 0 -1px 0px black;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
-  background: #383838;
-  border-radius: 2px;
-  padding: 3px 10px;
-  font-size: 12px;
-  white-space: nowrap;
-  transition: all 0.3s;
-  opacity: 1;
-  visibility: visible;
-}
-a:hover:after {
-  transition-delay: 100ms;
-  visibility: visible;
-  transform: translate(-50%, -6px);
-  opacity: 1;
-}
-</style>
+<style></style>

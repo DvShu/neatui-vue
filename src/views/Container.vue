@@ -1,5 +1,5 @@
 <template>
-  <div class="nt-scrollbar doc-main">
+  <DocMain>
     <p>
       容器布局，采用了 flex
       布局，一般用于后台管理项目的一些常用排版，方便快速搭建页面的基本结构：
@@ -25,57 +25,32 @@
     ></SourceCode>
     <p>在使用时，需要手动引入</p>
     <h2>常见布局</h2>
-    <h3>1. 上下两栏排版</h3>
-    <PcCodePreview :code="code1" lang="html"></PcCodePreview>
-    <h3>2. 左右两列布局</h3>
-    <PcCodePreview :code="code2" lang="html"></PcCodePreview>
-    <h3>3. 上下两栏，下栏又包含左右两列排版</h3>
-    <PcCodePreview :code="code3" lang="html"></PcCodePreview>
-    <h3>4. 后台管理系统模板</h3>
-    <p>
-      在 header 里面放点东西就成了，就成了经典的后台管理系统的模板,
-      左右是图标，右边是登录用户
-    </p>
-    <PcCodePreview :code="code4" lang="html"></PcCodePreview>
-    <h3>5. 左右两列，右边又包含上下两栏排版</h3>
-    <PcCodePreview :code="code5" lang="html"></PcCodePreview>
-    <h3>6. 上中下三栏</h3>
-    <PcCodePreview :code="code6" lang="html"></PcCodePreview>
-    <h2>主题定制</h2>
-    <h3>样式变量</h3>
-    <p>组件提供了下列 CSS 变量，可用于自定义样式，</p>
-    <table class="nt-table">
-      <thead>
-        <tr>
-          <th>名称</th>
-          <th>描述</th>
-          <th>默认值</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>--nt-header-height</td>
-          <td>header高度</td>
-          <td>50px</td>
-        </tr>
-        <tr>
-          <td>--nt-footer-height</td>
-          <td>footer高度</td>
-          <td>var(--nt-header-height, 50px)</td>
-        </tr>
-        <tr>
-          <td>--nt-aside-width</td>
-          <td>侧边栏宽度</td>
-          <td>240px</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <CodeExample>
+      <PcCodePreview :code="code1" lang="html" title="上下两栏排版" />
+      <PcCodePreview :code="code2" lang="html" title="左右两栏排版" />
+      <PcCodePreview :code="code3" lang="html" title="上下两栏嵌套" />
+      <PcCodePreview :code="code4" lang="html" title="经典后台系统">
+        <template v-slot:description>
+          <p>
+            在 header 里面放点东西就成了，就成了经典的后台管理系统的模板,
+            左右是图标，右边是登录用户
+          </p>
+        </template>
+      </PcCodePreview>
+      <PcCodePreview :code="code5" lang="html" title="左右两栏嵌套" />
+      <PcCodePreview :code="code6" lang="html" title="上中下三栏" />
+    </CodeExample>
+
+    <ThemeTable :rows="varRows"></ThemeTable>
+  </DocMain>
 </template>
 
 <script lang="ts" setup>
 import SourceCode from '../app_components/SourceCode.vue';
 import PcCodePreview from '../app_components/PcCodePreview.vue';
+import DocMain from '../app_components/DocMain.vue';
+import CodeExample from '../app_components/CodeExample.vue';
+import ThemeTable from '../app_components/ThemeTable.vue';
 
 const code1 = `
 <section class="nt-container nt-layout-vertical">
@@ -131,4 +106,22 @@ const code6 = `
   <footer class="nt-footer">Footer</footer>
 </section>
 `;
+
+const varRows = [
+  {
+    name: '--nt-header-height',
+    description: 'header高度',
+    default: '50px',
+  },
+  {
+    name: '--nt-footer-height',
+    description: 'footer高度',
+    default: 'var(--nt-header-height, 50px)',
+  },
+  {
+    name: '--nt-aside-width',
+    description: '侧边栏宽度',
+    default: '240px',
+  },
+];
 </script>

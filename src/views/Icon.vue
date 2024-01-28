@@ -1,5 +1,5 @@
 <template>
-  <div class="nt-scrollbar doc-main">
+  <DocMain>
     <h2>说明</h2>
     <p>
       推荐使用<a href="https://icon-sets.iconify.design/">iconify字体图标库</a
@@ -44,11 +44,15 @@
       lang="html"
       code='<nt-search-icon class="text-sm text-blue" />'
     ></SourceCode>
-    <h3>自定义图标</h3>
-    <p>
-      可以通过使用 base-icon 然后加入自定义的 svg-path 路径来构建自定义的图标
-    </p>
-    <PcCodePreview lang="html" :code="code1"></PcCodePreview>
+    <h3>自定义 svg 图标</h3>
+    <PcCodePreview lang="html" :code="code1" title="自定义图标">
+      <template v-slot:description>
+        <p>
+          可以通过使用 base-icon 然后加入自定义的 svg-path
+          路径来构建自定义的图标
+        </p>
+      </template>
+    </PcCodePreview>
     <p>
       当然自定义图标，也可以使用
       <a href="https://github.com/unplugin/unplugin-icons">unplugin-icons</a>
@@ -75,7 +79,7 @@
         既能离线加载，也能自定义图标
       </li>
     </ul>
-  </div>
+  </DocMain>
 </template>
 
 <script setup lang="ts">
@@ -84,6 +88,7 @@ import type { Component } from 'vue';
 import SourceCode from '../app_components/SourceCode.vue';
 import PcCodePreview from '../app_components/PcCodePreview.vue';
 import { copy } from 'ph-utils/copy';
+import DocMain from '../app_components/DocMain.vue';
 import Message from '../components/Message/index';
 
 /**

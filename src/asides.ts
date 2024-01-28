@@ -41,7 +41,7 @@ const asids: AsideItem[] = [
   },
   {
     name: 'Tooltip',
-    text: '弹出提示',
+    text: '文字提示',
   },
 ];
 export default asids;

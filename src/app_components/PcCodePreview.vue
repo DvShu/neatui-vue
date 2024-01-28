@@ -1,39 +1,5 @@
-<template>
-  <Card class="pc-code-preview" body-class="preview-body">
-    <template v-slot:header>
-      <h3>{{ title }}</h3>
-    </template>
-    <template v-slot:header-extra>
-      <Tooltip text="复制代码" position="bottom" @click="handleCopy">
-        <Button type="text" class="expand-btn">
-          <CopyIcon />
-        </Button>
-      </Tooltip>
-      <Tooltip text="查看源代码" position="bottom" align="right">
-        <Button type="text" class="expand-btn" @click="showCode = !showCode">
-          <ExpandIcon />
-        </Button>
-      </Tooltip>
-    </template>
-    <template v-slot:default>
-      <div class="code-description"><slot name="description"></slot></div>
-      <div class="code-preview">
-        <CodeRender :code="code">
-          <slot name="preview"></slot>
-        </CodeRender>
-      </div>
-      <SourceCode
-        v-if="showCode"
-        :code="code"
-        :lang="lang"
-        :show-copy="false"
-      ></SourceCode>
-    </template>
-  </Card>
-</template>
-
-<script lang="ts" setup>
-import { ref } from 'vue';
+<script lang="ts">
+import { ref, defineComponent, h } from 'vue';
 import SourceCode from './SourceCode.vue';
 import CodeRender from './CodeRender.vue';
 import Card from '../components/Card.vue';
@@ -44,28 +10,103 @@ import Tooltip from '../components/Tooltip.vue';
 import { copy } from 'ph-utils/copy';
 import Message from '../components/Message/index';
 
-const props = withDefaults(
-  defineProps<{
-    title: string;
-    code: string;
-    lang?: string;
-  }>(),
-  {
-    lang: 'js',
+export default defineComponent({
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    code: {
+      type: String,
+      required: true,
+    },
+    lang: {
+      type: String,
+      default: 'js',
+    },
   },
-);
+  setup(props, { slots }) {
+    const showCode = ref(false);
 
-const showCode = ref(false);
-
-async function handleCopy() {
-  await copy(props.code);
-  Message.success('复制成功');
-}
+    async function handleCopy() {
+      await copy(props.code);
+      Message.success('复制成功');
+    }
+    return () =>
+      h(
+        Card,
+        {
+          class: 'pc-code-preview',
+          bodyClass: 'preview-body',
+        },
+        {
+          header: () => h('h3', null, { default: () => props.title }),
+          'header-extra': () => [
+            h(
+              Tooltip,
+              {
+                text: '复制代码',
+                position: 'bottom',
+                onclick: handleCopy,
+              },
+              () =>
+                h(Button, { type: 'text', class: 'expand-btn' }, () =>
+                  h(CopyIcon),
+                ),
+            ),
+            h(
+              Tooltip,
+              {
+                text: '查看源代码',
+                position: 'bottom',
+                align: 'right',
+                onclick: () => {
+                  showCode.value = !showCode.value;
+                },
+              },
+              () =>
+                h(Button, { type: 'text', class: 'expand-btn' }, () =>
+                  h(ExpandIcon),
+                ),
+            ),
+          ],
+          default: () => [
+            slots.description
+              ? h('div', { class: 'code-description' }, slots.description())
+              : null,
+            h(
+              'div',
+              {
+                class: 'code-preview',
+              },
+              slots.preview
+                ? h(
+                    CodeRender,
+                    { code: props.code },
+                    {
+                      default: () => (slots as any).preview(),
+                    },
+                  )
+                : h(CodeRender, { code: props.code }),
+            ),
+            showCode.value
+              ? h(SourceCode, {
+                  code: props.code,
+                  lang: props.lang,
+                  showCopy: false,
+                })
+              : null,
+          ],
+        },
+      );
+  },
+});
 </script>
 
 <style lang="less">
 .pc-code-preview {
   margin: 10px 0;
+  overflow: hidden;
   h3 {
     font-size: 16px;
     font-weight: normal;
@@ -79,10 +120,11 @@ async function handleCopy() {
   .code-description {
     font-size: 15px;
     padding: 15px;
+    border-bottom: 1px solid #dedede;
   }
 
   .code-preview {
-    padding: 0 15px 15px 15px;
+    padding: 15px;
   }
 
   .source-code {
@@ -91,6 +133,17 @@ async function handleCopy() {
     pre {
       margin: 0;
     }
+  }
+
+  .nt-header,
+  .nt-footer {
+    background-color: #c5e2ff;
+  }
+  .nt-main {
+    background-color: #ecf5ff;
+  }
+  .nt-aside {
+    background-color: #d9ecff;
   }
 }
 .expand-btn {
