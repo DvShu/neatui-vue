@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue';
-import { defineComponent, h, defineAsyncComponent } from 'vue';
+import { defineComponent, h, defineAsyncComponent, Template } from 'vue';
 import { isBlank } from 'ph-utils';
 
 function parseAttributes(child: Element) {

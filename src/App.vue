@@ -179,6 +179,10 @@ p {
   list-style: circle;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
 #app {
   height: 100%;
 

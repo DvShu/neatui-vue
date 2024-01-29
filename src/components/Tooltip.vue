@@ -9,9 +9,8 @@
     }"
   >
     <slot></slot>
-    <div v-if="title" class="nt-tooltip-text">
-      <span v-if="title">{{ title }}</span>
-      <template v-else> <slot name="text"></slot></template>
+    <div class="nt-tooltip-text">
+      <slot name="title">{{ title }}</slot>
     </div>
   </div>
 </template>
