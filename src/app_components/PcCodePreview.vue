@@ -32,14 +32,14 @@ export default defineComponent({
       await copy(props.code);
       Message.success('复制成功');
     }
-
+    console.log(attrs);
     return () =>
       h(
         Card,
         {
+          ...attrs,
           class: 'pc-code-preview',
           bodyClass: 'preview-body',
-          ...attrs,
         },
         {
           header: () => h('h3', null, { default: () => props.title }),
