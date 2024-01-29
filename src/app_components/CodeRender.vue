@@ -79,8 +79,10 @@ export default defineComponent({
       return () => (slots as any).default();
     }
     if (props.code != null) {
+      console.log(props.code);
       const parser = new DOMParser();
       const doc = parser.parseFromString(props.code, 'text/html');
+      console.log(doc);
       const renderCompts = renderChildren(doc.body.children);
       return () => renderCompts;
     }

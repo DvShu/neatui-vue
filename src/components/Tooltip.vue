@@ -1,10 +1,12 @@
 <template>
   <div
-    :class="[
-      'nt-tooltip',
-      `nt-tooltip--${placement}`,
-      align ? `nt-tooltip-align-${align}` : '',
-    ]"
+    :class="{
+      'nt-tooltip': true,
+      'nt-tooltip-top': placement.startsWith('top'),
+      'nt-tooltip-bottom': placement.startsWith('bottom'),
+      'nt-tooltip-start': placement.endsWith('Start'),
+      'nt-tooltip-end': placement.endsWith('End'),
+    }"
   >
     <slot></slot>
     <div v-if="title" class="nt-tooltip-text">

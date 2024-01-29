@@ -25,19 +25,21 @@ export default defineComponent({
       default: 'js',
     },
   },
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const showCode = ref(false);
 
     async function handleCopy() {
       await copy(props.code);
       Message.success('复制成功');
     }
+
     return () =>
       h(
         Card,
         {
           class: 'pc-code-preview',
           bodyClass: 'preview-body',
+          ...attrs,
         },
         {
           header: () => h('h3', null, { default: () => props.title }),
@@ -106,7 +108,6 @@ export default defineComponent({
 <style lang="less">
 .pc-code-preview {
   margin: 10px 0;
-  overflow: hidden;
   h3 {
     font-size: 16px;
     font-weight: normal;

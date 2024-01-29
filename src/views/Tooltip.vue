@@ -8,7 +8,12 @@
     </p>
     <p>该提示使用纯 CSS 实现，所以气泡框位置通常需要手动设置</p>
     <CodeExample>
-      <PcCodePreview lang="html" :code="code0" title="基础用法">
+      <PcCodePreview
+        lang="html"
+        :code="code1.join().trim()"
+        title="基础用法"
+        class="tooltip-demo"
+      >
         <template v-slot:description>
           <p>
             使用 title 属性来决定 hover 时的提示信息。 由 placement
@@ -24,22 +29,18 @@
 
 <script lang="ts" setup>
 import ThemeTable from '../app_components/ThemeTable.vue';
-import Tooltip from '../components/Tooltip.vue';
 import DocMain from '../app_components/DocMain.vue';
 import CodeExample from '../app_components/CodeExample.vue';
 import PcCodePreview from '../app_components/PcCodePreview.vue';
 
-const code0 =
-  '<nt-tooltip placement="topStart" title="prompt text"><nt-button>左上</nt-button<nt-tooltip>';
-
 const code1 = [
   `
-<nt-tooltip placement="topStart" title="prompt text">左上<nt-tooltip>
-<nt-tooltip placement="top" title="prompt text">左上<nt-tooltip>
-<nt-tooltip placement="topEnd" title="prompt text">左上<nt-tooltip>
-<nt-tooltip placement="bottomStart" title="prompt text">左上<nt-tooltip>
-<nt-tooltip placement="bottom" title="prompt text">左上<nt-tooltip>
-<nt-tooltip placement="bottomEnd" title="prompt text">左上<nt-tooltip>
+<nt-tooltip placement="topStart" title="prompt text"><nt-button>topStart</nt-button></nt-tooltip>
+<nt-tooltip placement="top" title="prompt text"><nt-button>top</nt-button></nt-tooltip>
+<nt-tooltip placement="topEnd" title="prompt text"><nt-button>topEnd</nt-button></nt-tooltip>
+<nt-tooltip placement="bottomStart" title="prompt text"><nt-button>bottomStart</nt-button></nt-tooltip>
+<nt-tooltip placement="bottom" title="prompt text"><nt-button>bottom</nt-button></nt-tooltip>
+<nt-tooltip placement="bottomEnd" title="prompt text"><nt-button>bottomEnd</nt-button></nt-tooltip>
 `,
 ];
 

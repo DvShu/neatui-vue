@@ -42,7 +42,6 @@ export default defineComponent({
   gap: 20px;
   grid-template-columns: 1fr 1fr;
   margin: 5px 0;
-  overflow: hidden;
 }
 
 .code-example-col {

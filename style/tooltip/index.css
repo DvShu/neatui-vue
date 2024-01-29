@@ -15,8 +15,8 @@
   font-size: 12px;
   white-space: nowrap;
   transition: all 0.3s;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   z-index: 1;
 }
 .nt-tooltip-text::after {
@@ -29,37 +29,37 @@
 }
 
 /* 从顶部弹出的弹窗 */
-.nt-tooltip--top .nt-tooltip-text {
-  bottom: 100%;
+.nt-tooltip-top .nt-tooltip-text {
+  bottom: calc(100% + 7px);
 }
-.nt-tooltip--top .nt-tooltip-text::after {
-  top: 100%; /* 提示工具底部 */
+.nt-tooltip-top .nt-tooltip-text::after {
+  top: 100%;
   border-color: #383838 transparent transparent transparent;
 }
 /* 从底部弹出 */
-.nt-tooltip--bottom .nt-tooltip-text {
-  top: 100%;
+.nt-tooltip-bottom .nt-tooltip-text {
+  top: calc(100% + 7px);
 }
-.nt-tooltip--bottom .nt-tooltip-text::after {
+.nt-tooltip-bottom .nt-tooltip-text::after {
   bottom: 100%;
   border-color: transparent transparent #383838 transparent;
 }
 
 /* 左边上对齐 */
-.nt-tooltip.nt-tooltip-align-left .nt-tooltip-text {
+.nt-tooltip-start .nt-tooltip-text {
   left: 0;
   transform: translate3d(0, 0, 0);
 }
-.nt-tooltip.nt-tooltip-align-left .nt-tooltip-text::after {
+.nt-tooltip-start .nt-tooltip-text::after {
   left: 10px;
 }
 /* 右边对齐 */
-.nt-tooltip.nt-tooltip-align-right .nt-tooltip-text {
+.nt-tooltip-end .nt-tooltip-text {
   left: auto;
   right: 0;
   transform: translate3d(0, 0, 0);
 }
-.nt-tooltip.nt-tooltip-align-right .nt-tooltip-text::after {
+.nt-tooltip-end .nt-tooltip-text::after {
   right: 10px;
   left: auto;
   margin-left: 0;
