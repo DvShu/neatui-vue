@@ -29,10 +29,10 @@ export default defineComponent({
     const showCode = ref(false);
 
     async function handleCopy() {
-      await copy(props.code);
+      await copy(props.code.trim());
       Message.success('复制成功');
     }
-    console.log(attrs);
+
     return () =>
       h(
         Card,
@@ -47,8 +47,8 @@ export default defineComponent({
             h(
               Tooltip,
               {
-                text: '复制代码',
-                position: 'bottom',
+                title: '复制代码',
+                placement: 'topEnd',
                 onclick: handleCopy,
               },
               () =>
@@ -59,9 +59,8 @@ export default defineComponent({
             h(
               Tooltip,
               {
-                text: '查看源代码',
-                position: 'bottom',
-                align: 'right',
+                title: '查看源代码',
+                placement: 'topEnd',
                 onclick: () => {
                   showCode.value = !showCode.value;
                 },
