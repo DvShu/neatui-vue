@@ -74,4 +74,9 @@
 .nt-table .nt-fixed {
   position: -webkit-sticky;
   position: sticky;
+  z-index: 1;
+  box-sizing: border-box;
+}
+.nt-table tr.nt-fixed {
+  z-index: 2;
 }

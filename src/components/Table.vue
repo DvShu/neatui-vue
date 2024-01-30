@@ -15,7 +15,7 @@ export interface ColumnOption {
   fixed?: 'left' | 'right';
   /** 列宽 */
   width?: string | number;
-  render?: (row: any, index: number) => VNode;
+  render?: (row: any, index: number) => VNode | VNode[];
 }
 
 export interface DataSortState {
@@ -123,7 +123,7 @@ export default defineComponent({
             'sort-desc':
               sortInfo.value.key === column.key &&
               sortInfo.value.order === 'desc',
-            'nt-fixed': props.fixedHead || column.fixed,
+            'nt-fixed': column.fixed,
           },
           style: {},
         };
@@ -136,10 +136,6 @@ export default defineComponent({
             thAttrs.style.right =
               right.length === 0 ? '0' : `calc(${right.join('+')})`;
           }
-        }
-
-        if (props.fixedHead) {
-          thAttrs.style.top = '0';
         }
 
         if (column.width) {
@@ -185,36 +181,54 @@ export default defineComponent({
     function renderBody() {
       const bodies: VNode[] = [];
       for (let i = 0, len = props.data.length; i < len; i++) {
-        const column = props.columns[i];
         const dataItem = props.data[i];
 
         let left: string[] = [];
         let right: string[] = [];
 
-        const tdAttr: any = {
-          style: {},
-          class: {
-            'nt-fixed': column.fixed,
-          },
-        };
+        const $tds: VNode[] = [];
+        for (const column of props.columns) {
+          const tdAttr: any = {
+            style: {},
+            class: {
+              'nt-fixed': column.fixed,
+            },
+          };
 
-        if (column.fixed) {
-          if (column.fixed === 'left') {
-            tdAttr.style.left =
-              left.length === 0 ? '0' : `calc(${left.join('+')})`;
+          if (column.fixed) {
+            if (column.fixed === 'left') {
+              tdAttr.style.left = left.length === 0 ? '0' : `${left.join('+')}`;
+            } else {
+              tdAttr.style.right =
+                right.length === 0 ? '0' : `${left.join('+')}`;
+            }
+          }
+
+          if (column.width) {
+            let colWidth: string = column.width as string;
+            if (typeof column.width === 'number') {
+              colWidth = `${column.width}px`;
+            }
+            tdAttr.style.width = colWidth;
+            if (column.fixed != null) {
+              if (column.fixed === 'left') {
+                left.push(colWidth);
+              } else {
+                right.push(colWidth);
+              }
+            }
+          }
+
+          if (column.render != null) {
+            $tds.push(h('td', tdAttr, column.render(dataItem, i)));
+          } else if (column.key != null) {
+            $tds.push(h('td', tdAttr, dataItem[column.key]));
           } else {
-            tdAttr.style.right =
-              right.length === 0 ? '0' : `calc(${right.join('+')})`;
+            $tds.push(h('td', tdAttr, ''));
           }
         }
 
-        if (column.render != null) {
-          bodies.push(h('td', tdAttr, column.render(dataItem, i)));
-        } else if (column.key != null) {
-          bodies.push(h('td', tdAttr, dataItem[column.key]));
-        } else {
-          bodies.push(h('td', tdAttr, ''));
-        }
+        bodies.push(h('tr', $tds));
       }
       return bodies;
     }
@@ -230,7 +244,21 @@ export default defineComponent({
           ],
         },
         [
-          h('thead', h('tr', renderHead())),
+          h(
+            'thead',
+            h(
+              'tr',
+              {
+                class: {
+                  'nt-fixed': props.fixedHead,
+                },
+                style: {
+                  top: props.fixedHead ? '0' : undefined,
+                },
+              },
+              renderHead(),
+            ),
+          ),
           h(
             'tbody',
             props.data.length === 0
