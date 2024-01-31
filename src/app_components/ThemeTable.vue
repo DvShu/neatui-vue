@@ -2,25 +2,27 @@
   <h2 v-if="title != null">{{ title }}</h2>
   <h3 v-if="subtitle != null">{{ subtitle }}</h3>
   <p v-if="description != null">{{ description }}</p>
-  <table class="nt-table">
-    <thead>
-      <tr>
-        <th>名称</th>
-        <th>描述</th>
-        <th>默认值</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="row in rows" :key="row.name">
-        <td>{{ row.name }}</td>
-        <td>{{ row.description == null ? '' : row.description }}</td>
-        <td>{{ row.default == null ? '' : row.default }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <Table :columns="columns" :data="rows"></Table>
 </template>
 
 <script setup lang="ts">
+import Table from '../components/Table.vue';
+
+const columns = [
+  {
+    key: 'name',
+    title: '名称',
+  },
+  {
+    key: 'description',
+    title: '描述',
+  },
+  {
+    key: 'default',
+    title: '默认值',
+  },
+];
+
 interface ThemeTableItem {
   name: string;
   description?: string;

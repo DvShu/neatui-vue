@@ -45,6 +45,9 @@
         </template>
       </PcCodePreview>
     </CodeExample>
+    <h2>API</h2>
+    <PropTable :data="propData" title="Tooltip Props"></PropTable>
+    <SlotTable :data="slotData" title="Tooltip Slots"></SlotTable>
     <ThemeTable :rows="vars"></ThemeTable>
   </DocMain>
 </template>
@@ -56,6 +59,8 @@ import CodeExample from '../app_components/CodeExample.vue';
 import PcCodePreview from '../app_components/PcCodePreview.vue';
 import Tooltip from '../components/Tooltip.vue';
 import Button from '../components/Button.vue';
+import PropTable from '../app_components/PropTable.vue';
+import SlotTable from '../app_components/SlotTable.vue';
 
 const code1 = `
 <div class="demo-row">
@@ -84,6 +89,30 @@ const vars = [
     name: '',
     description: '',
     default: '',
+  },
+];
+
+const propData = [
+  {
+    name: 'title',
+    description: '提示信息',
+    type: 'string',
+    default: '',
+  },
+  {
+    name: 'placement',
+    description:
+      '气泡位置, top、bottom、topStart、topEnd、bottomStart、bottomEnd',
+    type: 'string',
+    default: 'top',
+  },
+];
+
+const slotData = [
+  {
+    name: 'title',
+    param: '()',
+    description: '自定义提示内容',
   },
 ];
 </script>

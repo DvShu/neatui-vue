@@ -62,6 +62,9 @@ async function createComponentTemplate(name) {
 		"\t\t\t\t</template>",
 		"\t\t\t</PcCodePreview>",
 		"\t\t</CodeExample>",
+		"\t\t<h2>API</h2>",
+		`<PropTable :data="propData" title="${name} Props"></PropTable>`,
+		`<SlotTable :data="slotData" title="${name} Slots"></SlotTable>`,
 		'\t\t<ThemeTable :rows="vars"></ThemeTable>',
 		"\t</DocMain>",
 		"</template>",
@@ -72,7 +75,11 @@ async function createComponentTemplate(name) {
 		"import DocMain from '../app_components/DocMain.vue';\r\n",
 		"import CodeExample from '../app_components/CodeExample.vue';",
 		"import PcCodePreview from '../app_components/PcCodePreview.vue';",
+		"import PropTable from '../app_components/PropTable.vue';",
+		"import SlotTable from '../app_components/SlotTable.vue';",
 		"const vars = [{name: '',description: '',default: ''}]",
+		"const propData = [{name:'',description: '',default: '',type:''}]",
+		"const slotData = [{name:'',param:'()',description:''}]",
 		"</script>",
 	];
 	await write(
