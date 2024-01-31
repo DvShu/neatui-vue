@@ -48,12 +48,10 @@
     <h2>API</h2>
     <PropTable :data="propData" title="Tooltip Props"></PropTable>
     <SlotTable :data="slotData" title="Tooltip Slots"></SlotTable>
-    <ThemeTable :rows="vars"></ThemeTable>
   </DocMain>
 </template>
 
 <script lang="ts" setup>
-import ThemeTable from '../app_components/ThemeTable.vue';
 import DocMain from '../app_components/DocMain.vue';
 import CodeExample from '../app_components/CodeExample.vue';
 import PcCodePreview from '../app_components/PcCodePreview.vue';
@@ -83,14 +81,6 @@ const code2 = `
   </template>
 </nt-tooltip>
 `;
-
-const vars = [
-  {
-    name: '',
-    description: '',
-    default: '',
-  },
-];
 
 const propData = [
   {
