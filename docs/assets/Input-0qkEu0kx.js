@@ -1,1 +1,0 @@
-import{d as t,o as p,c as l}from"./index-BY3UnrMK.js";const o=["type","placeholder"],c=t({__name:"Input",props:{htmlType:{default:"text"},placeholder:{default:""}},setup(a){return(e,n)=>(p(),l("input",{type:e.htmlType,class:"nt-input",placeholder:e.placeholder},null,8,o))}});export{c as default};

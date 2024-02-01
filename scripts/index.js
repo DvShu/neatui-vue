@@ -53,7 +53,7 @@ async function createComponentTemplate(name) {
 	const docTemplateContents = [
 		"<template>",
 		"\t<DocMain>",
-		`\t\t<h1>${name} </h1>`,
+		`\t\t<h1>${name}</h1>`,
 		"\t\t<p></p>",
 		"\t\t<CodeExample>",
 		'\t\t\t<PcCodePreview lang="html" code="" title="基础用法">',
@@ -63,8 +63,9 @@ async function createComponentTemplate(name) {
 		"\t\t\t</PcCodePreview>",
 		"\t\t</CodeExample>",
 		"\t\t<h2>API</h2>",
-		`<PropTable :data="propData" title="${name} Props"></PropTable>`,
-		`<SlotTable :data="slotData" title="${name} Slots"></SlotTable>`,
+		`\t\t<PropTable :data="propData" title="${name} Props"></PropTable>`,
+		`\t\t<SlotTable :data="slotData" title="${name} Slots"></SlotTable>`,
+		`\t\t<MethodTable :data="methodData" title="${name} Methods"></MethodTable>`,
 		'\t\t<ThemeTable :rows="vars"></ThemeTable>',
 		"\t</DocMain>",
 		"</template>",
@@ -77,9 +78,11 @@ async function createComponentTemplate(name) {
 		"import PcCodePreview from '../app_components/PcCodePreview.vue';",
 		"import PropTable from '../app_components/PropTable.vue';",
 		"import SlotTable from '../app_components/SlotTable.vue';",
+		"import MethodTable from '../app_components/MethodTable.vue';",
 		"const vars = [{name: '',description: '',default: ''}]",
 		"const propData = [{name:'',description: '',default: '',type:''}]",
 		"const slotData = [{name:'',param:'()',description:''}]",
+		"const methodData = [{name:'',param:'',description:'',return:''}]",
 		"</script>",
 	];
 	await write(

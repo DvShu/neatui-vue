@@ -1,7 +1,7 @@
 {
 	"name": "@asteres/neatui-vue",
 	"description": "基于 Vue3 的 UI 组件库",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -30,11 +30,7 @@
 		"ph-utils": "^0.4.2",
 		"vue": "^3.3.11"
 	},
-	"files": [
-		"lib",
-		"style",
-		"types"
-	],
+	"files": ["lib", "style", "types"],
 	"main": "./lib/neatui.js",
 	"module": "./lib/neatui.js",
 	"types": "./types/index.d.ts",
