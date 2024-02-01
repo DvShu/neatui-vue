@@ -54,11 +54,7 @@ function handleSearchFocus(dir: 'in' | 'out') {
 }
 
 function handleToggleDoc(name: string) {
-  console.log(name);
-  console.log(pageName);
-  console.log(import.meta.env.BASE_URL);
   if (name !== pageName) {
-    console.log(`${import.meta.env.BASE_URL}?page=${name}`);
     location.href = `${import.meta.env.BASE_URL}?page=${name}`;
   }
 }
