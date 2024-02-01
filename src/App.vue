@@ -7,7 +7,6 @@ import type { AsideItem } from './asides';
 import { debounce, query } from 'ph-utils/web';
 import { isBlank } from 'ph-utils';
 
-console.log(location.search);
 let pageName = query()['page'];
 if (isBlank(pageName)) {
   pageName = 'usage';
@@ -55,8 +54,12 @@ function handleSearchFocus(dir: 'in' | 'out') {
 }
 
 function handleToggleDoc(name: string) {
+  console.log(name);
+  console.log(pageName);
+  console.log(import.meta.env.BASE_URL);
   if (name !== pageName) {
-    location.href = '/?page=' + name;
+    console.log(`${import.meta.env.BASE_URL}?page=${name}`);
+    location.href = `${import.meta.env.BASE_URL}?page=${name}`;
   }
 }
 
