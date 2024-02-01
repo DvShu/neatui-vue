@@ -4,10 +4,11 @@ import GiteeIcon from './app_components/GiteeIcon.vue';
 import GithubIcon from './app_components/GithubIcon.vue';
 import asids from './asides';
 import type { AsideItem } from './asides';
-import { debounce } from 'ph-utils/web';
+import { debounce, query } from 'ph-utils/web';
 import { isBlank } from 'ph-utils';
 
-let pageName = location.pathname.substring(1);
+console.log(location.search);
+let pageName = query()['page'];
 if (isBlank(pageName)) {
   pageName = 'usage';
 }
@@ -55,7 +56,7 @@ function handleSearchFocus(dir: 'in' | 'out') {
 
 function handleToggleDoc(name: string) {
   if (name !== pageName) {
-    location.href = '/' + name;
+    location.href = '/?page=' + name;
   }
 }
 
