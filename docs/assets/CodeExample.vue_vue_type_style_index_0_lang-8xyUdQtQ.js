@@ -1,0 +1,1 @@
+import{d as o,m as l}from"./index-acfWqk0l.js";const n=o({setup(s,{slots:a}){const t=[],c=[];if(a.default!=null)for(let e=0,d=a.default().length;e<d;e++)e%2===0?t.push(l(a.default()[e])):c.push(l(a.default()[e]));return()=>l("div",{class:"code-example"},[l("div",{class:"code-example-col"},t),l("div",{class:"code-example-col"},c)])}});export{n as _};
