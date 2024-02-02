@@ -51,5 +51,9 @@ const asids: AsideItem[] = [
 		name: "Message",
 		text: "消息提示",
 	},
+	{
+		name: "Card",
+		text: "卡片",
+	},
 ];
 export default asids;
