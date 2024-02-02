@@ -21,7 +21,7 @@ export default defineConfig({
 				},
 			},
 		},
-		emptyOutDir: false,
+		emptyOutDir: true,
 		copyPublicDir: false,
 	},
 	server: {

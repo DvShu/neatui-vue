@@ -1,7 +1,7 @@
 {
 	"name": "@asteres/neatui-vue",
 	"description": "基于 Vue3 的 UI 组件库",
-	"version": "0.0.4",
+	"version": "0.0.6",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"g:c": "node scripts/index.js template",
 		"build:types": "vue-tsc -d  --emitDeclarationOnly -p tsconfig.types.json --outDir lib",
-		"build": "tcli rm lib & pnpm build:types & pnpm build:pkg & pnpm build:docs",
+		"build": "pnpm build:pkg & pnpm build:types",
 		"build:docs": "vite build -c docs.config.ts"
 	},
 	"devDependencies": {
@@ -40,5 +40,21 @@
 			"require": "./lib/index.js"
 		},
 		"./style/*": "./style/*"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/DvShu/neatui-vue.git"
+	},
+	"keywords": [
+		"neatui-vue",
+		"neatui",
+		"vue",
+		"ui framework",
+		"component library"
+	],
+	"homepage": "https://dvshu.github.io/neatui-vue/",
+	"bugs": {
+		"url": "https://github.com/DvShu/neatui-vue/issues"
+	},
+	"license": "MulanPSL-2.0"
 }
