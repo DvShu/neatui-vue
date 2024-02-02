@@ -38,12 +38,7 @@ jobs:
       - name: Build Site
         run: npm run build:docs
 
-      - name: Deploy Site
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git checkout -b gh-pages
-          cp -r docs/* .
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs # The folder the action should deploy.
