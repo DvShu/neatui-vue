@@ -1,15 +1,15 @@
 {
 	"name": "@asteres/neatui-vue",
 	"description": "基于 Vue3 的 UI 组件库",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build:pkg": "vite build",
 		"preview": "vite preview",
 		"g:c": "node scripts/index.js template",
-		"build:types": "vue-tsc -d  --emitDeclarationOnly -p tsconfig.types.json --outDir types",
-		"build": "pnpm build:types & pnpm build:pkg & pnpm build:docs",
+		"build:types": "vue-tsc -d  --emitDeclarationOnly -p tsconfig.types.json --outDir lib",
+		"build": "tcli rm lib & pnpm build:types & pnpm build:pkg & pnpm build:docs",
 		"build:docs": "vite build -c docs.config.ts"
 	},
 	"devDependencies": {
@@ -31,13 +31,13 @@
 		"vue": "^3.3.11"
 	},
 	"files": ["lib", "style", "types"],
-	"main": "./lib/neatui.js",
-	"module": "./lib/neatui.js",
-	"types": "./types/index.d.ts",
+	"main": "./lib/index.js",
+	"module": "./lib/index.js",
+	"types": "./lib/index.d.ts",
 	"exports": {
 		".": {
-			"import": "./lib/neatui.js",
-			"require": "./lib/neatui.js"
+			"import": "./lib/index.js",
+			"require": "./lib/index.js"
 		},
 		"./style/*": "./style/*"
 	}

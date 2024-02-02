@@ -1,1 +1,0 @@
-import{d as a,o as n,e as s,w as o,a as t,v as r}from"./index-TCyWjmXV.js";const _=["xlink:href"],p=a({__name:"FontIcon",props:{name:{}},setup(c){return(e,i)=>(n(),s(r,{"use-link":""},{default:o(()=>[t("use",{"xlink:href":`#${e.name}`},null,8,_)]),_:1}))}});export{p as default};

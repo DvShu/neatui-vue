@@ -9,7 +9,7 @@ export default defineConfig({
 		lib: {
 			entry: "src/index.ts",
 			formats: ["es"],
-			fileName: "neatui",
+			fileName: "index",
 		},
 		rollupOptions: {
 			// 确保外部化处理那些你不想打包进库的依赖
@@ -21,7 +21,7 @@ export default defineConfig({
 				},
 			},
 		},
-		emptyOutDir: true,
+		emptyOutDir: false,
 		copyPublicDir: false,
 	},
 	server: {
