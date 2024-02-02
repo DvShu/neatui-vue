@@ -44,4 +44,4 @@ jobs:
           folder: docs # The folder the action should deploy.
           token: ${{ secrets.TOKEN }}
           clean: true
-          ssh-key: true
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
