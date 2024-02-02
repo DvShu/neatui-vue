@@ -40,10 +40,10 @@ jobs:
 
       - name: Deploy Site
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git checkout gh-pages
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git checkout -b gh-pages
           cp -r docs/* .
           git add .
           git commit -m "Deploy to GitHub Pages"
-          git push
+          git push origin gh-pages
