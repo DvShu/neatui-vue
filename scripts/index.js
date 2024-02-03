@@ -81,7 +81,7 @@ async function createComponentTemplate(name) {
 		"import MethodTable from '../app_components/MethodTable.vue';",
 		"const vars = [{name: '',description: '',default: ''}]",
 		"const propData = [{name:'',description: '',default: '',type:''}]",
-		"const slotData = [{name:'',param:'()',description:''}]",
+		"const slotData = [{name:'default',param:'()',description:''}]",
 		"const methodData = [{name:'',param:'',description:'',return:''}]",
 		"</script>",
 	];

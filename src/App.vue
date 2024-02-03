@@ -183,6 +183,18 @@ p {
   margin-top: 10px;
 }
 
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
 #app {
   height: 100%;
 
