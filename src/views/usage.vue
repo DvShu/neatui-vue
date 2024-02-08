@@ -25,7 +25,7 @@
       >
     </p>
     <SourceCode
-      code="npm install unplugin-vue-components neatui-vue-resolver -D"
+      code="npm install unplugin-vue-components unplugin-auto-import neatui-vue-resolver -D"
       lang="shell"
     ></SourceCode>
     <p>在 vite.config.ts 的 plugins 添加如下代码：</p>
@@ -38,7 +38,9 @@
       变量控制，为了让样式可控变得简单化，所以需要手动引入全局变量文件
     </p>
     <p>在入口文件，如 main.ts 中引入</p>
-    <SourceCode code="import 'neatui-vue/style/vars.css';"></SourceCode>
+    <SourceCode
+      code="import '@asteres/neatui-vue/style/vars.css';"
+    ></SourceCode>
     <p>该变量样式文件包含如下内容</p>
     <SourceCode :code="varsCode" lang="css"></SourceCode>
     <h2>样式修改</h2>
@@ -81,6 +83,10 @@ import NeatuiResolver from 'neatui-vue-resolver'
 
 plugins: [
   // ...
+  AutoImport({
+		resolvers: [NeatuiResolver()],
+		dts: "src/auto-imports.d.ts",
+	}),
   Components({
     dts: 'src/components.d.ts',
     resolvers: [NeatuiResolver()],
@@ -89,18 +95,18 @@ plugins: [
 `;
 
 const code2 = `
-import { Button } from 'neatui-vue'
-import 'neatui-vue/style/button/index.css'
+import { Button } from '@asteres/neatui-vue'
+import '@asteres/neatui-vue/style/button/index.css'
 `;
 
 const code4 = `
-import 'neatui-vue/style/vars.css';
+import '@asteres/neatui-vue/style/vars.css';
 import './style.css'
 `;
 
 const code5 = `
 :root {
-  --nt-aside-width: 200px;
+  --nt-border-color: red;
 }
 `;
 

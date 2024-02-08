@@ -28,10 +28,23 @@
   color: var(--nt-btn-color);
   background: var(--nt-btn-bg-color);
   border: 1px solid var(--nt-btn-border-color);
-  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica Neue, Arial, Noto Sans, sans-serif, apple color emoji,
-    segoe ui emoji, Segoe UI Symbol, noto color emoji;
+  transition:
+    border-color 0.3s,
+    background-color 0.3s,
+    color 0.3s;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    apple color emoji,
+    segoe ui emoji,
+    Segoe UI Symbol,
+    noto color emoji;
 }
 
 .nt-btn:hover {
@@ -46,7 +59,7 @@
   background-color: var(--nt-btn-active-bg-color, var(--nt-btn-bg-color));
 }
 
-.nt-btn [class*='nt-icon']+span {
+.nt-btn [class*='nt-icon'] + span {
   margin-left: 5px;
 }
 
@@ -87,6 +100,8 @@
   --nt-btn-border-color: transparent;
   --nt-btn-hover-border-color: transparent;
   --nt-btn-active-border-color: transparent;
+  --nt-btn-disabled-bg-color: transparent;
+  --nt-btn-disabled-border-color: transparent;
   height: auto;
   padding: 5px;
 }
@@ -107,4 +122,3 @@
 .nt-btn-block {
   width: 100%;
 }
-

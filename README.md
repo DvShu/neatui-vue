@@ -12,7 +12,7 @@ npm install @asteres/neatui-vue
 
 2. 安装自动导入插件
 ```shell
-npm install -D unplugin-vue-components unplugin-auto-import
+npm install -D unplugin-vue-components unplugin-auto-import neatui-vue-resolver
 ```
 
 3. 修改 Vite 配置
@@ -22,7 +22,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import NeatuiResolver from "./index.js";
+import NeatuiResolver from "neatui-vue-resolver";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -50,7 +50,7 @@ import "@asteres/neatui-vue/style/vars.css";
 
 ## 文档
 
-[中文文档](https://neatui.github.io/neatui-vue/)
+[中文文档](https://dvshu.github.io/neatui-vue/)
 
 ## LICENSE
 neatui-vue is open source software licensed as [MulanPSL-2.0](https://github.com/DvShu/neatui-vue/blob/main/LICENSE).
