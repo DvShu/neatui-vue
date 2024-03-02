@@ -1,7 +1,8 @@
 import path from "path";
 import { mkdir, readFile } from "fs/promises";
-import { write } from "ph-utils/file";
-
+import { write, traverseDir } from "ph-utils/file";
+import vue from "@vitejs/plugin-vue";
+import { createServer, build } from "vite";
 const srcPath = path.join(process.cwd(), "src");
 const templatePath = path.join(srcPath, "components");
 const stylePath = path.join(process.cwd(), "style");
@@ -92,11 +93,94 @@ async function createComponentTemplate(name) {
 	console.log("创建成功");
 }
 
+async function devServer() {
+	const server = await createServer({
+		plugins: [vue()],
+		server: {
+			host: true,
+		},
+	});
+	await server.listen();
+
+	server.printUrls();
+	server.bindCLIShortcuts({ print: true });
+}
+
+async function scanSourceFile(dir) {
+	return new Promise((resolve) => {
+		const files = {};
+		const absPath = path.join(srcPath, dir);
+		traverseDir(
+			absPath,
+			(filePath) => {
+				const relPath = path.relative(absPath, filePath);
+				const fileRel = path.relative(process.cwd(), filePath);
+				if (relPath.startsWith("Message")) {
+					files[`${dir}/Message`] = fileRel;
+				} else {
+					let filename = path.basename(filePath);
+					filename = filename.substring(0, filename.indexOf("."));
+					files[`${dir}/${filename}`] = fileRel;
+				}
+			},
+			() => {
+				resolve(files);
+			},
+		);
+	});
+}
+
+async function buildLib() {
+	const baseBuildOption = {
+		outDir: "lib",
+		lib: {
+			entry: { index: "src/index.ts" },
+			formats: ["es"],
+			fileName: (format, entryName) => {
+				return `${entryName}.js`;
+			},
+		},
+		rollupOptions: {
+			// 确保外部化处理那些你不想打包进库的依赖
+			external: ["vue", "ph-utils", /\.\/components/, /\.\/directives/],
+		},
+		emptyOutDir: false,
+		copyPublicDir: false,
+	};
+	const comBuildOption = { ...baseBuildOption };
+	comBuildOption.emptyOutDir = true;
+	// 解析所有的文件
+	const componentFiles = await scanSourceFile("components");
+	const directivesFiles = await scanSourceFile("directives");
+	comBuildOption.lib.entry = { ...componentFiles, ...directivesFiles };
+	comBuildOption.emptyOutDir = true;
+	await build({
+		plugins: [vue()],
+		build: comBuildOption,
+	});
+	baseBuildOption.lib.entry = { index: "src/index.ts" };
+	const toFile = path.join(process.cwd(), "lib/index.js");
+	await build({
+		plugins: [vue()],
+		build: baseBuildOption,
+	})
+		.then(() => {
+			return readFile(toFile, "utf-8");
+		})
+		.then((d) => {
+			return write(toFile, d.replaceAll(".vue", ".js"));
+		});
+}
+
 (async () => {
 	const argv = process.argv;
 
 	if (argv[2] === "template") {
 		// 创建组件模板
 		await createComponentTemplate(argv[3]);
+	} else if (argv[2] === "dev") {
+		devServer();
+	} else if (argv[2] === "build") {
+		buildLib();
 	}
 })();

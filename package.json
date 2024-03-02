@@ -1,60 +1,65 @@
 {
-	"name": "@asteres/neatui-vue",
-	"description": "基于 Vue3 的 UI 组件库",
-	"version": "0.0.6",
-	"type": "module",
-	"scripts": {
-		"dev": "vite",
-		"build:pkg": "vite build",
-		"preview": "vite preview",
-		"g:c": "node scripts/index.js template",
-		"build:types": "vue-tsc -d  --emitDeclarationOnly -p tsconfig.types.json --outDir lib",
-		"build": "pnpm build:pkg & pnpm build:types",
-		"build:docs": "vite build -c docs.config.ts"
-	},
-	"devDependencies": {
-		"@types/node": "^20.11.5",
-		"@typescript-eslint/eslint-plugin": "^6.19.1",
-		"@typescript-eslint/parser": "^6.19.1",
-		"@vitejs/plugin-vue": "^5.0.3",
-		"eslint": "^8.56.0",
-		"eslint-plugin-vue": "^9.20.1",
-		"less": "^4.2.0",
-		"ph-utils": "^0.4.2",
-		"prettier": "^3.2.4",
-		"typescript": "^5.3.3",
-		"vite": "^5.0.11",
-		"vue-tsc": "^1.8.27"
-	},
-	"peerDependencies": {
-		"ph-utils": "^0.4.2",
-		"vue": "^3.3.11"
-	},
-	"files": ["lib", "style", "types"],
-	"main": "./lib/index.js",
-	"module": "./lib/index.js",
-	"types": "./lib/index.d.ts",
-	"exports": {
-		".": {
-			"import": "./lib/index.js",
-			"require": "./lib/index.js"
-		},
-		"./style/*": "./style/*"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/DvShu/neatui-vue.git"
-	},
-	"keywords": [
-		"neatui-vue",
-		"neatui",
-		"vue",
-		"ui framework",
-		"component library"
-	],
-	"homepage": "https://dvshu.github.io/neatui-vue/",
-	"bugs": {
-		"url": "https://github.com/DvShu/neatui-vue/issues"
-	},
-	"license": "MulanPSL-2.0"
+  "name": "@asteres/neatui-vue",
+  "description": "基于 Vue3 的 UI 组件库",
+  "version": "0.0.6",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/index.js dev",
+    "build:pkg": "node scripts/index.js build",
+    "preview": "vite preview",
+    "g:c": "node scripts/index.js template",
+    "build:types": "vue-tsc -d  --emitDeclarationOnly -p tsconfig.types.json --outDir lib",
+    "build": "pnpm build:pkg && pnpm build:types",
+    "build:docs": "vite build -c docs.config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.20.1",
+    "less": "^4.2.0",
+    "ph-utils": "^0.4.2",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vue-tsc": "^1.8.27"
+  },
+  "peerDependencies": {
+    "ph-utils": "^0.4.2",
+    "vue": "^3.3.11"
+  },
+  "files": [
+    "lib",
+    "style",
+    "types"
+  ],
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    "./style/*": "./style/*",
+    "./lib/*": "./lib/*",
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DvShu/neatui-vue.git"
+  },
+  "keywords": [
+    "neatui-vue",
+    "neatui",
+    "vue",
+    "ui framework",
+    "component library"
+  ],
+  "homepage": "https://dvshu.github.io/neatui-vue/",
+  "bugs": {
+    "url": "https://github.com/DvShu/neatui-vue/issues"
+  },
+  "license": "MulanPSL-2.0"
 }
