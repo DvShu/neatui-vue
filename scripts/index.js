@@ -116,7 +116,9 @@ async function scanSourceFile(dir) {
 				const relPath = path.relative(absPath, filePath);
 				const fileRel = path.relative(process.cwd(), filePath);
 				if (relPath.startsWith("Message")) {
-					files[`${dir}/Message`] = fileRel;
+					if (relPath.endsWith(".ts")) {
+						files[`${dir}/Message/index`] = fileRel;
+					}
 				} else {
 					let filename = path.basename(filePath);
 					filename = filename.substring(0, filename.indexOf("."));
