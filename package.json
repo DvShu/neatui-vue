@@ -1,30 +1,29 @@
 {
   "name": "@asteres/neatui-vue",
   "description": "基于 Vue3 的 UI 组件库",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "scripts": {
     "dev": "node scripts/index.js dev",
-    "build:pkg": "node scripts/index.js build",
     "preview": "vite preview",
     "g:c": "node scripts/index.js template",
-    "build:types": "vue-tsc -d  --emitDeclarationOnly -p tsconfig.types.json --outDir lib",
-    "build": "pnpm build:pkg && pnpm build:types",
+    "build": "node scripts/index.js build",
     "build:docs": "vite build -c docs.config.ts"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5",
-    "@typescript-eslint/eslint-plugin": "^6.19.1",
-    "@typescript-eslint/parser": "^6.19.1",
-    "@vitejs/plugin-vue": "^5.0.3",
-    "eslint": "^8.56.0",
-    "eslint-plugin-vue": "^9.20.1",
+    "@types/node": "^20.11.25",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.22.0",
     "less": "^4.2.0",
     "ph-utils": "^0.4.2",
-    "prettier": "^3.2.4",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.11",
-    "vue-tsc": "^1.8.27"
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5",
+    "vite-plugin-dts": "^3.7.3",
+    "vue-tsc": "^2.0.6"
   },
   "peerDependencies": {
     "ph-utils": "^0.4.2",
@@ -32,8 +31,7 @@
   },
   "files": [
     "lib",
-    "style",
-    "types"
+    "style"
   ],
   "main": "./lib/index.js",
   "module": "./lib/index.js",
@@ -43,7 +41,8 @@
     "./lib/*": "./lib/*",
     ".": {
       "import": "./lib/index.js",
-      "require": "./lib/index.js"
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
     }
   },
   "repository": {
@@ -61,5 +60,8 @@
   "bugs": {
     "url": "https://github.com/DvShu/neatui-vue/issues"
   },
-  "license": "MulanPSL-2.0"
+  "license": "MulanPSL-2.0",
+  "dependencies": {
+    "qrcode-generator-es": "^0.0.2"
+  }
 }
