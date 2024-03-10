@@ -20,6 +20,7 @@
   cursor: pointer;
   outline: none;
   box-sizing: border-box;
+  vertical-align: middle;
   padding: 0 11px;
   line-height: 1;
   height: var(--nt-form-edit-height);
