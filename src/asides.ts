@@ -67,5 +67,9 @@ const asids: AsideItem[] = [
     name: 'Qrcode',
     text: '二维码',
   },
+  {
+    name: 'Image',
+    text: '图片',
+  },
 ];
 export default asids;

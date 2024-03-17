@@ -15,3 +15,4 @@ export { default as Message } from './components/Message/index';
 export { default as Card } from './components/Card.vue';
 export { default as Tooltip } from './components/Tooltip.vue';
 export { default as Qrcode } from "./components/Qrcode.vue"
+export { default as Image } from "./components/Image.vue"

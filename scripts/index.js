@@ -57,6 +57,7 @@ async function createComponentTemplate(name) {
     '\t<DocMain>',
     `\t\t<h1>${name}</h1>`,
     '\t\t<p></p>',
+    '\t\t<h2>演示</h2>',
     '\t\t<CodeExample>',
     '\t\t\t<PcCodePreview lang="html" code="" title="基础用法">',
     '\t\t\t\t<template v-slot:description>',
