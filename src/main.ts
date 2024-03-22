@@ -14,6 +14,7 @@ import '../style/card/index.css';
 import '../style/tooltip/index.css';
 import "../style/qrcode/index.css";
 import "../style/image/index.css";
+import "../style/image_preview/index.css";
 import App from './App.vue';
 
 createApp(App).mount('#app');

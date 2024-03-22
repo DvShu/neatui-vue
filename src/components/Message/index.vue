@@ -23,7 +23,7 @@
 import { ref, computed, onMounted } from 'vue';
 import type { CSSProperties } from 'vue';
 
-import ErrorIcon from '../ErrorIcon.vue';
+import MaskCloseIcon from '../MaskCloseIcon.vue';
 import SuccessIcon from '../SuccessIcon.vue';
 import WarnIcon from '../WarnIcon.vue';
 import InfoIcon from '../InfoIcon.vue';
@@ -69,7 +69,7 @@ const icon = computed(() => {
   } else if (props.type === 'warn') {
     return WarnIcon;
   } else if (props.type === 'error') {
-    return ErrorIcon;
+    return MaskCloseIcon;
   }
   return InfoIcon;
 });

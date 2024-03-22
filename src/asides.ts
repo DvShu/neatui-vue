@@ -71,5 +71,9 @@ const asids: AsideItem[] = [
     name: 'Image',
     text: '图片',
   },
+  {
+    name: 'ImagePreview',
+    text: '图片预览',
+  },
 ];
 export default asids;

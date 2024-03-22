@@ -9,10 +9,10 @@ export { default as Button } from './components/Button.vue';
 export { default as LoadingIcon } from './components/LoadingIcon.vue';
 export { default as InfoIcon } from './components/InfoIcon.vue';
 export { default as WarnIcon } from './components/WarnIcon.vue';
-export { default as ErrorIcon } from './components/ErrorIcon.vue';
 export { default as SuccessIcon } from './components/SuccessIcon.vue';
 export { default as Message } from './components/Message/index';
 export { default as Card } from './components/Card.vue';
 export { default as Tooltip } from './components/Tooltip.vue';
-export { default as Qrcode } from "./components/Qrcode.vue"
-export { default as Image } from "./components/Image.vue"
+export { default as Qrcode } from './components/Qrcode.vue';
+export { default as Image } from './components/Image.vue';
+export { default as ImagePreview } from './components/ImagePreview.vue';
