@@ -8,6 +8,7 @@ import '@asteres/neatui-vue/style/util/transition.css';
 
 <script setup>
 import SourceCode from '../src/app_components/SourceCode.vue';
+import CodePreview from '../src/app_components/CodePreview.vue';
 </script>
 
 ### 1.2 使用
@@ -18,10 +19,4 @@ import SourceCode from '../src/app_components/SourceCode.vue';
 
 普通渐变进入/退出
 
-::: details 点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码点我查看代码
-
-```js
-console.log('Hello, VitePress!');
-```
-
-:::
+<CodePreview></CodePreview>
