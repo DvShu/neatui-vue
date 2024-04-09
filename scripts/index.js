@@ -10,13 +10,15 @@ const stylePath = path.join(process.cwd(), 'style');
 
 /**
  * 将风格由大写风格转换为下划线风格: IconFont -> icon_font
- * @param name 命名, 例如: IconFont
- */
-function snakeCaseStyle(name) {
-  const snakeName = name.replace(/([A-Z])/g, (match) => {
-    return `_${match.toLowerCase()}`;
+ *
+ * @param name 驼峰式命名的字符串, 例如: IconFont
+ * @returns 返回转换后的蛇形命名字符串
+ */ function snakeCaseStyle(name) {
+  if (!name) return ''; // 处理null或undefined的输入
+  const snakeName = name.replace(/([A-Z])/g, (match, _p, offset) => {
+    return (offset ? '_' : '') + match.toLowerCase();
   });
-  return snakeName[0] === '_' ? snakeName.substring(1) : snakeName;
+  return snakeName;
 }
 
 /**

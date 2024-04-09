@@ -16,10 +16,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    code: {
-      type: String,
-      required: true,
-    },
     lang: {
       type: String,
       default: 'js',
@@ -27,9 +23,10 @@ export default defineComponent({
   },
   setup(props, { slots, attrs }) {
     const showCode = ref(false);
+    const code = (slots as any).default()[0].children.trim() as string;
 
     async function handleCopy() {
-      await copy(props.code.trim());
+      await copy(code.trim());
       Message.success('复制成功');
     }
 
@@ -91,11 +88,17 @@ export default defineComponent({
                 : h(CodeRender, { code: props.code }),
             ),
             showCode.value
-              ? h(SourceCode, {
-                  code: props.code,
-                  lang: props.lang,
-                  showCopy: false,
-                })
+              ? h(
+                  SourceCode,
+                  {
+                    code: props.code,
+                    lang: props.lang,
+                    showCopy: false,
+                  },
+                  {
+                    default: () => (slots as any).default(),
+                  },
+                )
               : null,
           ],
         },

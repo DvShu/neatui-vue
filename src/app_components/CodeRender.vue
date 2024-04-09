@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue';
-import { defineComponent, h, defineAsyncComponent, Template } from 'vue';
+import { defineComponent, h, defineAsyncComponent } from 'vue';
 import { isBlank } from 'ph-utils';
 
 function parseAttributes(child: Element) {
@@ -79,10 +79,8 @@ export default defineComponent({
       return () => (slots as any).default();
     }
     if (props.code != null) {
-      console.log(props.code);
       const parser = new DOMParser();
       const doc = parser.parseFromString(props.code, 'text/html');
-      console.log(doc);
       const renderCompts = renderChildren(doc.body.children);
       return () => renderCompts;
     }
