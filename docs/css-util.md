@@ -21,5 +21,10 @@ import { Polygon } from '../src';
 普通渐变进入/退出
 
 <SourceCode>
-<template v-pre>a<nt-button class="d" a=1 c>sf</nt-button>d</template>
+<textarea>
+  <nt-button @click="show = !show">Toggle</nt-button>
+  <Transition name="nt-opacity">
+    <p v-if="show">Hello world</p>
+  </Transition>
+</textarea>
 </SourceCode>
