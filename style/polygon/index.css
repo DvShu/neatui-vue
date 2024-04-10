@@ -1,0 +1,75 @@
+.nt-polygon {
+  --nt-polygen-size: 10px;
+  --nt-polygen-width: var(--nt-polygen-size);
+  --nt-polygen-height: var(--nt-polygen-size);
+  --nt-polygen-background: #666;
+  display: inline-block;
+  width: var(--nt-polygen-width);
+  height: var(--nt-polygen-height);
+  background: var(--nt-polygen-background);
+  transition: background 0.3s ease-in-out;
+}
+
+.nt-polygon-triangle-top {
+  clip-path: polygon(
+    calc(var(--nt-polygen-width) / 2) 0,
+    var(--nt-polygen-width) var(--nt-polygen-height),
+    0 var(--nt-polygen-height)
+  );
+}
+
+.nt-polygon-triangle-top-left {
+  clip-path: polygon(
+    0 0,
+    var(--nt-polygen-width) 0,
+    0 var(--nt-polygen-height)
+  );
+}
+
+.nt-polygon-triangle-top-right {
+  clip-path: polygon(
+    0 0,
+    var(--nt-polygen-width) 0,
+    var(--nt-polygen-width) var(--nt-polygen-height)
+  );
+}
+
+.nt-polygon-triangle-right {
+  clip-path: polygon(
+    0 0,
+    var(--nt-polygen-width) calc(var(--nt-polygen-height) / 2),
+    0 var(--nt-polygen-height)
+  );
+}
+
+.nt-polygon-triangle-left {
+  clip-path: polygon(
+    var(--nt-polygen-width) 0,
+    var(--nt-polygen-width) var(--nt-polygen-height),
+    0 calc(var(--nt-polygen-height) / 2)
+  );
+}
+
+.nt-polygon-triangle-bottom {
+  clip-path: polygon(
+    0 0,
+    var(--nt-polygen-width) 0,
+    calc(var(--nt-polygen-width) / 2) var(--nt-polygen-height)
+  );
+}
+
+.nt-polygon-triangle-bottom-left {
+  clip-path: polygon(
+    0 0,
+    0 var(--nt-polygen-height),
+    var(--nt-polygen-width) var(--nt-polygen-height)
+  );
+}
+
+.nt-polygon-triangle-bottom-right {
+  clip-path: polygon(
+    var(--nt-polygen-width) 0,
+    var(--nt-polygen-width) var(--nt-polygen-height),
+    0 var(--nt-polygen-height)
+  );
+}

@@ -68,21 +68,20 @@ function renderChildren(children: HTMLCollection) {
 
 export default defineComponent({
   name: 'CodeRender',
-  props: {
-    code: {
-      type: String,
-      required: false,
-    },
-  },
-  setup(props, { slots }) {
-    if (slots.default != null) {
-      return () => (slots as any).default();
+  setup(_props, { slots }) {
+    if (slots.preview != null) {
+      return () => (slots as any).preview();
     }
-    if (props.code != null) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(props.code, 'text/html');
-      const renderCompts = renderChildren(doc.body.children);
-      return () => renderCompts;
+    if (slots.default != null) {
+      let code = (slots as any).default()[0].children as string;
+      console.log(code);
+      code = code.trim().replaceAll('\n    ', '\n');
+      if (!isBlank(code)) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(code, 'text/html');
+        const renderCompts = renderChildren(doc.body.children);
+        return () => renderCompts;
+      }
     }
   },
 });

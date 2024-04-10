@@ -1,4 +1,4 @@
-export { default as BaseIcon } from './components/Icon.vue';
+export { default as BaseIcon } from './components/icon/Base.vue';
 export { default as MaskCloseIcon } from './components/MaskCloseIcon.vue';
 export { default as SearchIcon } from './components/SearchIcon.vue';
 export { default as Input } from './components/Input.vue';
@@ -16,3 +16,6 @@ export { default as Tooltip } from './components/Tooltip.vue';
 export { default as Qrcode } from './components/Qrcode.vue';
 export { default as Image } from './components/Image.vue';
 export { default as ImagePreview } from './components/ImagePreview.vue';
+export { default as Polygon } from './components/Polygon.vue';
+export { default as CaretTopIcon } from './components/icon/CaretTop.vue';
+export { default as CaretBottomIcon } from './components/icon/CaretBottom.vue';

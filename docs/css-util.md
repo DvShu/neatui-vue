@@ -9,6 +9,7 @@ import '@asteres/neatui-vue/style/util/transition.css';
 <script setup>
 import SourceCode from '../src/app_components/SourceCode.vue';
 import CodePreview from '../src/app_components/CodePreview.vue';
+import { Polygon } from '../src';
 </script>
 
 ### 1.2 使用
@@ -19,4 +20,6 @@ import CodePreview from '../src/app_components/CodePreview.vue';
 
 普通渐变进入/退出
 
-<CodePreview></CodePreview>
+<SourceCode>
+<template v-pre>a<nt-button class="d" a=1 c>sf</nt-button>d</template>
+</SourceCode>

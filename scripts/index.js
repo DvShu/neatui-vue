@@ -33,16 +33,6 @@ async function createComponentTemplate(name) {
   await write(path.join(styleDir, 'index.css'), '');
   await write(path.join(styleDir, 'index.js'), 'import "./index.css";');
 
-  // 更新本地样式引用
-  let mainContent = await readFile(path.join(srcPath, 'main.ts'), 'utf-8');
-  const newMainContent = [
-    `import "../style/${snakeName}/index.css";`,
-    '\r\n',
-    'import App',
-  ];
-  mainContent = mainContent.replace('import App', newMainContent.join(''));
-  await write(path.join(srcPath, 'main.ts'), mainContent);
-
   // 新建组件
   const vueTemp = '<template></template>\r\n<script setup lang="ts"></script>';
   await write(path.join(templatePath, `${name}.vue`), vueTemp);
@@ -53,88 +43,30 @@ async function createComponentTemplate(name) {
   exportContent += `\r\nexport { default as ${name} } from "./components/${name}.vue"\r\n`;
   await write(path.join(srcPath, 'index.ts'), exportContent);
 
+  // 应用样式导入
+  const docsPath = path.join(process.cwd(), 'docs/.vitepress/theme/index.ts');
+  let importContent = await readFile(docsPath, 'utf-8');
+  exportContent = exportContent.replace(
+    '\r\nexport default DefaultTheme;',
+    `import '../../../style/${snakeName}';\r\nexport default DefaultTheme;`,
+  );
+  await write(docsPath, importContent);
+
   // 生成文档组件模板
   const docTemplateContents = [
-    '<template>',
-    '\t<DocMain>',
-    `\t\t<h1>${name}</h1>`,
-    '\t\t<p></p>',
-    '\t\t<h2>演示</h2>',
-    '\t\t<CodeExample>',
-    '\t\t\t<PcCodePreview lang="html" code="" title="基础用法">',
-    '\t\t\t\t<template v-slot:description>',
-    '\t\t\t\t\t<p></p>',
-    '\t\t\t\t</template>',
-    '\t\t\t</PcCodePreview>',
-    '\t\t</CodeExample>',
-    '\t\t<h2>API</h2>',
-    `\t\t<PropTable :data="propData" title="${name} Props"></PropTable>`,
-    `\t\t<SlotTable :data="slotData" title="${name} Slots"></SlotTable>`,
-    `\t\t<MethodTable :data="methodData" title="${name} Methods"></MethodTable>`,
-    '\t\t<ThemeTable :rows="vars"></ThemeTable>',
-    '\t</DocMain>',
-    '</template>',
-    '\r\n',
-    '<script lang="ts" setup>',
-    "import ThemeTable from '../app_components/ThemeTable.vue';",
-    `import ${name} from '../components/${name}.vue'`,
-    "import DocMain from '../app_components/DocMain.vue';\r\n",
-    "import CodeExample from '../app_components/CodeExample.vue';",
-    "import PcCodePreview from '../app_components/PcCodePreview.vue';",
-    "import PropTable from '../app_components/PropTable.vue';",
-    "import SlotTable from '../app_components/SlotTable.vue';",
-    "import MethodTable from '../app_components/MethodTable.vue';",
-    "const vars = [{name: '',description: '',default: ''}]",
-    "const propData = [{name:'',description: '',default: '',type:''}]",
-    "const slotData = [{name:'default',param:'()',description:''}]",
-    "const methodData = [{name:'',param:'',description:'',return:''}]",
-    '</script>',
+    `# ${name}`,
+    `${name}`,
+    '## 演示',
+    '### 基础用法',
+    '基础用法',
   ];
   await write(
-    path.join(srcPath, 'views', `${name}.vue`),
+    path.join(process.cwd(), 'docs/components', `${name}.md`),
     docTemplateContents.join('\r\n'),
   );
   console.log('创建成功');
 }
 
-async function devServer() {
-  const server = await createServer({
-    plugins: [vue()],
-    server: {
-      host: true,
-    },
-  });
-  await server.listen();
-
-  server.printUrls();
-  server.bindCLIShortcuts({ print: true });
-}
-
-async function scanSourceFile(dir) {
-  return new Promise((resolve) => {
-    const files = {};
-    const absPath = path.join(srcPath, dir);
-    traverseDir(
-      absPath,
-      (filePath) => {
-        const relPath = path.relative(absPath, filePath);
-        const fileRel = path.relative(process.cwd(), filePath);
-        if (relPath.startsWith('Message')) {
-          if (relPath.endsWith('.ts')) {
-            files[`${dir}/Message/index`] = fileRel;
-          }
-        } else {
-          let filename = path.basename(filePath);
-          filename = filename.substring(0, filename.indexOf('.'));
-          files[`${dir}/${filename}`] = fileRel;
-        }
-      },
-      () => {
-        resolve(files);
-      },
-    );
-  });
-}
 
 async function buildLib() {
   const baseBuildOption = {
@@ -189,9 +121,5 @@ async function buildLib() {
   if (argv[2] === 'template') {
     // 创建组件模板
     await createComponentTemplate(argv[3]);
-  } else if (argv[2] === 'dev') {
-    devServer();
-  } else if (argv[2] === 'build') {
-    buildLib();
   }
 })();
