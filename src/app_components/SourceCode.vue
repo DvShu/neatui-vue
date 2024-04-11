@@ -5,6 +5,7 @@
   >
     <button v-if="showCopy" title="Copy Code" class="copy"></button>
     <span class="lang">{{ lang }}</span>
+    <slot></slot>
   </div>
 </template>
 
@@ -13,19 +14,18 @@ import { onMounted, ref, useSlots } from 'vue';
 import type { VNode } from 'vue';
 import { codeToHtml } from 'shiki';
 import { isBlank } from 'ph-utils';
-import { vnodesToHTML } from '../utils';
 
 const slots = useSlots() as {
   default: () => VNode[];
 };
 
-const props = withDefaults(
+const lang = ref('ts');
+
+withDefaults(
   defineProps<{
-    lang?: string;
     showCopy?: boolean;
   }>(),
   {
-    lang: 'ts',
     showCopy: true,
   },
 );
@@ -33,43 +33,49 @@ const props = withDefaults(
 const vpCode = ref<HTMLDivElement>();
 
 onMounted(async () => {
-  let sourceCode = slots.default()[0].children as string;
-  sourceCode = sourceCode.trim().replaceAll('\n  ', '\n');
-  if (typeof sourceCode === 'string' && !isBlank(sourceCode)) {
-    let preCode = await codeToHtml(sourceCode.trim(), {
-      lang: props.lang,
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      },
-      defaultColor: false,
-    });
-    preCode = preCode
-      .replace('github-dark', 'github-dark vp-code')
-      .replace('; ', ';\r\n');
-    const lineMatch = preCode.match(/class="line"/g);
-    const lineNumber = lineMatch ? lineMatch.length : 0;
-    const fragment = new DocumentFragment();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(preCode, 'text/html');
-    const children = doc.body.children;
-
-    for (let i = 0, len = children.length; i < len; i++) {
-      if (children[i] != null) {
-        fragment.appendChild(children[i]);
+  if (vpCode.value != null) {
+    const $codeArea = vpCode.value.querySelector('textarea');
+    if ($codeArea != null) {
+      if ($codeArea.hasAttribute('lang')) {
+        lang.value = $codeArea.getAttribute('lang') as string;
       }
-    }
-    const $lineNumber = document.createElement('div');
-    $lineNumber.className = 'line-numbers-wrapper';
-    $lineNumber.setAttribute('aria-hidden', 'true');
-    let $lineTmp = '';
-    for (let i = 1; i <= lineNumber; i++) {
-      $lineTmp += `<span class="line-number">${i}</span><br>`;
-    }
-    $lineNumber.innerHTML = $lineTmp;
-    fragment.appendChild($lineNumber);
-    if (vpCode.value != null) {
-      vpCode.value.appendChild(fragment);
+      let sourceCode = $codeArea.value;
+      sourceCode = sourceCode.trim().replaceAll('\n  ', '\n');
+      if (typeof sourceCode === 'string' && !isBlank(sourceCode)) {
+        let preCode = await codeToHtml(sourceCode.trim(), {
+          lang: lang.value,
+          themes: {
+            light: 'github-light',
+            dark: 'github-dark',
+          },
+          defaultColor: false,
+        });
+        preCode = preCode
+          .replace('github-dark', 'github-dark vp-code')
+          .replace('; ', ';\r\n');
+        const lineMatch = preCode.match(/class="line"/g);
+        const lineNumber = lineMatch ? lineMatch.length : 0;
+        const fragment = new DocumentFragment();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(preCode, 'text/html');
+        const children = doc.body.children;
+
+        for (let i = 0, len = children.length; i < len; i++) {
+          if (children[i] != null) {
+            fragment.appendChild(children[i]);
+          }
+        }
+        const $lineNumber = document.createElement('div');
+        $lineNumber.className = 'line-numbers-wrapper';
+        $lineNumber.setAttribute('aria-hidden', 'true');
+        let $lineTmp = '';
+        for (let i = 1; i <= lineNumber; i++) {
+          $lineTmp += `<span class="line-number">${i}</span><br>`;
+        }
+        $lineNumber.innerHTML = $lineTmp;
+        fragment.appendChild($lineNumber);
+        $codeArea.replaceWith(fragment);
+      }
     }
   }
 });
@@ -88,6 +94,10 @@ onMounted(async () => {
     &:hover {
       color: var(--nt-primary-color);
     }
+  }
+
+  textarea {
+    display: none;
   }
 }
 </style>

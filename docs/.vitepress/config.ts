@@ -23,18 +23,23 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/usage' },
-      { text: '组件', link: '/components/button' },
+      { text: '组件', link: '/components/container' },
     ],
 
     sidebar: [
       {
         text: '指南',
-        collapsed: true,
+        collapsed: false,
         items: [
           { text: '快速上手', link: '/usage' },
           { text: '样式重置', link: '/reset' },
           { text: '工具样式', link: '/css-util' },
         ],
+      },
+      {
+        text: '组件',
+        collapsed: false,
+        items: [{ text: 'Container 容器布局', link: '/components/container' }],
       },
     ],
 

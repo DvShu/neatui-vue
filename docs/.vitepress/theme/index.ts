@@ -5,6 +5,11 @@ import '../../../style/button';
 import '../../../style/tooltip';
 import '../../../style/util/transition.css';
 import '../../../style/polygon';
+import '../../../style/vars.css';
+import '../../../style/reset.css';
+import '../../../src/style.css';
+import '../../../style/util/scrollbar.css';
+import '../../../style/container.css';
 
 export default {
   extends: DefaultTheme,

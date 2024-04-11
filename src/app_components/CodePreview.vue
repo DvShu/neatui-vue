@@ -1,23 +1,14 @@
 <script lang="ts">
 import { defineComponent, ref, h } from 'vue';
 import SourceCode from './SourceCode.vue';
-import ExpandIcon from './ExpandIcon.vue';
-import CopyIcon from './CopyIcon.vue';
 import Button from '../components/Button.vue';
-import Tooltip from '../components/Tooltip.vue';
 import CaretTopIcon from '../components/icon/CaretTop.vue';
 import CaretBottomIcon from '../components/icon/CaretBottom.vue';
 import CodeRender from './CodeRender.vue';
 
 export default defineComponent({
-  props: {
-    lang: {
-      type: String,
-      default: 'ts',
-    },
-  },
-  setup(props, { slots }: any) {
-    const showCode = ref(true);
+  setup(_props, { slots }: any) {
+    const showCode = ref(false);
 
     return () =>
       h('div', { class: 'code-preview' }, [
@@ -48,11 +39,7 @@ export default defineComponent({
           ),
         ]),
         showCode.value && [
-          h(
-            SourceCode,
-            { lang: props.lang },
-            { default: () => h('pre', 'const a = 1;') },
-          ),
+          h(SourceCode, null, { default: () => slots.default() }),
         ],
       ]);
   },
@@ -74,12 +61,15 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     border-top: 1px solid #e2e2e3;
-    border-bottom: 1px solid #e2e2e3;
   }
 
   div[class*='language-'] {
     margin: 0;
     border-radius: 0;
+  }
+
+  .source-code {
+    border-top: 1px solid #e2e2e3;
   }
 }
 </style>

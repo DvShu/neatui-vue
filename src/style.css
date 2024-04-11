@@ -1,0 +1,26 @@
+.mb-15 {
+  margin-bottom: 15px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.code-preview .nt-header,
+.code-preview .nt-footer {
+  background-color: #c5e2ff;
+}
+.code-preview .nt-main {
+  background-color: #ecf5ff;
+}
+.code-preview .nt-aside {
+  background-color: #d9ecff;
+}
