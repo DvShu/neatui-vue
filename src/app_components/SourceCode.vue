@@ -40,6 +40,7 @@ onMounted(async () => {
         lang.value = $codeArea.getAttribute('lang') as string;
       }
       let sourceCode = $codeArea.value;
+      console.log(sourceCode);
       sourceCode = sourceCode.trim().replaceAll('\n  ', '\n');
       if (typeof sourceCode === 'string' && !isBlank(sourceCode)) {
         let preCode = await codeToHtml(sourceCode.trim(), {
@@ -50,9 +51,7 @@ onMounted(async () => {
           },
           defaultColor: false,
         });
-        preCode = preCode
-          .replace('github-dark', 'github-dark vp-code')
-          .replace('; ', ';\r\n');
+        preCode = preCode.replace('github-dark', 'github-dark vp-code');
         const lineMatch = preCode.match(/class="line"/g);
         const lineNumber = lineMatch ? lineMatch.length : 0;
         const fragment = new DocumentFragment();

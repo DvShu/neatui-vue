@@ -39,7 +39,10 @@ export default defineConfig({
       {
         text: '组件',
         collapsed: false,
-        items: [{ text: 'Container 容器布局', link: '/components/container' }],
+        items: [
+          { text: 'Container 容器布局', link: '/components/container' },
+          { text: 'Directives 指令', link: '/components/directives' },
+        ],
       },
     ],
 

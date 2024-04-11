@@ -109,5 +109,8 @@ import CodePreview from '../../src/app_components/CodePreview.vue';
 
 ### 样式变量
 
-| 名称 | 描述 | 默认值 |
-| ---- | ---- | ------ |
+| 名称                 | 描述           | 默认值  |
+| -------------------- | -------------- | ------- |
+| `--nt-header-height` | header高度     | `50px`  |
+| `--nt-aside-width`   | 侧边栏宽度     | `240px` |
+| `--nt-footer-height` | 底栏高度       | `var(--nt-header-height, 50px)`  |

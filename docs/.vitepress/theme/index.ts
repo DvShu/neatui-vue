@@ -10,11 +10,13 @@ import '../../../style/reset.css';
 import '../../../src/style.css';
 import '../../../style/util/scrollbar.css';
 import '../../../style/container.css';
+import '../../../style/input';
+import CodePreview from '../../../src/app_components/CodePreview.vue';
 
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     // 注册自定义全局组件
-    // app.component('MyGlobalComponent' /* ... */)
+    app.component('CodePreview', CodePreview);
   },
 } satisfies Theme;
