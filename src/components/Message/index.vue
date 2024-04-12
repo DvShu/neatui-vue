@@ -23,10 +23,10 @@
 import { ref, computed, onMounted } from 'vue';
 import type { CSSProperties } from 'vue';
 
-import MaskCloseIcon from '../MaskCloseIcon.vue';
-import SuccessIcon from '../SuccessIcon.vue';
-import WarnIcon from '../WarnIcon.vue';
-import InfoIcon from '../InfoIcon.vue';
+import MaskCloseIcon from '../icon/MaskClose.vue';
+import SuccessIcon from '../icon/Success.vue';
+import WarnIcon from '../icon/Warn.vue';
+import InfoIcon from '../icon/Info.vue';
 
 const props = withDefaults(
   defineProps<{

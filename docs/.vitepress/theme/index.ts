@@ -12,6 +12,7 @@ import '../../../style/util/scrollbar.css';
 import '../../../style/container.css';
 import '../../../style/input';
 import CodePreview from '../../../src/app_components/CodePreview.vue';
+import '../../../style/message';
 
 export default {
   extends: DefaultTheme,

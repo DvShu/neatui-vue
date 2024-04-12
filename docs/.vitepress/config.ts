@@ -42,6 +42,10 @@ export default defineConfig({
         items: [
           { text: 'Container 容器布局', link: '/components/container' },
           { text: 'Directives 指令', link: '/components/directives' },
+          { text: 'Icon 图标', link: '/components/icon' },
+          { text: 'Button 按钮', link: '/components/button' },
+          { text: 'Input 输入框', link: '/components/input' },
+          { text: 'Tooltip 文字提示', link: '/components/tooltip' },
         ],
       },
     ],

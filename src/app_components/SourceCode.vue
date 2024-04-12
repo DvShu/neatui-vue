@@ -40,7 +40,6 @@ onMounted(async () => {
         lang.value = $codeArea.getAttribute('lang') as string;
       }
       let sourceCode = $codeArea.value;
-      console.log(sourceCode);
       sourceCode = sourceCode.trim().replaceAll('\n  ', '\n');
       if (typeof sourceCode === 'string' && !isBlank(sourceCode)) {
         let preCode = await codeToHtml(sourceCode.trim(), {

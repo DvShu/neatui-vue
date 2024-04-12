@@ -15,7 +15,8 @@ function parseAttributes(child: Element) {
 const parseComponent = function (name: string) {
   if (name.startsWith('nt-')) {
     let tagname = parseAsyncComponentName(name);
-    return defineAsyncComponent(() => import(`../components/${tagname}.vue`));
+    const filename = `../components/${tagname}.vue`;
+    return defineAsyncComponent(() => import(filename));
   }
   return name;
 };
@@ -24,7 +25,7 @@ function parseAsyncComponentName(tagName: string): string {
   if (tagName.startsWith('nt-')) {
     let name = tagName.substring(3);
     if (name === 'base-icon') {
-      return 'Icon';
+      return 'icon/Base';
     } else {
       let nameItmes = name.split('-');
       nameItmes = nameItmes.map(
@@ -75,7 +76,6 @@ export default defineComponent({
       }
       if (slots.default != null) {
         let code = (slots as any).default()[0].children as string;
-        console.log(code);
         code = code.trim().replaceAll('\n    ', '\n');
         if (!isBlank(code)) {
           const parser = new DOMParser();

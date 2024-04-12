@@ -20,16 +20,13 @@
     "eslint-plugin-vue": "^9.24.0",
     "globals": "^15.0.0",
     "less": "^4.2.0",
-    "ph-utils": "^0.4.2",
     "prettier": "^3.2.5",
     "typescript": "^5.4.2",
     "vite": "^5.1.6",
     "vite-plugin-dts": "^3.7.3",
-    "vitepress": "^1.0.2",
     "vue-tsc": "^2.0.6"
   },
   "peerDependencies": {
-    "ph-utils": "^0.4.2",
     "vue": "^3.3.11"
   },
   "files": [
@@ -65,7 +62,9 @@
   },
   "license": "MulanPSL-2.0",
   "dependencies": {
+    "ph-utils": "^0.4.3",
     "qrcode-generator-es": "^0.0.3",
-    "shiki": "^1.2.4"
+    "shiki": "^1.2.4",
+    "vitepress": "^1.1.0"
   }
 }

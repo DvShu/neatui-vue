@@ -21,7 +21,7 @@
   </button>
 </template>
 <script setup lang="ts">
-import LoadingIcon from './LoadingIcon.vue';
+import LoadingIcon from './icon/Loading.vue';
 
 withDefaults(
   defineProps<{
