@@ -46,6 +46,7 @@ export default defineConfig({
           { text: 'Button 按钮', link: '/components/button' },
           { text: 'Input 输入框', link: '/components/input' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
+          { text: 'Message 消息提示', link: '/components/message' },
         ],
       },
     ],
