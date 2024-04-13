@@ -14,6 +14,18 @@
   margin-top: 15px;
 }
 
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
 .code-preview .nt-header,
 .code-preview .nt-footer {
   background-color: #c5e2ff;

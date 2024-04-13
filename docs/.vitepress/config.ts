@@ -47,6 +47,7 @@ export default defineConfig({
           { text: 'Input 输入框', link: '/components/input' },
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
           { text: 'Message 消息提示', link: '/components/message' },
+          { text: 'Card 卡片', link: '/components/card' },
         ],
       },
     ],
