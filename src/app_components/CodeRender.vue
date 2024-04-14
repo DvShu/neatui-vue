@@ -16,7 +16,7 @@ const parseComponent = function (name: string) {
   if (name.startsWith('nt-')) {
     let tagname = parseAsyncComponentName(name);
     const filename = `../components/${tagname}.vue`;
-    return defineAsyncComponent(() => import(filename));
+    return defineAsyncComponent(() => import(/* @vite-ignore */ filename));
   }
   return name;
 };
@@ -79,11 +79,8 @@ export default defineComponent({
         code = code.trim().replaceAll('\n    ', '\n');
         if (!isBlank(code)) {
           const parser = new DOMParser();
-          console.log(code);
           const doc = parser.parseFromString(code, 'text/html');
-          console.log(doc.body);
           const renderCompts = renderChildren(doc.body.children);
-          console.log(renderCompts);
           return renderCompts;
         }
       }

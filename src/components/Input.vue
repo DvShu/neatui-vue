@@ -1,6 +1,7 @@
 <template>
   <input :type="htmlType" class="nt-input" :placeholder="placeholder" />
 </template>
+
 <script setup lang="ts">
 withDefaults(
   defineProps<{

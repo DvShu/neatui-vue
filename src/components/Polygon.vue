@@ -1,6 +1,7 @@
 <template>
   <div :class="['nt-polygon', shape ? `nt-polygon-${shape}` : '']"></div>
 </template>
+
 <script setup lang="ts">
 defineProps<{
   /** 形状 */

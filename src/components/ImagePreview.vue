@@ -6,4 +6,7 @@
     </div>
   </Teleport>
 </template>
-<script setup lang="ts"></script>
+
+<script setup lang="ts">
+console.log('');
+</script>

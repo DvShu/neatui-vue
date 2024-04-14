@@ -48,6 +48,7 @@ export default defineConfig({
           { text: 'Tooltip 文字提示', link: '/components/tooltip' },
           { text: 'Message 消息提示', link: '/components/message' },
           { text: 'Card 卡片', link: '/components/card' },
+          { text: 'Qrcode 二维码', link: '/components/qrcode' },
         ],
       },
     ],

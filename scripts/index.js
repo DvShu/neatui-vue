@@ -2,7 +2,7 @@ import path from 'path';
 import { mkdir, readFile } from 'fs/promises';
 import { write, traverseDir } from 'ph-utils/file';
 import vue from '@vitejs/plugin-vue';
-import { createServer, build } from 'vite';
+import { build } from 'vite';
 import dts from 'vite-plugin-dts';
 const srcPath = path.join(process.cwd(), 'src');
 const templatePath = path.join(srcPath, 'components');
@@ -59,6 +59,11 @@ async function createComponentTemplate(name) {
     '## 演示',
     '### 基础用法',
     '基础用法',
+    '## API',
+    '### ${name} Props',
+    '| 参数 | 说明 | 类型 | 默认值 |',
+    '| ---- | ---- | ---- | ---- |',
+    '| x | x | x | x |',
   ];
   await write(
     path.join(process.cwd(), 'docs/components', `${name}.md`),
@@ -67,12 +72,37 @@ async function createComponentTemplate(name) {
   console.log('创建成功');
 }
 
+async function scanSourceFile(dir) {
+  return new Promise((resolve) => {
+    const files = {};
+    const absPath = path.join(srcPath, dir);
+    traverseDir(
+      absPath,
+      (filePath) => {
+        const relPath = path.relative(absPath, filePath);
+        const fileRel = path.relative(process.cwd(), filePath);
+        if (relPath.startsWith('Message')) {
+          if (relPath.endsWith('.ts')) {
+            files[`${dir}/Message/index`] = fileRel;
+          }
+        } else {
+          let filename = path.basename(filePath);
+          filename = filename.substring(0, filename.indexOf('.'));
+          files[`${dir}/${filename}`] = fileRel;
+        }
+      },
+      () => {
+        resolve(files);
+      },
+    );
+  });
+}
 
 async function buildLib() {
   const baseBuildOption = {
     outDir: 'lib',
     lib: {
-      entry: { index: 'src/index.ts' },
+      entry: { 'components/Button': 'src/components/Button.vue' },
       formats: ['es'],
       fileName: (format, entryName) => {
         return `${entryName}.js`;
@@ -89,9 +119,11 @@ async function buildLib() {
   comBuildOption.emptyOutDir = true;
   // 解析所有的文件
   const componentFiles = await scanSourceFile('components');
+  console.log(componentFiles);
   const directivesFiles = await scanSourceFile('directives');
-  comBuildOption.lib.entry = { ...componentFiles, ...directivesFiles };
+  // comBuildOption.lib.entry = { ...componentFiles, ...directivesFiles };
   comBuildOption.emptyOutDir = true;
+  console.log(comBuildOption);
   await build({
     plugins: [
       vue(),
@@ -99,20 +131,34 @@ async function buildLib() {
         tsconfigPath: 'tsconfig.types.json',
       }),
     ],
-    build: comBuildOption,
+    build: {
+      outDir: 'lib',
+      lib: {
+        entry: 'src/index.ts',
+        formats: ['es'],
+        fileName: 'index',
+      },
+      rollupOptions: {
+        // 确保外部化处理那些你不想打包进库的依赖
+        external: ['vue', 'ph-utils'],
+      },
+      emptyOutDir: false,
+      copyPublicDir: false,
+    },
   });
+
   baseBuildOption.lib.entry = { index: 'src/index.ts' };
   const toFile = path.join(process.cwd(), 'lib/index.js');
-  await build({
-    plugins: [vue()],
-    build: baseBuildOption,
-  })
-    .then(() => {
-      return readFile(toFile, 'utf-8');
-    })
-    .then((d) => {
-      return write(toFile, d.replaceAll('.vue', '.js'));
-    });
+  // await build({
+  //   plugins: [vue()],
+  //   build: baseBuildOption,
+  // })
+  //   .then(() => {
+  //     return readFile(toFile, 'utf-8');
+  //   })
+  //   .then((d) => {
+  //     return write(toFile, d.replaceAll('.vue', '.js'));
+  //   });
 }
 
 (async () => {
@@ -121,5 +167,8 @@ async function buildLib() {
   if (argv[2] === 'template') {
     // 创建组件模板
     await createComponentTemplate(argv[3]);
+  } else if (argv[2] === 'build') {
+    // 构建组件库
+    await buildLib();
   }
 })();

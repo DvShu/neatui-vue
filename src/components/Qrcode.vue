@@ -1,6 +1,7 @@
 <template>
   <canvas ref="$canvas" width="100" height="100"</canvas>
 </template>
+
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { QRCodeRender, renderToCanvas } from 'qrcode-generator-es';
