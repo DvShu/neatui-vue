@@ -24,16 +24,15 @@ const parseComponent = function (name: string) {
 function parseAsyncComponentName(tagName: string): string {
   if (tagName.startsWith('nt-')) {
     let name = tagName.substring(3);
-    if (name === 'base-icon') {
-      return 'icon/Base';
-    } else {
-      let nameItmes = name.split('-');
-      nameItmes = nameItmes.map(
-        (item) => item[0].toUpperCase() + item.substring(1),
-      );
-      name = nameItmes.join('');
-      return name;
+    let nameItmes = name.split('-');
+    nameItmes = nameItmes.map(
+      (item) => item[0].toUpperCase() + item.substring(1),
+    );
+    name = nameItmes.join('');
+    if (name.endsWith('Icon')) {
+      name = `icon/${name.substring(0, name.length - 4)}`;
     }
+    return name;
   }
   return tagName;
 }
@@ -50,6 +49,7 @@ function renderChildren(children: HTMLCollection) {
           }),
         );
       } else {
+        console.log(component);
         renderCompts.push(
           h(component, parseAttributes(child), {
             default: () => child.textContent,
@@ -79,8 +79,11 @@ export default defineComponent({
         code = code.trim().replaceAll('\n    ', '\n');
         if (!isBlank(code)) {
           const parser = new DOMParser();
+          console.log(code);
           const doc = parser.parseFromString(code, 'text/html');
+          console.log(doc.body);
           const renderCompts = renderChildren(doc.body.children);
+          console.log(renderCompts);
           return renderCompts;
         }
       }
