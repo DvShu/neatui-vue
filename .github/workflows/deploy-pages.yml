@@ -36,11 +36,11 @@ jobs:
         run: npm install
 
       - name: Build Site
-        run: npm run build:docs
+        run: npm run docs:build
 
       - name: Deploy Site
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./docs/.vitepress/dist
           deploy_key: ${{ secrets.DEPLOY_KEY }}
