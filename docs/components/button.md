@@ -8,73 +8,73 @@
 
 使用 `type` 控制按钮类型, 提供三种类型: `default`, `primary`, `text`。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-button>Default</nt-button>
-  <nt-button type="primary" class="ml-10">Primary</nt-button>
-  <nt-button type="text" class="ml-10">Text</nt-button>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-button>Default</nt-button>
+<nt-button type="primary" class="ml-10">Primary</nt-button>
+<nt-button type="text" class="ml-10">Text</nt-button>
+</textarea>
+</CodePreview></ClientOnly>
 
 ### 按钮禁用
 
 使用 `disabled` 控制按钮禁用状态, 禁用状态下不可点击。该属性接受一个 Boolean 类型的值。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-button disabled>Default</nt-button>
-  <nt-button type="text" class="ml-10" disabled>Text</nt-button>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-button disabled>Default</nt-button>
+<nt-button type="text" class="ml-10" disabled>Text</nt-button>
+</textarea>
+</CodePreview></ClientOnly>
 
 ### 按钮加载状态
 
 使用 `loading` 控制按钮加载状态, 加载状态下不可点击。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-button loading>Default</nt-button>
-  <nt-button type="primary" loading class="ml-10">Primary</nt-button>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-button loading>Default</nt-button>
+<nt-button type="primary" loading class="ml-10">Primary</nt-button>
+</textarea>
+</CodePreview></ClientOnly>
 
 ### `Block` 按钮
 
 `block` 属性使按钮适合其父宽度。[100%]
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-button block>Default</nt-button>
-  <nt-button type="primary" block class="mt-15">Text</nt-button>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-button block>Default</nt-button>
+<nt-button type="primary" block class="mt-15">Text</nt-button>
+</textarea>
+</CodePreview></ClientOnly>
 
 ### 按钮形状
 
 按钮可以设置为圆形或者弧形
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-button circle>D</nt-button>
-  <nt-button type="primary" round class="ml-10">Text</nt-button>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-button circle>D</nt-button>
+<nt-button type="primary" round class="ml-10">Text</nt-button>
+</textarea>
+</CodePreview></ClientOnly>
 
 ### 图标按钮
 
 直接在 Button 内使用 Icon 组件。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-button circle>
-    <nt-search-icon></nt-search-icon>
-  </nt-button>
-  <nt-button type="primary" round class="ml-10">
-    <nt-search-icon></nt-search-icon>
-    <span>Search</span>
-  </nt-button>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-button circle>
+<nt-search-icon></nt-search-icon>
+</nt-button>
+<nt-button type="primary" round class="ml-10">
+<nt-search-icon></nt-search-icon>
+<span>Search</span>
+</nt-button>
+</textarea>
+</CodePreview></ClientOnly>
 
 ## API
 

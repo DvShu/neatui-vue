@@ -26,30 +26,33 @@ import CodePreview from '../../src/app_components/CodePreview.vue';
 
 ### 上下两栏排版
 
-<CodePreview class="mt-15">
-  <textarea lang="html">
+<ClientOnly><CodePreview class="mt-15">
+<textarea lang="html">
+
   <section class="nt-container nt-layout-vertical">
     <header class="nt-header">Header</header>
     <main class="nt-main">Main</main>
   </section>
   </textarea>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ### 左右两栏排版
 
-<CodePreview class="mt-15">
-  <textarea lang="html">
+<ClientOnly><CodePreview class="mt-15">
+<textarea lang="html">
+
   <section class="nt-container">
     <aside class="nt-aside">Aside</aside>
     <main class="nt-main">Main</main>
   </section>
   </textarea>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ### 上下两栏嵌套
 
-<CodePreview class="mt-15">
-  <textarea lang="html">
+<ClientOnly><CodePreview class="mt-15">
+<textarea lang="html">
+
   <section class="nt-container nt-layout-vertical">
     <header class="nt-header">Header</header>
     <section class="nt-container">
@@ -58,12 +61,13 @@ import CodePreview from '../../src/app_components/CodePreview.vue';
     </section>
   </section>
   </textarea>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ### 左右两栏嵌套
 
-<CodePreview class="mt-15">
-  <textarea lang="html">
+<ClientOnly><CodePreview class="mt-15">
+<textarea lang="html">
+
   <section class="nt-container">
     <aside class="nt-aside">Aside</aside>
     <section class="nt-container nt-layout-vertical">
@@ -72,26 +76,28 @@ import CodePreview from '../../src/app_components/CodePreview.vue';
     </section>
   </section>
   </textarea>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ### 上中下三栏
 
-<CodePreview class="mt-15">
-  <textarea lang="html">
+<ClientOnly><CodePreview class="mt-15">
+<textarea lang="html">
+
   <section class="nt-container nt-layout-vertical">
     <header class="nt-header">Header</header>
     <main class="nt-main">Main</main>
     <footer class="nt-footer">Footer</footer>
   </section>
   </textarea>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ### 经典后台系统
 
 在 `header` 里面放点东西就成了，就成了经典的后台管理系统的模板, 左边是图标，右边是登录用户；`Aside` 里面放菜单(`Menu`)，`Main` 里面放内容就是经典的后台管理系统模板
 
-<CodePreview>
-  <textarea lang="html">
+<ClientOnly><CodePreview>
+<textarea lang="html">
+
   <section class="nt-container nt-layout-vertical">
     <header class="nt-header">
       <a href="#">NEATUI</a>
@@ -103,14 +109,14 @@ import CodePreview from '../../src/app_components/CodePreview.vue';
     </section>
   </section>
   </textarea>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ## 主题定制
 
 ### 样式变量
 
-| 名称                 | 描述           | 默认值  |
-| -------------------- | -------------- | ------- |
-| `--nt-header-height` | header高度     | `50px`  |
-| `--nt-aside-width`   | 侧边栏宽度     | `240px` |
-| `--nt-footer-height` | 底栏高度       | `var(--nt-header-height, 50px)`  |
+| 名称                 | 描述       | 默认值                          |
+| -------------------- | ---------- | ------------------------------- |
+| `--nt-header-height` | header高度 | `50px`                          |
+| `--nt-aside-width`   | 侧边栏宽度 | `240px`                         |
+| `--nt-footer-height` | 底栏高度   | `var(--nt-header-height, 50px)` |

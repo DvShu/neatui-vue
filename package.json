@@ -65,6 +65,6 @@
   "license": "MulanPSL-2.0",
   "dependencies": {
     "ph-utils": "^0.4.3",
-    "qrcode-generator-es": "^0.0.3"
+    "qrcode-generator-es": "^0.0.4"
   }
 }

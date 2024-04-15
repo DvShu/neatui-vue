@@ -1,9 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref, h } from 'vue';
 import SourceCode from './SourceCode.vue';
-import Button from '../components/Button.vue';
-import CaretTopIcon from '../components/icon/CaretTop.vue';
-import CaretBottomIcon from '../components/icon/CaretBottom.vue';
+import { Button, CaretTopIcon, CaretBottomIcon } from '../';
 import CodeRender from './CodeRender.vue';
 
 export default defineComponent({

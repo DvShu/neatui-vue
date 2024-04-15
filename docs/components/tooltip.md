@@ -10,8 +10,9 @@
 
 使用 `title` 属性来决定 `hover` 时的提示信息。 由 `placement` 属性决定展示位置: `topStart`、`top[默认]`、`topEnd`、`bottomStart`、`bottom`、`bottomEnd`
 
-<CodePreview>
-  <textarea lang="vue-html">
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+
   <div class="flex-between">
     <nt-tooltip placement="topStart" title="prompt text">
       <nt-button>topStart</nt-button>
@@ -35,7 +36,7 @@
     </nt-tooltip>
   </div>
   </textarea>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ### 自定义提示
 
@@ -45,24 +46,24 @@
 import { Tooltip, Button } from '../../src'
 </script>
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-tooltip>
-    <nt-button>自定义提示</nt-button>
-    <template v-slot:title>
-      <span style="color:red;">custome propmt text</span>
-    </template>
-  </nt-tooltip>
-  </textarea>
-  <template #preview>
-  <Tooltip>
-    <Button>自定义提示</Button>
-    <template #title>
-      <span style="color:red;">custome propmt text</span>
-    </template>
-  </Tooltip>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-tooltip>
+<nt-button>自定义提示</nt-button>
+<template v-slot:title>
+<span style="color:red;">custome propmt text</span>
+</template>
+</nt-tooltip>
+</textarea>
+<template #preview>
+<Tooltip>
+<Button>自定义提示</Button>
+<template #title>
+<span style="color:red;">custome propmt text</span>
+</template>
+</Tooltip>
+</template>
+</CodePreview></ClientOnly>
 
 ## API
 

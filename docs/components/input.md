@@ -6,11 +6,11 @@
 
 文本输入的基础用法。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-input placeholder="请输入内容"></nt-input>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-input placeholder="请输入内容"></nt-input>
+</textarea>
+</CodePreview></ClientOnly>
 
 ## API
 

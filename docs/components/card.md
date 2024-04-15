@@ -10,115 +10,119 @@ import { Card, Button } from '../../src'
 
 包含标题、内容、操作区域。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-card header-text="card title">
-    <template v-slot:default>
-      <div>卡片内容</div>
-    </template>
-    <template v-slot:header-extra>
-      <nt-button type="text">按钮</nt-button>
-    </template>
-  </nt-card>
-  </textarea>
-  <template #preview>
-    <Card header-text="card title">
-      <template v-slot:default>
-        <div>卡片内容</div>
-      </template>
-      <template v-slot:header-extra>
-        <Button type="text">按钮</Button>
-      </template>
-    </Card>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-card header-text="card title">
+<template v-slot:default>
+
+<div>卡片内容</div>
+</template>
+<template v-slot:header-extra>
+<nt-button type="text">按钮</nt-button>
+</template>
+</nt-card>
+</textarea>
+<template #preview>
+<Card header-text="card title">
+<template v-slot:default>
+<div>卡片内容</div>
+</template>
+<template v-slot:header-extra>
+<Button type="text">按钮</Button>
+</template>
+</Card>
+</template>
+</CodePreview></ClientOnly>
 
 ## 简洁卡片
 
 只包含内容区域
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-card header-text="card title" :show-header="false">
-    <template v-slot:default>
-      <div>卡片内容</div>
-    </template>
-  </nt-card>
-  </textarea>
-  <template #preview>
-    <Card header-text="card title" :show-header="false">
-      <template v-slot:default>
-        <div>卡片内容</div>
-      </template>
-    </Card>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-card header-text="card title" :show-header="false">
+<template v-slot:default>
+
+<div>卡片内容</div>
+</template>
+</nt-card>
+</textarea>
+<template #preview>
+<Card header-text="card title" :show-header="false">
+<template v-slot:default>
+<div>卡片内容</div>
+</template>
+</Card>
+</template>
+</CodePreview></ClientOnly>
 
 ## 完整卡片
 
 卡片包含标题，内容、操作区域以及底部区域。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-card header-text="card title" show-footer footer-text="底部区域">
-    <template v-slot:default>
-      <div>卡片内容</div>
-    </template>
-    <template v-slot:header-extra>
-      <nt-button type="text">按钮</nt-button>
-    </template>
-  </nt-card>
-  </textarea>
-  <template #preview>
-    <Card header-text="card title" show-footer footer-text="底部区域">
-      <template v-slot:default>
-        <div>卡片内容</div>
-      </template>
-      <template v-slot:header-extra>
-        <Button type="text">按钮</Button>
-      </template>
-    </Card>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-card header-text="card title" show-footer footer-text="底部区域">
+<template v-slot:default>
+
+<div>卡片内容</div>
+</template>
+<template v-slot:header-extra>
+<nt-button type="text">按钮</nt-button>
+</template>
+</nt-card>
+</textarea>
+<template #preview>
+<Card header-text="card title" show-footer footer-text="底部区域">
+<template v-slot:default>
+<div>卡片内容</div>
+</template>
+<template v-slot:header-extra>
+<Button type="text">按钮</Button>
+</template>
+</Card>
+</template>
+</CodePreview></ClientOnly>
 
 ## 卡片标题
 
 标题和底部区域除了可以通过 `header-text` 和 `footer-text` 传递以外，也可以通过 `header` 和 `footer` `slot` 自定义 。
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-card :show-footer="true">
-    <template v-slot:header>
-      <span style="color: red">卡片标题</span>
-    </template>
-    <template v-slot:default>
-      <div>卡片内容</div>
-    </template>
-    <template v-slot:header-extra>
-      <nt-button type="text">按钮</nt-button>
-    </template>
-    <template v-slot:footer>
-      <span style="color: orange">卡片标题</span>
-    </template>
-  </nt-card>
-  </textarea>
-  <template #preview>
-    <Card :show-footer="true">
-      <template v-slot:header>
-        <span style="color: red">卡片标题</span>
-      </template>
-      <template v-slot:default>
-        <div>卡片内容</div>
-      </template>
-      <template v-slot:header-extra>
-        <Button type="text">按钮</Button>
-      </template>
-      <template v-slot:footer>
-        <span style="color: orange">卡片标题</span>
-      </template>
-    </Card>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-card :show-footer="true">
+<template v-slot:header>
+<span style="color: red">卡片标题</span>
+</template>
+<template v-slot:default>
+
+<div>卡片内容</div>
+</template>
+<template v-slot:header-extra>
+<nt-button type="text">按钮</nt-button>
+</template>
+<template v-slot:footer>
+<span style="color: orange">卡片标题</span>
+</template>
+</nt-card>
+</textarea>
+<template #preview>
+<Card :show-footer="true">
+<template v-slot:header>
+<span style="color: red">卡片标题</span>
+</template>
+<template v-slot:default>
+<div>卡片内容</div>
+</template>
+<template v-slot:header-extra>
+<Button type="text">按钮</Button>
+</template>
+<template v-slot:footer>
+<span style="color: orange">卡片标题</span>
+</template>
+</Card>
+</template>
+</CodePreview></ClientOnly>
 
 ## 栅格卡片
 
@@ -126,8 +130,9 @@ import { Card, Button } from '../../src'
 
 关于栅格布局，框架不提供，推荐使用 [unocss](https://unocss.dev/interactive/?s=grid) 或者 [tailwindcss](https://www.tailwindcss.cn/docs/display#grid) 的 `grid` 实现
 
-<CodePreview>
-  <textarea lang="vue-html">
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+
   <div class="grid grid-cols-3 gap-4">
     <nt-card header-text="卡片标题1">
       <template v-slot:default>
@@ -183,7 +188,7 @@ import { Card, Button } from '../../src'
       </Card>
     </div>
   </template>
-</CodePreview>
+</CodePreview></ClientOnly>
 
 ## API
 

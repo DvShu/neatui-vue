@@ -10,21 +10,21 @@
 
 `text` 属性为二维码内容
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-qrcode text="Hello World"></nt-qrcode>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-qrcode text="Hello World"></nt-qrcode>
+</textarea>
+</CodePreview></ClientOnly>
 
 ### 颜色以及大小
 
 可以通过 `fill` 属性更改二维码颜色, `size` 属性更改大小; 注意: 实际的二维码的大小不一定跟传递的 `size` 一样大，因为会调整每一个二维码小单元格尺寸, 所以最终大小只能是小于等于传递的 `size`
 
-<CodePreview>
-  <textarea lang="vue-html">
-  <nt-qrcode text="Hello World" fill="#4998f4" size="120"></nt-qrcode>
-  </textarea>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="vue-html">
+<nt-qrcode text="Hello World" fill="#4998f4" size="120"></nt-qrcode>
+</textarea>
+</CodePreview></ClientOnly>
 
 ## API
 

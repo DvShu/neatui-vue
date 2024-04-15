@@ -23,14 +23,14 @@
 
 从顶部出现，`3` 秒后自动消失; 可以接收一个字符串被显示为正文内容
 
-<CodePreview>
-  <textarea lang="ts">
-  NtMessage.info("这是一条普通的提示信息")
-  </textarea>
-  <template #preview>
-    <Button @click="Message.info('这是一条普通的提示信息')">显示信息</Button>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="ts">
+NtMessage.info("这是一条普通的提示信息")
+</textarea>
+<template #preview>
+<Button @click="Message.info('这是一条普通的提示信息')">显示信息</Button>
+</template>
+</CodePreview></ClientOnly>
 
 ## 不同状态
 
@@ -38,54 +38,54 @@
 
 当需要自定义更多属性时，`Message` 也可以接收一个对象为参数。 比如，设置 `type` 字段可以定义不同的状态，默认为 `info` 。 此时正文内容以 `message` 的值传入。 同时，也为 `Message` 的各种 `type` 注册了方法，可以在不传入 `type` 字段的情况下, 直接调用指定类型的函数, 例如: `Message.info('x')`。
 
-<CodePreview>
-  <textarea lang="ts">
-  NtMessage.success("这是一条成功的提示信息")
-  NtMessage.warn("这是一条警告的提示信息")
-  NtMessage.error("这是一条错误的提示信息")
-  </textarea>
-  <template #preview>
-    <Button @click="Message.success('这是一条成功的提示信息')" class="ml-10">显示成功</Button>
-    <Button @click="Message.warn('这是一条警告的提示信息')" class="ml-10">显示警告</Button>
-    <Button @click="Message.error('这是一条错误的提示信息')" class="ml-10">显示错误</Button>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="ts">
+NtMessage.success("这是一条成功的提示信息")
+NtMessage.warn("这是一条警告的提示信息")
+NtMessage.error("这是一条错误的提示信息")
+</textarea>
+<template #preview>
+<Button @click="Message.success('这是一条成功的提示信息')" class="ml-10">显示成功</Button>
+<Button @click="Message.warn('这是一条警告的提示信息')" class="ml-10">显示警告</Button>
+<Button @click="Message.error('这是一条错误的提示信息')" class="ml-10">显示错误</Button>
+</template>
+</CodePreview></ClientOnly>
 
 ## 手动关闭
 
 将 `duration` 属性设置为 `0``, 可以使 Message` 不自动消失。然后显示消息的函数会返回一个消息 `id`, 通过手动调用 `close` 手动关闭
 
-<CodePreview>
-  <textarea lang="ts">
-  // 打开消息
-  let msgId = NtMessage.info({
-    message: '这是一条提示信息',
-    duration: 0
-  })
-  // 关闭消息
-  NtMessage.close(msgId)
-  </textarea>
-  <template #preview>
-    <Button @click="handleShowMessage(0)">打开</Button>
-    <Button @click="handleCloseMessage" class="ml-10">关闭</Button>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="ts">
+// 打开消息
+let msgId = NtMessage.info({
+message: '这是一条提示信息',
+duration: 0
+})
+// 关闭消息
+NtMessage.close(msgId)
+</textarea>
+<template #preview>
+<Button @click="handleShowMessage(0)">打开</Button>
+<Button @click="handleCloseMessage" class="ml-10">关闭</Button>
+</template>
+</CodePreview></ClientOnly>
 
 ## 持续时间
 
 通过 `duration` 属性设定 `Message` 的持续时间。
 
-<CodePreview>
-  <textarea lang="ts">
-  NtMessage.info({
-    message: "这是一条提示信息",
-    duration: 5000
-  })
-  </textarea>
-  <template #preview>
-    <Button @click="Message.info({ message: '这是一条提示信息', duration: 5000 })">持续5s</Button>
-  </template>
-</CodePreview>
+<ClientOnly><CodePreview>
+<textarea lang="ts">
+NtMessage.info({
+message: "这是一条提示信息",
+duration: 5000
+})
+</textarea>
+<template #preview>
+<Button @click="Message.info({ message: '这是一条提示信息', duration: 5000 })">持续5s</Button>
+</template>
+</CodePreview></ClientOnly>
 
 ## API
 

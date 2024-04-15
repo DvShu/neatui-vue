@@ -3,6 +3,11 @@ import type { VNode } from 'vue';
 import { defineComponent, h, defineAsyncComponent } from 'vue';
 import { isBlank } from 'ph-utils';
 
+let modules = (import.meta as any).glob('../index.ts', {
+  eager: true,
+});
+modules = modules['../index.ts'];
+
 function parseAttributes(child: Element) {
   const attrs: { [index: string]: any } = {};
   for (const name of child.getAttributeNames()) {
@@ -15,8 +20,11 @@ function parseAttributes(child: Element) {
 const parseComponent = function (name: string) {
   if (name.startsWith('nt-')) {
     let tagname = parseAsyncComponentName(name);
-    const filename = `../components/${tagname}.vue`;
-    return defineAsyncComponent(() => import(/* @vite-ignore */ filename));
+    if (tagname in modules) {
+      return modules[tagname];
+    } else {
+      tagname;
+    }
   }
   return name;
 };
@@ -29,9 +37,6 @@ function parseAsyncComponentName(tagName: string): string {
       (item) => item[0].toUpperCase() + item.substring(1),
     );
     name = nameItmes.join('');
-    if (name.endsWith('Icon')) {
-      name = `icon/${name.substring(0, name.length - 4)}`;
-    }
     return name;
   }
   return tagName;
@@ -49,7 +54,6 @@ function renderChildren(children: HTMLCollection) {
           }),
         );
       } else {
-        console.log(component);
         renderCompts.push(
           h(component, parseAttributes(child), {
             default: () => child.textContent,
