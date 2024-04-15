@@ -24,6 +24,7 @@ dist-ssr
 *.sw?
 
 pnpm-lock.yaml
+pnpm-lock.json
 types/*
 lib/*
 bun.lockb

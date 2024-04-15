@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        fetch-depth: 0
 
       - name: Cache Node Modules
         id: cache-node-modules
@@ -26,17 +27,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          bun-version: latest
 
       - name: Install Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm install
+        run: bun install --no-save
 
       - name: Build Site
-        run: npm run docs:build
+        run: bunx --bun docs:build
 
       - name: Deploy Site
         uses: peaceiris/actions-gh-pages@v3
