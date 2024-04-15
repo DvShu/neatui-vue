@@ -36,17 +36,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - name: Install Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: bun install
+        run: bun install --force
 
       - name: Build Site
-        run: bunx --bun docs:build
+        run: npm run docs:build
 
       - name: Deploy Site
         uses: peaceiris/actions-gh-pages@v3
