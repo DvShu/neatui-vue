@@ -8,6 +8,8 @@ export { default as WarnIcon } from './components/icon/Warn.vue';
 export { default as SuccessIcon } from './components/icon/Success.vue';
 export { default as CaretTopIcon } from './components/icon/CaretTop.vue';
 export { default as CaretBottomIcon } from './components/icon/CaretBottom.vue';
+export { default as ArrowLeftIcon } from './components/icon/ArrowLeft.vue';
+export { default as ArrowRightIcon } from './components/icon/ArrowRight.vue';
 export { default as Input } from './components/Input.vue';
 export { default as Clickoutside } from './directives/clickoutside.js';
 export { default as Table } from './components/Table.vue';

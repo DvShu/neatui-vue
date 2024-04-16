@@ -22,9 +22,37 @@
   opacity: 0.8;
   cursor: pointer;
   background-color: #606666;
-  width: 44px;
-  height: 44px;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nt-image-preview__close {
+  top: 30px;
+  right: 30px;
+}
+
+.nt-image-preview__prev,
+.nt-image-preview__next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nt-image-preview__prev {
+  left: 30px;
+}
+.nt-image-preview__next {
+  right: 30px;
+}
+
+.nt-image-preview__actions {
+  cursor: default;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 25px;
+  display: inline-flex;
 }

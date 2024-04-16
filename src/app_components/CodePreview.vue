@@ -61,13 +61,13 @@ export default defineComponent({
     border-top: 1px solid #e2e2e3;
   }
 
-  div[class*='language-'] {
-    margin: 0;
-    border-radius: 0;
-  }
-
   .source-code {
     border-top: 1px solid #e2e2e3;
   }
+}
+
+#app .vp-doc .code-preview div[class*='language-'] {
+  margin: 0;
+  border-radius: 0;
 }
 </style>

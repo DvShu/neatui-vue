@@ -13,6 +13,7 @@ import '../../../style/container.css';
 import '../../../style/input';
 import '../../../style/card';
 import '../../../style/input';
+import '../../../style/image_preview';
 import CodePreview from '../../../src/app_components/CodePreview.vue';
 import '../../../style/message';
 

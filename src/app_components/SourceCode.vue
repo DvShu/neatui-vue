@@ -10,14 +10,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, useSlots } from 'vue';
-import type { VNode } from 'vue';
+import { onMounted, ref } from 'vue';
 import { codeToHtml } from 'shiki';
 import { isBlank } from 'ph-utils';
-
-const slots = useSlots() as {
-  default: () => VNode[];
-};
 
 const lang = ref('ts');
 
