@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.7](https://github.com/DvShu/neatui-vue/compare/v1.0.0...v0.0.7) (2024-04-17)
+
+
+### Features
+
+* update MD ([eb07398](https://github.com/DvShu/neatui-vue/commit/eb0739816da129400460bfce9868ba90c6a8994b))
+
+
+### Miscellaneous Chores
+
+* release 0.0.7 ([ab2cc80](https://github.com/DvShu/neatui-vue/commit/ab2cc80390fe3902a76095458207b45844b045a7))
+* release 0.0.7 ([9181576](https://github.com/DvShu/neatui-vue/commit/9181576832382ecaf7d8215f9a46542a910f1140))
+
 ## 1.0.0 (2024-04-17)
 
 ### Features
