@@ -11,4 +11,4 @@ import{d as m,a2 as k,o as r,c as p,F as E,O as g,_ as s,b as h,a as v,n as f,l 
       fill="#231F20"
     ></path>
 </nt-base-icon>
-`,-1),w=d("",4),W=JSON.parse('{"title":"Icon 图标","description":"","frontmatter":{},"headers":[],"relativePath":"components/icon.md","filePath":"components/icon.md","lastUpdated":1713345795000}'),B={name:"components/icon.md"},$=Object.assign(B,{setup(t){return(n,i)=>{const o=u("CodePreview"),e=u("ClientOnly");return r(),p("div",null,[F,c(L),q,c(e,null,{default:_(()=>[c(o,null,{default:_(()=>[S]),_:1})]),_:1}),w])}}});export{W as __pageData,$ as default};
+`,-1),w=d("",4),W=JSON.parse('{"title":"Icon 图标","description":"","frontmatter":{},"headers":[],"relativePath":"components/icon.md","filePath":"components/icon.md","lastUpdated":1713346936000}'),B={name:"components/icon.md"},$=Object.assign(B,{setup(t){return(n,i)=>{const o=u("CodePreview"),e=u("ClientOnly");return r(),p("div",null,[F,c(L),q,c(e,null,{default:_(()=>[c(o,null,{default:_(()=>[S]),_:1})]),_:1}),w])}}});export{W as __pageData,$ as default};

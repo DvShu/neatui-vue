@@ -1,4 +1,4 @@
-import{x as l,N as c,c as s,f as d,w as e,a9 as r,b as t,q as o,o as b}from"./chunks/framework.frWttwNL.js";const R=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"components/button.md","filePath":"components/button.md","lastUpdated":1713345795000}'),i={name:"components/button.md"},h=r("",5),u=t("textarea",{lang:"vue-html"},`
+import{x as l,N as c,c as s,f as d,w as e,a9 as r,b as t,q as o,o as b}from"./chunks/framework.frWttwNL.js";const R=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"components/button.md","filePath":"components/button.md","lastUpdated":1713346936000}'),i={name:"components/button.md"},h=r("",5),u=t("textarea",{lang:"vue-html"},`
 <nt-button>Default</nt-button>
 <nt-button type="primary" class="ml-10">Primary</nt-button>
 <nt-button type="text" class="ml-10">Text</nt-button>
