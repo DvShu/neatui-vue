@@ -1,0 +1,19 @@
+.nt-opacity-enter-active,
+.nt-opacity-leave-active {
+  transition: opacity var(--nt-transition-times, 0.3s) ease;
+}
+
+.nt-opacity-enter-from,
+.nt-opacity-leave-to {
+  opacity: 0;
+}
+
+.nt-fadein-enter-active,
+.nt-fadein-leave-active {
+  transition: all var(--nt-transition-times, 0.3s) ease-in-out;
+}
+.nt-fadein-enter-from,
+.nt-fadein-leave-to {
+  opacity: 0;
+  transform: translateY(var(--nt-fadein-offset, -20px));
+}
