@@ -53,7 +53,7 @@ import '@asteres/neatui-vue/style/vars.css';
 
 ## 文档
 
-[中文文档](https://dvshu.github.io/neatui-vue/)
+[中文 文档](https://dvshu.github.io/neatui-vue/)
 
 ## LICENSE
 
