@@ -5,12 +5,15 @@
 ## 使用
 
 ### 安装依赖
+
 1. 安装 UI 库
+
 ```shell
 npm install @asteres/neatui-vue
 ```
 
 2. 安装自动导入插件
+
 ```shell
 npm install -D unplugin-vue-components unplugin-auto-import neatui-vue-resolver
 ```
@@ -18,25 +21,25 @@ npm install -D unplugin-vue-components unplugin-auto-import neatui-vue-resolver
 3. 修改 Vite 配置
 
 ```js
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import NeatuiResolver from "neatui-vue-resolver";
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import NeatuiResolver from 'neatui-vue-resolver';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [
-		vue(),
-		AutoImport({
-			resolvers: [NeatuiResolver()],
-			dts: "src/auto-imports.d.ts",
-		}),
-		Components({
-			resolvers: [NeatuiResolver()],
-			dts: "src/components.d.ts",
-		}),
-	],
+  plugins: [
+    vue(),
+    AutoImport({
+      resolvers: [NeatuiResolver()],
+      dts: 'src/auto-imports.d.ts',
+    }),
+    Components({
+      resolvers: [NeatuiResolver()],
+      dts: 'src/components.d.ts',
+    }),
+  ],
 });
 ```
 
@@ -45,7 +48,7 @@ export default defineConfig({
 在 `main.ts` 中引入全局 CSS 变量文件
 
 ```js
-import "@asteres/neatui-vue/style/vars.css";
+import '@asteres/neatui-vue/style/vars.css';
 ```
 
 ## 文档
@@ -53,5 +56,5 @@ import "@asteres/neatui-vue/style/vars.css";
 [中文文档](https://dvshu.github.io/neatui-vue/)
 
 ## LICENSE
-neatui-vue is open source software licensed as [MulanPSL-2.0](https://github.com/DvShu/neatui-vue/blob/main/LICENSE).
 
+neatui-vue is open source software licensed as [MulanPSL-2.0](https://github.com/DvShu/neatui-vue/blob/main/LICENSE).
