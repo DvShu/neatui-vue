@@ -54,3 +54,4 @@ import "@asteres/neatui-vue/style/vars.css";
 
 ## LICENSE
 neatui-vue is open source software licensed as [MulanPSL-2.0](https://github.com/DvShu/neatui-vue/blob/main/LICENSE).
+
