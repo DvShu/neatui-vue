@@ -6,7 +6,6 @@
   "scripts": {
     "g:c": "node scripts/index.js template",
     "lib:build": "vite build",
-    "b": "node scripts/index.js build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
@@ -67,5 +66,6 @@
   "dependencies": {
     "ph-utils": "^0.4.3",
     "qrcode-generator-es": "^0.0.4"
-  }
+  },
+  "packageManager": "pnpm@9.0.2"
 }

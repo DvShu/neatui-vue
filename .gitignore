@@ -23,12 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-pnpm-lock.yaml
-package-lock.json
-yarn.lock
 types/*
 lib/*
-bun.lockb
 
 docs/.vitepress/dist
 docs/.vitepress/cache
