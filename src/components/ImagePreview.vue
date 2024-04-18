@@ -13,7 +13,10 @@
       </span>
       <div class="nt-image-preview__btn nt-image-preview__actions">
         <span class="nt-image-preview__btn">
-          <ArrowRight></ArrowRight>
+          <ZoomOut></ZoomOut>
+        </span>
+        <span class="nt-image-preview__btn">
+          <ZoomIn></ZoomIn>
         </span>
       </div>
     </div>
@@ -24,4 +27,6 @@
 import CloseIcon from './icon/Close.vue';
 import ArrowLeft from './icon/ArrowLeft.vue';
 import ArrowRight from './icon/ArrowRight.vue';
+import ZoomIn from './icon/ZoomIn.vue';
+import ZoomOut from './icon/ZoomOut.vue';
 </script>
