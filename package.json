@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "g:c": "node scripts/index.js template",
-    "build": "vite build",
+    "lib:build": "vite build",
+    "b": "node scripts/index.js build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
