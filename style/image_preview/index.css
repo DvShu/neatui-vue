@@ -29,6 +29,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: color 0.3s ease-in-out;
+}
+.nt-image-preview__btn:hover {
+  color: var(--nt-primary-color, #4998f6);
 }
 
 .nt-image-preview__close {
@@ -54,8 +58,28 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 0 25px;
+  width: auto;
+  border-radius: 20px;
 }
 
 .nt-image-preview__actions .nt-image-preview__btn {
   position: static;
+  width: 40px;
+}
+
+.nt-image-preview-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nt-image-preview-img {
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 200px);
+  vertical-align: middle;
+  transform-origin: center center;
+  transition: all 0.25s ease;
+  user-select: none;
 }

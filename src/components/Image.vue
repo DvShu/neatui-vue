@@ -1,7 +1,7 @@
 <template>
   <img
     :loading="loading"
-    :src="src"
+    :src="actualSrc"
     class="nt-image"
     :style="computedStyle"
     :alt="alt"
@@ -9,7 +9,7 @@
   />
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, watch, onUnmounted } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -23,11 +23,40 @@ const props = withDefaults(
     fit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
     /** 图片加载失败时显示的地址 */
     fallback?: string;
+    /** 图片占位, 用于加载大图时的占位 */
+    placeholder?: string;
   }>(),
   {
     loading: 'eager',
   },
 );
+let img: HTMLImageElement | null;
+
+const actualSrc = ref(props.placeholder || props.src);
+loadActualImage();
+
+watch(
+  () => props.src,
+  () => {
+    actualSrc.value = props.placeholder || props.src;
+    loadActualImage();
+  },
+);
+
+onUnmounted(() => {
+  clearImg();
+});
+
+function loadActualImage() {
+  if (props.placeholder != null) {
+    img = new Image();
+    img.src = props.src;
+    img.onload = () => {
+      actualSrc.value = props.src;
+      clearImg();
+    };
+  }
+}
 
 const computedStyle = computed(() => {
   return {
@@ -48,6 +77,14 @@ const computedStyle = computed(() => {
 function handleLoadError(e: Event) {
   if (props.fallback != null) {
     (e.target as HTMLImageElement).src = props.fallback;
+  }
+}
+
+function clearImg() {
+  if (img) {
+    img.onload = null;
+    img.onerror = null;
+    img = null;
   }
 }
 </script>
