@@ -2,3 +2,7 @@
   vertical-align: middle;
   display: inline-block;
 }
+
+.nt-image--preview {
+  cursor: pointer;
+}

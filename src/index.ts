@@ -21,3 +21,4 @@ export { default as Qrcode } from './components/Qrcode.vue';
 export { default as Image } from './components/Image.vue';
 export { default as ImagePreview } from './components/ImagePreview.vue';
 export { default as Polygon } from './components/Polygon.vue';
+export { default as Shadow } from './components/Shadow.vue';

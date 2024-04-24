@@ -2,14 +2,22 @@
   <img
     :loading="loading"
     :src="actualSrc"
-    class="nt-image"
+    :class="['nt-image', previewDisable ? '' : 'nt-image--preview']"
     :style="computedStyle"
     :alt="alt"
     @error="handleLoadError"
+    @click="showPreview = true"
   />
+  <ImagePreview
+    v-model:show="showPreview"
+    :url-list="previewSrcList || [src]"
+  ></ImagePreview>
 </template>
 <script setup lang="ts">
 import { computed, ref, watch, onUnmounted } from 'vue';
+import ImagePreview from './ImagePreview.vue';
+
+const showPreview = ref(false);
 
 const props = withDefaults(
   defineProps<{
@@ -25,9 +33,14 @@ const props = withDefaults(
     fallback?: string;
     /** 图片占位, 用于加载大图时的占位 */
     placeholder?: string;
+    /** 禁用图片预览 */
+    previewDisable?: boolean;
+    /** 预览图片地址列表, 多图预览是使用 */
+    previewSrcList?: string[];
   }>(),
   {
     loading: 'eager',
+    previewDisable: false,
   },
 );
 let img: HTMLImageElement | null;

@@ -6,7 +6,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Image, Tooltip } from '../../src'
+import { Image, Tooltip, Shadow } from '../../src'
 </script>
 
 ### 基础用法
@@ -83,3 +83,22 @@ import { Image, Tooltip } from '../../src'
   </template>
   </CodePreview>
 </ClientOnly>
+
+### 加载失败
+
+加载失败显示图像占位符
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-image src="/neatui-vue/img3.svg" width="100" height="100" placeholder="/neatui-vue/loading_error.png"></nt-image>
+  </textarea>
+  <template #preview>
+    <Image src="/neatui-vue/img3.svg" width="100" height="100" placeholder="/neatui-vue/loading_error.png"></Image>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+<Shadow>
+  <div style="width: 100px;height:100px;background-color:red;"></div>
+</Shadow>

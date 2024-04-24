@@ -91,7 +91,7 @@ const show = defineModel<boolean>('show', { required: true });
 const props = withDefaults(
   defineProps<{
     /** 预览的图片列表 */
-    urlList?: string[];
+    urlList: string[];
     /** 初始预览图像索引，小于 url-list 的长度 */
     initialIndex?: number;
   }>(),
