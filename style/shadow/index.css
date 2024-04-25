@@ -6,13 +6,14 @@
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
 }
 .nt-shadow .nt-shadow-main {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nt-shadow.nt-shadow_transparent {
   background-color: transparent;

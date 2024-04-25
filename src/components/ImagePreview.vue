@@ -1,8 +1,11 @@
 <template>
   <Teleport to="body">
     <Transition name="nt-opacity">
-      <div class="nt-image-preview" v-if="show">
-        <div class="nt-image-preview__mask"></div>
+      <Shadow
+        v-if="show"
+        @shadow-close="handleClose"
+        shadow-class="nt-image-preview-container"
+      >
         <span
           class="nt-image-preview__btn nt-image-preview__close"
           aria-label="close"
@@ -61,22 +64,20 @@
             <RefreshRight></RefreshRight>
           </span>
         </div>
-        <div class="nt-image-preview-container">
-          <img
-            class="nt-image-preview-img"
-            :src="urlList[currIndex]"
-            :style="{
-              transform: transformStyleValue,
-            }"
-          />
-        </div>
-      </div>
+        <img
+          class="nt-image-preview-img"
+          :src="urlList[currIndex]"
+          :style="{
+            transform: transformStyleValue,
+          }"
+        />
+      </Shadow>
     </Transition>
   </Teleport>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import CloseIcon from './icon/Close.vue';
 import ArrowLeft from './icon/ArrowLeft.vue';
 import ArrowRight from './icon/ArrowRight.vue';
@@ -85,8 +86,11 @@ import ZoomOut from './icon/ZoomOut.vue';
 import RefreshLeft from './icon/RefreshLeft.vue';
 import RefreshRight from './icon/RefreshRight.vue';
 import Reduction from './icon/Reduction.vue';
+import Shadow from './Shadow.vue';
+import { getBodyOverflow } from '../utils';
 
 const show = defineModel<boolean>('show', { required: true });
+const bodyOverflow = getBodyOverflow();
 
 const props = withDefaults(
   defineProps<{
@@ -121,6 +125,7 @@ const transformStyleValue = computed(() => {
  * @param dir next - 下一张, prev - 上一张
  */
 function toggleImage(dir: 'prev' | 'next') {
+  resetTransform();
   if (dir === 'prev') {
     if (currIndex.value === 0) {
       currIndex.value = props.urlList.length - 1;
@@ -140,10 +145,10 @@ function toggleImage(dir: 'prev' | 'next') {
 function transformScale(type: 'out' | 'in') {
   if (type === 'in') {
     if (transform.value.scale >= 3) return;
-    transform.value.scale += 0.5;
+    transform.value.scale += 0.25;
   } else {
-    if (transform.value.scale <= 0.5) return;
-    transform.value.scale -= 0.5;
+    if (transform.value.scale <= 0.25) return;
+    transform.value.scale -= 0.25;
   }
 }
 
@@ -169,4 +174,33 @@ function resetTransform() {
 function handleClose() {
   show.value = false;
 }
+
+function handleWheel(e: WheelEvent) {
+  e.preventDefault();
+  if (e.deltaY > 0) {
+    transformScale('out');
+  } else {
+    transformScale('in');
+  }
+}
+
+watch(show, (newVal) => {
+  if (newVal) {
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('wheel', handleWheel, { passive: false });
+  } else {
+    document.body.style.overflow = bodyOverflow;
+    document.removeEventListener('wheel', handleWheel);
+  }
+});
+
+watch(currIndex, (newVal) => {
+  if (newVal < 0) {
+    currIndex.value = 0;
+  } else if (newVal >= props.urlList.length) {
+    currIndex.value = props.urlList.length - 1;
+  } else {
+    document.body.style.overflow = bodyOverflow;
+  }
+});
 </script>

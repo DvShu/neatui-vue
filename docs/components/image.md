@@ -6,7 +6,15 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Image, Tooltip, Shadow } from '../../src'
+import { Image, Tooltip, ImagePreview } from '../../src'
+
+const show = ref(true)
+
+const imgs = [
+  '/neatui-vue/img1.svg',
+  '/neatui-vue/img2.svg',
+  'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+]
 </script>
 
 ### 基础用法
@@ -99,6 +107,66 @@ import { Image, Tooltip, Shadow } from '../../src'
   </CodePreview>
 </ClientOnly>
 
-<Shadow>
-  <div style="width: 100px;height:100px;background-color:red;"></div>
-</Shadow>
+### 禁用预览
+
+使用 `preview-disabled` 来禁止预览
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-image src="/neatui-vue/img2.svg" width="100" height="100" preview-disable></nt-image>
+  </textarea>
+  <template #preview>
+    <Image src="/neatui-vue/img2.svg" width="100" height="100" preview-disable></Image>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 多图预览
+
+可通过 `previewSrcList` 开启预览多图的功能。 可以通过 `initial-index` 初始化第一张预览图片的位置。 默认初始位置为 `0`。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+    const imgs = [
+      '/neatui-vue/img1.svg',
+      '/neatui-vue/img2.svg',
+      'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+    ]
+  </script>
+
+  <template>
+    <nt-image v-for="src,index in imgs" :key="index" :src="src" :preview-src-list="imgs" :initial-index="index" width="100"></nt-image>
+  </template>
+  </textarea>
+  <template #preview>
+    <Image v-for="src,index in imgs" :key="index" :src="src" :preview-src-list="imgs" :initial-index="index" width="100"></Image>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 懒加载
+
+通过使用浏览器原生支持的 `loading` 属性来开启懒加载，只需要设置 `loading="lazy"`
+
+> 从 `ios 15.4` 开始已经全面支持; 对于不支持 `loading="lazy"` 属性的浏览器，可以通过 [loading-attribute-polyfill](https://github.com/mfranzke/loading-attribute-polyfill) 来兼容
+
+## API
+
+### Image Props
+
+| 参数                | 说明                                                                                                     | 类型            | 默认值  |
+| ------------------- | -------------------------------------------------------------------------------------------------------- | --------------- | ------- |
+| `src`               | _必填_ , 图片源地址，同原生属性一致                                                                      | `string`        | —       |
+| `width`             | 宽度                                                                                                     | `string`        | -       |
+| `height`            | 高度                                                                                                     | `string`        | -       |
+| `alt`               | 原生属性 `alt`                                                                                           | `string`        | -       |
+| `loading`           | 原生属性, 浏览器加载图像的策略                                                                           | `eager`、`lazy` | `eager` |
+| `fit`               | 确定图片如何适应容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) | `string`        | -       |
+| `fallback`          | 图片加载失败时显示的地址                                                                                 | `string`        | -       |
+| `placeholder`       | 图片占位, 用于加载大图时的占位                                                                           | `string`        | -       |
+| `preview-disable`   | 禁用图片预览                                                                                             | `boolean`       | `false` |
+| `preview--src-list` | 预览图片地址列表, 多图预览时使用                                                                         | `string[]`      | -       |
+| `initial-index`     | 初始预览图像索引                                                                                         | `number`        | 0       |

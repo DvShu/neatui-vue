@@ -1,1 +1,2 @@
-import "./index.css";
+import '../image_preview';
+import './index.css';

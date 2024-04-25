@@ -6,11 +6,12 @@
     :style="computedStyle"
     :alt="alt"
     @error="handleLoadError"
-    @click="showPreview = true"
+    @click="handleClick"
   />
   <ImagePreview
     v-model:show="showPreview"
     :url-list="previewSrcList || [src]"
+    :initial-index="initialIndex"
   ></ImagePreview>
 </template>
 <script setup lang="ts">
@@ -35,12 +36,14 @@ const props = withDefaults(
     placeholder?: string;
     /** 禁用图片预览 */
     previewDisable?: boolean;
-    /** 预览图片地址列表, 多图预览是使用 */
+    /** 预览图片地址列表, 多图预览时使用 */
     previewSrcList?: string[];
+    initialIndex?: number;
   }>(),
   {
     loading: 'eager',
     previewDisable: false,
+    initialIndex: 0,
   },
 );
 let img: HTMLImageElement | null;
@@ -68,6 +71,12 @@ function loadActualImage() {
       actualSrc.value = props.src;
       clearImg();
     };
+  }
+}
+
+function handleClick() {
+  if (!props.previewDisable) {
+    showPreview.value = true;
   }
 }
 
