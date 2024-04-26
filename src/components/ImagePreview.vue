@@ -199,8 +199,6 @@ watch(currIndex, (newVal) => {
     currIndex.value = 0;
   } else if (newVal >= props.urlList.length) {
     currIndex.value = props.urlList.length - 1;
-  } else {
-    document.body.style.overflow = bodyOverflow;
   }
 });
 </script>
