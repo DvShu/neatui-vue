@@ -3,7 +3,7 @@
     <Transition name="nt-opacity">
       <Shadow
         v-if="show"
-        @shadow-close="handleClose"
+        @shadow-click="handleClose"
         shadow-class="nt-image-preview-container"
       >
         <span

@@ -8,7 +8,7 @@
 import { ref } from 'vue'
 import { Image, Tooltip, ImagePreview } from '../../src'
 
-const show = ref(true)
+const show = ref(false)
 
 const imgs = [
   '/neatui-vue/img1.svg',
@@ -151,7 +151,64 @@ const imgs = [
 
 通过使用浏览器原生支持的 `loading` 属性来开启懒加载，只需要设置 `loading="lazy"`
 
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-image src="/neatui-vue/img2.svg" width="100" height="100" loading="lazy"></nt-image>
+  </textarea>
+  <template #preview>
+    <Image src="/neatui-vue/img2.svg" width="100" height="100" loading="lazy"></Image>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 > 从 `ios 15.4` 开始已经全面支持; 对于不支持 `loading="lazy"` 属性的浏览器，可以通过 [loading-attribute-polyfill](https://github.com/mfranzke/loading-attribute-polyfill) 来兼容
+
+### 手动预览
+
+如果不想通过 `Image` 组件来预览图片，也可以手动通过使用 `ImagePreview` 来预览图片
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+    import { ref } from 'vue';
+    const show = ref(false);
+    const imgs = [
+      '/neatui-vue/img1.svg',
+      '/neatui-vue/img2.svg',
+      'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+    ]
+  </script>
+  <template>
+    <img
+      v-for="item, index in imgs"
+      :key="index"
+      :src="item"
+      class="demo-img"
+      @click="show = true"
+    />
+    <nt-image-preview
+      v-model:show="show"
+      :url-list="imgs"
+      :initial-index="0"
+    ></nt-image-preview>
+  </template>
+  <style>
+    .demo-img {
+      width: 100px;
+      height: 100px;
+      display: inline;
+      cursor: pointer;
+    }
+  </style>
+  </textarea>
+  <template #preview>
+    <img v-for="item, index in imgs" :key="index" :src="item" style="width:100px;height:100px;display:inline;cursor:pointer;" @click="show = true" />
+    <ImagePreview v-model:show="show" :url-list="imgs" :initial-index="0"></ImagePreview>
+  </template>
+  </CodePreview>
+</ClientOnly>
 
 ## API
 

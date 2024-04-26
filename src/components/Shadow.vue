@@ -19,7 +19,7 @@ let index = 0;
 <script setup lang="ts">
 let id = index;
 index += 1;
-const emits = defineEmits(['shadowClose']);
+const emits = defineEmits(['shadowClick']);
 
 withDefaults(
   defineProps<{
@@ -38,7 +38,7 @@ function clickHandler(e: Event) {
   let $target = e.target as HTMLElement;
   if ($target.hasAttribute('nt-shadow')) {
     // 点击的是遮罩层
-    emits('shadowClose', e);
+    emits('shadowClick', e);
   }
 }
 </script>
