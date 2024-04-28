@@ -1,4 +1,4 @@
-import{e as p,P as v,c as l,f as a,w as t,ab as u,b as e,q as n,o as d,u as b,T as h,p as _}from"./chunks/framework.B2jEF4L8.js";import{b as r,a as f}from"./chunks/theme.GQzoXoR1.js";const k=u("",7),g=e("textarea",{lang:"vue-html"},`
+import{e as p,P as v,c as l,f as a,w as t,ab as u,b as e,q as n,o as d,u as b,T as h,p as _}from"./chunks/framework.B2jEF4L8.js";import{b as r,a as f}from"./chunks/theme.BELXmYxf.js";const k=u("",7),g=e("textarea",{lang:"vue-html"},`
 <nt-button @click="show = !show">Toggle</nt-button>
 <Transition name="nt-opacity">
 <p v-if="show">Hello world</p>
