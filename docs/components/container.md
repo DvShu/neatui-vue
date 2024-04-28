@@ -26,15 +26,16 @@ import CodePreview from '../../src/app_components/CodePreview.vue';
 
 ### 上下两栏排版
 
-<ClientOnly><CodePreview class="mt-15">
-<textarea lang="html">
-
+<ClientOnly>
+  <CodePreview class="mt-15">
+  <textarea lang="html">
   <section class="nt-container nt-layout-vertical">
     <header class="nt-header">Header</header>
     <main class="nt-main">Main</main>
   </section>
   </textarea>
-</CodePreview></ClientOnly>
+  </CodePreview>
+</ClientOnly>
 
 ### 左右两栏排版
 
