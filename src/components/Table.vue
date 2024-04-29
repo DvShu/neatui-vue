@@ -46,10 +46,6 @@ export default defineComponent({
       type: Array as PropType<any[]>,
       required: true,
     },
-    columnKey: {
-      type: String,
-      required: false,
-    },
   },
   emits: ['sort-change'],
   setup(props, { emit }) {

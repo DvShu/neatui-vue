@@ -8,13 +8,15 @@
 
 使用 `type` 控制按钮类型, 提供三种类型: `default`, `primary`, `text`。
 
-<ClientOnly><CodePreview>
-<textarea lang="vue-html">
-<nt-button>Default</nt-button>
-<nt-button type="primary" class="ml-10">Primary</nt-button>
-<nt-button type="text" class="ml-10">Text</nt-button>
-</textarea>
-</CodePreview></ClientOnly>
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-button>Default</nt-button>
+  <nt-button type="primary" class="ml-10">Primary</nt-button>
+  <nt-button type="text" class="ml-10">Text</nt-button>
+  </textarea>
+  </CodePreview>
+</ClientOnly>
 
 ### 按钮禁用
 

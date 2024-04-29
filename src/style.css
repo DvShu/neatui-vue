@@ -130,6 +130,11 @@
     font-size: 14px;
     margin-top: 5px;
   }
+
+  .nt-table {
+    display: table;
+    margin: 0;
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -28,7 +28,7 @@ withDefaults(
     /**
      * 设置按钮类型；primary, text, normal
      */
-    type?: 'primary' | 'text' | 'normal';
+    type?: 'primary' | 'text' | 'normal' | 'repple';
     /** 是否禁用状态 */
     disabled?: boolean;
     /** 原生的 type 属性 */
