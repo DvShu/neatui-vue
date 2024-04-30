@@ -36,6 +36,12 @@ export default defineComponent({
       default: true,
       required: false,
     },
+    /** 是否显示四周边框 */
+    border: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
     /** 是否固定表头 */
     fixedHead: {
       type: Boolean,
@@ -70,6 +76,8 @@ export default defineComponent({
 
     /** 是否使用 fixed[table-layout:fixed] 布局 */
     let fixed = isFixed();
+
+    console.log(fixed);
 
     function handleHeadClick({ sorter, key, index }: any) {
       if (sorter === true) {
@@ -231,44 +239,49 @@ export default defineComponent({
 
     return () =>
       h(
-        'table',
-        {
-          class: [
-            'nt-table',
-            props.stripe ? 'nt-table-stripe' : '',
-            fixed ? 'nt-table-fixed' : '',
-          ],
-        },
-        [
-          h(
-            'thead',
+        'div',
+        { class: 'nt-table-wrapper' },
+        h(
+          'table',
+          {
+            class: [
+              'nt-table',
+              props.stripe ? 'nt-table-stripe' : '',
+              fixed ? 'nt-table-fixed' : '',
+              props.border ? 'nt-table-border' : '',
+            ],
+          },
+          [
             h(
-              'tr',
-              {
-                class: {
-                  'nt-fixed': props.fixedHead,
-                },
-                style: {
-                  top: props.fixedHead ? '0' : undefined,
-                },
-              },
-              renderHead(),
-            ),
-          ),
-          h(
-            'tbody',
-            props.data.length === 0
-              ? h(
-                  'td',
-                  {
-                    class: 'ph-table__none-col',
-                    colspan: props.columns.length,
+              'thead',
+              h(
+                'tr',
+                {
+                  class: {
+                    'nt-fixed': props.fixedHead,
                   },
-                  '暂无数据记录!',
-                )
-              : renderBody(),
-          ),
-        ],
+                  style: {
+                    top: props.fixedHead ? '0' : undefined,
+                  },
+                },
+                renderHead(),
+              ),
+            ),
+            h(
+              'tbody',
+              props.data.length === 0
+                ? h(
+                    'td',
+                    {
+                      class: 'nt-table__none-col',
+                      colspan: props.columns.length,
+                    },
+                    '暂无数据记录!',
+                  )
+                : renderBody(),
+            ),
+          ],
+        ),
       );
   },
 });

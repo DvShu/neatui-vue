@@ -134,6 +134,22 @@
   .nt-table {
     display: table;
     margin: 0;
+
+    tr {
+      border-top: none;
+    }
+
+    td,
+    th {
+      border: none;
+      border-bottom: 1px solid #e6e6e6;
+    }
+  }
+  .nt-table-border {
+    th,
+    td {
+      border: 1px solid #e6e6e6;
+    }
   }
 }
 
