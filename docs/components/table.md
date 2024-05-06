@@ -10,13 +10,13 @@
 
   const dataSource1 = [
     {
-      name: '张三',
-      age: 18,
+      name: '李四',
+      age: 19,
       address: '北京朝阳',
     },
     {
-      name: '李四',
-      age: 19,
+      name: '张三',
+      age: 18,
       address: '北京朝阳',
     },
     {
@@ -77,10 +77,9 @@
   const columns1 = [{
     title: '姓名',
     key: 'name',
-    fixed: 'left'
   }, {
     title: '年龄',
-    key: 'age'
+    key: 'age',
   }, {
     title: '住址',
     key: 'address'
@@ -109,11 +108,32 @@
     title: '操作',
     key: 'action',
     width: 200,
+    fixed: 'right',
     render: () => [
       h(Button, { type: 'text' }, { default: () => '编辑'}),
       h(Button, { type: 'text' }, { default: () => '删除'})
     ]
   }]
+  const columns3 = [{
+    title: '姓名',
+    key: 'name',
+  }, {
+    title: '年龄',
+    key: 'age',
+    sorter: true
+  }, {
+    title: '住址',
+    key: 'address'
+  }, {
+    title: '操作',
+    key: 'action',
+    render: () => [
+      h(Button, { type: 'text' }, { default: () => '编辑'}),
+      h(Button, { type: 'text' }, { default: () => '删除'})
+    ]
+  }]
+
+  const defaultSort = { key: 'age', order: 'desc' }
 </script>
 
 ### 基础表格
@@ -148,7 +168,6 @@
     const columns = [{
       title: '姓名',
       key: 'name'
-      fixed: 'left',
       width: 80
     }, {
       title: '年龄',
@@ -160,7 +179,7 @@
       width: 80
     }, {
       title: '操作',
-      width: 180,
+      width: 80,
       render: () => [
         h(NtButton, { type: 'text' }, { default: () => '编辑'}),
         h(NtButton, { type: 'text' }, { default: () => '删除'})
@@ -235,6 +254,52 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue">
+  <script setup>
+    import { h } from 'vue';
+    const dataSource = [
+      {
+        id: 1,
+        name: '张三',
+        age: 18,
+        address: '北京朝阳',
+      },
+      {
+        id: 2,
+        name: '李四',
+        age: 19,
+        address: '北京朝阳',
+      },
+      {
+        id: 3,
+        name: '王五',
+        age: 20,
+        address: '北京朝阳',
+      },
+    ]
+    const columns2 = [{
+      title: '姓名',
+      key: 'name',
+      fixed: 'left',
+      width: 80,
+    }, {
+      title: '年龄',
+      key: 'age',
+      width: 200,
+    }, {
+      title: '住址',
+      key: 'address',
+      width: 200,
+    }, {
+      title: '操作',
+      key: 'action',
+      width: 200,
+      fixed: 'right',
+      render: () => [
+        h(Button, { type: 'text' }, { default: () => '编辑'}),
+        h(Button, { type: 'text' }, { default: () => '删除'})
+      ]
+    }]
+  </script>
   <template>
     <nt-table :data="dataSource2" :columns="columns" fixed-head style="max-height:200px;" class="nt-scrollbar"></nt-table>
   </template>
@@ -247,3 +312,16 @@
 
 > 1. 设置 `max-height` 可以通过直接设置 `style`；也可以通过 [tailwindcss-max-height](https://www.tailwindcss.cn/docs/max-height#setting-the-maximum-height)
 > 2. 如果想改变滚动条样式，参考 [工具样式-滚动条](../css-util#_2-滚动条样式)；引入样式表，然后给 `Table` 组件, 添加 `nt-scrollbar` 的类名: `<nt-table ... fixed-head class="max-h-24 nt-scrollbar"></nt-table>`
+
+### 排序
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <hr />
+  </textarea>
+  <template #preview>
+    <Table :data="dataSource1" :columns="columns3" :default-sort="defaultSort"></Table>
+  </template>
+  </CodePreview>
+</ClientOnly>
