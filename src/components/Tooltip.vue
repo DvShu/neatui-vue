@@ -2,14 +2,21 @@
   <div
     :class="{
       'nt-tooltip': true,
-      'nt-tooltip-top': placement.startsWith('top'),
-      'nt-tooltip-bottom': placement.startsWith('bottom'),
-      'nt-tooltip-start': placement.endsWith('Start'),
-      'nt-tooltip-end': placement.endsWith('End'),
+      'nt-tooltip-visible': visible,
     }"
   >
     <slot></slot>
-    <div class="nt-tooltip-text">
+    <div
+      :class="[
+        'nt-tooltip-content',
+        placement.startsWith('top') ? 'nt-tooltip-top' : '',
+        placement.startsWith('bottom') ? 'nt-tooltip-bottom' : '',
+        placement.endsWith('Start') ? 'nt-tooltip-start' : '',
+        placement.endsWith('End') ? 'nt-tooltip-end' : '',
+        `nt-tooltip--${styleName}`,
+        contentClass,
+      ]"
+    >
       <slot name="title">{{ title }}</slot>
     </div>
   </div>
@@ -26,9 +33,16 @@ withDefaults(
       | 'bottomStart'
       | 'bottom'
       | 'bottomEnd';
+    /** 组件可见性, 受控模式 */
+    visible?: boolean;
+    /** Tooltip Content 样式 */
+    contentClass?: string;
+    styleName?: string;
   }>(),
   {
     placement: 'top',
+    visible: false,
+    styleName: 'default',
   },
 );
 </script>

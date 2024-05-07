@@ -9,8 +9,6 @@ export interface ColumnOption {
   title: string;
   /** 是否启用排序 */
   sorter?: boolean;
-  /** 默认的排序方式 */
-  defaultSortOrder?: 'asc' | 'desc';
   /** 是否固定列 */
   fixed?: 'left' | 'right';
   /** 列宽 */
@@ -24,6 +22,13 @@ export interface DataSortState {
   order: 'asc' | 'desc';
 }
 
+interface SortOption {
+  key: string;
+  order: string;
+}
+
+type SorterFnOption = (data: any[]) => any[];
+
 export default defineComponent({
   props: {
     columns: {
@@ -36,6 +41,12 @@ export default defineComponent({
       default: true,
       required: false,
     },
+    /** 是否显示四周边框 */
+    border: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
     /** 是否固定表头 */
     fixedHead: {
       type: Boolean,
@@ -46,17 +57,49 @@ export default defineComponent({
       type: Array as PropType<any[]>,
       required: true,
     },
-    columnKey: {
-      type: String,
+    defaultSort: {
+      type: Object as PropType<SortOption>,
+      required: false,
+    },
+    sorter: {
+      type: Function as PropType<SorterFnOption>,
       required: false,
     },
   },
-  emits: ['sort-change'],
-  setup(props, { emit }) {
-    const sortInfo = ref({
+  setup(props) {
+    const sortInfo = ref<SortOption>({
       key: '',
       order: '',
     });
+    const sourceData = ref(props.data);
+
+    function dataSort(
+      data: any[],
+      sortInfo: SortOption,
+      sorterFn?: (data: any[]) => any[],
+    ) {
+      let oriData = [...data];
+      if (sorterFn) {
+        return sorterFn(oriData);
+      }
+      if (sortInfo.key === '') {
+        return oriData;
+      }
+      return oriData.sort((a, b) => {
+        if (sortInfo.order === 'asc') {
+          return a[sortInfo.key] - b[sortInfo.key];
+        }
+        return b[sortInfo.key] - a[sortInfo.key];
+      });
+    }
+
+    if (props.defaultSort != null) {
+      sortInfo.value = {
+        key: props.defaultSort.key,
+        order: props.defaultSort.order,
+      };
+      sourceData.value = dataSort(props.data, sortInfo.value, props.sorter);
+    }
 
     function isFixed() {
       const len = props.columns.length;
@@ -75,7 +118,7 @@ export default defineComponent({
     /** 是否使用 fixed[table-layout:fixed] 布局 */
     let fixed = isFixed();
 
-    function handleHeadClick({ sorter, key, index }: any) {
+    function handleHeadClick({ sorter, key }: any) {
       if (sorter === true) {
         let sortKey = key;
         let sortOrder = '';
@@ -92,11 +135,7 @@ export default defineComponent({
           order: sortOrder,
           key: sortKey,
         };
-        emit('sort-change', {
-          key: sortKey,
-          order: sortOrder,
-          index,
-        });
+        sourceData.value = dataSort(props.data, sortInfo.value, props.sorter);
       }
     }
 
@@ -107,12 +146,6 @@ export default defineComponent({
 
       for (let i = 0, len = props.columns.length; i < len; i++) {
         const column = props.columns[i];
-        if (column.defaultSortOrder != null && sortInfo.value.key === '') {
-          sortInfo.value = {
-            key: column.key || '',
-            order: column.defaultSortOrder,
-          };
-        }
 
         const thAttrs: any = {
           class: {
@@ -180,8 +213,8 @@ export default defineComponent({
 
     function renderBody() {
       const bodies: VNode[] = [];
-      for (let i = 0, len = props.data.length; i < len; i++) {
-        const dataItem = props.data[i];
+      for (let i = 0, len = sourceData.value.length; i < len; i++) {
+        const dataItem = sourceData.value[i];
 
         let left: string[] = [];
         let right: string[] = [];
@@ -235,44 +268,49 @@ export default defineComponent({
 
     return () =>
       h(
-        'table',
-        {
-          class: [
-            'nt-table',
-            props.stripe ? 'nt-table-stripe' : '',
-            fixed ? 'nt-table-fixed' : '',
-          ],
-        },
-        [
-          h(
-            'thead',
+        'div',
+        { class: 'nt-table-wrapper' },
+        h(
+          'table',
+          {
+            class: [
+              'nt-table',
+              props.stripe ? 'nt-table-stripe' : '',
+              fixed ? 'nt-table-fixed' : '',
+              props.border ? 'nt-table-border' : '',
+            ],
+          },
+          [
             h(
-              'tr',
-              {
-                class: {
-                  'nt-fixed': props.fixedHead,
-                },
-                style: {
-                  top: props.fixedHead ? '0' : undefined,
-                },
-              },
-              renderHead(),
-            ),
-          ),
-          h(
-            'tbody',
-            props.data.length === 0
-              ? h(
-                  'td',
-                  {
-                    class: 'ph-table__none-col',
-                    colspan: props.columns.length,
+              'thead',
+              h(
+                'tr',
+                {
+                  class: {
+                    'nt-fixed': props.fixedHead,
                   },
-                  '暂无数据记录!',
-                )
-              : renderBody(),
-          ),
-        ],
+                  style: {
+                    top: props.fixedHead ? '0' : undefined,
+                  },
+                },
+                renderHead(),
+              ),
+            ),
+            h(
+              'tbody',
+              props.data.length === 0
+                ? h(
+                    'td',
+                    {
+                      class: 'nt-table__none-col',
+                      colspan: props.columns.length,
+                    },
+                    '暂无数据记录!',
+                  )
+                : renderBody(),
+            ),
+          ],
+        ),
       );
   },
 });

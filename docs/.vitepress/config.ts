@@ -51,6 +51,7 @@ export default defineConfig({
           { text: 'Qrcode 二维码', link: '/components/qrcode' },
           { text: 'Image 图片', link: '/components/image' },
           { text: 'Shadow 阴影', link: '/components/shadow' },
+          { text: 'Table 表格', link: '/components/table' },
         ],
       },
     ],
