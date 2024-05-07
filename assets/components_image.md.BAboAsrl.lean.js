@@ -1,4 +1,4 @@
-import{c as r,d,e as b}from"./chunks/theme.BELXmYxf.js";import{e as x,P as v,c as u,f as t,w as i,ab as p,b as e,q as a,o as _,u as n,F as f,Q as w}from"./chunks/framework.B2jEF4L8.js";const P=p("",4),k=e("textarea",{lang:"vue-html"},`
+import{c as r,d,e as b}from"./chunks/theme.JvRmGtQ2.js";import{e as x,P as v,c as u,f as t,w as i,ab as p,b as e,q as a,o as _,u as n,F as f,Q as w}from"./chunks/framework.B2jEF4L8.js";const P=p("",4),k=e("textarea",{lang:"vue-html"},`
     <nt-image src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg" width="100"></nt-image>
     `,-1),S=e("h3",{id:"适应容器",tabindex:"-1"},[a("适应容器 "),e("a",{class:"header-anchor",href:"#适应容器","aria-label":'Permalink to "适应容器"'},"​")],-1),y=e("p",null,[a("可以通过 "),e("code",null,"fit"),a(" 确定图片如何适应到容器框，同原生 "),e("a",{href:"https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit",target:"_blank",rel:"noreferrer"},"object-fit"),a(),e("code",null,"CSS"),a(" 属性；如果不填浏览器默认为 "),e("code",null,"fill")],-1),T=e("textarea",{lang:"vue-html"},`
   <nt-image src="/neatui-vue/img1.svg" width="100" height="100" fit="fill"></nt-image>
