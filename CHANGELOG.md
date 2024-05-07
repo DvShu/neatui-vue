@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/DvShu/neatui-vue/compare/v0.1.0...v0.2.0) (2024-05-07)
+
+
+### Features
+
+* **Table:** 表格 ([86af2b9](https://github.com/DvShu/neatui-vue/commit/86af2b9665d93f0f3894a224b5d22229df5f92f0))
+
 ## [0.1.0](https://github.com/DvShu/neatui-vue/compare/v0.0.7...v0.1.0) (2024-04-28)
 
 
