@@ -66,8 +66,7 @@ export default defineComponent({
       required: false,
     },
   },
-  emits: ['sort-change'],
-  setup(props, { emit }) {
+  setup(props) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
@@ -79,13 +78,14 @@ export default defineComponent({
       sortInfo: SortOption,
       sorterFn?: (data: any[]) => any[],
     ) {
+      let oriData = [...data];
       if (sorterFn) {
-        return sorterFn(data);
+        return sorterFn(oriData);
       }
       if (sortInfo.key === '') {
-        return data;
+        return oriData;
       }
-      return data.sort((a, b) => {
+      return oriData.sort((a, b) => {
         if (sortInfo.order === 'asc') {
           return a[sortInfo.key] - b[sortInfo.key];
         }
@@ -118,7 +118,7 @@ export default defineComponent({
     /** 是否使用 fixed[table-layout:fixed] 布局 */
     let fixed = isFixed();
 
-    function handleHeadClick({ sorter, key, index }: any) {
+    function handleHeadClick({ sorter, key }: any) {
       if (sorter === true) {
         let sortKey = key;
         let sortOrder = '';
@@ -136,11 +136,6 @@ export default defineComponent({
           key: sortKey,
         };
         sourceData.value = dataSort(props.data, sortInfo.value, props.sorter);
-        emit('sort-change', {
-          key: sortKey,
-          order: sortOrder,
-          index,
-        });
       }
     }
 
@@ -218,8 +213,8 @@ export default defineComponent({
 
     function renderBody() {
       const bodies: VNode[] = [];
-      for (let i = 0, len = props.data.length; i < len; i++) {
-        const dataItem = props.data[i];
+      for (let i = 0, len = sourceData.value.length; i < len; i++) {
+        const dataItem = sourceData.value[i];
 
         let left: string[] = [];
         let right: string[] = [];

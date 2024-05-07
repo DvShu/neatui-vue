@@ -315,13 +315,72 @@
 
 ### 排序
 
+给列的选项增加 `sorter` 为 `true`，同时配置 `key` 字段就能实现排序；可以通过 `defaultSort` 设置初始排序；也可以添加 `sorter` 回调函数来启用手动排序
+
 <ClientOnly>
   <CodePreview>
-  <textarea lang="vue-html">
-  <hr />
+  <textarea lang="vue">
+  <script setup>
+  const columns3 = [{
+    title: '姓名',
+    key: 'name',
+  }, {
+    title: '年龄',
+    key: 'age',
+    sorter: true
+  }, {
+    title: '住址',
+    key: 'address'
+  }, {
+    title: '操作',
+    key: 'action',
+    render: () => [
+      h(Button, { type: 'text' }, { default: () => '编辑'}),
+      h(Button, { type: 'text' }, { default: () => '删除'})
+    ]
+  }]
+  const defaultSort = { key: 'age', order: 'desc' }
+  </script>
+  <template>
+    <nt-table :data="dataSource1" :columns="columns3" :default-sort="defaultSort"></nt-table>
+  </template>
   </textarea>
   <template #preview>
     <Table :data="dataSource1" :columns="columns3" :default-sort="defaultSort"></Table>
   </template>
   </CodePreview>
 </ClientOnly>
+
+## API
+
+### Table Props
+
+| 参数           | 说明             | 类型                     | 默认值  |
+| -------------- | ---------------- | ------------------------ | ------- |
+| `data`         | 数据源           | `array`                  | -       |
+| `columns`      | 表格列配置       | `ColumnOption[]`         | -       |
+| `default-sort` | 初始排序         | `SortOption`             | -       |
+| `stripe`       | 是否为斑马纹     | `boolean`                | `true`  |
+| `border`       | 是否显示四周边框 | `boolean`                | `false` |
+| `fixed-head`   | 是否固定表头     | `boolean`                | `false` |
+| `sorter`       | 使用手动排序     | `(data: any[]) => any[]` | -       |
+
+`ColumnOption` 选项:
+
+| 字段     | 说明                   | 类型                                            | 默认值  |
+| -------- | ---------------------- | ----------------------------------------------- | ------- |
+| `title`  | 列名                   | `string`                                        | -       |
+| `key`    | 列标识, 自动排序时必传 | `string`                                        | -       |
+| `width`  | 列宽                   | `string`、`number`                              | -       |
+| `fixed`  | 列是否固定             | `left`、`right`                                 | -       |
+| `sorter` | 是否排序               | `boolean`                                       | `false` |
+| `render` | 自定义渲染             | `(row: any, index: number) => VNode \| VNode[]` | -       |
+
+`SortOption` 选项
+
+| 字段    | 说明                   | 类型                        |
+| ------- | ---------------------- | --------------------------- |
+| `key`   | 列标识, 自动排序时必传 | `string`                    |
+| `order` | 排序方式               | `asc` - 升序、`desc` - 降序 |
+
+### Table Events
