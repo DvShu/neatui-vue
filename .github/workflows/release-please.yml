@@ -31,7 +31,8 @@ jobs:
     steps:
       - name: Print Previous Job Output
         run: |
-          echo "Previous job output: ${{ needs.release.outputs }}"
+          echo "Previous job output: "
+          echo "${{ needs.release.outputs }}" | jq .
 
   publish:
     runs-on: ubuntu-latest

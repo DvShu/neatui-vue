@@ -14,6 +14,7 @@ export interface ColumnOption {
   /** 列宽 */
   width?: string | number;
   render?: (row: any, index: number) => VNode | VNode[];
+  children?: ColumnOption[];
 }
 
 export interface DataSortState {
@@ -28,6 +29,62 @@ interface SortOption {
 }
 
 type SorterFnOption = (data: any[]) => any[];
+
+type RenderColumnOption = ColumnOption & {
+  colspan: number;
+  rowspan: number;
+  children?: RenderColumnOption[];
+};
+
+/** 通过配置的 columns 计算表头跨行，跨列 */
+function calculateSpan(
+  headers: ColumnOption[],
+  level = 0,
+): RenderColumnOption[] {
+  if (!Array.isArray(headers)) {
+    return [];
+  }
+
+  const spans = headers.map((header) => {
+    // 如果有子级元素，递归计算
+    if (header.children != null) {
+      const childrenSpans = calculateSpan(header.children, level + 1);
+      const colspan = childrenSpans.reduce(
+        (sum, childSpan) => sum + childSpan.colspan,
+        0,
+      );
+      return {
+        ...header,
+        colspan,
+        rowspan: 1,
+        children: childrenSpans,
+      };
+    } else {
+      // 如果元素没有子级，意味着它占满从当前层级到最底层的所有行
+      return {
+        ...header,
+        colspan: 1,
+        rowspan: getMaxDepth(headers),
+      };
+    }
+  }) as RenderColumnOption[];
+
+  return spans;
+}
+
+// 递归获取最深的层级数
+function getMaxDepth(headers: ColumnOption[]) {
+  let maxDepth = 1;
+  headers.forEach((header) => {
+    if (header.children) {
+      const childDepth = getMaxDepth(header.children) + 1;
+      if (childDepth > maxDepth) {
+        maxDepth = childDepth;
+      }
+    }
+  });
+  return maxDepth;
+}
 
 export default defineComponent({
   props: {
@@ -70,13 +127,20 @@ export default defineComponent({
       type: Function as PropType<() => VNode | VNode[]>,
       required: false,
     },
+    /** 是否使用 fixed[table-layout:fixed] 布局 */
+    tableLayout: {
+      type: String,
+      required: false,
+      default: 'fixed',
+    },
   },
-  setup(props, { slots }) {
+  setup(props) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
     });
     const sourceData = ref(props.data);
+    const parsedColumns = calculateSpan(props.columns, 0);
 
     function dataSort(
       data: any[],
@@ -106,23 +170,6 @@ export default defineComponent({
       sourceData.value = dataSort(props.data, sortInfo.value, props.sorter);
     }
 
-    function isFixed() {
-      const len = props.columns.length;
-      if (props.columns[0].fixed) return true;
-      if (props.columns[len - 1].fixed) return true;
-      let isFixed = false;
-      for (let i = 0; i < len; i++) {
-        if (props.columns[i].fixed) {
-          isFixed = true;
-          break;
-        }
-      }
-      return isFixed;
-    }
-
-    /** 是否使用 fixed[table-layout:fixed] 布局 */
-    let fixed = isFixed();
-
     function handleHeadClick({ sorter, key }: any) {
       if (sorter === true) {
         let sortKey = key;
@@ -144,77 +191,93 @@ export default defineComponent({
       }
     }
 
-    function renderHead() {
-      const columnsRender: VNode[] = [];
-      let left: string[] = [];
-      let right: string[] = [];
+    function renderHeadRow(
+      columns: RenderColumnOption[],
+      left: string[],
+      right: string[],
+      nodes: VNode[],
+    ) {
+      for (let i = 0, len = columns.length; i < len; i++) {
+        const column = columns[i];
+        if (column.children == null) {
+          const thAttrs: any = {
+            class: {
+              'sort-column': column.sorter === true,
+              'sort-asc':
+                sortInfo.value.key === column.key &&
+                sortInfo.value.order === 'asc',
+              'sort-desc':
+                sortInfo.value.key === column.key &&
+                sortInfo.value.order === 'desc',
+              'nt-fixed': column.fixed,
+            },
+            style: {},
+          };
 
-      for (let i = 0, len = props.columns.length; i < len; i++) {
-        const column = props.columns[i];
-
-        const thAttrs: any = {
-          class: {
-            'sort-column': column.sorter === true,
-            'sort-asc':
-              sortInfo.value.key === column.key &&
-              sortInfo.value.order === 'asc',
-            'sort-desc':
-              sortInfo.value.key === column.key &&
-              sortInfo.value.order === 'desc',
-            'nt-fixed': column.fixed,
-          },
-          style: {},
-        };
-
-        if (column.fixed) {
-          if (column.fixed === 'left') {
-            thAttrs.style.left =
-              left.length === 0 ? '0' : `calc(${left.join('+')})`;
-          } else {
-            thAttrs.style.right =
-              right.length === 0 ? '0' : `calc(${right.join('+')})`;
-          }
-        }
-
-        if (column.width) {
-          let colWidth: string = column.width as string;
-          if (typeof column.width === 'number') {
-            colWidth = `${column.width}px`;
-          }
-          thAttrs.style.width = colWidth;
-          if (column.fixed != null) {
+          if (column.fixed) {
             if (column.fixed === 'left') {
-              left.push(colWidth);
+              thAttrs.style.left =
+                left.length === 0 ? '0' : `calc(${left.join('+')})`;
             } else {
-              right.push(colWidth);
+              thAttrs.style.right =
+                right.length === 0 ? '0' : `calc(${right.join('+')})`;
             }
           }
-        }
-        if (column.sorter === true) {
-          thAttrs.onClick = () => {
-            handleHeadClick({
-              key: column.key || '',
-              index: i,
-              order: 'asc',
-              sorter: column.sorter,
-            });
-          };
-        }
 
-        columnsRender.push(
-          h('th', thAttrs, [
-            h('span', column.title),
-            column.sorter === true
-              ? h('span', { class: 'caret-wrapper' }, [
-                  h('span', { class: 'sort-caret ascending' }),
-                  h('span', { class: 'sort-caret descending' }),
-                ])
-              : null,
-          ]),
-        );
+          if (column.width) {
+            let colWidth: string = column.width as string;
+            if (typeof column.width === 'number') {
+              colWidth = `${column.width}px`;
+            }
+            thAttrs.style.width = colWidth;
+            if (column.fixed != null) {
+              if (column.fixed === 'left') {
+                left.push(colWidth);
+              } else {
+                right.push(colWidth);
+              }
+            }
+          }
+          if (column.sorter === true) {
+            thAttrs.onClick = () => {
+              handleHeadClick({
+                key: column.key || '',
+                index: i,
+                order: 'asc',
+                sorter: column.sorter,
+              });
+            };
+          }
+
+          nodes.push(
+            h('th', thAttrs, [
+              h('span', column.title),
+              column.sorter === true
+                ? h('span', { class: 'caret-wrapper' }, [
+                    h('span', { class: 'sort-caret ascending' }),
+                    h('span', { class: 'sort-caret descending' }),
+                  ])
+                : null,
+            ]),
+          );
+        } else {
+          let children: VNode[] = [];
+          renderHeadRow(
+            column.children as RenderColumnOption[],
+            left,
+            right,
+            children,
+          );
+          nodes.push(h('tr', children));
+        }
       }
-      return columnsRender;
     }
+
+    function renderHead() {
+        const headTrs:VNode[] = []
+        renderHeadRow(parsedColumns, [], [], headTrs)
+        return headTrs
+      }
 
     function renderBody() {
       const bodies: VNode[] = [];
@@ -281,7 +344,7 @@ export default defineComponent({
             class: [
               'nt-table',
               props.stripe ? 'nt-table-stripe' : '',
-              fixed ? 'nt-table-fixed' : '',
+              props.tableLayout === 'fixed' ? 'nt-table-fixed' : '',
               props.border ? 'nt-table-border' : '',
             ],
           },
@@ -296,7 +359,7 @@ export default defineComponent({
                   top: props.fixedHead ? '0' : undefined,
                 },
               },
-              slots.header != null ? slots.header : h('tr', renderHead()),
+              h('tr', renderHead()),
             ),
             h(
               'tbody',
