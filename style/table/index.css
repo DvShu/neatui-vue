@@ -59,7 +59,8 @@
   padding: 10px 5px;
   border-bottom: 1px solid #e6e6e6;
 }
-.nt-table th {
+.nt-table th,
+.nt-table tfoot td {
   text-align: left;
   background-color: #f2f2f2;
 }
@@ -89,6 +90,7 @@
   z-index: 1;
   box-sizing: border-box;
 }
-.nt-table tr.nt-fixed {
+.nt-table thead.nt-fixed,
+.nt-table tfoot.nt-fixed {
   z-index: 2;
 }

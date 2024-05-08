@@ -134,6 +134,13 @@
   }]
 
   const defaultSort = { key: 'age', order: 'desc' }
+
+  function renderSummary() {
+    return h('tr', [
+      h('td', '合计'),
+      h('td', { colspan: '3' },dataSource1.reduce((sum, item) => sum + item.age, 0)),
+    ])
+  }
 </script>
 
 ### 基础表格
@@ -249,7 +256,7 @@
 
 ### 固定表头和列
 
-给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。 给列设置宽度，然后给需要固定的列设置 `fixed`；就能实现固定列。
+给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。 给列设置宽度，然后给需要固定的列设置 `fixed` 为 `left` 或 `right`，就能实现固定列。
 
 <ClientOnly>
   <CodePreview>
@@ -351,19 +358,45 @@
   </CodePreview>
 </ClientOnly>
 
+### 表尾合计行
+
+设置 `renderSummary` 函数来渲染表尾合计行
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+    function renderSummary() {
+      return h('tr', [
+        h('td', '合计'),
+        h('td', { colspan: '3' },dataSource1.reduce((sum, item) => sum + item.age, 0)),
+      ])
+    }
+  </script>
+  <template>
+    <nt-table :data="dataSource1" :columns="columns3" :render-summary="renderSummary"></nt-table>
+  </template>
+  </textarea>
+  <template #preview>
+    <Table :data="dataSource1" :columns="columns3" :render-summary="renderSummary"></Table>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Table Props
 
-| 参数           | 说明             | 类型                     | 默认值  |
-| -------------- | ---------------- | ------------------------ | ------- |
-| `data`         | 数据源           | `array`                  | -       |
-| `columns`      | 表格列配置       | `ColumnOption[]`         | -       |
-| `default-sort` | 初始排序         | `SortOption`             | -       |
-| `stripe`       | 是否为斑马纹     | `boolean`                | `true`  |
-| `border`       | 是否显示四周边框 | `boolean`                | `false` |
-| `fixed-head`   | 是否固定表头     | `boolean`                | `false` |
-| `sorter`       | 使用手动排序     | `(data: any[]) => any[]` | -       |
+| 参数             | 说明             | 类型                     | 默认值  |
+| ---------------- | ---------------- | ------------------------ | ------- |
+| `data`           | 数据源           | `array`                  | -       |
+| `columns`        | 表格列配置       | `ColumnOption[]`         | -       |
+| `default-sort`   | 初始排序         | `SortOption`             | -       |
+| `stripe`         | 是否为斑马纹     | `boolean`                | `true`  |
+| `border`         | 是否显示四周边框 | `boolean`                | `false` |
+| `fixed-head`     | 是否固定表头     | `boolean`                | `false` |
+| `sorter`         | 使用手动排序     | `(data: any[]) => any[]` | -       |
+| `render-summary` | 渲染表尾合计行   | `() => VNode \| VNode[]` | -       |
 
 `ColumnOption` 选项:
 
@@ -382,5 +415,3 @@
 | ------- | ---------------------- | --------------------------- |
 | `key`   | 列标识, 自动排序时必传 | `string`                    |
 | `order` | 排序方式               | `asc` - 升序、`desc` - 降序 |
-
-### Table Events
