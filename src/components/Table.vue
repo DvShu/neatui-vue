@@ -6,7 +6,7 @@ export interface ColumnOption {
   /** 排序时，如果传递了 key，则会将此 key 回传，便于排序, 如果不传此 key，则排序无效 */
   key?: string;
   /** 文本 */
-  title: string;
+  title?: string;
   /** 是否启用排序 */
   sorter?: boolean;
   /** 是否固定列 */
@@ -65,8 +65,13 @@ export default defineComponent({
       type: Function as PropType<SorterFnOption>,
       required: false,
     },
+    /** 渲染表尾合计行 */
+    renderSummary: {
+      type: Function as PropType<() => VNode | VNode[]>,
+      required: false,
+    },
   },
-  setup(props) {
+  setup(props, { slots }) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
@@ -283,18 +288,15 @@ export default defineComponent({
           [
             h(
               'thead',
-              h(
-                'tr',
-                {
-                  class: {
-                    'nt-fixed': props.fixedHead,
-                  },
-                  style: {
-                    top: props.fixedHead ? '0' : undefined,
-                  },
+              {
+                class: {
+                  'nt-fixed': props.fixedHead,
                 },
-                renderHead(),
-              ),
+                style: {
+                  top: props.fixedHead ? '0' : undefined,
+                },
+              },
+              slots.header != null ? slots.header : h('tr', renderHead()),
             ),
             h(
               'tbody',
@@ -309,6 +311,13 @@ export default defineComponent({
                   )
                 : renderBody(),
             ),
+            props.renderSummary
+              ? h(
+                  'tfoot',
+                  { class: 'nt-fixed', style: { bottom: '0' } },
+                  props.renderSummary(),
+                )
+              : null,
           ],
         ),
       );
