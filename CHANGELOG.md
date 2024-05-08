@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/DvShu/neatui-vue/compare/v0.2.0...v0.2.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* **Table:** 表格增加渲染表尾合计行 ([eb7a32a](https://github.com/DvShu/neatui-vue/commit/eb7a32a170f6c2d78d1217a5f7c10e08fd8eaed7))
+
 ## [0.2.0](https://github.com/DvShu/neatui-vue/compare/v0.1.0...v0.2.0) (2024-05-07)
 
 
