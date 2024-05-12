@@ -1,6 +1,9 @@
 .nt-checkbox {
   --nt-checkbox-size: 16px;
+  --nt-checkbox-label-color: #333;
   --nt-checkbox-checked-color: var(--nt-primary-color, #4998f4);
+  --nt-checkbox-disabled-color: #e6e6e6;
+  --nt-checkbox-disabled-label-color: #c0c4cc;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -11,12 +14,15 @@
   z-index: 1;
 }
 .nt-checkbox__label {
+  color: var(--nt-checkbox-label-color);
   transition: color 0.3s ease-in-out;
 }
 .nt-checkbox__inner {
-  width: var(--nt-checkbox-size, 16px);
-  height: var(--nt-checkbox-size, 16px);
-  display: block;
+  width: var(--nt-checkbox-size);
+  height: var(--nt-checkbox-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 3px;
   border: 1px solid #dcddd9;
   box-sizing: border-box;
@@ -25,9 +31,6 @@
 }
 .nt-checkbox__inner::after {
   content: '';
-  position: absolute;
-  left: calc(var(--nt-checkbox-size) * 0.2);
-  top: calc(var(--nt-checkbox-size) * 0.2);
   width: calc(var(--nt-checkbox-size) * 0.6);
   height: calc(var(--nt-checkbox-size) * 0.3);
   display: block;
@@ -49,12 +52,28 @@
 .nt-checkbox__input:checked ~ .nt-checkbox__label {
   color: var(--nt-checkbox-checked-color);
 }
+.nt-checkbox--indeterminate .nt-checkbox__input:checked ~ .nt-checkbox__label {
+  color: var(--nt-checkbox-label-color);
+}
 .nt-checkbox__label {
   margin-left: 5px;
 }
 .nt-checkbox--indeterminate .nt-checkbox__inner::after {
   transform: rotate(0);
+  height: 1px;
   border-left: none;
-  width: calc(var(--nt-checkbox-size) / 2);
-  left: calc(var(--nt-checkbox-size) * 0.25);
+  width: calc(var(--nt-checkbox-size) * 0.4);
+}
+.nt-checkbox--disabled {
+  --nt-checkbox-checked-color: var(--nt-checkbox-disabled-color);
+  cursor: not-allowed;
+}
+.nt-checkbox--disabled .nt-checkbox__inner {
+  border-color: var(--nt-checkbox-disabled-color);
+}
+.nt-checkbox--disabled .nt-checkbox__inner::after {
+  border-color: transparent;
+}
+.nt-checkbox--disabled .nt-checkbox__label {
+  color: var(--nt-checkbox-disabled-label-color);
 }

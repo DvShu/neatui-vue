@@ -60,7 +60,7 @@ async function createComponentTemplate(name) {
     '### 基础用法',
     '基础用法',
     '## API',
-    '### ${name} Props',
+    `### ${name} Props`,
     '| 参数 | 说明 | 类型 | 默认值 |',
     '| ---- | ---- | ---- | ---- |',
     '| x | x | x | x |',
