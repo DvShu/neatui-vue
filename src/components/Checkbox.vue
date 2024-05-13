@@ -10,15 +10,18 @@
       type="checkbox"
       class="nt-checkbox__input"
       :name="name"
-      :checked="checkedModel"
+      :checked="isChecked"
       @change="handleChange"
       :disabled="disabled"
+      :value="value"
     />
     <span class="nt-checkbox__inner"></span>
     <span class="nt-checkbox__label">{{ label }}</span>
   </label>
 </template>
 <script setup lang="ts">
+import { Ref, computed, inject } from 'vue';
+
 const checkedModel = defineModel({ type: Boolean });
 
 const props = withDefaults(
@@ -30,6 +33,7 @@ const props = withDefaults(
     /** 显示的 label 文本 */
     label?: string;
     disabled?: boolean;
+    value?: string;
   }>(),
   {
     indeterminate: false,
@@ -37,12 +41,27 @@ const props = withDefaults(
   },
 );
 
-console.log(checkedModel.value);
+const checkGroupList: Ref<any[]> | undefined = inject('nt-check-group-list');
+
+const isChecked = computed(() => {
+  if (checkGroupList != null) {
+    return checkGroupList.value.includes(props.value);
+  }
+  return checkedModel.value;
+});
 
 function handleChange(e: Event) {
   const target = e.target as HTMLInputElement;
+  const checked = target.checked;
+  if (checkGroupList != null) {
+    let index = checkGroupList.value.indexOf(props.value);
+    if (index === -1) {
+      checkGroupList.value.push(props.value);
+    } else {
+      checkGroupList.value.splice(index, 1);
+    }
+  }
   if (props.indeterminate === false) {
-    const checked = target.checked;
     checkedModel.value = checked;
   }
 }

@@ -6,15 +6,26 @@
 
 <script setup>
   import { ref, watch } from 'vue'
-  import { Checkbox } from '../../src'
+  import { Checkbox, CheckboxGroup } from '../../src'
   const checked1 = ref(true)
 
   watch(checked1, (newVal) => {
     console.log(newVal)
   })
+
+  const checkList = ref(['A', 'B'])
+
+  function getGroupList() {
+    console.log(checkList.value)
+  }
 </script>
 
-<Checkbox v-model="checked1" label="Option1" />
+<CheckboxGroup v-model="checkList">
+  <Checkbox value="A" label="Option1" />
+  <Checkbox value="B" label="Option2" />
+</CheckboxGroup>
+
+<button @click="getGroupList">获取复选框值</button>
 
 ### 基础用法
 

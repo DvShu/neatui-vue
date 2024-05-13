@@ -22,4 +22,5 @@ export { default as Image } from './components/Image.vue';
 export { default as ImagePreview } from './components/ImagePreview.vue';
 export { default as Polygon } from './components/Polygon.vue';
 export { default as Shadow } from './components/Shadow.vue';
-export { default as Checkbox } from "./components/Checkbox.vue"
+export { default as Checkbox } from './components/Checkbox.vue';
+export { default as CheckboxGroup } from './components/CheckboxGroup.vue';
