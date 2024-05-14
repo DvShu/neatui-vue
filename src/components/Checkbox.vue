@@ -41,11 +41,19 @@ const props = withDefaults(
   },
 );
 
-const checkGroupList: Ref<any[]> | undefined = inject('nt-check-group-list');
+const emits = defineEmits(['change']);
+
+const { checkList, updateCheck } = inject<{
+  checkList: Ref<any[]> | null;
+  updateCheck: null | ((value: any) => void);
+}>('nt-check-group-check', {
+  checkList: null,
+  updateCheck: null,
+});
 
 const isChecked = computed(() => {
-  if (checkGroupList != null) {
-    return checkGroupList.value.includes(props.value);
+  if (checkList != null) {
+    return checkList.value.includes(props.value);
   }
   return checkedModel.value;
 });
@@ -53,16 +61,10 @@ const isChecked = computed(() => {
 function handleChange(e: Event) {
   const target = e.target as HTMLInputElement;
   const checked = target.checked;
-  if (checkGroupList != null) {
-    let index = checkGroupList.value.indexOf(props.value);
-    if (index === -1) {
-      checkGroupList.value.push(props.value);
-    } else {
-      checkGroupList.value.splice(index, 1);
-    }
+  if (updateCheck != null) {
+    updateCheck(props.value);
   }
-  if (props.indeterminate === false) {
-    checkedModel.value = checked;
-  }
+  checkedModel.value = checked;
+  emits('change', checked);
 }
 </script>

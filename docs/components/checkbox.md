@@ -4,10 +4,16 @@
 
 ## 演示
 
-<script setup>
+<script setup lang="ts">
   import { ref, watch } from 'vue'
   import { Checkbox, CheckboxGroup } from '../../src'
   const checked1 = ref(true)
+
+  const cities= [['CD', '成都'], ['BJ', '北京'], ['SZ', '深圳'], ['HZ', '杭州']]
+
+  const checkedCities = ref(['CD', 'SZ'])
+  const checkAll = ref(false)
+  const isIndeterminate = ref(true)
 
   watch(checked1, (newVal) => {
     console.log(newVal)
@@ -18,18 +24,21 @@
   function getGroupList() {
     console.log(checkList.value)
   }
+
+  function handleCheckAllChange(val: boolean) {
+    checkedCities.value = val ? cities.map(c => c[0]) : []
+    isIndeterminate.value = false
+  }
+  function handleGroupChange(val: string[]) {
+    const checkedCount = val.length
+    checkAll.value = checkedCount === cities.length
+    isIndeterminate.value = checkedCount < cities.length
+  }
 </script>
-
-<CheckboxGroup v-model="checkList">
-  <Checkbox value="A" label="Option1" />
-  <Checkbox value="B" label="Option2" />
-</CheckboxGroup>
-
-<button @click="getGroupList">获取复选框值</button>
 
 ### 基础用法
 
-单独使用可以表示两种状态之间的切换
+单独使用可以表示两种状态之间的切换；在 `nt-checkbox` 元素中定义 `v-model` 绑定变量，单一的 `checkbox` 中，默认绑定变量的值会是 `Boolean`，选中为 `true`。
 
 <ClientOnly>
   <CodePreview>
@@ -51,6 +60,32 @@
   </CodePreview>
 </ClientOnly>
 
+### 选项框组
+
+使用 `nt-checkbox-group` 元素来包裹 `nt-checkbox` 元素，实现复选框组。使用时需要给 `nt-checkbox` 传递 `value` 属性。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+    import { ref } from 'vue';
+    const cities= [['CD', '成都'], ['BJ', '北京'], ['SZ', '深圳'], ['HZ', '杭州']];
+    const checkedCities = ref(['CD', 'SZ']);
+  </script>
+  <template>
+    <nt-checkbox-group v-model="checkedCities">
+      <nt-checkbox v-for="city in cities" :key="city[0]" :value="city[0]" :label="city[1]"></nt-checkbox>
+    </nt-checkbox-group>
+  </template>
+  </textarea>
+  <template #preview>
+    <CheckboxGroup v-model="checkedCities">
+      <Checkbox v-for="city in cities" :key="city[0]" :value="city[0]" :label="city[1]"></Checkbox>
+    </CheckboxGroup>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ### 中间状态
 
 设置 `indeterminate` 属性，表示不确定状态，一般用于实现全选的效果，实现部分选中的状态。
@@ -59,12 +94,31 @@
   <CodePreview>
   <textarea lang="vue">
   <script setup>
+    import { ref } from 'vue';
+    const checked1 = ref(true);
   </script>
   <template>
+    <nt-checkbox v-model="checked1" label="Option1" indeterminate />
   </template>
   </textarea>
   <template #preview>
-    <Checkbox v-model="checked1" label="Option1" indeterminate />
+    <Checkbox
+      v-model="checkAll"
+      label="全选"
+      :indeterminate="isIndeterminate"
+      @change="handleCheckAllChange"
+    />
+    <CheckboxGroup
+      v-model="checkedCities"
+      @change="handleGroupChange"
+    >
+      <Checkbox
+        v-for="city in cities"
+        :key="city[0]"
+        :value="city[0]"
+        :label="city[1]"
+      ></Checkbox>
+    </CheckboxGroup>
   </template>
   </CodePreview>
 </ClientOnly>
