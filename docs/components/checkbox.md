@@ -5,25 +5,14 @@
 ## 演示
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+  import { ref } from 'vue'
   import { Checkbox, CheckboxGroup } from '../../src'
-  const checked1 = ref(true)
 
   const cities= [['CD', '成都'], ['BJ', '北京'], ['SZ', '深圳'], ['HZ', '杭州']]
 
   const checkedCities = ref(['CD', 'SZ'])
   const checkAll = ref(false)
   const isIndeterminate = ref(true)
-
-  watch(checked1, (newVal) => {
-    console.log(newVal)
-  })
-
-  const checkList = ref(['A', 'B'])
-
-  function getGroupList() {
-    console.log(checkList.value)
-  }
 
   function handleCheckAllChange(val: boolean) {
     checkedCities.value = val ? cities.map(c => c[0]) : []
@@ -95,10 +84,39 @@
   <textarea lang="vue">
   <script setup>
     import { ref } from 'vue';
-    const checked1 = ref(true);
+    import { Checkbox, CheckboxGroup } from '../../src';
+    const cities= [['CD', '成都'], ['BJ', '北京'], ['SZ', '深圳'], ['HZ', '杭州']];
+    const checkedCities = ref(['CD', 'SZ']);
+    const checkAll = ref(false);
+    const isIndeterminate = ref(true);
+    function handleCheckAllChange(val: boolean) {
+      checkedCities.value = val ? cities.map(c => c[0]) : [];
+      isIndeterminate.value = false;
+    }
+    function handleGroupChange(val: string[]) {
+      const checkedCount = val.length;
+      checkAll.value = checkedCount === cities.length;
+      isIndeterminate.value = checkedCount < cities.length;
+    }
   </script>
   <template>
-    <nt-checkbox v-model="checked1" label="Option1" indeterminate />
+    <nt-checkbox
+      v-model="checkAll"
+      label="全选"
+      :indeterminate="isIndeterminate"
+      @change="handleCheckAllChange"
+    />
+    <nt-checkbox-group
+      v-model="checkedCities"
+      @change="handleGroupChange"
+    >
+      <nt-checkbox
+        v-for="city in cities"
+        :key="city[0]"
+        :value="city[0]"
+        :label="city[1]"
+      ></nt-checkbox>
+    </nt-checkbox-group>
   </template>
   </textarea>
   <template #preview>
@@ -127,6 +145,29 @@
 
 ### Checkbox Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| ---- | ---- | ---- | ------ |
-| x    | x    | x    | x      |
+| 参数                    | 说明                           | 类型      | 默认值  |
+| ----------------------- | ------------------------------ | --------- | ------- |
+| `model-value / v-model` | 选中项绑定的值                 | `boolean` | -       |
+| `indeterminate`         | 设置不确定状态，仅负责样式控制 | `boolean` | `false` |
+| `name`                  | 原生 `name` 属性               | `string`  | -       |
+| `disabled`              | 是否禁用                       | `boolean` | `false` |
+| `value`                 | 原生 `value` 属性              | `string`  | -       |
+| `label`                 | 显示的标签                     | `string`  | -       |
+
+### CheckboxGroup Props
+
+| 参数                    | 说明           | 类型       | 默认值 |
+| ----------------------- | -------------- | ---------- | ------ |
+| `model-value / v-model` | 选中项绑定的值 | `string[]` | -      |
+
+### Checkbox Events
+
+| 事件     | 说明             | 参数                         |
+| -------- | ---------------- | ---------------------------- |
+| `change` | 选中项变化时触发 | `(checked: boolean) => void` |
+
+### CheckboxGroup Events
+
+| 事件     | 说明             | 参数                            |
+| -------- | ---------------- | ------------------------------- |
+| `change` | 选中项变化时触发 | `(checkList: string[]) => void` |
