@@ -141,6 +141,44 @@
   </CodePreview>
 </ClientOnly>
 
+### 按钮样式
+
+只需要设置 `checkbox` 的 `type` 为 `button`；就能将复选框变为按钮样式
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+    import { ref } from 'vue';
+    const cities= [['CD', '成都'], ['BJ', '北京'], ['SZ', '深圳'], ['HZ', '杭州']];
+    const checkedCities = ref(['CD', 'SZ']);
+  </script>
+  <template>
+    <nt-checkbox-group v-model="checkedCities">
+      <nt-checkbox
+        v-for="city in cities"
+        :key="city[0]"
+        :value="city[0]"
+        :label="city[1]"
+        type="button"
+      ></nt-checkbox>
+    </nt-checkbox-group>
+  </template>
+  </textarea>
+  <template #preview>
+    <CheckboxGroup v-model="checkedCities">
+      <Checkbox
+        v-for="city in cities"
+        :key="city[0]"
+        :value="city[0]"
+        :label="city[1]"
+        type="button"
+      ></Checkbox>
+    </CheckboxGroup>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Checkbox Props
@@ -153,6 +191,7 @@
 | `disabled`              | 是否禁用                       | `boolean` | `false` |
 | `value`                 | 原生 `value` 属性              | `string`  | -       |
 | `label`                 | 显示的标签                     | `string`  | -       |
+| `type`                  | 是否设置为按钮风格             | `button`  | -       |
 
 ### CheckboxGroup Props
 

@@ -1,5 +1,11 @@
 <template>
-  <div class="nt-check-group"><slot></slot></div>
+  <div
+    :class="{
+      'nt-check-group': true,
+    }"
+  >
+    <slot></slot>
+  </div>
 </template>
 
 <script setup lang="ts">

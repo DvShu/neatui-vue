@@ -4,6 +4,7 @@
       'nt-checkbox',
       indeterminate ? 'nt-checkbox--indeterminate' : '',
       disabled ? 'nt-checkbox--disabled' : '',
+      type === 'button' ? 'nt-checkbox--button' : '',
     ]"
   >
     <input
@@ -15,7 +16,7 @@
       :disabled="disabled"
       :value="value"
     />
-    <span class="nt-checkbox__inner"></span>
+    <span v-if="type !== 'button'" class="nt-checkbox__inner"></span>
     <span class="nt-checkbox__label">{{ label }}</span>
   </label>
 </template>
@@ -34,6 +35,7 @@ const props = withDefaults(
     label?: string;
     disabled?: boolean;
     value?: string;
+    type?: 'button';
   }>(),
   {
     indeterminate: false,
