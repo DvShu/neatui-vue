@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/DvShu/neatui-vue/compare/v0.2.1...v0.3.0) (2024-05-17)
+
+
+### Features
+
+* **Checkbox:** 复选框组件 ([0a57ae6](https://github.com/DvShu/neatui-vue/commit/0a57ae66b33f0f68d5125f41097634f66211953b))
+
 ## [0.2.1](https://github.com/DvShu/neatui-vue/compare/v0.2.0...v0.2.1) (2024-05-08)
 
 
