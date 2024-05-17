@@ -19,6 +19,7 @@ import CodePreview from '../../../src/app_components/CodePreview.vue';
 import '../../../style/message';
 import '../../../style/shadow';
 import '../../../style/table';
+import '../../../style/checkbox';
 
 export default {
   extends: DefaultTheme,

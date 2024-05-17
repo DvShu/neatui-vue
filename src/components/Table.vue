@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, h, PropType, ref } from 'vue';
+import { defineComponent, h, PropType, ref, watch } from 'vue';
 import type { VNode } from 'vue';
 
 export interface ColumnOption {
@@ -13,7 +13,18 @@ export interface ColumnOption {
   fixed?: 'left' | 'right';
   /** 列宽 */
   width?: string | number;
+  /** 单元格内容渲染函数 */
   render?: (row: any, index: number) => VNode | VNode[];
+  /** 表头分组配置 */
+  children?: ColumnOption[];
+  /** td colspan */
+  colspan: number | ((rowData: any, rowIndex: number) => number);
+  /** td rowspan */
+  rowspan: number | ((rowData: any, rowIndex: number) => number);
+  /** th colspan */
+  titleColspan: number;
+  /** th rowspan */
+  titleRowspan: number;
 }
 
 export interface DataSortState {
@@ -28,6 +39,60 @@ interface SortOption {
 }
 
 type SorterFnOption = (data: any[]) => any[];
+
+/** 通过配置的 columns 计算表头跨行，跨列 */
+function calculateSpan(headers: ColumnOption[], level = 0): ColumnOption[] {
+  if (!Array.isArray(headers)) {
+    return [];
+  }
+
+  const spans = headers.map((header) => {
+    // 如果有子级元素，递归计算
+    if (header.children != null) {
+      let titleColspan = header.titleColspan;
+      const childrenSpans = calculateSpan(header.children, level + 1);
+      if (titleColspan == null) {
+        titleColspan = childrenSpans.reduce(
+          (sum, childSpan) => sum + childSpan.titleColspan,
+          0,
+        );
+      }
+      return {
+        ...header,
+        titleColspan: titleColspan,
+        titleRowspan: header.titleRowspan || 1,
+        children: childrenSpans,
+      };
+    } else {
+      let titleRowspan = header.titleRowspan;
+      if (titleRowspan == null) {
+        titleRowspan = getMaxDepth(headers);
+      }
+      // 如果元素没有子级，意味着它占满从当前层级到最底层的所有行
+      return {
+        ...header,
+        titleColspan: header.titleColspan || 1,
+        titleRowspan: titleRowspan,
+      };
+    }
+  });
+
+  return spans;
+}
+
+// 递归获取最深的层级数
+function getMaxDepth(headers: ColumnOption[]) {
+  let maxDepth = 1;
+  headers.forEach((header) => {
+    if (header.children) {
+      const childDepth = getMaxDepth(header.children) + 1;
+      if (childDepth > maxDepth) {
+        maxDepth = childDepth;
+      }
+    }
+  });
+  return maxDepth;
+}
 
 export default defineComponent({
   props: {
@@ -70,13 +135,24 @@ export default defineComponent({
       type: Function as PropType<() => VNode | VNode[]>,
       required: false,
     },
+    /** 是否使用 fixed[table-layout:fixed] 布局 */
+    tableLayout: {
+      type: String,
+      required: false,
+      default: 'auto',
+    },
   },
-  setup(props, { slots }) {
+  setup(props) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
     });
     const sourceData = ref(props.data);
+    const parsedColumns = calculateSpan(props.columns, 0);
+
+    watch(props.data, () => {
+      sourceData.value = props.data;
+    });
 
     function dataSort(
       data: any[],
@@ -106,23 +182,6 @@ export default defineComponent({
       sourceData.value = dataSort(props.data, sortInfo.value, props.sorter);
     }
 
-    function isFixed() {
-      const len = props.columns.length;
-      if (props.columns[0].fixed) return true;
-      if (props.columns[len - 1].fixed) return true;
-      let isFixed = false;
-      for (let i = 0; i < len; i++) {
-        if (props.columns[i].fixed) {
-          isFixed = true;
-          break;
-        }
-      }
-      return isFixed;
-    }
-
-    /** 是否使用 fixed[table-layout:fixed] 布局 */
-    let fixed = isFixed();
-
     function handleHeadClick({ sorter, key }: any) {
       if (sorter === true) {
         let sortKey = key;
@@ -144,128 +203,187 @@ export default defineComponent({
       }
     }
 
-    function renderHead() {
-      const columnsRender: VNode[] = [];
-      let left: string[] = [];
-      let right: string[] = [];
+    function renderHeadCol(
+      column: ColumnOption,
+      index: number,
+      left: string[],
+      right: string[],
+    ) {
+      const thAttrs: any = {
+        class: {
+          'sort-column': column.sorter === true,
+          'sort-asc':
+            sortInfo.value.key === column.key && sortInfo.value.order === 'asc',
+          'sort-desc':
+            sortInfo.value.key === column.key &&
+            sortInfo.value.order === 'desc',
+          'nt-fixed': column.fixed,
+        },
+        style: {},
+        colspan: column.titleColspan,
+        rowspan: column.titleRowspan,
+      };
 
-      for (let i = 0, len = props.columns.length; i < len; i++) {
-        const column = props.columns[i];
+      if (column.fixed) {
+        if (column.fixed === 'left') {
+          thAttrs.style.left =
+            left.length === 0 ? '0' : `calc(${left.join('+')})`;
+        } else {
+          thAttrs.style.right =
+            right.length === 0 ? '0' : `calc(${right.join('+')})`;
+        }
+      }
 
-        const thAttrs: any = {
-          class: {
-            'sort-column': column.sorter === true,
-            'sort-asc':
-              sortInfo.value.key === column.key &&
-              sortInfo.value.order === 'asc',
-            'sort-desc':
-              sortInfo.value.key === column.key &&
-              sortInfo.value.order === 'desc',
-            'nt-fixed': column.fixed,
-          },
-          style: {},
-        };
-
-        if (column.fixed) {
+      if (column.width) {
+        let colWidth: string = column.width as string;
+        if (typeof column.width === 'number') {
+          colWidth = `${column.width}px`;
+        }
+        thAttrs.style.width = colWidth;
+        if (column.fixed != null) {
           if (column.fixed === 'left') {
-            thAttrs.style.left =
-              left.length === 0 ? '0' : `calc(${left.join('+')})`;
+            left.push(colWidth);
           } else {
-            thAttrs.style.right =
-              right.length === 0 ? '0' : `calc(${right.join('+')})`;
+            right.push(colWidth);
           }
         }
+      }
+      if (column.sorter === true) {
+        thAttrs.onClick = () => {
+          handleHeadClick({
+            key: column.key || '',
+            index,
+            order: 'asc',
+            sorter: column.sorter,
+          });
+        };
+      }
+      return h('th', thAttrs, [
+        h('span', column.title),
+        column.sorter === true
+          ? h('span', { class: 'caret-wrapper' }, [
+              h('span', { class: 'sort-caret ascending' }),
+              h('span', { class: 'sort-caret descending' }),
+            ])
+          : null,
+      ]);
+    }
 
-        if (column.width) {
-          let colWidth: string = column.width as string;
-          if (typeof column.width === 'number') {
-            colWidth = `${column.width}px`;
+    function renderHeadRow(
+      columns: ColumnOption[],
+      left: string[],
+      right: string[],
+      rowChildren: VNode[],
+      children: VNode[],
+    ) {
+      for (let i = 0, len = columns.length; i < len; i++) {
+        const column = columns[i];
+        rowChildren.push(renderHeadCol(column, i, left, right));
+
+        if (column.children != null) {
+          let rChildren: VNode[] = [];
+          renderHeadRow(column.children, left, right, rChildren, children);
+          children.push(h('tr', rChildren));
+        }
+      }
+    }
+
+    function renderHead() {
+      const headTrs: VNode[] = [];
+      const rootChildren: VNode[] = [];
+      renderHeadRow(parsedColumns, [], [], rootChildren, headTrs);
+      headTrs.unshift(h('tr', rootChildren));
+      return headTrs;
+    }
+
+    function renderBodyRow(
+      columns: ColumnOption[],
+      rowIndex: number,
+      rowData: any,
+      left: string[],
+      right: string[],
+      rowChildren: VNode[],
+    ) {
+      for (const column of columns) {
+        if (column.children == null) {
+          let rowspan: null | number = null;
+          let colspan: null | number = null;
+          if (typeof column.rowspan === 'number') {
+            rowspan = column.rowspan;
           }
-          thAttrs.style.width = colWidth;
-          if (column.fixed != null) {
-            if (column.fixed === 'left') {
-              left.push(colWidth);
+          if (typeof column.rowspan === 'function') {
+            rowspan = column.rowspan(rowData, rowIndex);
+          }
+          if (typeof column.colspan === 'number') {
+            rowspan = column.colspan;
+          }
+          if (typeof column.colspan === 'function') {
+            colspan = column.colspan(rowData, rowIndex);
+          }
+          if (rowspan !== 0 && colspan !== 0) {
+            const tdAttr: any = {
+              style: {},
+              class: {
+                'nt-fixed': column.fixed,
+              },
+              colspan,
+              rowspan,
+            };
+
+            if (column.fixed) {
+              if (column.fixed === 'left') {
+                tdAttr.style.left =
+                  left.length === 0 ? '0' : `${left.join('+')}`;
+              } else {
+                tdAttr.style.right =
+                  right.length === 0 ? '0' : `${left.join('+')}`;
+              }
+            }
+
+            if (column.width) {
+              let colWidth: string = column.width as string;
+              if (typeof column.width === 'number') {
+                colWidth = `${column.width}px`;
+              }
+              tdAttr.style.width = colWidth;
+              if (column.fixed != null) {
+                if (column.fixed === 'left') {
+                  left.push(colWidth);
+                } else {
+                  right.push(colWidth);
+                }
+              }
+            }
+
+            if (column.render != null) {
+              rowChildren.push(
+                h('td', tdAttr, column.render(rowData, rowIndex)),
+              );
+            } else if (column.key != null) {
+              rowChildren.push(h('td', tdAttr, rowData[column.key]));
             } else {
-              right.push(colWidth);
+              rowChildren.push(h('td', tdAttr, ''));
             }
           }
+        } else {
+          renderBodyRow(
+            column.children,
+            rowIndex,
+            rowData,
+            left,
+            right,
+            rowChildren,
+          );
         }
-        if (column.sorter === true) {
-          thAttrs.onClick = () => {
-            handleHeadClick({
-              key: column.key || '',
-              index: i,
-              order: 'asc',
-              sorter: column.sorter,
-            });
-          };
-        }
-
-        columnsRender.push(
-          h('th', thAttrs, [
-            h('span', column.title),
-            column.sorter === true
-              ? h('span', { class: 'caret-wrapper' }, [
-                  h('span', { class: 'sort-caret ascending' }),
-                  h('span', { class: 'sort-caret descending' }),
-                ])
-              : null,
-          ]),
-        );
       }
-      return columnsRender;
     }
 
     function renderBody() {
       const bodies: VNode[] = [];
       for (let i = 0, len = sourceData.value.length; i < len; i++) {
         const dataItem = sourceData.value[i];
-
-        let left: string[] = [];
-        let right: string[] = [];
-
         const $tds: VNode[] = [];
-        for (const column of props.columns) {
-          const tdAttr: any = {
-            style: {},
-            class: {
-              'nt-fixed': column.fixed,
-            },
-          };
-
-          if (column.fixed) {
-            if (column.fixed === 'left') {
-              tdAttr.style.left = left.length === 0 ? '0' : `${left.join('+')}`;
-            } else {
-              tdAttr.style.right =
-                right.length === 0 ? '0' : `${left.join('+')}`;
-            }
-          }
-
-          if (column.width) {
-            let colWidth: string = column.width as string;
-            if (typeof column.width === 'number') {
-              colWidth = `${column.width}px`;
-            }
-            tdAttr.style.width = colWidth;
-            if (column.fixed != null) {
-              if (column.fixed === 'left') {
-                left.push(colWidth);
-              } else {
-                right.push(colWidth);
-              }
-            }
-          }
-
-          if (column.render != null) {
-            $tds.push(h('td', tdAttr, column.render(dataItem, i)));
-          } else if (column.key != null) {
-            $tds.push(h('td', tdAttr, dataItem[column.key]));
-          } else {
-            $tds.push(h('td', tdAttr, ''));
-          }
-        }
-
+        renderBodyRow(parsedColumns, i, dataItem, [], [], $tds);
         bodies.push(h('tr', $tds));
       }
       return bodies;
@@ -281,7 +399,7 @@ export default defineComponent({
             class: [
               'nt-table',
               props.stripe ? 'nt-table-stripe' : '',
-              fixed ? 'nt-table-fixed' : '',
+              props.tableLayout === 'fixed' ? 'nt-table-fixed' : '',
               props.border ? 'nt-table-border' : '',
             ],
           },
@@ -296,7 +414,7 @@ export default defineComponent({
                   top: props.fixedHead ? '0' : undefined,
                 },
               },
-              slots.header != null ? slots.header : h('tr', renderHead()),
+              renderHead(),
             ),
             h(
               'tbody',

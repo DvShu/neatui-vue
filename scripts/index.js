@@ -60,13 +60,13 @@ async function createComponentTemplate(name) {
     '### 基础用法',
     '基础用法',
     '## API',
-    '### ${name} Props',
+    `### ${name} Props`,
     '| 参数 | 说明 | 类型 | 默认值 |',
     '| ---- | ---- | ---- | ---- |',
     '| x | x | x | x |',
   ];
   await write(
-    path.join(process.cwd(), 'docs/components', `${name}.md`),
+    path.join(process.cwd(), 'docs/components', `${name.toUpperCase()}.md`),
     docTemplateContents.join('\r\n'),
   );
   console.log('创建成功');
