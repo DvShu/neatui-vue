@@ -53,6 +53,7 @@ export default defineConfig({
           { text: 'Shadow 阴影', link: '/components/shadow' },
           { text: 'Table 表格', link: '/components/table' },
           { text: 'Checkbox 复选框', link: '/components/checkbox' },
+          { text: 'Radio 单选框', link: '/components/radio' },
         ],
       },
     ],

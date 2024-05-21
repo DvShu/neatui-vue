@@ -24,7 +24,7 @@ function updateCheck(val: any) {
   emits('change', [...checkList.value]);
 }
 
-provide('nt-check-group-check', {
+provide('nt-checkbox-group-check', {
   checkList,
   updateCheck,
 });

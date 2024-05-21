@@ -48,7 +48,7 @@ const emits = defineEmits(['change']);
 const { checkList, updateCheck } = inject<{
   checkList: Ref<any[]> | null;
   updateCheck: null | ((value: any) => void);
-}>('nt-check-group-check', {
+}>('nt-checkbox-group-check', {
   checkList: null,
   updateCheck: null,
 });

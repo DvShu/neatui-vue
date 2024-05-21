@@ -20,6 +20,7 @@ import '../../../style/message';
 import '../../../style/shadow';
 import '../../../style/table';
 import '../../../style/checkbox';
+import '../../../style/radio';
 
 export default {
   extends: DefaultTheme,
