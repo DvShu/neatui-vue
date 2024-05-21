@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/DvShu/neatui-vue/compare/v0.3.0...v0.3.1) (2024-05-21)
+
+
+### Bug Fixes
+
+* **Tooltip:** 修复 Tooltip 位置错误 ([be72448](https://github.com/DvShu/neatui-vue/commit/be724481b204d8627aa6e8015f3b2ee5d6affcb8))
+* 优化主题色 ([be72448](https://github.com/DvShu/neatui-vue/commit/be724481b204d8627aa6e8015f3b2ee5d6affcb8))
+
 ## [0.3.0](https://github.com/DvShu/neatui-vue/compare/v0.2.1...v0.3.0) (2024-05-17)
 
 
