@@ -1,4 +1,4 @@
-import{e as c,a as p}from"./chunks/theme.B3Up3ktu.js";import{c as s,g as e,w as o,ab as r,b as t,x as n,R as i,o as _,y as l}from"./chunks/framework.kESMpjgr.js";const h=r("",6),m=t("textarea",{lang:"vue-html"},`
+import{e as c,a as p}from"./chunks/theme.COEnDAye.js";import{c as s,g as e,w as o,ab as r,b as t,x as n,R as i,o as _,y as l}from"./chunks/framework.kESMpjgr.js";const h=r("",6),m=t("textarea",{lang:"vue-html"},`
   <div class="flex-between">
     <nt-tooltip placement="topStart" title="prompt text">
       <nt-button>topStart</nt-button>
@@ -29,10 +29,12 @@ import{e as c,a as p}from"./chunks/theme.B3Up3ktu.js";import{c as s,g as e,w as 
     </template>
   </nt-tooltip>
   `,-1),f=t("span",{style:{color:"red"}},"custome propmt text",-1),x=t("h3",{id:"受控模式",tabindex:"-1"},[n("受控模式 "),t("a",{class:"header-anchor",href:"#受控模式","aria-label":'Permalink to "受控模式"'},"​")],-1),T=t("p",null,[n("通过 "),t("code",null,"visible"),n(" 属性来控制提示框的显示与隐藏")],-1),g=t("textarea",{lang:"vue-html"},`
-  <hr />
+    <nt-tooltip :visible="true" title="Content">
+        <span>受控模式</span>
+    </nt-tooltip>
   `,-1),S=t("span",null,"受控模式",-1),P=r("",2),C=t("textarea",{lang:"vue"},`
   <template>
-    <nt-tooltip :visible="true" title="Content" style-name="demo" placement="bottom">
+    <nt-tooltip title="Content" style-name="demo" placement="bottom">
       <span>自定义风格</span>
     </nt-tooltip>
   </template>
@@ -71,4 +73,4 @@ import{e as c,a as p}from"./chunks/theme.B3Up3ktu.js";import{c as s,g as e,w as 
       top: calc(100% + 20px);
     }
   </style>
-  `,-1),y=t("span",null,"自定义风格",-1),k=r("",6),I=JSON.parse('{"title":"Tooltip 文字提示","description":"","frontmatter":{},"headers":[],"relativePath":"components/tooltip.md","filePath":"components/tooltip.md","lastUpdated":1715067177000}'),q={name:"components/tooltip.md"},D=Object.assign(q,{setup(E){return(A,N)=>{const d=i("CodePreview"),a=i("ClientOnly");return _(),s("div",null,[h,e(a,null,{default:o(()=>[e(d,null,{default:o(()=>[m]),_:1})]),_:1}),b,u,e(a,null,{default:o(()=>[e(d,null,{preview:o(()=>[e(l(c),null,{title:o(()=>[f]),default:o(()=>[e(l(p),null,{default:o(()=>[n("自定义提示")]),_:1})]),_:1})]),default:o(()=>[v]),_:1})]),_:1}),x,T,e(a,null,{default:o(()=>[e(d,null,{preview:o(()=>[e(l(c),{visible:!0,title:"Content"},{default:o(()=>[S]),_:1})]),default:o(()=>[g]),_:1})]),_:1}),P,e(a,null,{default:o(()=>[e(d,null,{preview:o(()=>[e(l(c),{visible:!0,title:"Content","style-name":"demo",placement:"bottom"},{default:o(()=>[y]),_:1})]),default:o(()=>[C]),_:1})]),_:1}),k])}}});export{I as __pageData,D as default};
+  `,-1),y=t("span",null,"自定义风格",-1),k=r("",6),I=JSON.parse('{"title":"Tooltip 文字提示","description":"","frontmatter":{},"headers":[],"relativePath":"components/tooltip.md","filePath":"components/tooltip.md","lastUpdated":1716277553000}'),q={name:"components/tooltip.md"},D=Object.assign(q,{setup(E){return(A,N)=>{const a=i("CodePreview"),d=i("ClientOnly");return _(),s("div",null,[h,e(d,null,{default:o(()=>[e(a,null,{default:o(()=>[m]),_:1})]),_:1}),b,u,e(d,null,{default:o(()=>[e(a,null,{preview:o(()=>[e(l(c),null,{title:o(()=>[f]),default:o(()=>[e(l(p),null,{default:o(()=>[n("自定义提示")]),_:1})]),_:1})]),default:o(()=>[v]),_:1})]),_:1}),x,T,e(d,null,{default:o(()=>[e(a,null,{preview:o(()=>[e(l(c),{visible:!0,title:"Content"},{default:o(()=>[S]),_:1})]),default:o(()=>[g]),_:1})]),_:1}),P,e(d,null,{default:o(()=>[e(a,null,{preview:o(()=>[e(l(c),{title:"Content","style-name":"demo",placement:"bottom"},{default:o(()=>[y]),_:1})]),default:o(()=>[C]),_:1})]),_:1}),k])}}});export{I as __pageData,D as default};
