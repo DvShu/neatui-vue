@@ -74,7 +74,9 @@ import { Tooltip, Button } from '../../src'
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <hr />
+    <nt-tooltip :visible="true" title="Content">
+        <span>受控模式</span>
+    </nt-tooltip>
   </textarea>
   <template #preview>
     <Tooltip :visible="true" title="Content">
@@ -92,7 +94,7 @@ import { Tooltip, Button } from '../../src'
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-tooltip :visible="true" title="Content" style-name="demo" placement="bottom">
+    <nt-tooltip title="Content" style-name="demo" placement="bottom">
       <span>自定义风格</span>
     </nt-tooltip>
   </template>
@@ -133,7 +135,7 @@ import { Tooltip, Button } from '../../src'
   </style>
   </textarea>
   <template #preview>
-    <Tooltip :visible="true" title="Content" style-name="demo" placement="bottom">
+    <Tooltip title="Content" style-name="demo" placement="bottom">
       <span>自定义风格</span>
     </Tooltip>
   </template>

@@ -7,9 +7,9 @@
   /* 按钮的边框颜色 */
   --nt-btn-border-color: #d9d9d9;
   /* 按钮的悬浮边框 less lighten(var(--nt-primary-color), 10) */
-  --nt-btn-hover-color: #79b3f7;
+  --nt-btn-hover-color: var(--nt-primary-color-light1, #31890a);
   /* 按钮的点击颜色 */
-  --nt-btn-active-color: #197df1;
+  --nt-btn-active-color: var(--nt-primary-color-dark1, #31890a);
   /* 按钮禁用 */
   --nt-btn-disabled-color: #c9c9c9;
   --nt-btn-disabled-bg-color: #fbfbfb;
@@ -74,12 +74,12 @@
   --nt-btn-border-color: var(--nt-primary-color);
   /* 按钮的悬浮边框 less lighten(var(--nt-primary-color), 10) */
   --nt-btn-hover-color: #fff;
-  --nt-btn-hover-border-color: #79b3f7;
-  --nt-btn-hover-bg-color: #79b3f7;
+  --nt-btn-hover-border-color: var(--nt-primary-color-light1, #31890a);
+  --nt-btn-hover-bg-color: var(--nt-primary-color-light1, #31890a);
   /* 按钮的点击颜色 */
   --nt-btn-active-color: #fff;
-  --nt-btn-active-border-color: #197df1;
-  --nt-btn-active-bg-color: #197df1;
+  --nt-btn-active-border-color: var(--nt-primary-color-dark1, #31890a);
+  --nt-btn-active-bg-color: var(--nt-primary-color-dark1, #31890a);
 }
 
 /* 按钮禁用时的样式 */

@@ -32,7 +32,7 @@ jobs:
       - name: Print Previous Job Output
         run: |
           echo "Previous job output: "
-          echo "${{ needs.release.outputs }}" | jq .
+          echo "${{ toJson(needs.release.outputs) }}"
 
   publish:
     runs-on: ubuntu-latest
