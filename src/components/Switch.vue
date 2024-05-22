@@ -16,6 +16,8 @@
 <script setup lang="ts">
 const checked = defineModel({ default: false });
 
+const emits = defineEmits(['change'])
+
 withDefaults(
   defineProps<{
     disabled?: boolean;
@@ -29,5 +31,6 @@ withDefaults(
 
 function handleChange() {
   checked.value = !checked.value;
+  emits('change', checked.value);
 }
 </script>
