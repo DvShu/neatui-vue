@@ -17,7 +17,9 @@
       @change="handleChange"
     />
     <span v-if="type !== 'button'" class="nt-radio__inner"></span>
-    <span class="nt-radio__label">{{ label }}</span>
+    <slot name="label">
+      <span class="nt-radio__label">{{ label }}</span>
+    </slot>
   </label>
 </template>
 <script setup lang="ts">
@@ -28,7 +30,7 @@ const checkedModel = defineModel({ type: Boolean });
 const props = withDefaults(
   defineProps<{
     name?: string;
-    value?: string;
+    value?: number | string | boolean;
     label?: string;
     type?: 'button';
     disabled?: boolean;

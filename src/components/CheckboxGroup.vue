@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'nt-check-group': true,
+      'nt-checkbox-group': true,
     }"
   >
     <slot></slot>

@@ -86,12 +86,12 @@
 .nt-checkbox--disabled .nt-checkbox__label {
   color: var(--nt-checkbox-disabled-label-color);
 }
-.nt-check-group {
+.nt-checkbox-group {
   display: flex;
   align-items: center;
 }
 
-.nt-check-group .nt-checkbox:not(:first-child) {
+.nt-checkbox-group .nt-checkbox:not(:first-child) {
   margin-left: var(--nt-checkbox-item-margin);
 }
 
@@ -120,6 +120,6 @@
   border-bottom-color: var(--nt-checkbox-checked-color);
   border-right-color: #fff;
 }
-.nt-check-group .nt-checkbox--button:not(:first-child) {
+.nt-checkbox-group .nt-checkbox--button:not(:first-child) {
   margin-left: 0;
 }
