@@ -1,5 +1,5 @@
 .nt-checkbox {
-  --nt-checkbox-size: 16px;
+  --nt-checkbox-size: 14px;
   --nt-checkbox-label-color: #333;
   --nt-checkbox-checked-color: var(--nt-primary-color, #4998f4);
   --nt-checkbox-disabled-color: #e6e6e6;
@@ -13,7 +13,6 @@
 }
 .nt-checkbox__input {
   opacity: 0;
-  z-index: 1;
   width: 0;
   height: 0;
   position: absolute;
@@ -87,12 +86,12 @@
 .nt-checkbox--disabled .nt-checkbox__label {
   color: var(--nt-checkbox-disabled-label-color);
 }
-.nt-check-group {
+.nt-checkbox-group {
   display: flex;
   align-items: center;
 }
 
-.nt-check-group .nt-checkbox:not(:first-child) {
+.nt-checkbox-group .nt-checkbox:not(:first-child) {
   margin-left: var(--nt-checkbox-item-margin);
 }
 
@@ -121,6 +120,6 @@
   border-bottom-color: var(--nt-checkbox-checked-color);
   border-right-color: #fff;
 }
-.nt-check-group .nt-checkbox--button:not(:first-child) {
+.nt-checkbox-group .nt-checkbox--button:not(:first-child) {
   margin-left: 0;
 }

@@ -1,0 +1,105 @@
+.nt-radio {
+  --nt-radio-size: 14px;
+  --nt-radio-label-color: #333;
+  --nt-radio-disabled-color: #e6e6e6;
+  --nt-radio-disabled-label-color: #c0c4cc;
+  --nt-radio-checked-color: var(--nt-primary-color, #42b80e);
+  --nt-radio-item-margin: 10px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.nt-radio__label {
+  color: var(--nt-radio-label-color);
+  transition: color 0.3s ease-in-out;
+}
+
+.nt-radio__input {
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.nt-radio__inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--nt-radio-size);
+  height: var(--nt-radio-size);
+  border: 1px solid #dcddd9;
+  border-radius: 50%;
+  margin-right: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.nt-radio__inner::before {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 60%;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.nt-radio__input:checked + .nt-radio__inner {
+  border-color: var(--nt-primary-color, #42b80e);
+}
+.nt-radio__input:checked + .nt-radio__inner::before {
+  background-color: var(--nt-primary-color, #42b80e);
+}
+.nt-radio__input:checked ~ .nt-radio__label {
+  color: var(--nt-primary-color, #42b80e);
+}
+
+.nt-radio--disabled {
+  cursor: not-allowed;
+}
+.nt-radio--disabledd .nt-radio__inner {
+  border-color: var(--nt-radio-disabled-color);
+}
+.nt-radio--disabled .nt-radio__label {
+  color: var(--nt-radio-disabled-label-color);
+}
+
+.nt-radio-group {
+  display: flex;
+  align-items: center;
+}
+.nt-radio-group .nt-radio:not(:first-child) {
+  margin-left: var(--nt-radio-item-margin);
+}
+
+.nt-radio--button .nt-radio__label {
+  display: inline-flex;
+  height: var(--nt-form-edit-height, 32px);
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  border: 1px solid #c0c4cc;
+  border-left-width: 0;
+}
+.nt-radio--button:first-child .nt-radio__label {
+  border-left-width: 1px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.nt-radio--button:last-child .nt-radio__label {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.nt-radio--button .nt-radio__input:checked ~ .nt-radio__label {
+  background-color: var(--nt-radio-checked-color);
+  color: #fff;
+  border-top-color: var(--nt-radio-checked-color);
+  border-bottom-color: var(--nt-radio-checked-color);
+  border-right-color: #fff;
+}
+.nt-radio-group .nt-radio--button:not(:first-child) {
+  margin-left: 0;
+}
