@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/DvShu/neatui-vue/compare/v0.3.1...v0.4.0) (2024-05-22)
+
+
+### Features
+
+* **Radio:** 单选框 ([8eb7ce3](https://github.com/DvShu/neatui-vue/commit/8eb7ce33c9e2f777b0980180d3a3cc16e8277a7f))
+
 ## [0.3.1](https://github.com/DvShu/neatui-vue/compare/v0.3.0...v0.3.1) (2024-05-21)
 
 
