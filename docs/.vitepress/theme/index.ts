@@ -21,6 +21,7 @@ import '../../../style/shadow';
 import '../../../style/table';
 import '../../../style/checkbox';
 import '../../../style/radio';
+import '../../../style/switch';
 
 export default {
   extends: DefaultTheme,
