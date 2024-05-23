@@ -27,6 +27,7 @@ jobs:
 
       - name: Print Release Output
         run: |
+          echo "Release output origin: ${{ steps.release.outputs }}"
           echo "Release output: ${{ toJson(steps.release.outputs) }}"
 
   joblog:
