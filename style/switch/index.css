@@ -1,0 +1,47 @@
+.nt-switch {
+  --nt-switch-height: 20px;
+  --nt-switch-width: calc(var(--nt-switch-height) * 2);
+  display: inline-flex;
+  width: var(--nt-switch-width);
+  height: var(--nt-switch-height);
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #d9d9d9;
+  border-radius: calc(var(--nt-switch-height) / 2);
+  padding: 2px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  vertical-align: middle;
+}
+
+.nt-switch:hover {
+  background-color: var(--nt-primary-color-light1, #d9f7be);
+}
+.nt-switch--checked {
+  background-color: var(--nt-primary-color, #52c41a);
+}
+
+.nt-switch-action {
+  position: absolute;
+  width: calc(var(--nt-switch-height) - 4px);
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: left 0.3s ease-in-out;
+}
+
+.nt-switch-text {
+  color: #fff;
+  padding-left: calc(var(--nt-switch-width) - 18px);
+  transition: padding-left 0.3s ease-in-out;
+}
+
+.nt-switch--checked .nt-switch-action {
+  left: calc(var(--nt-switch-width) - var(--nt-switch-height) + 2px);
+}
+.nt-switch--checked .nt-switch-text {
+  padding-left: 5px;
+}

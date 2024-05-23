@@ -25,6 +25,10 @@ jobs:
           # for more options
           release-type: node
 
+      - name: Print Release Output
+        run: |
+          echo "Release output: ${{ toJson(steps.release.outputs) }}"
+
   joblog:
     runs-on: ubuntu-latest
     needs: release

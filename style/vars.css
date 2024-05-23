@@ -2,9 +2,11 @@
   /* button、input 元素高度 */
   --nt-form-edit-height: 32px;
   /* 主题(primary)颜色 */
-  --nt-primary-color: #42b80e;
-  --nt-primary-color-light1: #47c60f;
-  --nt-primary-color-dark1: #3daa0d;
+  --nt-primary-color: #52c41a;
+  --nt-primary-color-light1: #73d13d;
+  --nt-primary-color-light2: #95de64;
+  --nt-primary-color-light3: #b7eb8f;
+  --nt-primary-color-dark1: #389e0d;
   /* 表示错误(error)的颜色 */
   --nt-error-color: #ed3f13;
   /* 表示成功(success)的颜色 */
