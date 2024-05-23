@@ -55,6 +55,7 @@ export default defineConfig({
           { text: 'Checkbox 复选框', link: '/components/checkbox' },
           { text: 'Radio 单选框', link: '/components/radio' },
           { text: 'Switch 开关', link: '/components/switch' },
+          { text: 'Polygon 多边形', link: '/components/polygon' },
         ],
       },
     ],
