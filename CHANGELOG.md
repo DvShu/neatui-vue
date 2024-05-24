@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.1](https://github.com/DvShu/neatui-vue/compare/v0.5.0...v0.5.1) (2024-05-24)
+
+
+### Bug Fixes
+
+* **Checkbox:** 复选框增加 checked 属性 ([4dd23f6](https://github.com/DvShu/neatui-vue/commit/4dd23f62e7ac7905469108dad29f26666f83e8a8))
+* **Polygon:** 完善多边形文档 ([4dd23f6](https://github.com/DvShu/neatui-vue/commit/4dd23f62e7ac7905469108dad29f26666f83e8a8))
+* **Radio:** 单选框增加 checked 属性 ([4dd23f6](https://github.com/DvShu/neatui-vue/commit/4dd23f62e7ac7905469108dad29f26666f83e8a8))
+
 ## [0.5.0](https://github.com/DvShu/neatui-vue/compare/v0.4.0...v0.5.0) (2024-05-23)
 
 
