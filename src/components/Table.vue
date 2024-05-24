@@ -29,6 +29,8 @@ export interface ColumnOption {
   titleRowspan: number;
   /** 设置可选择 */
   type?: 'radio' | 'checkbox';
+  /** 为 radio，checkbox 设置是否禁用 */
+  disabled?: (row: any) => boolean;
 }
 
 export interface DataSortState {
@@ -160,6 +162,8 @@ export default defineComponent({
         sourceData.value = props.data;
       },
     );
+
+    function handleSelectionChange(value) {}
 
     function dataSort(
       data: any[],
@@ -390,7 +394,11 @@ export default defineComponent({
                   h(
                     'div',
                     { class: 'nt-table-selection-cell' },
-                    h(column.type === 'radio' ? Radio : Checkbox),
+                    h(column.type === 'radio' ? Radio : Checkbox, {
+                      disabled: column.disabled
+                        ? column.disabled(rowData)
+                        : false,
+                    }),
                   ),
                 ),
               );

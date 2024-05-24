@@ -276,7 +276,8 @@
   }]
 
   const columns7 = [{
-    type: 'radio'
+    type: 'radio',
+    disabled: (rowData) => rowData.name === '张三'
   }, {
     title: '姓名',
     key: 'name',
