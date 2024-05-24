@@ -34,9 +34,12 @@ const props = withDefaults(
     label?: string;
     type?: 'button';
     disabled?: boolean;
+    /** 是否选中 */
+    checked?: boolean;
   }>(),
   {
     disabled: false,
+    checked: undefined,
   },
 );
 
@@ -49,6 +52,9 @@ const { checkedValue, updateCheck } = inject<{
 });
 
 const isChecked = computed(() => {
+  if (props.checked != null) {
+    return props.checked;
+  }
   if (checkedValue != null) {
     return checkedValue.value === props.value;
   }

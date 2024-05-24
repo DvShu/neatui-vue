@@ -1,6 +1,8 @@
 <script lang="ts">
 import { defineComponent, h, PropType, ref, watch } from 'vue';
 import type { VNode } from 'vue';
+import Radio from './Radio.vue';
+import Checkbox from './Checkbox.vue';
 
 export interface ColumnOption {
   /** 排序时，如果传递了 key，则会将此 key 回传，便于排序, 如果不传此 key，则排序无效 */
@@ -25,6 +27,8 @@ export interface ColumnOption {
   titleColspan: number;
   /** th rowspan */
   titleRowspan: number;
+  /** 设置可选择 */
+  type?: 'radio' | 'checkbox';
 }
 
 export interface DataSortState {
@@ -150,9 +154,12 @@ export default defineComponent({
     const sourceData = ref(props.data);
     const parsedColumns = calculateSpan(props.columns, 0);
 
-    watch(props.data, () => {
-      sourceData.value = props.data;
-    });
+    watch(
+      () => props.data,
+      () => {
+        sourceData.value = props.data;
+      },
+    );
 
     function dataSort(
       data: any[],
@@ -234,6 +241,10 @@ export default defineComponent({
         }
       }
 
+      if (column.type != null && column.width == null) {
+        column.width = 40;
+      }
+
       if (column.width) {
         let colWidth: string = column.width as string;
         if (typeof column.width === 'number') {
@@ -258,15 +269,25 @@ export default defineComponent({
           });
         };
       }
-      return h('th', thAttrs, [
-        h('span', column.title),
-        column.sorter === true
-          ? h('span', { class: 'caret-wrapper' }, [
+      const colChildren = [];
+      if (column.type != null) {
+        if (column.type === 'checkbox') {
+          colChildren.push(
+            h('div', { class: 'nt-table-selection-cell' }, h(Checkbox)),
+          );
+        }
+      } else {
+        colChildren.push(h('span', column.title));
+        if (column.sorter === true) {
+          colChildren.push(
+            h('span', { class: 'caret-wrapper' }, [
               h('span', { class: 'sort-caret ascending' }),
               h('span', { class: 'sort-caret descending' }),
-            ])
-          : null,
-      ]);
+            ]),
+          );
+        }
+      }
+      return h('th', thAttrs, colChildren);
     }
 
     function renderHeadRow(
@@ -361,6 +382,18 @@ export default defineComponent({
               );
             } else if (column.key != null) {
               rowChildren.push(h('td', tdAttr, rowData[column.key]));
+            } else if (column.type != null) {
+              rowChildren.push(
+                h(
+                  'td',
+                  tdAttr,
+                  h(
+                    'div',
+                    { class: 'nt-table-selection-cell' },
+                    h(column.type === 'radio' ? Radio : Checkbox),
+                  ),
+                ),
+              );
             } else {
               rowChildren.push(h('td', tdAttr, ''));
             }
