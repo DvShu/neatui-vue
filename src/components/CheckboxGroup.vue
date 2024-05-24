@@ -16,6 +16,8 @@ const emits = defineEmits(['change']);
 
 function updateCheck(val: any) {
   let index = checkList.value.indexOf(val);
+  console.log(index);
+  console.log(checkList.value);
   if (index === -1) {
     checkList.value.push(val);
   } else {

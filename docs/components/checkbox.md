@@ -21,7 +21,11 @@
   function handleGroupChange(val: string[]) {
     const checkedCount = val.length
     checkAll.value = checkedCount === cities.length
-    isIndeterminate.value = checkedCount < cities.length
+    if (checkedCount === 0) {
+      isIndeterminate.value = 0
+    } else {
+      isIndeterminate.value = checkedCount < cities.length
+    }
   }
 </script>
 
@@ -179,6 +183,18 @@
   </CodePreview>
 </ClientOnly>
 
+### 受控选中
+
+复选框的选中状态是可控的，通过传递 `checked` 属性，`true` 为选中，`false` 为未选中。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-checkbox label="协议" checked></nt-checkbox>
+  </textarea>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Checkbox Props
@@ -192,6 +208,7 @@
 | `value`                 | 原生 `value` 属性              | `string`  | -       |
 | `label`                 | 显示的标签                     | `string`  | -       |
 | `type`                  | 是否设置为按钮风格             | `button`  | -       |
+| `checked`               | 是否选中                       | `boolean` | -       |
 
 ### CheckboxGroup Props
 
