@@ -23,9 +23,9 @@
   </label>
 </template>
 <script setup lang="ts">
-import { computed, inject, Ref } from 'vue';
+import { watch, inject, Ref, ref } from 'vue';
 
-const checkedModel = defineModel({ type: Boolean });
+const checkedModel = defineModel();
 
 const props = withDefaults(
   defineProps<{
@@ -40,6 +40,7 @@ const props = withDefaults(
   {
     disabled: false,
     checked: undefined,
+    value: undefined,
   },
 );
 
@@ -51,15 +52,27 @@ const { checkedValue, updateCheck } = inject<{
   updateCheck: null,
 });
 
-const isChecked = computed(() => {
+function initIsChecked() {
   if (props.checked != null) {
     return props.checked;
   }
   if (checkedValue != null) {
     return checkedValue.value === props.value;
   }
+  if (props.value != null) {
+    return checkedModel.value === props.value;
+  }
   return checkedModel.value;
-});
+}
+
+const isChecked = ref(initIsChecked());
+
+watch(
+  () => props.checked,
+  (val) => {
+    isChecked.value = val;
+  },
+);
 
 const emits = defineEmits(['change']);
 
@@ -69,7 +82,8 @@ function handleChange(e: Event) {
   if (updateCheck != null) {
     updateCheck(props.value);
   }
-  checkedModel.value = checked;
-  emits('change', checked);
+  const value = props.value == null ? checked : props.value;
+  checkedModel.value = value;
+  emits('change', value);
 }
 </script>

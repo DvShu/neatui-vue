@@ -287,13 +287,6 @@
   }, {
     title: '住址',
     key: 'address'
-  }, {
-    title: '操作',
-    key: 'action',
-    render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
-    ]
   }]
 
   const columns8 = [{
@@ -307,13 +300,6 @@
   }, {
     title: '住址',
     key: 'address'
-  }, {
-    title: '操作',
-    key: 'action',
-    render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
-    ]
   }]
 
   const defaultSort = { key: 'age', order: 'desc' }
@@ -323,6 +309,10 @@
       h('td', '合计'),
       h('td', { colspan: '3' },dataSource1.reduce((sum, item) => sum + item.age, 0)),
     ])
+  }
+
+  function rowKey(rowData) {
+    return rowData.name
   }
 </script>
 
@@ -702,7 +692,7 @@
   </template>
   </textarea>
   <template #preview>
-    <Table :data="dataSource4" :columns="columns7"></Table>
+    <Table :data="dataSource4" :columns="columns7" :row-key="rowKey"></Table>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -719,7 +709,7 @@
   </template>
   </textarea>
   <template #preview>
-    <Table :data="dataSource4" :columns="columns8"></Table>
+    <Table :data="dataSource4" :columns="columns8" :row-key="rowKey"></Table>
   </template>
   </CodePreview>
 </ClientOnly>

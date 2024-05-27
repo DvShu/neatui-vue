@@ -21,9 +21,9 @@
   </label>
 </template>
 <script setup lang="ts">
-import { Ref, computed, inject } from 'vue';
+import { Ref, ref, inject, watch } from 'vue';
 
-const checkedModel = defineModel({ type: Boolean });
+const checkedModel = defineModel();
 
 const props = withDefaults(
   defineProps<{
@@ -34,7 +34,7 @@ const props = withDefaults(
     /** 显示的 label 文本 */
     label?: string;
     disabled?: boolean;
-    value?: string;
+    value?: string | number | boolean;
     type?: 'button';
     /** 是否选中 */
     checked?: boolean;
@@ -43,6 +43,7 @@ const props = withDefaults(
     indeterminate: false,
     disabled: false,
     checked: undefined,
+    value: undefined,
   },
 );
 
@@ -56,15 +57,26 @@ const { checkList, updateCheck } = inject<{
   updateCheck: null,
 });
 
-const isChecked = computed(() => {
+function initIsChecked() {
   if (props.checked != null) {
     return props.checked;
   }
   if (checkList != null) {
     return checkList.value.includes(props.value);
   }
+  if (props.value != null) {
+    return checkedModel.value === props.value;
+  }
   return checkedModel.value;
-});
+}
+const isChecked = ref(initIsChecked());
+
+watch(
+  () => props.checked,
+  (checked) => {
+    isChecked.value = checked;
+  },
+);
 
 function handleChange(e: Event) {
   const target = e.target as HTMLInputElement;
@@ -72,7 +84,8 @@ function handleChange(e: Event) {
   if (updateCheck != null) {
     updateCheck(props.value);
   }
-  checkedModel.value = checked;
-  emits('change', checked);
+  const value = props.value == null ? checked : props.value;
+  checkedModel.value = value;
+  emits('change', value);
 }
 </script>
