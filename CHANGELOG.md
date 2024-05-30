@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/DvShu/neatui-vue/compare/v0.5.1...v0.5.2) (2024-05-30)
+
+
+### Bug Fixes
+
+* **Button:** 按钮增加曾定义颜色功能 ([3d7ea23](https://github.com/DvShu/neatui-vue/commit/3d7ea23490f5113299cda3e26f99945ecc8c382c))
+
 ## [0.5.1](https://github.com/DvShu/neatui-vue/compare/v0.5.0...v0.5.1) (2024-05-24)
 
 
