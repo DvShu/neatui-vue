@@ -69,7 +69,7 @@ function initIsChecked(): boolean {
   }
   return checkedModel.value as boolean;
 }
-const isChecked = ref(initIsChecked());
+const isChecked = ref<boolean>(initIsChecked());
 
 watch(
   () => props.checked,
