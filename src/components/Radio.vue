@@ -52,11 +52,7 @@ const { checkedValue, updateCheck } = inject<{
   updateCheck: null,
 });
 
-<<<<<<< HEAD
-function initIsChecked() {
-=======
 function initIsChecked(): boolean {
->>>>>>> main
   if (props.checked != null) {
     return props.checked;
   }
@@ -66,11 +62,7 @@ function initIsChecked(): boolean {
   if (props.value != null) {
     return checkedModel.value === props.value;
   }
-<<<<<<< HEAD
-  return checkedModel.value;
-=======
   return checkedModel.value as boolean;
->>>>>>> main
 }
 
 const isChecked = ref(initIsChecked());
@@ -78,11 +70,7 @@ const isChecked = ref(initIsChecked());
 watch(
   () => props.checked,
   (val) => {
-<<<<<<< HEAD
-    isChecked.value = val;
-=======
     isChecked.value = val as boolean;
->>>>>>> main
   },
 );
 
