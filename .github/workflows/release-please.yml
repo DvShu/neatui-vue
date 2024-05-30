@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
+      job_output: ${{ steps.set-output-step.outputs.output_value }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
@@ -26,6 +27,13 @@ jobs:
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
           release-type: node
+
+      - name: Generate output value
+        id: set-output-step
+        run: |
+          echo "Generating output value..."
+          VALUE="Hello, World!"
+          echo "::set-output name=output_value::$VALUE"
 
   joblog:
     runs-on: ubuntu-latest
