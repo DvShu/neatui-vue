@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       ph-utils:
-        specifier: ^0.4.3
-        version: 0.4.3
+        specifier: ^0.4.5
+        version: 0.4.5
       qrcode-generator-es:
         specifier: ^0.0.4
         version: 0.0.4
@@ -151,6 +151,10 @@ packages:
   '@babel/types@7.24.0':
     resolution: {integrity: sha512-+j7a5c253RfKh8iABBhywc8NSfP5LURe7Uh4qpsh6jc+aLJguvmIUBdjSdEMQv2bENrCR5MfRdjGo7vzS/ob7w==}
     engines: {node: '>=6.9.0'}
+
+  '@ctrl/tinycolor@4.1.0':
+    resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
+    engines: {node: '>=14'}
 
   '@docsearch/css@3.6.0':
     resolution: {integrity: sha512-+sbxb71sWre+PwDK7X2T8+bhS6clcVMLwBPznX45Qu6opJcgRjAp7gYSDzVFp187J+feSj5dNBN1mJoi6ckkUQ==}
@@ -1194,8 +1198,8 @@ packages:
   perfect-debounce@1.0.0:
     resolution: {integrity: sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==}
 
-  ph-utils@0.4.3:
-    resolution: {integrity: sha512-blFJ5+6QKoudds/zG2qEEGXJWRf/iSo24AqdIMQyj+JhrCMCZhQTF2uFCxJzYGhxhsbEurNsFI4He8rGfblY/Q==}
+  ph-utils@0.4.5:
+    resolution: {integrity: sha512-LmORf7AqiZSIP2ioQEwueNWYn7Wru7xo6Q8cJUw3a+/5xvLxS+gMdrsjzxCOpJBlcf4yKU9nEf6kb4RChSe0yw==}
 
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
@@ -1634,6 +1638,8 @@ snapshots:
       '@babel/helper-string-parser': 7.24.1
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
+
+  '@ctrl/tinycolor@4.1.0': {}
 
   '@docsearch/css@3.6.0': {}
 
@@ -2689,7 +2695,9 @@ snapshots:
 
   perfect-debounce@1.0.0: {}
 
-  ph-utils@0.4.3: {}
+  ph-utils@0.4.5:
+    dependencies:
+      '@ctrl/tinycolor': 4.1.0
 
   picocolors@1.0.0: {}
 

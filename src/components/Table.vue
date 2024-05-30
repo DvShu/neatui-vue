@@ -3,6 +3,8 @@ import { defineComponent, h, PropType, ref, watch } from 'vue';
 import type { VNode } from 'vue';
 import Radio from './Radio.vue';
 import Checkbox from './Checkbox.vue';
+import { random } from 'ph-utils';
+import { format } from 'ph-utils/date';
 
 export interface ColumnOption {
   /** 排序时，如果传递了 key，则会将此 key 回传，便于排序, 如果不传此 key，则排序无效 */
@@ -29,6 +31,8 @@ export interface ColumnOption {
   titleRowspan: number;
   /** 设置可选择 */
   type?: 'radio' | 'checkbox';
+  /** 为 radio，checkbox 设置是否禁用 */
+  disabled?: (row: any) => boolean;
 }
 
 export interface DataSortState {
@@ -43,6 +47,8 @@ interface SortOption {
 }
 
 type SorterFnOption = (data: any[]) => any[];
+
+type RowKeyOption = (row: any) => any;
 
 /** 通过配置的 columns 计算表头跨行，跨列 */
 function calculateSpan(headers: ColumnOption[], level = 0): ColumnOption[] {
@@ -145,14 +151,23 @@ export default defineComponent({
       required: false,
       default: 'auto',
     },
+    rowKey: {
+      type: Function as PropType<RowKeyOption>,
+      required: false,
+    },
   },
   setup(props) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
     });
+    const allowSelectCount = calcAllowSelectCount(); // 允许选择的数量
     const sourceData = ref(props.data);
     const parsedColumns = calculateSpan(props.columns, 0);
+    const selectedValues = new Set();
+    /** 复选的半选、全选状态 */
+    const isIndeterminate = ref(false);
+    const checkedAll = ref(false);
 
     watch(
       () => props.data,
@@ -160,6 +175,45 @@ export default defineComponent({
         sourceData.value = props.data;
       },
     );
+
+    function calcAllowSelectCount() {
+      let c = 0;
+      if (props.columns[0].type === 'checkbox') {
+        for (const d in props.data) {
+          let isDisabled = false;
+          if (props.columns[0].disabled != null) {
+            isDisabled = props.columns[0].disabled(d);
+          }
+          if (!isDisabled) {
+            c++;
+          }
+        }
+      }
+      return c;
+    }
+
+    function handleSelectionChange(value: any) {
+      const selectType = props.columns[0].type;
+      if (selectType === 'radio') {
+        selectedValues.clear();
+      }
+      if (selectedValues.has(value)) {
+        selectedValues.delete(value);
+      } else {
+        selectedValues.add(value);
+      }
+      if (selectedValues.size === 0) {
+        isIndeterminate.value = false;
+        checkedAll.value = false;
+      } else if (selectedValues.size === allowSelectCount) {
+        checkedAll.value = true;
+        isIndeterminate.value = false;
+      } else {
+        checkedAll.value = false;
+        isIndeterminate.value = true;
+      }
+      console.log(selectedValues);
+    }
 
     function dataSort(
       data: any[],
@@ -273,7 +327,17 @@ export default defineComponent({
       if (column.type != null) {
         if (column.type === 'checkbox') {
           colChildren.push(
-            h('div', { class: 'nt-table-selection-cell' }, h(Checkbox)),
+            h(
+              'div',
+              {
+                class: 'nt-table-selection-cell',
+              },
+              h(Checkbox, {
+                indeterminate: isIndeterminate.value,
+                checked: checkedAll.value,
+                onChange: handleSelectionChange,
+              }),
+            ),
           );
         }
       } else {
@@ -324,6 +388,7 @@ export default defineComponent({
       left: string[],
       right: string[],
       rowChildren: VNode[],
+      selectionName: string,
     ) {
       for (const column of columns) {
         if (column.children == null) {
@@ -383,6 +448,8 @@ export default defineComponent({
             } else if (column.key != null) {
               rowChildren.push(h('td', tdAttr, rowData[column.key]));
             } else if (column.type != null) {
+              const selectionValue =
+                props.rowKey != null ? props.rowKey(rowData) : '';
               rowChildren.push(
                 h(
                   'td',
@@ -390,7 +457,15 @@ export default defineComponent({
                   h(
                     'div',
                     { class: 'nt-table-selection-cell' },
-                    h(column.type === 'radio' ? Radio : Checkbox),
+                    h(column.type === 'radio' ? Radio : Checkbox, {
+                      name: selectionName,
+                      value: selectionValue,
+                      checked: selectedValues.has(selectionValue),
+                      disabled: column.disabled
+                        ? column.disabled(rowData)
+                        : false,
+                      onChange: handleSelectionChange,
+                    }),
                   ),
                 ),
               );
@@ -406,6 +481,7 @@ export default defineComponent({
             left,
             right,
             rowChildren,
+            selectionName,
           );
         }
       }
@@ -413,10 +489,12 @@ export default defineComponent({
 
     function renderBody() {
       const bodies: VNode[] = [];
+      format();
+      const selectionName = `${random(3)}${String(Date.now()).substring(8)}`;
       for (let i = 0, len = sourceData.value.length; i < len; i++) {
         const dataItem = sourceData.value[i];
         const $tds: VNode[] = [];
-        renderBodyRow(parsedColumns, i, dataItem, [], [], $tds);
+        renderBodyRow(parsedColumns, i, dataItem, [], [], $tds, selectionName);
         bodies.push(h('tr', $tds));
       }
       return bodies;
