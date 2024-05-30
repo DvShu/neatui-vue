@@ -156,15 +156,16 @@ export default defineComponent({
       required: false,
     },
   },
-  setup(props) {
+  emits: ['select-change'],
+  setup(props, { emit }) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
     });
-    const allowSelectCount = calcAllowSelectCount(); // 允许选择的数量
+    const allowSelect = calcAllowSelect(); // 允许选择的列表
     const sourceData = ref(props.data);
     const parsedColumns = calculateSpan(props.columns, 0);
-    const selectedValues = new Set();
+    const selectedValues = ref<any[]>([]);
     /** 复选的半选、全选状态 */
     const isIndeterminate = ref(false);
     const checkedAll = ref(false);
@@ -176,16 +177,16 @@ export default defineComponent({
       },
     );
 
-    function calcAllowSelectCount() {
-      let c = 0;
+    function calcAllowSelect() {
+      let c = [];
       if (props.columns[0].type === 'checkbox') {
-        for (const d in props.data) {
+        for (const d of props.data) {
           let isDisabled = false;
           if (props.columns[0].disabled != null) {
             isDisabled = props.columns[0].disabled(d);
           }
-          if (!isDisabled) {
-            c++;
+          if (!isDisabled && props.rowKey != null) {
+            c.push(props.rowKey(d));
           }
         }
       }
@@ -195,24 +196,37 @@ export default defineComponent({
     function handleSelectionChange(value: any) {
       const selectType = props.columns[0].type;
       if (selectType === 'radio') {
-        selectedValues.clear();
+        selectedValues.value = [];
       }
-      if (selectedValues.has(value)) {
-        selectedValues.delete(value);
+      let index = selectedValues.value.indexOf(value);
+      if (index !== -1) {
+        selectedValues.value.splice(index, 1);
       } else {
-        selectedValues.add(value);
+        selectedValues.value.push(value);
       }
-      if (selectedValues.size === 0) {
+      if (selectedValues.value.length === 0) {
         isIndeterminate.value = false;
         checkedAll.value = false;
-      } else if (selectedValues.size === allowSelectCount) {
+      } else if (selectedValues.value.length === allowSelect.length) {
         checkedAll.value = true;
         isIndeterminate.value = false;
       } else {
         checkedAll.value = false;
         isIndeterminate.value = true;
       }
-      console.log(selectedValues);
+      emit('select-change', [...selectedValues.value]);
+    }
+
+    function handleChangeAll(v: boolean) {
+      if (v === true) {
+        selectedValues.value = [...allowSelect];
+        checkedAll.value = true;
+      } else {
+        selectedValues.value = [];
+        checkedAll.value = false;
+      }
+      isIndeterminate.value = false;
+      emit('select-change', [...selectedValues.value]);
     }
 
     function dataSort(
@@ -335,7 +349,7 @@ export default defineComponent({
               h(Checkbox, {
                 indeterminate: isIndeterminate.value,
                 checked: checkedAll.value,
-                onChange: handleSelectionChange,
+                onChange: handleChangeAll,
               }),
             ),
           );
@@ -460,7 +474,7 @@ export default defineComponent({
                     h(column.type === 'radio' ? Radio : Checkbox, {
                       name: selectionName,
                       value: selectionValue,
-                      checked: selectedValues.has(selectionValue),
+                      checked: selectedValues.value.includes(selectionValue),
                       disabled: column.disabled
                         ? column.disabled(rowData)
                         : false,

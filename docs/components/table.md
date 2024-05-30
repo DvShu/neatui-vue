@@ -314,6 +314,10 @@
   function rowKey(rowData) {
     return rowData.name
   }
+
+  function handleSelectChange(v) {
+    console.log(v)
+  }
 </script>
 
 ### 基础表格
@@ -692,7 +696,12 @@
   </template>
   </textarea>
   <template #preview>
-    <Table :data="dataSource4" :columns="columns7" :row-key="rowKey"></Table>
+    <Table
+      :data="dataSource4"
+      :columns="columns7"
+      :row-key="rowKey"
+      @select-change="handleSelectChange"
+    ></Table>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -709,7 +718,12 @@
   </template>
   </textarea>
   <template #preview>
-    <Table :data="dataSource4" :columns="columns8" :row-key="rowKey"></Table>
+    <Table
+      :data="dataSource4"
+      :columns="columns8"
+      :row-key="rowKey"
+      @select-change="handleSelectChange"
+    ></Table>
   </template>
   </CodePreview>
 </ClientOnly>
