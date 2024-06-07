@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.4](https://github.com/DvShu/neatui-vue/compare/v0.5.3...v0.5.4) (2024-06-07)
+
+
+### Bug Fixes
+
+* 修复上个版本未正确导出组件 ([404aac0](https://github.com/DvShu/neatui-vue/commit/404aac00600084214276e9d38b29a267b1b5638c))
+
 ## [0.5.3](https://github.com/DvShu/neatui-vue/compare/v0.5.2...v0.5.3) (2024-06-07)
 
 
