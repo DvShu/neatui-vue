@@ -33,7 +33,9 @@ jobs:
         run: |
           echo "Generating output value..."
           VALUE="Hello, World!"
+          release_created=${{ steps.release.outputs.release_created }}
           echo "::set-output name=output_value::$VALUE"
+          echo "::set-output name=release_created::$release_created"
 
   joblog:
     runs-on: ubuntu-latest
