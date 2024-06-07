@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.3](https://github.com/DvShu/neatui-vue/compare/v0.5.2...v0.5.3) (2024-06-07)
+
+
+### Bug Fixes
+
+* **Icon:** 增加 ArrowUp、ArrowDown 组件 ([f18a31f](https://github.com/DvShu/neatui-vue/commit/f18a31f487d7c16906290f5e561bd3aa187ba602))
+* **Table:** 优化表格 ([f18a31f](https://github.com/DvShu/neatui-vue/commit/f18a31f487d7c16906290f5e561bd3aa187ba602))
+
 ## [0.5.2](https://github.com/DvShu/neatui-vue/compare/v0.5.1...v0.5.2) (2024-05-30)
 
 
