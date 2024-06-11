@@ -56,6 +56,7 @@ export default defineConfig({
           { text: 'Radio 单选框', link: '/components/radio' },
           { text: 'Switch 开关', link: '/components/switch' },
           { text: 'Polygon 多边形', link: '/components/polygon' },
+          { text: 'Form 表单', link: '/components/form' },
         ],
       },
     ],

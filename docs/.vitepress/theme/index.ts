@@ -20,6 +20,8 @@ import '../../../style/message';
 import '../../../style/shadow';
 import '../../../style/table';
 import '../../../style/switch';
+import '../../../style/form';
+import '../../../style/form_item';
 
 export default {
   extends: DefaultTheme,

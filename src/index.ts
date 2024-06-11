@@ -29,3 +29,5 @@ export { default as CheckboxGroup } from './components/CheckboxGroup.vue';
 export { default as Radio } from './components/Radio.vue';
 export { default as RadioGroup } from './components/RadioGroup.vue';
 export { default as Switch } from './components/Switch.vue';
+export { default as FormItem } from "./components/FormItem.vue"
+export { default as Form } from "./components/Form.vue"
