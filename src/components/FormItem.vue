@@ -8,23 +8,33 @@
   >
     <label
       class="nt-form-item__label"
-      v-if="label != null"
       :style="{
-        width: labelWidth,
+        '--nt-form-label-width': labelWidth ? labelWidth : undefined,
       }"
     >
       {{ label }}
     </label>
     <div class="nt-form-item__content">
-      <slot class="a"></slot>
-      <div class="nt-form-item__error">错误提示</div>
+      <slot></slot>
+      <div class="nt-form-item__error" v-if="isError">
+        {{ errors[prop as string] }}
+      </div>
     </div>
   </div>
+  <Form :model="formData" </Form>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, inject, reactive } from 'vue';
+import Form from './Form.vue';
 
-withDefaults(
+const formData = reactive({
+  /** 用户名 */
+  username: '',
+  /** 密码 */
+  password: '',
+});
+
+const props = withDefaults(
   defineProps<{
     /** 标签文本 */
     label?: string;
@@ -36,10 +46,15 @@ withDefaults(
     prop?: string;
   }>(),
   {
-    labelWidth: '80px',
     required: false,
   },
 );
 
-const isError = ref(false);
+let errors: any;
+if (props.prop != null) {
+  errors = inject('ntFormErrors');
+}
+const isError = computed(() => {
+  return errors != null && props.prop != null && errors[props.prop] != null;
+});
 </script>
