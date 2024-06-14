@@ -9,11 +9,11 @@
     <div
       :class="[
         'nt-tooltip-content',
+        `nt-tooltip--${styleName}`,
         placement.startsWith('top') ? 'nt-tooltip-top' : '',
         placement.startsWith('bottom') ? 'nt-tooltip-bottom' : '',
         placement.endsWith('Start') ? 'nt-tooltip-start' : '',
         placement.endsWith('End') ? 'nt-tooltip-end' : '',
-        `nt-tooltip--${styleName}`,
         contentClass,
       ]"
     >

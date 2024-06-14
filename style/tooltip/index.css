@@ -76,10 +76,10 @@
   bottom: 100%;
   border-color: transparent transparent #383838 transparent;
 }
-.nt-tooltip-start.nt-tooltip-default::after {
-  left: 10px;
+.nt-tooltip-start.nt-tooltip--default::after {
+  left: 15px;
 }
-.nt-tooltip-end.nt-tooltip-default::after {
+.nt-tooltip-end.nt-tooltip--default::after {
   right: 10px;
   left: auto;
   margin-left: 0;
