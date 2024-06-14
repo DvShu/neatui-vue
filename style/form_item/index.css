@@ -1,6 +1,6 @@
 .nt-form-item {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-size: 14px;
 }
 .nt-form-item__label {
@@ -29,7 +29,7 @@
   top: 100%;
   left: 0;
   color: var(--nt-error-color, #ed3f13);
-  padding-top: 2px;
+  padding-top: 3px;
 }
 .nt-form-item.is-error .nt-input {
   border-color: var(--nt-error-color, #ed3f13);
