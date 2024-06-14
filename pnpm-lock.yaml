@@ -1195,8 +1195,13 @@ packages:
   perfect-debounce@1.0.0:
     resolution: {integrity: sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==}
 
+<<<<<<< HEAD
   ph-utils@0.4.7:
     resolution: {integrity: sha512-N6xMAz9fytk7CB0GwItA+vTAYxcltNDFEYogEiZTMxr2fu00GpID6DJG1/5sHuk7H3CaGpqQCTcqoeTa2LecPw==}
+=======
+  ph-utils@0.4.5:
+    resolution: {integrity: sha512-LmORf7AqiZSIP2ioQEwueNWYn7Wru7xo6Q8cJUw3a+/5xvLxS+gMdrsjzxCOpJBlcf4yKU9nEf6kb4RChSe0yw==}
+>>>>>>> 30db493b37c343c3da04207493c657b3e02558bc
 
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
@@ -2691,7 +2696,11 @@ snapshots:
 
   perfect-debounce@1.0.0: {}
 
+<<<<<<< HEAD
   ph-utils@0.4.7:
+=======
+  ph-utils@0.4.5:
+>>>>>>> 30db493b37c343c3da04207493c657b3e02558bc
     dependencies:
       '@ctrl/tinycolor': 4.1.0
 
