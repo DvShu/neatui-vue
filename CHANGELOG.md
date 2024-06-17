@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/DvShu/neatui-vue/compare/v0.5.4...v0.6.0) (2024-06-14)
+
+
+### Features
+
+* Form 表单 ([6aef628](https://github.com/DvShu/neatui-vue/commit/6aef628e8f8ccda2dcd1e1efb401413349ff0425))
+* Form表单 ([cbe390f](https://github.com/DvShu/neatui-vue/commit/cbe390f7b34eb13043c5cfd847f05f319c435d16))
+
 ## [0.5.4](https://github.com/DvShu/neatui-vue/compare/v0.5.3...v0.5.4) (2024-06-07)
 
 

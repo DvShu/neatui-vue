@@ -9,6 +9,10 @@
   padding: 0 5px;
   border-radius: 3px;
   vertical-align: middle;
+  width: 100%;
+}
+.nt-input.is-autosize {
+  width: auto;
 }
 .nt-input:focus {
   border-color: var(--nt-primary-color);
