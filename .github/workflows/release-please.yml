@@ -13,9 +13,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.set-output-step.outputs.release_created }}
-      job_output: ${{ steps.set-output-step.outputs.output_value }}
-      b: ${{ steps.set-output-step.outputs.b }}
+      release_created: ${{ steps.output-release-created.outputs.release_created }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
