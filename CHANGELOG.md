@@ -1,14 +1,5 @@
 # Changelog
 
-## [0.6.2](https://github.com/DvShu/neatui-vue/compare/v0.6.1...v0.6.2) (2024-06-18)
-
-
-### Bug Fixes
-
-* 修复图片预览路径错误 ([d52955b](https://github.com/DvShu/neatui-vue/commit/d52955b0fdd367ff34e024a9cbbf47b56780fde5))
-* 修复目录结构错误 ([e99cbe6](https://github.com/DvShu/neatui-vue/commit/e99cbe69e3695e63326372e9a98d3e5d406a88cd))
-* 修复目录结构错误 ([f9056a2](https://github.com/DvShu/neatui-vue/commit/f9056a2e4b7ab4979f0a31de02ee1ea97d062b9b))
-
 ## [0.6.1](https://github.com/DvShu/neatui-vue/compare/v0.6.0...v0.6.1) (2024-06-18)
 
 
