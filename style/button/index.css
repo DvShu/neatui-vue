@@ -157,3 +157,7 @@
 .nt-btn-block {
   width: 100%;
 }
+
+.nt-btn:not(.nt-btn-text) + .nt-btn {
+  margin-left: 10px;
+}
