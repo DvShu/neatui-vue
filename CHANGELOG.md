@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/DvShu/neatui-vue/compare/v0.6.0...v0.6.1) (2024-06-18)
+
+
+### Bug Fixes
+
+* 修复未正确导出 useFormReset hooks ([caa6bba](https://github.com/DvShu/neatui-vue/commit/caa6bba5cb50c6b2638f67d655e4fa916715a686))
+
 ## [0.6.0](https://github.com/DvShu/neatui-vue/compare/v0.5.4...v0.6.0) (2024-06-14)
 
 
