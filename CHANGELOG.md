@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.6.2](https://github.com/DvShu/neatui-vue/compare/v0.6.1...v0.6.2) (2024-06-18)
+
+
+### Bug Fixes
+
+* 优化CI ([54f648b](https://github.com/DvShu/neatui-vue/commit/54f648be59c605da6ddc1a2817ae88041e50259e))
+* 修复Button无默认高度 ([26863b7](https://github.com/DvShu/neatui-vue/commit/26863b76f1f338a05317e351e23c5d4b6d99a7c4))
+* 修复FormItem渲染空label ([26863b7](https://github.com/DvShu/neatui-vue/commit/26863b76f1f338a05317e351e23c5d4b6d99a7c4))
+* 修复Input无默认颜色 ([26863b7](https://github.com/DvShu/neatui-vue/commit/26863b76f1f338a05317e351e23c5d4b6d99a7c4))
+* 修复目录结构错误 ([26863b7](https://github.com/DvShu/neatui-vue/commit/26863b76f1f338a05317e351e23c5d4b6d99a7c4))
+
 ## [0.6.1](https://github.com/DvShu/neatui-vue/compare/v0.6.0...v0.6.1) (2024-06-18)
 
 
