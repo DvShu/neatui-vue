@@ -1,0 +1,52 @@
+.nt-collapse-item {
+  --nt-collapse-item-space: 0px;
+  border-bottom: 1px solid #ebeef5;
+  color: #333;
+  font-size: 14px;
+  margin-top: var(--nt-collapse-item-space);
+}
+
+.nt-collapse-item__header {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  justify-content: flex-start;
+}
+
+.nt-collapse-item--content {
+  overflow-y: hidden;
+}
+
+.nt-collapse-content--box {
+  padding-bottom: 15px;
+}
+
+.nt-collapse-arrow__left {
+  margin-right: 5px;
+}
+.nt-collapse-arrow__right {
+  margin-left: 5px;
+}
+
+.nt-collapse--background .nt-collapse-item {
+  border: 1px solid #dedede;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.nt-collapse--background .nt-collapse-item:not(:last-child) {
+  border-bottom: 0;
+}
+.nt-collapse--background .nt-collapse-item__header {
+  padding: 10px 15px;
+}
+
+.nt-collapse--background .nt-collapse-item--content {
+  border-top: 1px solid #dedede;
+  background-color: #ffffff;
+  padding: 15px;
+}
+
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: height 0.3s linear;
+}

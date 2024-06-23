@@ -22,6 +22,8 @@ import '../../../style/table';
 import '../../../style/switch';
 import '../../../style/form';
 import '../../../style/form-item';
+import '../../../style/collapse';
+import '../../../style/collapse-item';
 
 export default {
   extends: DefaultTheme,
