@@ -212,8 +212,27 @@
 
 ## API
 
-### Collapase Props
+### Collapse Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| ---- | ---- | ---- | ------ |
-| x    | x    | x    | x      |
+| 参数                     | 说明                               | 类型                            | 默认值       |
+| ------------------------ | ---------------------------------- | ------------------------------- | ------------ |
+| `accordion`              | 手风琴模式，是否只允许展开一个面板 | `boolean`                       | `false`      |
+| `arrow-placement`        | 箭头位置                           | `left` \| `right`               | `left`       |
+| `header-justify`         | 面板头部, 水平对齐方式             | `flex-start` \| `space-between` | `flex-start` |
+| `background`             | 是否带有背景和边框                 | `boolean`                       | `false`      |
+| `item-space`             | 面板之间的间隔                     | `string`                        | -            |
+| `default-expanded-names` | 默认展开的面板                     | `(string \| number)[]`          | -            |
+| `border-radius`          | 边框圆角                           | `string`                        | -            |
+
+### Collapse Events
+
+| 名称     | 参数                                    | 说明           |
+| -------- | --------------------------------------- | -------------- |
+| `change` | `(expandedNames: (string \| number)[])` | 面板变化时触发 |
+
+### CollapseItem Props
+
+| 参数    | 说明           | 类型     | 默认值 |
+| ------- | -------------- | -------- | ------ |
+| `title` | 标题           | `string` | -      |
+| `name`  | 名称, **必传** | `string` | -      |
