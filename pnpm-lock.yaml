@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       ph-utils:
-        specifier: ^0.4.7
-        version: 0.4.7
+        specifier: ^0.6.2
+        version: 0.6.2
       qrcode-generator-es:
         specifier: ^0.0.4
         version: 0.0.4
@@ -147,10 +147,6 @@ packages:
   '@babel/types@7.24.7':
     resolution: {integrity: sha512-XEFXSlxiG5td2EJRe8vOmRbaXVgfcBlszKujvVmWIK/UpywWljQCfzAv3RQCGujWQ1RD4YYWEAqDXfuJiy8f5Q==}
     engines: {node: '>=6.9.0'}
-
-  '@ctrl/tinycolor@4.1.0':
-    resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
-    engines: {node: '>=14'}
 
   '@docsearch/css@3.6.0':
     resolution: {integrity: sha512-+sbxb71sWre+PwDK7X2T8+bhS6clcVMLwBPznX45Qu6opJcgRjAp7gYSDzVFp187J+feSj5dNBN1mJoi6ckkUQ==}
@@ -1195,13 +1191,8 @@ packages:
   perfect-debounce@1.0.0:
     resolution: {integrity: sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==}
 
-<<<<<<< HEAD
-  ph-utils@0.4.7:
-    resolution: {integrity: sha512-N6xMAz9fytk7CB0GwItA+vTAYxcltNDFEYogEiZTMxr2fu00GpID6DJG1/5sHuk7H3CaGpqQCTcqoeTa2LecPw==}
-=======
-  ph-utils@0.4.5:
-    resolution: {integrity: sha512-LmORf7AqiZSIP2ioQEwueNWYn7Wru7xo6Q8cJUw3a+/5xvLxS+gMdrsjzxCOpJBlcf4yKU9nEf6kb4RChSe0yw==}
->>>>>>> 30db493b37c343c3da04207493c657b3e02558bc
+  ph-utils@0.6.2:
+    resolution: {integrity: sha512-laeDS2cn4t5rn4odt5K1Y70B9SgFZCAvhag1csLIM3wcIW74zOt7rYrEp9pCPzS8unGMIlcDgERN3oue2ZXZDg==}
 
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
@@ -1645,8 +1636,6 @@ snapshots:
       '@babel/helper-string-parser': 7.24.7
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
-
-  '@ctrl/tinycolor@4.1.0': {}
 
   '@docsearch/css@3.6.0': {}
 
@@ -2696,13 +2685,7 @@ snapshots:
 
   perfect-debounce@1.0.0: {}
 
-<<<<<<< HEAD
-  ph-utils@0.4.7:
-=======
-  ph-utils@0.4.5:
->>>>>>> 30db493b37c343c3da04207493c657b3e02558bc
-    dependencies:
-      '@ctrl/tinycolor': 4.1.0
+  ph-utils@0.6.2: {}
 
   picocolors@1.0.1: {}
 

@@ -1,0 +1,6 @@
+.nt-collapse {
+  /* 边框颜色 */
+  --nt-collapse-border-color: #dedede;
+  /* 圆角 */
+  --nt-collapse-border-radius: 0px;
+}

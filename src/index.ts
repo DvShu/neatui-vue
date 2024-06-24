@@ -16,7 +16,7 @@ export { default as Input } from './components/Input.vue';
 export { default as Clickoutside } from './directives/clickoutside';
 export { default as Table } from './components/Table.vue';
 export { default as Button } from './components/Button.vue';
-export { default as Message } from './components/Message/index';
+export { default as Message } from './components/message/index';
 export { default as Card } from './components/Card.vue';
 export { default as Tooltip } from './components/Tooltip.vue';
 export { default as Qrcode } from './components/Qrcode.vue';
@@ -33,3 +33,5 @@ export { default as FormItem } from './components/form/FormItem.vue';
 export { default as Form } from './components/form/Form.vue';
 
 export { default as useFormReset } from './hooks/useFormReset';
+export { default as Collapse } from './components/collapse/Collapse.vue';
+export { default as CollapseItem } from './components/collapse/CollapseItem.vue';

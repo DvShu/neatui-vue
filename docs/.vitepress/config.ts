@@ -57,6 +57,7 @@ export default defineConfig({
           { text: 'Switch 开关', link: '/components/switch' },
           { text: 'Polygon 多边形', link: '/components/polygon' },
           { text: 'Form 表单', link: '/components/form' },
+          { text: 'Collapse 折叠面板', link: '/components/collapse' },
         ],
       },
     ],
