@@ -1,9 +1,16 @@
 .nt-collapse-item {
-  --nt-collapse-item-space: 0px;
-  border-bottom: 1px solid #ebeef5;
+  border-bottom: 1px solid var(--nt-collapse-border-color);
   color: #333;
   font-size: 14px;
-  margin-top: var(--nt-collapse-item-space);
+  margin-top: var(--nt-collapse-item-space, 0px);
+}
+.nt-collapse-item:first-child {
+  border-top-left-radius: var(--nt-collapse-border-radius, 0px);
+  border-top-right-radius: var(--nt-collapse-border-radius, 0px);
+}
+.nt-collapse-item:last-child {
+  border-bottom-left-radius: var(--nt-collapse-border-radius, 0px);
+  border-bottom-right-radius: var(--nt-collapse-border-radius, 0px);
 }
 
 .nt-collapse-item__header {
@@ -16,6 +23,8 @@
 
 .nt-collapse-item--content {
   overflow-y: hidden;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 }
 
 .nt-collapse-content--box {
@@ -30,23 +39,33 @@
 }
 
 .nt-collapse--background .nt-collapse-item {
-  border: 1px solid #dedede;
+  border-left: 1px solid var(--nt-collapse-border-color);
+  border-right: 1px solid var(--nt-collapse-border-color);
   background-color: rgba(0, 0, 0, 0.02);
 }
-.nt-collapse--background .nt-collapse-item:not(:last-child) {
-  border-bottom: 0;
+.nt-collapse--background .nt-collapse-item:first-child {
+  border-top: 1px solid var(--nt-collapse-border-color);
 }
 .nt-collapse--background .nt-collapse-item__header {
   padding: 10px 15px;
 }
 
 .nt-collapse--background .nt-collapse-item--content {
-  border-top: 1px solid #dedede;
+  border-top: 1px solid var(--nt-collapse-border-color);
   background-color: #ffffff;
+}
+.nt-collapse--background .nt-collapse-content--box {
   padding: 15px;
 }
 
 .collapse-enter-active,
 .collapse-leave-active {
-  transition: height 0.3s linear;
+  transition: height 0.15s linear;
+}
+
+.nt-collapse--space.nt-collapse--background .nt-collapse-item {
+  border-top: 1px solid var(--nt-collapse-border-color);
+}
+.nt-collapse--space .nt-collapse-item {
+  border-radius: var(--nt-collapse-border-radius, 0px);
 }
