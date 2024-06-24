@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.4](https://github.com/DvShu/neatui-vue/compare/v0.6.3...v0.6.4) (2024-06-24)
+
+
+### Bug Fixes
+
+* 修复文件名称错误 ([839d556](https://github.com/DvShu/neatui-vue/commit/839d5561b7c207a6faffd352aad580d14576e53f))
+
 ## [0.6.3](https://github.com/DvShu/neatui-vue/compare/v0.6.2...v0.6.3) (2024-06-24)
 
 ### Features
