@@ -3,6 +3,10 @@ on:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
   # 允许你从 Actions 选项卡手动运行此工作流程
   workflow_dispatch:
 
@@ -46,7 +50,9 @@ jobs:
         id: output-release-created
         run: |
           release_created=${{ steps.release.outputs.release_created }}
-          echo "::set-output name=release_created::$release_created"
+          b=1
+          echo "release_created={release_created}" >> "$GITHUB_OUTPUT"
+          echo "b={b}" >> "$GITHUB_OUTPUT"
 
   deploy-doc:
     runs-on: ubuntu-latest
