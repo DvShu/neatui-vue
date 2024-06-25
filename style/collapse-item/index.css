@@ -31,11 +31,19 @@
   padding-bottom: 15px;
 }
 
+.nt-collapse-arrow-icon {
+  transform: rotate3d(0, 0, 1, 0deg);
+  transition: transform 0.3s ease-in-out;
+}
 .nt-collapse-arrow__left {
   margin-right: 5px;
 }
 .nt-collapse-arrow__right {
   margin-left: 5px;
+}
+
+.nt-collapse-item--active .nt-collapse-arrow-icon {
+  transform: rotate3d(0, 0, 1, 90deg);
 }
 
 .nt-collapse--background .nt-collapse-item {

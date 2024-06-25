@@ -1,16 +1,25 @@
 <template>
-  <div class="nt-collapse-item">
+  <div
+    class="nt-collapse-item"
+    :class="{
+      'nt-collapse-item--active': collapseCtx.actives.value.includes(
+        props.name,
+      ),
+    }"
+  >
     <div
       class="nt-collapse-item__header"
       :style="headerStyleObj"
       @click="toggle"
     >
       <ArrowRightIcon
+        class="nt-collapse-arrow-icon"
         v-if="collapseCtx.arrowPlacement === 'left'"
         :class="['nt-collapse-arrow__' + collapseCtx.arrowPlacement]"
       ></ArrowRightIcon>
       <span class="nt-collapse-item__title">{{ title }}</span>
       <ArrowRightIcon
+        class="nt-collapse-arrow-icon"
         v-if="collapseCtx.arrowPlacement === 'right'"
         :class="['nt-collapse-arrow__' + collapseCtx.arrowPlacement]"
       ></ArrowRightIcon>
@@ -51,7 +60,6 @@ function onEnter(el: Element) {
 
 function onAfterEnter(el: Element) {
   (el as HTMLDivElement).style.removeProperty('height');
-  // delete styles['height'];
 }
 
 function onBeforeLeave(el: Element) {
