@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue';
-import { defineComponent, h, defineAsyncComponent } from 'vue';
+import { defineComponent, h } from 'vue';
 import { isBlank } from 'ph-utils';
 
 let modules = (import.meta as any).glob('../index.ts', {

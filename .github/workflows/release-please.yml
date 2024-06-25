@@ -46,7 +46,7 @@ jobs:
         id: output-release-created
         run: |
           release_created=${{ steps.release.outputs.release_created }}
-          echo "::set-output name=release_created::$release_created"
+          echo "release_created={release_created}" >> "$GITHUB_OUTPUT"
 
   deploy-doc:
     runs-on: ubuntu-latest
