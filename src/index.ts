@@ -16,7 +16,7 @@ export { default as Input } from './components/Input.vue';
 export { default as Clickoutside } from './directives/clickoutside';
 export { default as Table } from './components/Table.vue';
 export { default as Button } from './components/Button.vue';
-export { default as Message } from './components/message/index.js';
+export { default as Message } from './components/message/index';
 export { default as Card } from './components/Card.vue';
 export { default as Tooltip } from './components/Tooltip.vue';
 export { default as Qrcode } from './components/Qrcode.vue';

@@ -22,7 +22,14 @@ name: release-please
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.output-release-created.outputs.release_created }}
     steps:
+      - name: Check event type
+        id: check_event
+        run: |
+          echo "Event: ${{ github.event_name }}"
+
       - uses: googleapis/release-please-action@v4
         id: release
         name: release
@@ -34,6 +41,13 @@ jobs:
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
           release-type: node
+
+      - name: Output Release Created
+        id: output-release-created
+        run: |
+          release_created=${{ steps.release.outputs.release_created }}
+          echo "::set-output name=release_created::$release_created"
+
   deploy-doc:
     runs-on: ubuntu-latest
 
