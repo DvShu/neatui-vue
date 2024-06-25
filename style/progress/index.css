@@ -1,0 +1,28 @@
+.nt-progess {
+  position: relative;
+  font-size: 14px;
+  color: #333333;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nt-progress-bar {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+  background: #f0f0f0;
+}
+
+.nt-progress-value {
+  width: 30%;
+  border-radius: 5px;
+  height: 6px;
+}
+
+.nt-progess-text {
+  margin-left: 5px;
+  width: max-content;
+  flex-shrink: 0;
+}

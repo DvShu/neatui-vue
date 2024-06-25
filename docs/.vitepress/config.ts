@@ -58,6 +58,7 @@ export default defineConfig({
           { text: 'Polygon 多边形', link: '/components/polygon' },
           { text: 'Form 表单', link: '/components/form' },
           { text: 'Collapse 折叠面板', link: '/components/collapse' },
+          { text: 'Progress 进度条', link: '/components/progress' },
         ],
       },
     ],

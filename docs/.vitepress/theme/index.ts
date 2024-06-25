@@ -24,6 +24,7 @@ import '../../../style/form';
 import '../../../style/form-item';
 import '../../../style/collapse';
 import '../../../style/collapse-item';
+import '../../../style/progress'
 
 export default {
   extends: DefaultTheme,
