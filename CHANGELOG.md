@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.5](https://github.com/DvShu/neatui-vue/compare/v0.6.4...v0.6.5) (2024-06-25)
+
+
+### Bug Fixes
+
+* **Collpase:** 增加箭头动画 ([8eda613](https://github.com/DvShu/neatui-vue/commit/8eda61348cf40b867de093e7f6d04cd34aaeffac))
+
 ## [0.6.4](https://github.com/DvShu/neatui-vue/compare/v0.6.3...v0.6.4) (2024-06-24)
 
 
