@@ -37,3 +37,4 @@ export { default as Collapse } from './components/collapse/Collapse.vue';
 export { default as CollapseItem } from './components/collapse/CollapseItem.vue';
 export { default as Progress } from './components/Progress.vue';
 export { default as LoadingBar } from './components/LoadingBar';
+export { default as DescriptionPanel } from "./components/DescriptionPanel.vue"

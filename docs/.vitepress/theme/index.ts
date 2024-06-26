@@ -26,6 +26,7 @@ import '../../../style/collapse';
 import '../../../style/collapse-item';
 import '../../../style/progress';
 import '../../../style/loading-bar';
+import '../../../style/description-panel';
 
 export default {
   extends: DefaultTheme,
