@@ -2,10 +2,9 @@
 
 ## [0.7.0](https://github.com/DvShu/neatui-vue/compare/v0.6.5...v0.7.0) (2024-06-26)
 
-
 ### Features
 
-* **DescriptionPanel:** 新增简介面板 ([251ef39](https://github.com/DvShu/neatui-vue/commit/251ef399be174d9450116558c8c19b2c2d0ef541))
+- **DescriptionPanel:** 新增简介面板 ([251ef39](https://github.com/DvShu/neatui-vue/commit/251ef399be174d9450116558c8c19b2c2d0ef541))
 
 ## [0.6.5](https://github.com/DvShu/neatui-vue/compare/v0.6.4...v0.6.5) (2024-06-25)
 
