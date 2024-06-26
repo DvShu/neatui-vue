@@ -7,7 +7,7 @@
     :style="styles"
   >
     <div ref="$content"><slot></slot></div>
-    <div class="nt-desc-panel-operator">
+    <div class="nt-desc-panel-operator" v-if="showMore">
       <Button
         type="text"
         class="nt-desc-panel-btnmore"
@@ -59,8 +59,8 @@ const showMore = ref(true);
 onMounted(() => {
   if ($content.value != null) {
     let contentHeight = $content.value.getBoundingClientRect().height;
-    if (contentHeight > props.collapseHeight) {
-      showMore.value = true;
+    if (contentHeight <= props.collapseHeight) {
+      showMore.value = false;
     }
     let offsetHeight = 0;
     const $operator = $content.value.nextElementSibling as HTMLDivElement;
