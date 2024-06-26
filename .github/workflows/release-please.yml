@@ -32,7 +32,7 @@ jobs:
       - name: Check event type
         id: check_event
         run: |
-          echo "Event: ${{ github.event_name }}"
+          echo "Event: ${{ toJson(env) }}"
 
       - uses: googleapis/release-please-action@v4
         id: release
@@ -45,6 +45,14 @@ jobs:
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
           release-type: node
+
+      - name: is published
+        id: is-published
+        # these if statements ensure that a publication only occurs when
+        # a new release is created:
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          echo "is_published"
 
       - name: Output Release Created
         id: output-release-created
