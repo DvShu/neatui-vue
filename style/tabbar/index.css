@@ -1,0 +1,33 @@
+.nt-tabbar {
+  position: relative;
+  overflow: hidden;
+}
+
+.nt-tabbar-item {
+  color: #666;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.nt-tabbar-item:hover {
+  color: var(--nt-primary-color-light1);
+}
+.nt-tabbar-item.active {
+  color: var(--nt-primary-color);
+}
+
+/* bar */
+.nt-tabbar--bar {
+  --nt-tabbar-bar-height: 50px;
+  display: flex;
+  height: var(--nt-tabbar-bar-height);
+  align-items: stretch;
+}
+
+.nt-tabbar--bar .nt-tabbar-item {
+  flex-grow: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
