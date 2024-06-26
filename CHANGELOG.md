@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/DvShu/neatui-vue/compare/v0.7.0...v0.7.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* **DescriptionPanel:** 修复简介面板不能正确隐藏展开按钮 ([7d74c2a](https://github.com/DvShu/neatui-vue/commit/7d74c2a8311ce3c20f34aea8d88f45c1c5f65611))
+
 ## [0.7.0](https://github.com/DvShu/neatui-vue/compare/v0.6.5...v0.7.0) (2024-06-26)
 
 ### Features
