@@ -64,6 +64,10 @@ export default defineConfig({
             text: 'DescriptionPanel 简介面板',
             link: '/components/descriptionpanel',
           },
+          {
+            text: 'Tabbar 标签栏',
+            link: '/components/tabbar',
+          },
         ],
       },
     ],
