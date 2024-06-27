@@ -9,6 +9,7 @@
   color: #666;
   transition: color 0.3s ease-in-out;
   cursor: pointer;
+  display: inline-block;
 }
 
 .nt-tabbar-item:hover {
@@ -46,4 +47,31 @@
   align-items: center;
   font-size: 12px;
   line-height: 1;
+}
+
+/* bar */
+.nt-tabbar--bar {
+  --nt-tabbar-bar-vertical-padding: 10px;
+  --nt-tabbar-bar-gap: 30px;
+  --nt-tabbar-bar-color: var(--nt-primary-color);
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.nt-tabbar--bar .nt-tabbar-item {
+  padding: var(--nt-tabbar-bar-vertical-padding) 0;
+}
+
+.nt-tabbar--bar .nt-tabbar-item:not(:first-child) {
+  margin-left: var(--nt-tabbar-bar-gap);
+}
+.nt-tabbar--bar-line {
+  position: absolute;
+  width: 32px;
+  left: 0;
+  bottom: 0;
+  border-radius: 1px;
+  height: 2px;
+  background-color: var(--nt-tabbar-bar-color);
+  transition: all 0.3s ease-in-out;
 }

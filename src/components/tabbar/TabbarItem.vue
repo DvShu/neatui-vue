@@ -26,6 +26,7 @@ export default defineComponent({
             'nt-tabbar-item' +
             (tabbarCtx?.active.value === props.name ? ' active' : ''),
           onClick: handleToggle,
+          'data-name': props.name,
         },
         [
           slots.icon

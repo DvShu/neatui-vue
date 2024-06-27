@@ -8,7 +8,18 @@
 ## 演示
 
 <script setup>
-  import { Tabbar, TabbarItem, SearchIcon, ReductionIcon, RefreshRightIcon, RefreshLeftIcon, SortIcon } from '../../src'
+  import { ref } from 'vue'
+  import {
+    Tabbar,
+    TabbarItem,
+    SearchIcon,
+    ReductionIcon,
+    RefreshRightIcon,
+    RefreshLeftIcon,
+    SortIcon
+  } from '../../src'
+
+  const active2 = ref('2')
 </script>
 
 ### 导航栏模式
@@ -83,6 +94,35 @@
         </template>
         <span>Sort</span>
       </TabbarItem>
+    </Tabbar>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 选项卡
+
+基础的、简洁的选项卡，初始选中第2项
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <template>
+  <nt-tabbar type="bar" v-model='active2'>
+    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
+    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
+    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
+  </nt-tabbar>
+  </template>
+  <script setup>
+  import { ref } from 'vue';
+  const active2 = ref('2')
+  </script>
+  </textarea>
+  <template #preview>
+    <Tabbar type="bar" v-model='active2'>
+      <TabbarItem name="1">选项1</TabbarItem>
+      <TabbarItem name="2">选项2</TabbarItem>
+      <TabbarItem name="3">选项3</TabbarItem>
     </Tabbar>
   </template>
   </CodePreview>
