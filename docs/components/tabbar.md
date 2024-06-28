@@ -123,18 +123,65 @@
       <TabbarItem name="1">选项1</TabbarItem>
       <TabbarItem name="2">选项2</TabbarItem>
       <TabbarItem name="3">选项3</TabbarItem>
-      <TabbarItem name="4">选项4</TabbarItem>
-      <TabbarItem name="5">选项5</TabbarItem>
-      <TabbarItem name="6">选项6</TabbarItem>
-      <TabbarItem name="7">选项7</TabbarItem>
-      <TabbarItem name="8">选项8</TabbarItem>
-      <TabbarItem name="9">选项9</TabbarItem>
-      <TabbarItem name="10">选项10</TabbarItem>
-      <TabbarItem name="11">选项11</TabbarItem>
-      <TabbarItem name="12">选项12</TabbarItem>
-      <TabbarItem name="13">选项13</TabbarItem>
-      <TabbarItem name="14">选项14</TabbarItem>
-      <TabbarItem name="15">选项15</TabbarItem>
+    </Tabbar>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 排列方式
+
+主轴的排列方式，只对 `bar` 类型生效。只需要将 `justify-content` 的属性设置为 [justify-content可用值](https://developer.mozilla.org/zh-CN/docs/Web/CSS/justify-content#%E5%80%BC) 即可。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-tabbar type="bar" v-model='active2' justify-content="center">
+    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
+    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
+    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
+  </nt-tabbar>
+  <hr />
+  <nt-tabbar type="bar" v-model='active2' justify-content="space-between">
+    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
+    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
+    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
+  </nt-tabbar>
+  <hr />
+  <nt-tabbar type="bar" v-model='active2' justify-content="space-around">
+    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
+    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
+    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
+  </nt-tabbar>
+  <hr />
+  <nt-tabbar type="bar" v-model='active2' justify-content="space-evenly">
+    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
+    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
+    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
+  </nt-tabbar>
+  </textarea>
+  <template #preview>
+    <Tabbar type="bar" v-model='active2' justify-content="center">
+      <TabbarItem name="1">选项1</TabbarItem>
+      <TabbarItem name="2">选项2</TabbarItem>
+      <TabbarItem name="3">选项3</TabbarItem>
+    </Tabbar>
+    <hr />
+    <Tabbar type="bar" v-model='active2' justify-content="space-between">
+      <TabbarItem name="1">选项1</TabbarItem>
+      <TabbarItem name="2">选项2</TabbarItem>
+      <TabbarItem name="3">选项3</TabbarItem>
+    </Tabbar>
+    <hr />
+    <Tabbar type="bar" v-model='active2' justify-content="space-around">
+      <TabbarItem name="1">选项1</TabbarItem>
+      <TabbarItem name="2">选项2</TabbarItem>
+      <TabbarItem name="3">选项3</TabbarItem>
+    </Tabbar>
+    <hr />
+    <Tabbar type="bar" v-model='active2' justify-content="space-evenly">
+      <TabbarItem name="1">选项1</TabbarItem>
+      <TabbarItem name="2">选项2</TabbarItem>
+      <TabbarItem name="3">选项3</TabbarItem>
     </Tabbar>
   </template>
   </CodePreview>
