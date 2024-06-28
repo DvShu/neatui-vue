@@ -3,6 +3,8 @@
   --nt-tabbar-active-color: var(--nt-primary-color);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .nt-tabbar-item {
@@ -34,7 +36,6 @@
 .nt-tabbar--nav {
   --nt-tabbar-nav-height: 50px;
   width: 100%;
-  display: flex;
   height: var(--nt-tabbar-nav-height);
   align-items: stretch;
 }

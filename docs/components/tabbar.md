@@ -123,6 +123,18 @@
       <TabbarItem name="1">选项1</TabbarItem>
       <TabbarItem name="2">选项2</TabbarItem>
       <TabbarItem name="3">选项3</TabbarItem>
+      <TabbarItem name="4">选项4</TabbarItem>
+      <TabbarItem name="5">选项5</TabbarItem>
+      <TabbarItem name="6">选项6</TabbarItem>
+      <TabbarItem name="7">选项7</TabbarItem>
+      <TabbarItem name="8">选项8</TabbarItem>
+      <TabbarItem name="9">选项9</TabbarItem>
+      <TabbarItem name="10">选项10</TabbarItem>
+      <TabbarItem name="11">选项11</TabbarItem>
+      <TabbarItem name="12">选项12</TabbarItem>
+      <TabbarItem name="13">选项13</TabbarItem>
+      <TabbarItem name="14">选项14</TabbarItem>
+      <TabbarItem name="15">选项15</TabbarItem>
     </Tabbar>
   </template>
   </CodePreview>
