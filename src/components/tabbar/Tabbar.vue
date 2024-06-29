@@ -4,14 +4,15 @@
     class="nt-tabbar"
     :class="[
       'nt-tabbar--' + type,
-      typePlacement != null ? 'nt-tabbar--' + typePlacement : '',
+      gap != null && gap > 0 ? 'nt-tabbar-gap' : '',
     ]"
-    :style="styles"
   >
-    <slot></slot>
-
+    <div class="nt-tabbar-wrapper" :style="styles">
+      <slot></slot>
+    </div>
+    <div v-if="type === 'card'" class="nt-tabbar-card-border"></div>
     <div
-      v-if="type === 'bar' && model != null"
+      v-if="type !== 'nav' && model != null"
       :style="lineStyles"
       class="nt-tabbar--bar-line"
     ></div>
@@ -37,14 +38,16 @@ const props = withDefaults(
      * 标签类型:
      *  1. nav - 每一项等分排列, 类似于移动端底部的标签栏
      *  2. bar - 选项卡
+     *  3. card - 卡片
      */
-    type?: 'nav' | 'bar';
-    placement?: 'top' | 'bottom';
+    type?: 'nav' | 'bar' | 'card';
     justifyContent?: string;
+    gap?: number;
   }>(),
   {
     type: 'nav',
     justifyContent: undefined,
+    gap: undefined,
   },
 );
 
@@ -56,15 +59,10 @@ const styles = computed(() => {
     }
     res['justify-content'] = props.justifyContent;
   }
-  return res;
-});
-
-const typePlacement = computed(() => {
-  let placement = props.placement;
-  if (props.type === 'nav') {
-    placement = undefined;
+  if (props.gap != null) {
+    res['--nt-tabbar-item-gap'] = `${props.gap}px`;
   }
-  return placement;
+  return res;
 });
 
 function calcItemPos(name: string) {

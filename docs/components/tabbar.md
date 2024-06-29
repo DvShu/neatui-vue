@@ -4,6 +4,7 @@
 
 1. 底部导航栏，用于在不同页面之间进行切换
 2. 标签切换
+3. 选项卡
 
 ## 演示
 
@@ -135,50 +136,86 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-tabbar type="bar" v-model='active2' justify-content="center">
+  <nt-tabbar type="bar" justify-content="center">
     <nt-tabbar-item name="1">选项1</nt-tabbar-item>
     <nt-tabbar-item name="2">选项2</nt-tabbar-item>
     <nt-tabbar-item name="3">选项3</nt-tabbar-item>
   </nt-tabbar>
   <hr />
-  <nt-tabbar type="bar" v-model='active2' justify-content="space-between">
+  <nt-tabbar type="bar" justify-content="space-between">
     <nt-tabbar-item name="1">选项1</nt-tabbar-item>
     <nt-tabbar-item name="2">选项2</nt-tabbar-item>
     <nt-tabbar-item name="3">选项3</nt-tabbar-item>
   </nt-tabbar>
   <hr />
-  <nt-tabbar type="bar" v-model='active2' justify-content="space-around">
+  <nt-tabbar type="bar" justify-content="space-around">
     <nt-tabbar-item name="1">选项1</nt-tabbar-item>
     <nt-tabbar-item name="2">选项2</nt-tabbar-item>
     <nt-tabbar-item name="3">选项3</nt-tabbar-item>
   </nt-tabbar>
   <hr />
-  <nt-tabbar type="bar" v-model='active2' justify-content="space-evenly">
+  <nt-tabbar type="bar" justify-content="space-evenly">
     <nt-tabbar-item name="1">选项1</nt-tabbar-item>
     <nt-tabbar-item name="2">选项2</nt-tabbar-item>
     <nt-tabbar-item name="3">选项3</nt-tabbar-item>
   </nt-tabbar>
   </textarea>
   <template #preview>
-    <Tabbar type="bar" v-model='active2' justify-content="center">
+    <Tabbar type="bar" justify-content="center">
       <TabbarItem name="1">选项1</TabbarItem>
       <TabbarItem name="2">选项2</TabbarItem>
       <TabbarItem name="3">选项3</TabbarItem>
     </Tabbar>
     <hr />
-    <Tabbar type="bar" v-model='active2' justify-content="space-between">
+    <Tabbar type="bar" justify-content="space-between">
       <TabbarItem name="1">选项1</TabbarItem>
       <TabbarItem name="2">选项2</TabbarItem>
       <TabbarItem name="3">选项3</TabbarItem>
     </Tabbar>
     <hr />
-    <Tabbar type="bar" v-model='active2' justify-content="space-around">
+    <Tabbar type="bar" justify-content="space-around">
       <TabbarItem name="1">选项1</TabbarItem>
       <TabbarItem name="2">选项2</TabbarItem>
       <TabbarItem name="3">选项3</TabbarItem>
     </Tabbar>
     <hr />
-    <Tabbar type="bar" v-model='active2' justify-content="space-evenly">
+    <Tabbar type="bar" justify-content="space-evenly">
+      <TabbarItem name="1">选项1</TabbarItem>
+      <TabbarItem name="2">选项2</TabbarItem>
+      <TabbarItem name="3">选项3</TabbarItem>
+    </Tabbar>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 卡片式
+
+具有卡片风格的标签。只需要设置 `type` 属性为 `card` 就可以使选项卡改变为标签风格。
+同时可以通过 `gap` 调整选项卡之间的间距。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-tabbar type="card">
+    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
+    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
+    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
+  </nt-tabbar>
+  <hr />
+  <nt-tabbar type="card" :gap="5">
+    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
+    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
+    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
+  </nt-tabbar>
+  </textarea>
+  <template #preview>
+    <Tabbar type="card">
+      <TabbarItem name="1">选项1</TabbarItem>
+      <TabbarItem name="2">选项2</TabbarItem>
+      <TabbarItem name="3">选项3</TabbarItem>
+    </Tabbar>
+    <hr />
+    <Tabbar type="card" :gap="5">
       <TabbarItem name="1">选项1</TabbarItem>
       <TabbarItem name="2">选项2</TabbarItem>
       <TabbarItem name="3">选项3</TabbarItem>
