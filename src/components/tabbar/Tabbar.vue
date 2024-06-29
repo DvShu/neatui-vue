@@ -25,6 +25,7 @@ import { isVisible, elem } from 'ph-utils/dom';
 
 const model = defineModel<string | number>();
 const Rel = ref<HTMLElement>();
+const emits = defineEmits(['change']);
 
 /* bar-line style */
 const lineStyles = ref<{ width: string; left: string }>({
@@ -90,6 +91,7 @@ function calcItemPos(name: string) {
 function change(name: string | number) {
   model.value = name;
   calcItemPos(String(name));
+  emits('change', name);
 }
 
 provide(tabbarContext, {

@@ -26,6 +26,7 @@ import '../../../style/progress';
 import '../../../style/loading-bar';
 import '../../../style/description-panel';
 import '../../../style/tabbar';
+import '../../../style/tabs';
 
 export default {
   extends: DefaultTheme,

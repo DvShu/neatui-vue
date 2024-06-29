@@ -226,8 +226,41 @@
 
 ## API
 
-### -- Props
+### Tabbar Props
 
-| 参数 | 说明 | 类型 | 默认值 |
-| ---- | ---- | ---- | ------ |
-| x    | x    | x    | x      |
+| 参数              | 说明             | 类型                 | 默认值       |
+| ----------------- | ---------------- | -------------------- | ------------ |
+| `v-model`         | 选中的选项卡     | `string`             | -            |
+| `type`            | 风格             | `nav`、`bar`、`card` | `nav`        |
+| `justify-content` | 主轴的排列方式   | `string`             | `flex-start` |
+| `gap`             | 选项卡之间的间距 | `number`             | `0`          |
+
+### Tabbar Events
+
+| 事件名 | 说明 | 参数 |
+| `change` | 选项卡切换时触发 | `(active: string) => void` |
+
+### TabbarItem Props
+
+| 参数   | 说明             | 类型               | 默认值 |
+| ------ | ---------------- | ------------------ | ------ |
+| `name` | 选项卡的唯一标识 | `string` \| `name` | -      |
+
+### TabbarItem Slots
+
+| 插槽名    | 说明         |
+| --------- | ------------ |
+| `icon`    | 选项卡的图标 |
+| `default` | 选项卡的内容 |
+
+### Tabbar Css Vars
+
+| 变量名                           | 说明                     | 默认值                           |
+| -------------------------------- | ------------------------ | -------------------------------- |
+| `--nt-tabbar-hover-color`        | 选项卡的鼠标悬浮时的颜色 | `var(--nt-primary-color-light1)` |
+| `--nt-tabbar-active-color`       | 选项卡的选中时的颜色     | `var(--nt-primary-color)`        |
+| `--nt-tabbar-item-gap`           | 选项卡之间的间距         | `0`                              |
+| `--nt-tabbar-height`             | 选项卡的高度             | `38px`[`nav`时默认为: `50px`]    |
+| `--nt-tabbar-line-color`         | 下划线的颜色             | `var(--nt-primary-color)`        |
+| `--nt-tabbar-card-border-color`  | 卡片选项卡的边框颜色     | `#f5f7fa`                        |
+| `--nt-tabbar-card-border-radius` | 卡片选项卡的边框圆角     | `5px`                            |

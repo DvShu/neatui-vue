@@ -2,21 +2,26 @@
   --nt-tabbar-hover-color: var(--nt-primary-color-light1);
   --nt-tabbar-active-color: var(--nt-primary-color);
   --nt-tabbar-item-gap: 0;
+  --nt-tabbar-height: 38px;
   position: relative;
   overflow: hidden;
+  height: var(--nt-tabbar-height);
 }
 
 .nt-tabbar-wrapper {
   display: flex;
   flex-wrap: nowrap;
   height: 100%;
+  align-items: stretch;
 }
 
 .nt-tabbar-item {
   color: #666;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nt-tabbar-item:hover {
@@ -39,13 +44,8 @@
 }
 /* nav */
 .nt-tabbar--nav {
-  --nt-tabbar-nav-height: 50px;
+  --nt-tabbar-height: 50px;
   width: 100%;
-  height: var(--nt-tabbar-nav-height);
-}
-
-.nt-tabbar--nav .nt-tabbar-wrapper {
-  align-items: stretch;
 }
 
 .nt-tabbar--nav .nt-tabbar-item {
@@ -65,10 +65,6 @@
   --nt-tabbar-line-color: var(--nt-primary-color);
   overflow: auto;
   white-space: nowrap;
-}
-
-.nt-tabbar--bar .nt-tabbar-item {
-  padding: var(--nt-tabbar-bar-vertical-padding) 0;
 }
 
 .nt-tabbar--bar .nt-tabbar-item:not(:first-child) {
@@ -101,7 +97,7 @@
   background-color: var(--nt-tabbar-card-border-color);
 }
 .nt-tabbar--card .nt-tabbar-item {
-  padding: 7px 15px;
+  padding: 0 15px;
   background: #f5f7fa;
   border: 1px solid #f0f0f0;
 }

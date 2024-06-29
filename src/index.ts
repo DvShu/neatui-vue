@@ -43,3 +43,4 @@ export { default as LoadingBar } from './components/LoadingBar';
 export { default as DescriptionPanel } from './components/DescriptionPanel.vue';
 export { default as Tabbar } from './components/tabbar/Tabbar.vue';
 export { default as TabbarItem } from './components/tabbar/TabbarItem.vue';
+export { default as Tabs } from "./components/Tabs.vue"

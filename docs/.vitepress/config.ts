@@ -68,6 +68,10 @@ export default defineConfig({
             text: 'Tabbar 标签栏',
             link: '/components/tabbar',
           },
+          {
+            text: 'Tabs 标签页',
+            link: '/components/tabs',
+          },
         ],
       },
     ],
