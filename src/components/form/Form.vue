@@ -11,10 +11,8 @@
 </template>
 <script setup lang="ts">
 import { ref, provide, watch } from 'vue';
-// import Validator from 'ph-utils/validator';
-import Validator from './validator';
-// import type { SchemaType } from 'ph-utils/validator';
-import type { SchemaType } from './validator';
+import Validator from 'ph-utils/validator';
+import type { SchemaType } from 'ph-utils/validator';
 import { formContext } from './constant';
 
 const props = defineProps<{
