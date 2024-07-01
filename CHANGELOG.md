@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/DvShu/neatui-vue/compare/v0.7.1...v0.8.0) (2024-07-01)
+
+
+### Features
+
+* 新增 tabbar 选项卡组件 ([a85565a](https://github.com/DvShu/neatui-vue/commit/a85565a13b228ad644c38f2681acd4eec8ed3a3b))
+* 新增 tabs 标签页样式 ([a85565a](https://github.com/DvShu/neatui-vue/commit/a85565a13b228ad644c38f2681acd4eec8ed3a3b))
+
 ## [0.7.1](https://github.com/DvShu/neatui-vue/compare/v0.7.0...v0.7.1) (2024-06-26)
 
 
