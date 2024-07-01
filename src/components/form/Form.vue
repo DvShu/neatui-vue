@@ -60,7 +60,7 @@ if (props.model != null && validator != null) {
           if (value !== oldValues[i]) {
             // 数据验证, 验证单一字段;
             validator
-              .validateKey(keys[i], value)
+              .validateKey(keys[i], value, props.model)
               .then(() => {
                 errors.value[keys[i]] = undefined;
               })

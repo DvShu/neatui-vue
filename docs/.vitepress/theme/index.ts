@@ -21,12 +21,12 @@ import '../../../style/shadow';
 import '../../../style/table';
 import '../../../style/switch';
 import '../../../style/form';
-import '../../../style/form-item';
 import '../../../style/collapse';
-import '../../../style/collapse-item';
 import '../../../style/progress';
 import '../../../style/loading-bar';
 import '../../../style/description-panel';
+import '../../../style/tabbar';
+import '../../../style/util/tabs.css';
 
 export default {
   extends: DefaultTheme,
