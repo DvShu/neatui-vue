@@ -18,6 +18,7 @@ export { default as RefreshRightIcon } from './components/icon/RefreshRight.vue'
 export { default as SortIcon } from './components/icon/Sort.vue';
 export { default as Input } from './components/Input.vue';
 export { default as Clickoutside } from './directives/clickoutside';
+export { default as Loading } from './directives/loading';
 export { default as Table } from './components/Table.vue';
 export { default as Button } from './components/Button.vue';
 export { default as Message } from './components/message/index';
