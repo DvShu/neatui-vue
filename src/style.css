@@ -195,3 +195,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.login-form-wrapper {
+  width: 400px;
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+  padding: 15px;
+}

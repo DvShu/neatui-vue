@@ -11,8 +11,10 @@
 </template>
 <script setup lang="ts">
 import { ref, provide, watch } from 'vue';
-import Validator from 'ph-utils/validator';
-import type { SchemaType } from 'ph-utils/validator';
+// import Validator from 'ph-utils/validator';
+import Validator from './validator';
+// import type { SchemaType } from 'ph-utils/validator';
+import type { SchemaType } from './validator';
 import { formContext } from './constant';
 
 const props = defineProps<{
@@ -60,7 +62,7 @@ if (props.model != null && validator != null) {
           if (value !== oldValues[i]) {
             // 数据验证, 验证单一字段;
             validator
-              .validateKey(keys[i], value)
+              .validateKey(keys[i], value, props.model)
               .then(() => {
                 errors.value[keys[i]] = undefined;
               })
