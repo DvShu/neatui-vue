@@ -1,4 +1,4 @@
-.nt-loading-bar-container {
+/* .nt-loading-bar-container {
   z-index: 5999;
   position: fixed;
   top: 0;
@@ -39,4 +39,20 @@
   max-width: 100%;
   background-color: #d03050;
   opacity: 0;
+} */
+
+.nt-loading {
+  position: relative;
+}
+.nt-loading-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(122, 122, 122, 0.8);
+  border-radius: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
