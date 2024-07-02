@@ -5,7 +5,7 @@ import { tabbarContext } from './constant';
 export default defineComponent({
   props: {
     name: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
   },

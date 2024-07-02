@@ -6,6 +6,7 @@
   position: relative;
   overflow: hidden;
   height: var(--nt-tabbar-height);
+  background-color: #ffffff;
 }
 
 .nt-tabbar-wrapper {
