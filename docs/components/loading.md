@@ -9,6 +9,10 @@
   import { ref } from 'vue'
 
   const loading = ref(true)
+
+  setTimeout(() => {
+    // loading.value = false
+  }, 5000);
 </script>
 
 ### 区域加载
@@ -18,14 +22,39 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <script setup>
-  </script>
-  <template>
-    <hr />
-  </template>
+  <div class="loading-demo" v-loading="loading">
+    内容加载区域
+  </div>
   </textarea>
   <template #preview>
     <div class="loading-demo" v-loading="loading">
+      内容加载区域
+    </div>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 自定义内容
+
+你可以自定义加载中组件的文字，背景颜色。
+
+在绑定了 `v-loading` 指令的元素上添加 `nt-loading-text` 属性，其值会被渲染为加载文案，并显示在加载图标的下方；将其设置为空字符串可以用于取消文本。`nt-loading-background` 用来设定背景色值。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+  </script>
+  <template>
+  </template>
+  </textarea>
+  <template #preview>
+    <div
+      class="loading-demo"
+      v-loading="loading"
+      nt-loading-text="loading……"
+      nt-loading-background="rgba(255, 255, 255, .9)"
+    >
       内容加载区域
     </div>
   </template>
