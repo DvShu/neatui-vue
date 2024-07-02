@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.1](https://github.com/DvShu/neatui-vue/compare/v0.8.0...v0.8.1) (2024-07-02)
+
+
+### Bug Fixes
+
+* **TabbarItem:** 优化 name 类型 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+* **Tabbar:** Tabbar默认白色背景 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+
 ## [0.8.0](https://github.com/DvShu/neatui-vue/compare/v0.7.1...v0.8.0) (2024-07-01)
 
 
