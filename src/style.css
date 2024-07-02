@@ -202,3 +202,10 @@
   border: 1px solid #e6e6e6;
   padding: 15px;
 }
+
+.loading-demo {
+  height: 300px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 10px;
+}
