@@ -32,7 +32,8 @@ jobs:
       - name: Check event type
         id: check_event
         run: |
-          echo "HeadRef": ${{ github.head_ref }}"
+          echo "EventName: ${{ github.event_name }}"
+          echo "HeadRef: ${{ github.head_ref }}"
 
       - uses: googleapis/release-please-action@v4
         id: release
