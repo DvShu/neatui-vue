@@ -1,0 +1,115 @@
+.nt-loading:not(.nt-loading-fullscreen) {
+  position: relative;
+}
+
+.nt-loading-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+.nt-loading-spinner {
+  text-align: center;
+}
+.nt-loading-spinner .circle {
+  display: inline;
+  width: 40px;
+  height: 40px;
+  animation: loading-rotate 2s ease-in-out infinite;
+}
+
+.nt-loading-spinner .path {
+  stroke: var(--nt-primary-color, #52c41a);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0px;
+  animation: loading-dash 1.5s ease-in-out infinite;
+}
+
+.nt-loading-spinner .nt-loading-text {
+  color: var(--nt-primary-color, #52c41a);
+  margin: 5px 0 0 0;
+  font-size: 14px;
+}
+
+/* 全屏组件 */
+.nt-loading-fullscreen.nt-loading-lock {
+  overflow: hidden;
+}
+.nt-loading-fullscreen > .nt-loading-mask {
+  position: fixed;
+  z-index: 100;
+}
+
+/* 进度条样式 */
+.nt-loading-bar.nt-loading-mask {
+  bottom: auto;
+  height: 2px;
+  border-radius: inherit;
+  background-color: transparent;
+  justify-content: flex-start;
+  opacity: 1;
+}
+.nt-loading-bar > .nt-loading-spinner {
+  width: 100%;
+  height: 100%;
+  max-width: 0;
+  opacity: 1;
+  transition:
+    max-width 4s linear,
+    background-color 0.2s linear,
+    opacity 0.2s linear;
+  background-color: var(--nt-primary-color, #52c41a);
+}
+.nt-loading-bar--start .nt-loading-spinner {
+  max-width: 90%;
+}
+
+.nt-loading-bar--finish .nt-loading-spinner {
+  transition:
+    max-width 0.2s linear,
+    background-color 0.2s linear,
+    opacity 0.2s linear;
+  max-width: 100%;
+  opacity: 0;
+}
+
+.nt-loading-bar--error .nt-loading-spinner {
+  transition:
+    max-width 0.2s linear,
+    background-color 0.2s linear,
+    opacity 0.2s linear;
+  max-width: 100%;
+  background-color: var(--nt-error-color, #d03050);
+  opacity: 0;
+}
+
+@keyframes loading-rotate {
+  100% {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+@keyframes loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
+  }
+}

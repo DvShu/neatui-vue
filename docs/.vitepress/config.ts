@@ -59,7 +59,6 @@ export default defineConfig({
           { text: 'Form 表单', link: '/components/form' },
           { text: 'Collapse 折叠面板', link: '/components/collapse' },
           { text: 'Progress 进度条', link: '/components/progress' },
-          { text: 'LoadingBar 加载条', link: '/components/loadingbar' },
           { text: 'Loading 加载', link: '/components/loading' },
           {
             text: 'DescriptionPanel 简介面板',
