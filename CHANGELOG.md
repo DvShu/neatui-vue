@@ -1,6 +1,30 @@
 # Changelog
 
+## [0.9.1](https://github.com/DvShu/neatui-vue/compare/v0.9.0...v0.9.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* 修复 Tabbar 选中问题 ([3118f98](https://github.com/DvShu/neatui-vue/commit/3118f9866276947af73a1dc74b4fcab630a90d9c))
+
 ## [0.9.0](https://github.com/DvShu/neatui-vue/compare/v0.8.1...v0.9.0) (2024-07-03)
+
+### Features
+
+- **Loading:** 新增加载指令 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
+
+### Bug Fixes
+
+- 移除 LoadingBar 组件 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
+
+## [0.8.1](https://github.com/DvShu/neatui-vue/compare/v0.8.0...v0.8.1) (2024-07-02)
+
+### Bug Fixes
+
+- **TabbarItem:** 优化 name 类型 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+- **Tabbar:** Tabbar默认白色背景 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+
+## [0.8.0](https://github.com/DvShu/neatui-vue/compare/v0.7.1...v0.8.0) (2024-07-01)
 
 ### Features
 
