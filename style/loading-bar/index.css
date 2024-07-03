@@ -55,8 +55,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
 }
-
+.nt-loading-spinner {
+  text-align: center;
+}
 .nt-loading-spinner .circle {
   display: inline;
   width: 40px;
@@ -72,6 +76,12 @@
   stroke-dasharray: 90, 150;
   stroke-dashoffset: 0px;
   animation: loading-dash 1.5s ease-in-out infinite;
+}
+
+.nt-loading-spinner .nt-loading-text {
+  color: var(--nt-primary-color, #52c41a);
+  margin: 5px 0 0 0;
+  font-size: 14px;
 }
 
 @keyframes loading-rotate {
