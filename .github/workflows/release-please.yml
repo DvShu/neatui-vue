@@ -32,7 +32,7 @@ jobs:
       - name: Check event type
         id: check_event
         run: |
-          echo "Event: ${{ toJson(github) }}"
+          echo "Event: ${{ toJson(env) }}"
 
       - uses: googleapis/release-please-action@v4
         id: release
