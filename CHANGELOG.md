@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/DvShu/neatui-vue/compare/v0.9.0...v0.9.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* 修复 Tabbar 选中问题 ([3118f98](https://github.com/DvShu/neatui-vue/commit/3118f9866276947af73a1dc74b4fcab630a90d9c))
+
 ## [0.9.0](https://github.com/DvShu/neatui-vue/compare/v0.8.1...v0.9.0) (2024-07-03)
 
 ### Features
