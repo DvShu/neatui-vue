@@ -23,7 +23,7 @@ import '../../../style/switch';
 import '../../../style/form';
 import '../../../style/collapse';
 import '../../../style/progress';
-import '../../../style/loading-bar';
+import '../../../style/loading';
 import '../../../style/description-panel';
 import '../../../style/tabbar';
 import '../../../style/util/tabs.css';
