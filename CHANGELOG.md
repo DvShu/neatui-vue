@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.9.0](https://github.com/DvShu/neatui-vue/compare/v0.8.1...v0.9.0) (2024-07-03)
+
+
+### Features
+
+* **Loading:** 新增加载指令 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
+
+
+### Bug Fixes
+
+* 移除 LoadingBar 组件 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
+
 ## [0.8.1](https://github.com/DvShu/neatui-vue/compare/v0.8.0...v0.8.1) (2024-07-02)
 
 
