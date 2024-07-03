@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, provide, ref } from 'vue';
+import { computed, onMounted, provide, ref, watch, nextTick } from 'vue';
 import { tabbarContext } from './constant';
 import { isVisible, elem } from 'ph-utils/dom';
 
@@ -67,32 +67,40 @@ const styles = computed(() => {
 });
 
 function calcItemPos(name: string) {
-  if (Rel.value != null) {
-    const $target = elem(
-      '.nt-tabbar-item[data-name="' + name + '"]',
-      Rel.value,
-    )[0];
-    const offsetLeft = $target.offsetLeft;
-    lineStyles.value = {
-      width: $target.offsetWidth + 'px',
-      left: `${offsetLeft}px`,
-    };
+  nextTick(() => {
     if (Rel.value != null) {
-      if (!isVisible($target, Rel.value)) {
-        Rel.value.scrollTo({
-          left: offsetLeft,
-          behavior: 'smooth',
-        });
+      const $target = elem(
+        '.nt-tabbar-item[data-name="' + name + '"]',
+        Rel.value,
+      )[0];
+      if ($target != null) {
+        const offsetLeft = $target.offsetLeft;
+        lineStyles.value = {
+          width: $target.offsetWidth + 'px',
+          left: `${offsetLeft}px`,
+        };
+        if (!isVisible($target, Rel.value)) {
+          Rel.value.scrollTo({
+            left: offsetLeft,
+            behavior: 'smooth',
+          });
+        }
       }
     }
-  }
+  });
 }
 
 function change(name: string | number) {
   model.value = name;
-  calcItemPos(String(name));
   emits('change', name);
 }
+
+watch(
+  () => model.value,
+  (val) => {
+    calcItemPos(String(val));
+  },
+);
 
 provide(tabbarContext, {
   active: model,
