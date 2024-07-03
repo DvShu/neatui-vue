@@ -2,38 +2,50 @@
 
 ## [0.9.0](https://github.com/DvShu/neatui-vue/compare/v0.8.1...v0.9.0) (2024-07-03)
 
-
 ### Features
 
-* **Loading:** 新增加载指令 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
-
+- **Loading:** 新增加载指令 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
 
 ### Bug Fixes
 
-* 移除 LoadingBar 组件 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
+- 移除 LoadingBar 组件 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
 
 ## [0.8.1](https://github.com/DvShu/neatui-vue/compare/v0.8.0...v0.8.1) (2024-07-02)
 
-
 ### Bug Fixes
 
-* **TabbarItem:** 优化 name 类型 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
-* **Tabbar:** Tabbar默认白色背景 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+- **TabbarItem:** 优化 name 类型 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+- **Tabbar:** Tabbar默认白色背景 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
 
 ## [0.8.0](https://github.com/DvShu/neatui-vue/compare/v0.7.1...v0.8.0) (2024-07-01)
 
-
 ### Features
 
-* 新增 tabbar 选项卡组件 ([a85565a](https://github.com/DvShu/neatui-vue/commit/a85565a13b228ad644c38f2681acd4eec8ed3a3b))
-* 新增 tabs 标签页样式 ([a85565a](https://github.com/DvShu/neatui-vue/commit/a85565a13b228ad644c38f2681acd4eec8ed3a3b))
-
-## [0.7.1](https://github.com/DvShu/neatui-vue/compare/v0.7.0...v0.7.1) (2024-06-26)
-
+- **Loading:** 新增加载指令 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
 
 ### Bug Fixes
 
-* **DescriptionPanel:** 修复简介面板不能正确隐藏展开按钮 ([7d74c2a](https://github.com/DvShu/neatui-vue/commit/7d74c2a8311ce3c20f34aea8d88f45c1c5f65611))
+- 移除 LoadingBar 组件 ([e591c5f](https://github.com/DvShu/neatui-vue/commit/e591c5f1b039b9051a29925a3aa58184f313f517))
+
+## [0.8.1](https://github.com/DvShu/neatui-vue/compare/v0.8.0...v0.8.1) (2024-07-02)
+
+### Bug Fixes
+
+- **TabbarItem:** 优化 name 类型 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+- **Tabbar:** Tabbar默认白色背景 ([7d39889](https://github.com/DvShu/neatui-vue/commit/7d39889f391c4b55b0277a8eae3db8d8b1f57658))
+
+## [0.8.0](https://github.com/DvShu/neatui-vue/compare/v0.7.1...v0.8.0) (2024-07-01)
+
+### Features
+
+- 新增 tabbar 选项卡组件 ([a85565a](https://github.com/DvShu/neatui-vue/commit/a85565a13b228ad644c38f2681acd4eec8ed3a3b))
+- 新增 tabs 标签页样式 ([a85565a](https://github.com/DvShu/neatui-vue/commit/a85565a13b228ad644c38f2681acd4eec8ed3a3b))
+
+## [0.7.1](https://github.com/DvShu/neatui-vue/compare/v0.7.0...v0.7.1) (2024-06-26)
+
+### Bug Fixes
+
+- **DescriptionPanel:** 修复简介面板不能正确隐藏展开按钮 ([7d74c2a](https://github.com/DvShu/neatui-vue/commit/7d74c2a8311ce3c20f34aea8d88f45c1c5f65611))
 
 ## [0.7.0](https://github.com/DvShu/neatui-vue/compare/v0.6.5...v0.7.0) (2024-06-26)
 
