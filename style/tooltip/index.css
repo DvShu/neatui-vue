@@ -34,7 +34,7 @@
   transform: translate3d(0, 0, 0);
 }
 
-.nt-tooltip:hover .nt-tooltip-content {
+.nt-tooltip-hover:hover .nt-tooltip-content {
   opacity: 1;
   visibility: visible;
 }

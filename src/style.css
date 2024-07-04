@@ -185,3 +185,27 @@
     }
   }
 }
+
+.loading-bar-demo {
+  height: 100px;
+  border: 1px solid #4998f4;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login-form-wrapper {
+  width: 400px;
+  border-radius: 5px;
+  border: 1px solid #e6e6e6;
+  padding: 15px;
+}
+
+.loading-demo {
+  height: 200px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 10px;
+}

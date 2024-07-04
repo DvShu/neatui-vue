@@ -22,7 +22,7 @@ import type { Component } from 'vue';
 import { defineAsyncComponent } from 'vue';
 import { snakeCaseStyle } from 'ph-utils';
 import { copy } from 'ph-utils/copy';
-import Message from '../components/Message/index';
+import Message from '../components/message/index';
 
 const modules = import.meta.glob('../components/icon/*.vue');
 const components: { name: string; component: Component }[] = [];
@@ -48,3 +48,4 @@ async function handleCopyIcon(name: string) {
 </script>
 
 <style lang="less"></style>
+../components/message/index

@@ -4,6 +4,7 @@
     "src/index.ts",
     "src/components/**/*.vue",
     "src/components/**/*.ts",
-    "src/directives/*.ts"
+    "src/directives/*.ts",
+    "src/hooks/*.ts"
   ]
 }

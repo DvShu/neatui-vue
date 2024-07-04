@@ -57,6 +57,21 @@ export default defineConfig({
           { text: 'Switch 开关', link: '/components/switch' },
           { text: 'Polygon 多边形', link: '/components/polygon' },
           { text: 'Form 表单', link: '/components/form' },
+          { text: 'Collapse 折叠面板', link: '/components/collapse' },
+          { text: 'Progress 进度条', link: '/components/progress' },
+          { text: 'Loading 加载', link: '/components/loading' },
+          {
+            text: 'DescriptionPanel 简介面板',
+            link: '/components/descriptionpanel',
+          },
+          {
+            text: 'Tabbar 标签栏',
+            link: '/components/tabbar',
+          },
+          {
+            text: 'Tabs 标签页',
+            link: '/components/tabs',
+          },
         ],
       },
     ],

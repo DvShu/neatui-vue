@@ -1,2 +1,2 @@
-import '../image_preview';
+import '../image-preview';
 import './index.css';

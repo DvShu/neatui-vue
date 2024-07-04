@@ -27,7 +27,7 @@
   vertical-align: middle;
   padding: 0 11px;
   line-height: 1;
-  height: var(--nt-form-edit-height);
+  height: var(--nt-form-edit-height, 32px);
   border-radius: 3px;
   font-size: 14px;
   color: var(--nt-btn-color);

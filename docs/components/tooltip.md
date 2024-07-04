@@ -144,6 +144,30 @@ import { Tooltip, Button } from '../../src'
 
 > 可以通过配合 `nt-tooltip-top`、`nt-tooltip-start` 等调整箭头或者提示框的位置
 
+### 触发方式
+
+默认是悬浮触发，可以通过修改 `trigger` 属性来改变触发方式
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <script setup>
+  </script>
+  <template>
+    <hr />
+  </template>
+  </textarea>
+  <template #preview>
+    <Tooltip title="prompt text">
+      <Button>悬浮</Button>
+    </Tooltip>
+    <Tooltip title="prompt text" trigger="click" class="ml-10">
+      <Button>点击</Button>
+    </Tooltip>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Tooltip Props

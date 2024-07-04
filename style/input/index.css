@@ -15,5 +15,5 @@
   width: auto;
 }
 .nt-input:focus {
-  border-color: var(--nt-primary-color);
+  border-color: var(--nt-primary-color, #52c41a);
 }

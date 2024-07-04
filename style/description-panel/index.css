@@ -1,0 +1,53 @@
+.nt-desc-panel {
+  --nt-desc-panel-min-height: 100px;
+  --nt-desc-panel-font-size: 12px;
+  --nt-desc-panel-textindent: calc(var(--nt-desc-panel-font-size) * 2);
+  max-height: var(--nt-desc-panel-max-height, max-content);
+  color: rgb(31 41 55);
+  font-size: var(--nt-desc-panel-font-size);
+  position: relative;
+  transition: all 0.15s linear;
+}
+
+.nt-desc-panel p {
+  text-indent: var(--nt-desc-panel-textindent);
+  margin: 0;
+  font-size: inherit;
+}
+.nt-desc-panel-operator {
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+  background: transparent;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+.nt-desc-panel-btnmore {
+  font-size: var(--nt-desc-panel-font-size);
+}
+.nt-desc-panel-arrow {
+  margin-left: 5px;
+  transition: transform 0.3s ease-in-out;
+  transform: rotate3d(0, 0, 1, 180deg);
+}
+
+.nt-desc-panel.collapse {
+  max-height: var(--nt-desc-panel-min-height);
+  overflow-y: hidden;
+}
+.nt-desc-panel.collapse .nt-desc-panel-operator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding-top: 65px;
+  background: linear-gradient(
+    -180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 80%
+  );
+}
+
+.nt-desc-panel.collapse .nt-desc-panel-arrow {
+  transform: rotate3d(1, 0, 0, 0deg);
+}

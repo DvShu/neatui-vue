@@ -11,6 +11,7 @@
       :style="{
         '--nt-form-label-width': labelWidth ? labelWidth : undefined,
       }"
+      v-if="label != null"
     >
       {{ label }}
     </label>
@@ -42,6 +43,7 @@ const props = withDefaults(
   {
     required: undefined,
     error: undefined,
+    label: undefined,
   },
 );
 
