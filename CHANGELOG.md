@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.3](https://github.com/DvShu/neatui-vue/compare/v0.9.2...v0.9.3) (2024-07-05)
+
+
+### Bug Fixes
+
+* **Table:** 修复类型定义错误 ([5bd88ec](https://github.com/DvShu/neatui-vue/commit/5bd88ec15ab237a4ae03d60da0c5a1a1c23e5bbb))
+
 ## [0.9.2](https://github.com/DvShu/neatui-vue/compare/v0.9.1...v0.9.2) (2024-07-04)
 
 
