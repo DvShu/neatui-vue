@@ -1,15 +1,16 @@
 .nt-input {
+  --nt-input-width: auto;
   outline: none;
   box-sizing: border-box;
+  width: var(--nt-input-width);
   height: var(--nt-form-edit-height, 32px);
   border: 1px solid #dedede;
   transition: border-color 0.3s;
-  background-color: transparent;
+  background-color: #ffffff;
   text-align: inherit;
   padding: 0 5px;
   border-radius: 3px;
   vertical-align: middle;
-  width: 100%;
 }
 .nt-input.is-autosize {
   width: auto;
