@@ -22,13 +22,13 @@ export interface ColumnOption {
   /** 表头分组配置 */
   children?: ColumnOption[];
   /** td colspan */
-  colspan: number | ((rowData: any, rowIndex: number) => number);
+  colspan?: number | ((rowData: any, rowIndex: number) => number);
   /** td rowspan */
-  rowspan: number | ((rowData: any, rowIndex: number) => number);
+  rowspan?: number | ((rowData: any, rowIndex: number) => number);
   /** th colspan */
-  titleColspan: number;
+  titleColspan?: number;
   /** th rowspan */
-  titleRowspan: number;
+  titleRowspan?: number;
   /** 设置可选择 */
   type?: 'radio' | 'checkbox';
   /** 为 radio，checkbox 设置是否禁用 */
@@ -63,7 +63,7 @@ function calculateSpan(headers: ColumnOption[], level = 0): ColumnOption[] {
       const childrenSpans = calculateSpan(header.children, level + 1);
       if (titleColspan == null) {
         titleColspan = childrenSpans.reduce(
-          (sum, childSpan) => sum + childSpan.titleColspan,
+          (sum, childSpan) => sum + (childSpan.titleColspan || 0),
           0,
         );
       }

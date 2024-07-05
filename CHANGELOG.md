@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.2](https://github.com/DvShu/neatui-vue/compare/v0.9.1...v0.9.2) (2024-07-04)
+
+
+### Bug Fixes
+
+* conflict ([632d1f7](https://github.com/DvShu/neatui-vue/commit/632d1f772482bd548792a8ba4778a39c56b20d0e))
+* **Tooltip:** 文字提示增加触发方式 ([bfea512](https://github.com/DvShu/neatui-vue/commit/bfea5124c48b92c68c627903be041c8174e3ae45))
+
 ## [0.9.1](https://github.com/DvShu/neatui-vue/compare/v0.9.0...v0.9.1) (2024-07-03)
 
 

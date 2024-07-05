@@ -43,3 +43,5 @@ export { default as Progress } from './components/Progress.vue';
 export { default as DescriptionPanel } from './components/DescriptionPanel.vue';
 export { default as Tabbar } from './components/tabbar/Tabbar.vue';
 export { default as TabbarItem } from './components/tabbar/TabbarItem.vue';
+
+export type { ColumnOption } from './components/Table.vue';
