@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.10.0](https://github.com/DvShu/neatui-vue/compare/v0.9.3...v0.10.0) (2024-07-05)
+
+
+### Features
+
+* **Form:** 表单增加行内表单选项 ([37f3ff5](https://github.com/DvShu/neatui-vue/commit/37f3ff58b0b4429fe34a727aae863be3e370d05b))
+
+
+### Bug Fixes
+
+* **Input:** 修复输入框背景异常 ([37f3ff5](https://github.com/DvShu/neatui-vue/commit/37f3ff58b0b4429fe34a727aae863be3e370d05b))
+
+## [0.9.3](https://github.com/DvShu/neatui-vue/compare/v0.9.2...v0.9.3) (2024-07-05)
+
+
+### Bug Fixes
+
+* **Table:** 修复类型定义错误 ([5bd88ec](https://github.com/DvShu/neatui-vue/commit/5bd88ec15ab237a4ae03d60da0c5a1a1c23e5bbb))
+
+## [0.9.2](https://github.com/DvShu/neatui-vue/compare/v0.9.1...v0.9.2) (2024-07-04)
+
+
+### Bug Fixes
+
+* conflict ([632d1f7](https://github.com/DvShu/neatui-vue/commit/632d1f772482bd548792a8ba4778a39c56b20d0e))
+* **Tooltip:** 文字提示增加触发方式 ([bfea512](https://github.com/DvShu/neatui-vue/commit/bfea5124c48b92c68c627903be041c8174e3ae45))
+
 ## [0.9.1](https://github.com/DvShu/neatui-vue/compare/v0.9.0...v0.9.1) (2024-07-03)
 
 
