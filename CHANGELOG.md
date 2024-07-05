@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.0](https://github.com/DvShu/neatui-vue/compare/v0.9.3...v0.10.0) (2024-07-05)
+
+
+### Features
+
+* **Form:** 表单增加行内表单选项 ([37f3ff5](https://github.com/DvShu/neatui-vue/commit/37f3ff58b0b4429fe34a727aae863be3e370d05b))
+
+
+### Bug Fixes
+
+* **Input:** 修复输入框背景异常 ([37f3ff5](https://github.com/DvShu/neatui-vue/commit/37f3ff58b0b4429fe34a727aae863be3e370d05b))
+
 ## [0.9.3](https://github.com/DvShu/neatui-vue/compare/v0.9.2...v0.9.3) (2024-07-05)
 
 
