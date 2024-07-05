@@ -106,6 +106,8 @@ function handleSubmit(e: Event) {
           [err.key]: err.message,
         };
       });
+  } else {
+    emits('submit');
   }
 }
 </script>
