@@ -34,3 +34,16 @@
 .nt-form-item.is-error .nt-input {
   border-color: var(--nt-error-color, #ed3f13);
 }
+.nt-form-item .nt-input {
+  width: 100%;
+}
+
+/** 行内表单 */
+.nt-form-inline .nt-form-item {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+.nt-form-inline .nt-form-item__label {
+  --nt-form-label-width: auto;
+}

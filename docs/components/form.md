@@ -69,7 +69,7 @@
       <nt-form-item label="密码" required name="password">
         <nt-input placeholder="请输入密码" v-model="formFields.password"></nt-input>
       </nt-form-item>
-      <nt-form-item>
+      <nt-form-item label="">
         <nt-button html-type="submit">提交</nt-button>
         <nt-button type="normal" @click="handleReset">重置</nt-button>
       </nt-form-item>
@@ -84,9 +84,52 @@
       <FormItem label="密码" required name="password">
         <Input placeholder="请输入密码" v-model="formFields.password"></Input>
       </FormItem>
-      <FormItem>
+      <FormItem label="">
         <Button html-type="submit">提交</Button>
         <Button type="normal" @click="handleReset">重置</Button>
+      </FormItem>
+    </Form>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 行内表单
+
+当前表单较简单时，可以在一行内放置表单。
+
+通过设置 `inline` 属性为 `true` 可以让表单域变为行内的表单域。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-form inline>
+    <nt-form-item label="用户名" required name="username">
+      <nt-input placeholder="请输入用户名"></nt-input>
+    </nt-form-item>
+    <nt-form-item label="密码" required name="password">
+      <nt-input placeholder="请输入密码"></nt-input>
+    </nt-form-item>
+    <nt-form-item>
+      <nt-button html-type="submit">提交</nt-button>
+    </nt-form-item>
+  </nt-form>
+  </textarea>
+  <template #preview>
+    <Form inline>
+      <FormItem label="用户名" name="username">
+        <Input placeholder="请输入用户名"></Input>
+      </FormItem>
+      <FormItem label="密码" name="password">
+        <Input placeholder="请输入密码"></Input>
+      </FormItem>
+      <FormItem label="用户名" name="username">
+        <Input placeholder="请输入用户名"></Input>
+      </FormItem>
+      <FormItem label="密码" name="password">
+        <Input placeholder="请输入密码"></Input>
+      </FormItem>
+      <FormItem>
+        <Button html-type="submit">提交</Button>
       </FormItem>
     </Form>
   </template>

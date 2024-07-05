@@ -1,6 +1,9 @@
 <template>
   <form
-    class="nt-form"
+    :class="{
+      'nt-form': true,
+      'nt-form-inline': inline,
+    }"
     :style="{
       '--nt-form-label-width': labelWidth ? labelWidth : undefined,
     }"
@@ -15,14 +18,21 @@ import Validator from 'ph-utils/validator';
 import type { SchemaType } from 'ph-utils/validator';
 import { formContext } from './constant';
 
-const props = defineProps<{
-  /** 表单数据对象 */
-  model?: Record<string, any>;
-  /** 标签宽度 */
-  labelWidth?: string;
-  /** 验证规则 */
-  rules?: SchemaType[];
-}>();
+const props = withDefaults(
+  defineProps<{
+    /** 表单数据对象 */
+    model?: Record<string, any>;
+    /** 标签宽度 */
+    labelWidth?: string;
+    /** 验证规则 */
+    rules?: SchemaType[];
+    /** 是否行内表单 */
+    inline?: boolean;
+  }>(),
+  {
+    inline: false,
+  },
+);
 
 const emits = defineEmits(['submit']);
 
