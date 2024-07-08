@@ -1,0 +1,93 @@
+body.nt-body-lock {
+  overflow: hidden;
+}
+
+.nt-dialog-normal {
+  display: block;
+}
+
+.nt-dialog-align-center {
+  display: flex;
+}
+.nt-dialog-align-center .nt-dialog-main {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+.nt-dialog-main {
+  background-color: white;
+  border-radius: 5px;
+  width: 30%;
+  margin: auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: translate3d(0, 80px, 0) scale(1);
+  opacity: 1;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.nt-dialog-header {
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #dedede;
+  font-weight: bold;
+}
+
+/* 右上角关闭按钮 */
+.nt-dialog-close1,
+.nt-dialog-close2 {
+  --nt-form-edit-height: auto;
+  font-size: 16px;
+  position: absolute;
+  padding: 5px;
+  background-color: white;
+}
+
+.nt-dialog-close1 {
+  right: 5px;
+  width: auto;
+  height: auto;
+  top: 6px;
+  padding: 5px;
+  border: none;
+}
+
+/* 内容区域 */
+.nt-dialog-container {
+  padding: 15px 10px;
+  font-size: 14px;
+}
+
+/* 底部按钮区域 */
+.nt-dialog-footer {
+  padding: 10px;
+  text-align: right;
+  border-top: 1px solid #dedede;
+}
+
+.nt-dialog-close2 {
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  top: -12px;
+}
+
+.nt-dialog-enter-active,
+.nt-dialog-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.nt-dialog-enter-from,
+.nt-dialog-leave-to {
+  opacity: 0;
+  .nt-dialog-main {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nt-dialog .nt-dialog-main {
+    width: 80%;
+  }
+}

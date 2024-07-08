@@ -28,6 +28,8 @@ import '../../../style/description-panel';
 import '../../../style/tabbar';
 import '../../../style/popover';
 import '../../../style/util/tabs.css';
+import '../../../style/list';
+import '../../../style/dialog';
 
 export default {
   extends: DefaultTheme,

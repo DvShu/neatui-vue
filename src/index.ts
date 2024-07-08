@@ -1,3 +1,5 @@
+export type { ColumnOption } from './components/Table.vue';
+
 export { default as BaseIcon } from './components/icon/Base.vue';
 export { default as MaskCloseIcon } from './components/icon/MaskClose.vue';
 export { default as SearchIcon } from './components/icon/Search.vue';
@@ -43,6 +45,6 @@ export { default as Progress } from './components/Progress.vue';
 export { default as DescriptionPanel } from './components/DescriptionPanel.vue';
 export { default as Tabbar } from './components/tabbar/Tabbar.vue';
 export { default as TabbarItem } from './components/tabbar/TabbarItem.vue';
-
-export type { ColumnOption } from './components/Table.vue';
-export { default as Popover } from "./components/Popover.vue"
+export { default as Popover } from './components/Popover.vue';
+export { default as List } from './components/List.vue';
+export { default as Dialog } from './components/Dialog.vue';

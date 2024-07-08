@@ -1,0 +1,194 @@
+<script lang="ts">
+import { defineComponent, watch, h, Teleport, Transition } from 'vue';
+import type { PropType } from 'vue';
+import Shadow from './Shadow.vue';
+import Button from './Button.vue';
+import CloseIcon from './icon/Close.vue';
+
+export default defineComponent({
+  props: {
+    /** 控制遮罩展现，是否显示遮罩 */
+    mask: {
+      type: Boolean,
+      default: true,
+    },
+    /** 是否可以通过点击 mask 关闭对话框 */
+    maskClosable: {
+      type: Boolean,
+      default: true,
+    },
+    type: {
+      type: String as PropType<'normal'>,
+      default: 'normal',
+    },
+    /** 是否显示对话框 */
+    modelValue: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    /** Dialog 对话框 Dialog 的标题， 也可通过具名 slot （见下表）传入
+     * 如果都不传，则不显示标题
+     */
+    title: String,
+    /** 是否显示右上角关闭按钮, 1 - 显示在框内， 2 - 显示在框角, 0 - 不显示 */
+    showClose: {
+      type: Number as PropType<1 | 2 | 0>,
+      default: 1,
+    },
+    /** 是否显示底部取消按钮 */
+    showCandel: {
+      type: Boolean,
+      default: true,
+    },
+    /** 是否显示底部确定按钮 */
+    showOk: {
+      type: Boolean,
+      default: true,
+    },
+    /** 内容区域样式 */
+    containerClass: {
+      type: String,
+      default: '',
+    },
+    /** 是否水平垂直对齐对话框 */
+    alignCenter: {
+      type: Boolean,
+      default: false,
+    },
+    /** 关闭前的回调, 会暂停 Dialog 的关闭. 回调返回 true 表明关闭对话框. */
+    beforeClose: {
+      type: Function as PropType<(type: string) => boolean | undefined>,
+      default: () => true,
+    },
+  },
+  emits: ['update:modelValue'],
+  setup(props, { slots, emit }) {
+    if (props.modelValue === true) {
+      document.body.classList.add('nt-body-lock');
+    }
+
+    watch(
+      () => props.modelValue,
+      (val) => {
+        if (val === true) {
+          document.body.classList.add('nt-body-lock');
+        } else {
+          document.body.classList.remove('nt-body-lock');
+        }
+      },
+    );
+
+    function shadowClick() {
+      if (props.mask && props.maskClosable) {
+        close('close');
+      }
+    }
+
+    function close(type: 'cancel' | 'close') {
+      if (props.beforeClose(type)) {
+        emit('update:modelValue', false);
+      }
+    }
+
+    return () => {
+      return h(
+        Teleport,
+        { to: 'body' },
+        h(
+          Transition,
+          {
+            appear: true,
+            name: 'nt-dialog',
+          },
+          {
+            default: () =>
+              props.modelValue
+                ? h(
+                    Shadow,
+                    {
+                      shadowClass: [
+                        'nt-dialog',
+                        'nt-dialog-' + props.type,
+                        props.alignCenter ? 'nt-dialog-align-center' : '',
+                      ]
+                        .join(' ')
+                        .trim(),
+                      transparent: !props.mask,
+                      onShadowClick: shadowClick,
+                    },
+                    {
+                      default: () => {
+                        const $contents = [];
+                        if (slots.header != null) {
+                          $contents.push(slots.header());
+                        } else if (props.title != null) {
+                          $contents.push(
+                            h(
+                              'div',
+                              { class: 'nt-dialog-header' },
+                              props.title,
+                            ),
+                          );
+                        }
+                        if (props.showClose !== 0) {
+                          $contents.push(
+                            h(
+                              Button,
+                              {
+                                circle: true,
+                                type: 'normal',
+                                class: `nt-dialog-close${props.showClose}`,
+                                onClick: () => close('close'),
+                              },
+                              {
+                                default: () => h(CloseIcon),
+                              },
+                            ),
+                          );
+                        }
+                        $contents.push(
+                          h(
+                            'div',
+                            {
+                              class: [
+                                'nt-dialog-container',
+                                props.containerClass,
+                              ],
+                            },
+                            slots.default != null ? slots.default() : undefined,
+                          ),
+                        );
+                        if (slots.footer != null) {
+                          $contents.push(slots.footer());
+                        } else {
+                          $contents.push(
+                            h('div', { class: 'nt-dialog-footer' }, [
+                              props.showCandel
+                                ? h(
+                                    Button,
+                                    {
+                                      type: 'normal',
+                                      onClick: () => close('close'),
+                                    },
+                                    { default: () => '取消' },
+                                  )
+                                : undefined,
+                              props.showOk
+                                ? h(Button, {}, { default: () => '确定' })
+                                : undefined,
+                            ]),
+                          );
+                        }
+                        return h('div', { class: 'nt-dialog-main' }, $contents);
+                      },
+                    },
+                  )
+                : null,
+          },
+        ),
+      );
+    };
+  },
+});
+</script>
