@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.1](https://github.com/DvShu/neatui-vue/compare/v0.10.0...v0.10.1) (2024-07-05)
+
+
+### Bug Fixes
+
+* **Form:** 修复表单提交 ([9baa6df](https://github.com/DvShu/neatui-vue/commit/9baa6dfa7b61d113e6e408287c70b95337cda390))
+* **Loading:** 增加结束检测避免因错误而无法触发transitionEnd事件 ([9da2d06](https://github.com/DvShu/neatui-vue/commit/9da2d069489391ff1c7772aca42769e363a8846d))
+
 ## [0.10.0](https://github.com/DvShu/neatui-vue/compare/v0.9.3...v0.10.0) (2024-07-05)
 
 

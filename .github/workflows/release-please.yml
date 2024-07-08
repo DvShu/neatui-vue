@@ -47,9 +47,9 @@ jobs:
         id: is-published
         # these if statements ensure that a publication only occurs when
         # a new release is created:
-        if: ${{ steps.release.outputs.release_created }}
         run: |
-          echo "is_published"
+          echo "is_published: ${{ steps.release.outputs.releases_created }}"
+          echo "prs_created: ${{ steps.release.outputs.prs_created }}"
 
       - name: Output Release Created
         id: output-release-created

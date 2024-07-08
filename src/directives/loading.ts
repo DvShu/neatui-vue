@@ -93,19 +93,25 @@ function removeLoading(
   arg?: string,
 ) {
   const selectorPrefix = modifiers.fullscreen ? '#' : '.';
-  const $mask = elem(`${selectorPrefix}nt-loading-mask`, el)[0];
+  let $mask = elem(`${selectorPrefix}nt-loading-mask`, el)[0];
   if ($mask) {
+    function transitionEnd() {
+      el.classList.remove(
+        'nt-loading',
+        'nt-loading-lock',
+        'nt-loading-fullscreen',
+        'nt-loading-bar--finish',
+        'nt-loading-bar--start',
+      );
+      if ($mask != null) {
+        el.removeChild($mask);
+        $mask = undefined as any;
+      }
+    }
     $mask.addEventListener(
       'transitionend',
       () => {
-        el.classList.remove(
-          'nt-loading',
-          'nt-loading-lock',
-          'nt-loading-fullscreen',
-          'nt-loading-bar--finish',
-          'nt-loading-bar--start',
-        );
-        el.removeChild($mask);
+        transitionEnd();
       },
       { once: true },
     );
@@ -114,6 +120,10 @@ function removeLoading(
     } else {
       $mask.style.opacity = '0';
     }
+    // 检测避免因为错误导致无法移除
+    setTimeout(() => {
+      transitionEnd();
+    }, 350);
   }
 }
 
