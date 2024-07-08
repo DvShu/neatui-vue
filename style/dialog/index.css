@@ -1,0 +1,34 @@
+body.nt-body-lock {
+  overflow: hidden;
+}
+
+.nt-dialog-container {
+  background-color: white;
+  border-radius: 5px;
+  width: 30%;
+  margin: auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: translate3d(0, 40px, 0) scale(1);
+  opacity: 1;
+  transition:
+    opacity 3s ease-in-out,
+    transform 3s ease-in-out;
+}
+
+.nt-dialog-header {
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #dedede;
+  font-weight: bold;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
