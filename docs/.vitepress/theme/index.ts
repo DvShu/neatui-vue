@@ -26,6 +26,7 @@ import '../../../style/progress';
 import '../../../style/loading';
 import '../../../style/description-panel';
 import '../../../style/tabbar';
+import '../../../style/popover';
 import '../../../style/util/tabs.css';
 
 export default {
