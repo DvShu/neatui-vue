@@ -45,3 +45,4 @@ export { default as Tabbar } from './components/tabbar/Tabbar.vue';
 export { default as TabbarItem } from './components/tabbar/TabbarItem.vue';
 
 export type { ColumnOption } from './components/Table.vue';
+export { default as List } from "./components/List.vue"

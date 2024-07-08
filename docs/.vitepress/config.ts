@@ -72,6 +72,10 @@ export default defineConfig({
             text: 'Tabs 标签页',
             link: '/components/tabs',
           },
+          {
+            text: 'List 滚动列表',
+            link: '/components/list',
+          },
         ],
       },
     ],

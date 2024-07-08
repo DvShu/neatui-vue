@@ -31,21 +31,35 @@ async function createComponentTemplate(name) {
   // 应用样式导入
   const docsPath = path.join(process.cwd(), 'docs/.vitepress/theme/index.ts');
   let importContent = await readFile(docsPath, 'utf-8');
-  exportContent = exportContent.replace(
+  importContent = importContent.replace(
     '\r\nexport default DefaultTheme;',
     `import '../../../style/${snakeName}';\r\nexport default DefaultTheme;`,
   );
   await write(docsPath, importContent);
 
+  // 编辑侧边栏配置
+  const configPaht = paht.join(process.cwd(), 'docs/.vitepress/config.ts');
+  let configContent = await readFile(configPaht, 'utf-8');
+  const configReg =
+    /export\s+default\s+defineComponent\s*\(\s*(\{{[\s\S]*?\})\s*\)/;
+  configContent = configContent.replace(configReg, (m) => {
+    console.log(m);
+  });
+  console.log(configContent);
+
   // 生成文档组件模板
   const docTemplateContents = [
-    `# ${name}`,
-    `${name}`,
-    '## 演示',
-    '### 基础用法',
-    '基础用法',
-    '## API',
-    `### ${name} Props`,
+    `# ${name}\r\n`,
+    `${name}\r\n`,
+    '## 演示\r\n',
+    '<script setup>',
+    `  import { ${name} } from "../../src"`,
+    '</script>\r\n',
+    '### 基础用法\r\n',
+    '基础用法\r\n',
+    '## API\r\n',
+    `### ${name} Props\r\n`,
+    '<!-- prettier-ignore -->',
     '| 参数 | 说明 | 类型 | 默认值 |',
     '| ---- | ---- | ---- | ---- |',
     '| x | x | x | x |',

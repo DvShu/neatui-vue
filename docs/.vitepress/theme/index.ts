@@ -27,6 +27,7 @@ import '../../../style/loading';
 import '../../../style/description-panel';
 import '../../../style/tabbar';
 import '../../../style/util/tabs.css';
+import '../../../style/list'
 
 export default {
   extends: DefaultTheme,
