@@ -1,28 +1,43 @@
 <script lang="ts">
-import { defineComponent, h, VNode } from 'vue';
+import { defineComponent, h, VNode, Teleport, ref, Transition } from 'vue';
 import type { PropType } from 'vue';
 
-function getFirstSlotVNode(vnodes?: VNode[]) {
-  if (vnodes != null) {
-    return vnodes[0];
+function getFirstTriggerVNode(slots: any): VNode | null {
+  if (slots.trigger != null) {
+    return slots.trigger()[0];
   }
   return null;
 }
 
 export default defineComponent({
   props: {
+    /** 触发方式: hover - 渲染, click - 点击 */
     trigger: {
       type: String as PropType<'hover' | 'click'>,
       default: 'hover',
     },
+    /** 显示的内容，也可以通过写入默认 slot 修改显示内容 */
+    content: String,
   },
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
+    const show = ref(false);
+    const posStyle = ref({});
+
     function handleMouseEnter(e: Event) {
-      console.log('mouseenter');
+      const $target = e.target as HTMLElement;
+      const rect = $target.getBoundingClientRect();
+      console.log(rect);
+      console.log($target.offsetParent.getBoundingClientRect());
+      posStyle.value = {
+        top: 500 + 'px',
+        left: `${rect.left}px`,
+      };
+      show.value = true;
     }
 
-    function hanldeMouseLeave(e: Event) {
-      console.log('mouseleave');
+    /** 鼠标离开事件 */
+    function hanldeMouseLeave() {
+      show.value = false;
     }
 
     function handleClick(e: Event) {
@@ -30,9 +45,7 @@ export default defineComponent({
     }
 
     return () => {
-      const firstVNode = getFirstSlotVNode(
-        slots.default != null ? slots.default() : undefined,
-      );
+      const firstVNode = getFirstTriggerVNode(slots);
       if (firstVNode == null) {
         return null;
       }
@@ -43,7 +56,38 @@ export default defineComponent({
       } else {
         prop.onClick = handleClick;
       }
-      return h('div', h(firstVNode, prop));
+      return [
+        h(firstVNode, prop),
+        h(
+          Teleport,
+          { to: 'body' },
+          h(
+            Transition,
+            { name: 'nt-opacity' },
+            {
+              default: () =>
+                show.value
+                  ? h(
+                      'div',
+                      {
+                        ...attrs,
+                        class: ['nt-popover', attrs.class],
+                        style: [posStyle.value],
+                      },
+                      [
+                        slots.default != null
+                          ? slots.default()
+                          : props.content != null
+                            ? h('span', props.content)
+                            : null,
+                        h('span', { class: 'nt-popover-arrow' }),
+                      ],
+                    )
+                  : null,
+            },
+          ),
+        ),
+      ];
     };
   },
 });

@@ -1,0 +1,24 @@
+.nt-popover {
+  --nt-popover-border-color: #e4e4e4;
+  position: absolute;
+  top: 264px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  border: 1px solid var(--nt-popover-border-color);
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 30;
+  color: #666666;
+  box-sizing: border-box;
+}
+
+.nt-popover-arrow {
+  position: absolute;
+  border-width: 6px;
+  border-style: solid;
+  left: 50%;
+  margin-left: -5px;
+  top: 100%;
+  border-color: var(--nt-popover-border-color) transparent transparent
+    transparent;
+}
