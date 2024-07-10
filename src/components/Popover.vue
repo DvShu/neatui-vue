@@ -20,16 +20,26 @@ export default defineComponent({
     content: String,
   },
   setup(props, { slots, attrs }) {
-    const show = ref(false);
-    const posStyle = ref({});
+    const show = ref(true);
+    const posStyle = ref({
+      left: '109px',
+      top: '400px',
+    });
+    function getDistanceToScrollTop(element) {
+      let distance = 0;
+      while (element) {
+        distance += element.offsetTop;
+        element = element.offsetParent;
+      }
+      return distance;
+    }
 
     function handleMouseEnter(e: Event) {
       const $target = e.target as HTMLElement;
       const rect = $target.getBoundingClientRect();
-      console.log(rect);
-      console.log($target.offsetParent.getBoundingClientRect());
+      console.log(getDistanceToScrollTop1($target));
       posStyle.value = {
-        top: 500 + 'px',
+        top: 560 + 'px',
         left: `${rect.left}px`,
       };
       show.value = true;
