@@ -1,7 +1,6 @@
 .nt-popover {
   --nt-popover-border-color: #e4e4e4;
   position: absolute;
-  top: 264px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.12);
   background: #ffffff;
   border: 1px solid var(--nt-popover-border-color);
@@ -14,11 +13,26 @@
 
 .nt-popover-arrow {
   position: absolute;
-  border-width: 6px;
-  border-style: solid;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
   left: 50%;
-  margin-left: -5px;
-  top: 100%;
-  border-color: var(--nt-popover-border-color) transparent transparent
-    transparent;
+  bottom: -4px;
+  margin-left: -4px;
+}
+
+.nt-popover-arrow::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  transform: rotate3d(0, 0, 1, 45deg);
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border: transparent var(--nt-popover-border-color)
+    var(--nt-popover-border-color) transparent;
+  box-sizing:
+    inset 0 -0.5px 0 var(--td-gray-color-9),
+    inset -0.5px 0 0 var(--td-gray-color-9);
 }

@@ -101,7 +101,7 @@ export default defineConfig({
             link: '/components/list',
           },
           {
-            text: 'Popover 弹出起泡',
+            text: 'Popover 弹出气泡',
             link: '/components/popover',
           },
           {

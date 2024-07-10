@@ -1,5 +1,14 @@
 <script lang="ts">
-import { defineComponent, h, VNode, Teleport, ref, Transition } from 'vue';
+import {
+  defineComponent,
+  h,
+  VNode,
+  Teleport,
+  ref,
+  Transition,
+  nextTick,
+  onMounted,
+} from 'vue';
 import type { PropType } from 'vue';
 
 function getFirstTriggerVNode(slots: any): VNode | null {
@@ -7,6 +16,18 @@ function getFirstTriggerVNode(slots: any): VNode | null {
     return slots.trigger()[0];
   }
   return null;
+}
+
+/** 获取某个节点距离容器顶部和左边的距离 */
+function getDistanceToContainer(el: HTMLElement) {
+  let left = 0;
+  let top = 0;
+  while (el) {
+    top += el.offsetTop;
+    left += el.offsetLeft;
+    el = el.offsetParent as HTMLElement;
+  }
+  return { left, top };
 }
 
 export default defineComponent({
@@ -18,31 +39,37 @@ export default defineComponent({
     },
     /** 显示的内容，也可以通过写入默认 slot 修改显示内容 */
     content: String,
+    placement: {
+      type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+      default: 'top',
+    },
   },
   setup(props, { slots, attrs }) {
-    const show = ref(true);
-    const posStyle = ref({
-      left: '109px',
-      top: '400px',
-    });
-    function getDistanceToScrollTop(element) {
-      let distance = 0;
-      while (element) {
-        distance += element.offsetTop;
-        element = element.offsetParent;
-      }
-      return distance;
-    }
+    const show = ref(false);
+
+    const $popover = ref<HTMLDivElement>();
+
+    const posStyle = ref();
 
     function handleMouseEnter(e: Event) {
       const $target = e.target as HTMLElement;
-      const rect = $target.getBoundingClientRect();
-      console.log(getDistanceToScrollTop1($target));
-      posStyle.value = {
-        top: 560 + 'px',
-        left: `${rect.left}px`,
-      };
       show.value = true;
+      console.log('enter');
+      nextTick(() => {
+        const { left, top } = getDistanceToContainer($target);
+        let offsetTop = 0;
+        let offsetLeft = 0;
+        if ($popover.value != null) {
+          const popoverRect = $popover.value.getBoundingClientRect();
+          offsetTop = popoverRect.height + 10;
+          const targetRect = $target.getBoundingClientRect();
+          offsetLeft = popoverRect.width / 2 - targetRect.width / 2;
+        }
+        posStyle.value = {
+          top: `${top - offsetTop}px`,
+          left: `${left - offsetLeft}px`,
+        };
+      });
     }
 
     /** 鼠标离开事件 */
@@ -82,7 +109,8 @@ export default defineComponent({
                       {
                         ...attrs,
                         class: ['nt-popover', attrs.class],
-                        style: [posStyle.value],
+                        style: [attrs.style, posStyle.value],
+                        ref: $popover,
                       },
                       [
                         slots.default != null
