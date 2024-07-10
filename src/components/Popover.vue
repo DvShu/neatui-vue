@@ -7,7 +7,6 @@ import {
   ref,
   Transition,
   nextTick,
-  onMounted,
 } from 'vue';
 import type { PropType } from 'vue';
 
@@ -39,8 +38,11 @@ export default defineComponent({
     },
     /** 显示的内容，也可以通过写入默认 slot 修改显示内容 */
     content: String,
+    /** 弹出位置 */
     placement: {
-      type: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
+      type: String as PropType<
+        'topStart' | 'top' | 'topEnd' | 'bottomStart' | 'bottom' | 'bottomEnd'
+      >,
       default: 'top',
     },
   },
@@ -49,20 +51,32 @@ export default defineComponent({
 
     const $popover = ref<HTMLDivElement>();
 
-    const posStyle = ref();
+    let closeT: number | undefined;
+
+    const posStyle = ref({});
 
     function handleMouseEnter(e: Event) {
+      if (show.value) {
+        if (closeT != null) {
+          clearTimeout(closeT);
+          closeT = undefined;
+        }
+        return;
+      }
       const $target = e.target as HTMLElement;
       show.value = true;
-      console.log('enter');
       nextTick(() => {
         const { left, top } = getDistanceToContainer($target);
         let offsetTop = 0;
         let offsetLeft = 0;
         if ($popover.value != null) {
           const popoverRect = $popover.value.getBoundingClientRect();
-          offsetTop = popoverRect.height + 10;
           const targetRect = $target.getBoundingClientRect();
+          if (props.placement === 'top') {
+            offsetTop = popoverRect.height + 10;
+          } else if (props.placement === 'bottom') {
+            offsetTop = -(targetRect.height + 10);
+          }
           offsetLeft = popoverRect.width / 2 - targetRect.width / 2;
         }
         posStyle.value = {
@@ -74,7 +88,9 @@ export default defineComponent({
 
     /** 鼠标离开事件 */
     function hanldeMouseLeave() {
-      show.value = false;
+      closeT = setTimeout(() => {
+        show.value = false;
+      }, 150) as any;
     }
 
     function handleClick(e: Event) {
@@ -108,9 +124,25 @@ export default defineComponent({
                       'div',
                       {
                         ...attrs,
-                        class: ['nt-popover', attrs.class],
+                        class: [
+                          'nt-popover',
+                          props.placement.startsWith('top')
+                            ? 'nt-popover-top'
+                            : '',
+                          props.placement.startsWith('bottom')
+                            ? 'nt-popover-bottom'
+                            : '',
+                          props.placement.endsWith('Start')
+                            ? 'nt-popover-start'
+                            : '',
+                          props.placement.endsWith('End')
+                            ? 'nt-popover-end'
+                            : '',
+                          attrs.class,
+                        ],
                         style: [attrs.style, posStyle.value],
                         ref: $popover,
+                        ...prop,
                       },
                       [
                         slots.default != null

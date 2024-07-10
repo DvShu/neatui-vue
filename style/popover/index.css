@@ -17,7 +17,6 @@
   height: 8px;
   z-index: -1;
   left: 50%;
-  bottom: -4px;
   margin-left: -4px;
 }
 
@@ -30,9 +29,22 @@
   background-color: #ffffff;
   border-width: 1px;
   border-style: solid;
-  border: transparent var(--nt-popover-border-color)
+}
+
+/* top */
+.nt-popover-top .nt-popover-arrow {
+  bottom: -4px;
+}
+.nt-popover-top .nt-popover-arrow::before {
+  border-color: transparent var(--nt-popover-border-color)
     var(--nt-popover-border-color) transparent;
-  box-sizing:
-    inset 0 -0.5px 0 var(--td-gray-color-9),
-    inset -0.5px 0 0 var(--td-gray-color-9);
+}
+
+/* bottom */
+.nt-popover-bottom .nt-popover-arrow {
+  top: -4px;
+}
+.nt-popover-bottom .nt-popover-arrow::before {
+  border-color: var(--nt-popover-border-color) transparent transparent
+    var(--nt-popover-border-color);
 }

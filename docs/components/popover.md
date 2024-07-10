@@ -25,7 +25,7 @@
   </template>
   </textarea>
   <template #preview>
-    <Popover content="Content">
+    <Popover content="Content" placement="bottom">
       <template #trigger>
         <Button @click="click1">悬浮</Button>
       </template>
