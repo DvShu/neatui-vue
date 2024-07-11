@@ -7,8 +7,10 @@ import {
   ref,
   Transition,
   nextTick,
+  withDirectives,
 } from 'vue';
 import type { PropType } from 'vue';
+import Clickoutside from '../directives/clickoutside';
 
 function getFirstTriggerVNode(slots: any): VNode | null {
   if (slots.trigger != null) {
@@ -55,15 +57,11 @@ export default defineComponent({
 
     const posStyle = ref({});
 
-    function handleMouseEnter(e: Event) {
+    function showFn($target: HTMLElement) {
       if (show.value) {
-        if (closeT != null) {
-          clearTimeout(closeT);
-          closeT = undefined;
-        }
+        clearHide();
         return;
       }
-      const $target = e.target as HTMLElement;
       show.value = true;
       nextTick(() => {
         const { left, top } = getDistanceToContainer($target);
@@ -86,15 +84,47 @@ export default defineComponent({
       });
     }
 
-    /** 鼠标离开事件 */
-    function hanldeMouseLeave() {
+    function hideFn() {
       closeT = setTimeout(() => {
         show.value = false;
-      }, 150) as any;
+      }, 50) as any;
+    }
+
+    function clearHide() {
+      if (closeT != null) {
+        clearTimeout(closeT);
+        closeT = undefined;
+      }
+    }
+
+    function handleMouseEnter(e: Event) {
+      showFn(e.target as HTMLElement);
+    }
+
+    /** 鼠标离开事件 */
+    function hanldeMouseLeave() {
+      hideFn();
     }
 
     function handleClick(e: Event) {
-      console.log('click');
+      const $target = e.currentTarget as HTMLElement;
+      // 点击的不是 popover 元素，才切换 popover
+      if (!$target.classList.contains('nt-popover')) {
+        if (!show.value) {
+          showFn(e.target as HTMLElement);
+        } else {
+          show.value = false;
+        }
+      } else {
+        if (closeT != null) {
+          clearTimeout(closeT);
+          closeT = undefined;
+        }
+      }
+    }
+
+    function handleOutside() {
+      hideFn();
     }
 
     return () => {
@@ -110,7 +140,7 @@ export default defineComponent({
         prop.onClick = handleClick;
       }
       return [
-        h(firstVNode, prop),
+        withDirectives(h(firstVNode, prop), [[Clickoutside, handleOutside]]),
         h(
           Teleport,
           { to: 'body' },
@@ -126,18 +156,7 @@ export default defineComponent({
                         ...attrs,
                         class: [
                           'nt-popover',
-                          props.placement.startsWith('top')
-                            ? 'nt-popover-top'
-                            : '',
-                          props.placement.startsWith('bottom')
-                            ? 'nt-popover-bottom'
-                            : '',
-                          props.placement.endsWith('Start')
-                            ? 'nt-popover-start'
-                            : '',
-                          props.placement.endsWith('End')
-                            ? 'nt-popover-end'
-                            : '',
+                          `nt-popover-${props.placement}`,
                           attrs.class,
                         ],
                         style: [attrs.style, posStyle.value],

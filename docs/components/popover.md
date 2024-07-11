@@ -14,7 +14,63 @@
 
 ### 基础用法
 
-基
+最简单的用法，通过 `content` 传递浮层内容。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-popover content="悬浮提示">
+    <template #trigger>
+      <span>悬浮</span>
+    </template>
+  </nt-popover>
+  </textarea>
+  <template #preview>
+    <Popover content="悬浮提示">
+      <template #trigger>
+        <span>悬浮</span>
+      </template>
+    </Popover>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 触发方式
+
+两种触发方式：鼠标移入[`hover`]、点击[`click`]；通过 `trigger` 属性设置触发方式。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-popover content="悬浮提示" trigger='hover'>
+    <template #trigger>
+      <nt-button>悬浮</nt-button>
+    </template>
+  </nt-popover>
+  <nt-popover content="点击提示" trigger='click'>
+    <template #trigger>
+      <nt-button>点击</nt-button>
+    </template>
+  </nt-popover>
+  </textarea>
+  <template #preview>
+    <Popover content="悬浮提示" trigger='hover'>
+      <template #trigger>
+        <Button>悬浮</Button>
+      </template>
+    </Popover>
+    <Popover content="点击提示" trigger='click'>
+      <template #trigger>
+        <Button>点击</Button>
+      </template>
+    </Popover>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 位置
+
+有 `12` 个弹出位置。通过 `placement` 属性设置弹出位置。
 
 <ClientOnly>
   <CodePreview>
@@ -25,11 +81,35 @@
   </template>
   </textarea>
   <template #preview>
-    <Popover content="Content" placement="bottom">
-      <template #trigger>
-        <Button @click="click1">悬浮</Button>
-      </template>
-    </Popover>
+    <div class="popover-p-row">
+      <Button>topLeft</Button>
+      <Popover content="提示内容" placement="top">
+        <template #trigger>
+          <Button>top</Button>
+        </template>
+      </Popover>
+      <Button>topRight</Button>
+    </div>
+    <div class="popover-p-row">
+      <Button>leftTop</Button>
+      <Button>left</Button>
+      <Button>leftBottom</Button>
+    </div>
+    <div class="popover-p-row">
+      <Button>rightTop</Button>
+      <Button>right</Button>
+      <Button>rightBottom</Button>
+    </div>
+    <div class="popover-p-row">
+      <Button>bottomLeft</Button>
+      <Popover content="提示内容" placement="bottom">
+        <template #trigger>
+          <Button>bottom</Button>
+        </template>
+      </Popover>
+      <Button>bottomRight</Button>
+    </div>
+
   </template>
   </CodePreview>
 </ClientOnly>
