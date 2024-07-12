@@ -43,7 +43,18 @@ export default defineComponent({
     /** 弹出位置 */
     placement: {
       type: String as PropType<
-        'topStart' | 'top' | 'topEnd' | 'bottomStart' | 'bottom' | 'bottomEnd'
+        | 'topLeft'
+        | 'top'
+        | 'topRight'
+        | 'bottomLeft'
+        | 'bottom'
+        | 'bottomRight'
+        | 'left'
+        | 'leftTop'
+        | 'leftBottom'
+        | 'right'
+        | 'rightTop'
+        | 'rightBottom'
       >,
       default: 'top',
     },
@@ -70,12 +81,37 @@ export default defineComponent({
         if ($popover.value != null) {
           const popoverRect = $popover.value.getBoundingClientRect();
           const targetRect = $target.getBoundingClientRect();
-          if (props.placement === 'top') {
+          if (props.placement.startsWith('top')) {
             offsetTop = popoverRect.height + 10;
-          } else if (props.placement === 'bottom') {
+          } else if (props.placement.startsWith('bottom')) {
             offsetTop = -(targetRect.height + 10);
+          } else if (
+            props.placement === 'left' ||
+            props.placement === 'right'
+          ) {
+            offsetTop = popoverRect.height / 2 - targetRect.height / 2;
+          } else if (
+            props.placement === 'leftBottom' ||
+            props.placement === 'rightBottom'
+          ) {
+            offsetTop = popoverRect.height - targetRect.height;
           }
-          offsetLeft = popoverRect.width / 2 - targetRect.width / 2;
+
+          if (props.placement.startsWith('left')) {
+            offsetLeft = popoverRect.width + 10;
+          } else if (props.placement.startsWith('right')) {
+            offsetLeft = -(targetRect.width + 10);
+          } else if (
+            props.placement === 'top' ||
+            props.placement === 'bottom'
+          ) {
+            offsetLeft = popoverRect.width / 2 - targetRect.width / 2;
+          } else if (
+            props.placement === 'bottomRight' ||
+            props.placement === 'topRight'
+          ) {
+            offsetLeft = popoverRect.width - targetRect.width;
+          }
         }
         posStyle.value = {
           top: `${top - offsetTop}px`,
