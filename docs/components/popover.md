@@ -59,7 +59,7 @@
         <Button>悬浮</Button>
       </template>
     </Popover>
-    <Popover content="点击提示" trigger='click' placement="bottomRight">
+    <Popover content="点击提示" trigger='click'>
       <template #trigger>
         <Button>点击</Button>
       </template>

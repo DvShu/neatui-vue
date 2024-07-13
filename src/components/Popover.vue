@@ -11,6 +11,9 @@ import {
 } from 'vue';
 import type { PropType } from 'vue';
 import Clickoutside from '../directives/clickoutside';
+import { round } from 'ph-utils';
+
+const XM_REG = /^(left)|(right)/;
 
 function getFirstTriggerVNode(slots: any): VNode | null {
   if (slots.trigger != null) {
@@ -21,14 +24,24 @@ function getFirstTriggerVNode(slots: any): VNode | null {
 
 /** 获取某个节点距离容器顶部和左边的距离 */
 function getDistanceToContainer(el: HTMLElement) {
-  let left = 0;
+  let offsetLeft = 0;
+  let offsetTop = 0;
   let top = 0;
+  let bottom = 0;
+  let left = 0;
+  let right = 0;
   while (el) {
-    top += el.offsetTop;
-    left += el.offsetLeft;
+    const rect = el.getBoundingClientRect();
+    offsetTop += el.offsetTop;
+    offsetLeft += el.offsetLeft;
+    top = rect.top;
+    bottom = rect.bottom;
+    left = rect.left;
+    right = rect.right;
     el = el.offsetParent as HTMLElement;
   }
-  return { left, top };
+
+  return { offsetLeft, offsetTop, top, bottom, left, right };
 }
 
 export default defineComponent({
@@ -61,6 +74,7 @@ export default defineComponent({
   },
   setup(props, { slots, attrs }) {
     const show = ref(false);
+    const place = ref(props.placement);
 
     const $popover = ref<HTMLDivElement>();
 
@@ -75,48 +89,121 @@ export default defineComponent({
       }
       show.value = true;
       nextTick(() => {
-        const { left, top } = getDistanceToContainer($target);
-        let offsetTop = 0;
-        let offsetLeft = 0;
+        const { offsetLeft, offsetTop, top, left } =
+          getDistanceToContainer($target);
+        let topDiff = 0;
+        let leftDiff = 0;
+        let tmpPlace = props.placement;
         if ($popover.value != null) {
           const popoverRect = $popover.value.getBoundingClientRect();
           const targetRect = $target.getBoundingClientRect();
           if (props.placement.startsWith('top')) {
-            offsetTop = popoverRect.height + 10;
+            topDiff = popoverRect.height + 10;
           } else if (props.placement.startsWith('bottom')) {
-            offsetTop = -(targetRect.height + 10);
+            topDiff = -(targetRect.height + 10);
           } else if (
             props.placement === 'left' ||
             props.placement === 'right'
           ) {
-            offsetTop = popoverRect.height / 2 - targetRect.height / 2;
+            topDiff = popoverRect.height / 2 - targetRect.height / 2;
           } else if (
             props.placement === 'leftBottom' ||
             props.placement === 'rightBottom'
           ) {
-            offsetTop = popoverRect.height - targetRect.height;
+            topDiff = popoverRect.height - targetRect.height;
           }
 
           if (props.placement.startsWith('left')) {
-            offsetLeft = popoverRect.width + 10;
+            leftDiff = popoverRect.width + 10;
           } else if (props.placement.startsWith('right')) {
-            offsetLeft = -(targetRect.width + 10);
+            leftDiff = -(targetRect.width + 10);
           } else if (
             props.placement === 'top' ||
             props.placement === 'bottom'
           ) {
-            offsetLeft = popoverRect.width / 2 - targetRect.width / 2;
+            leftDiff = popoverRect.width / 2 - targetRect.width / 2;
           } else if (
             props.placement === 'bottomRight' ||
             props.placement === 'topRight'
           ) {
-            offsetLeft = popoverRect.width - targetRect.width;
+            leftDiff = popoverRect.width - targetRect.width;
+          }
+
+          const posLeft = offsetLeft - leftDiff;
+          let xPos = '';
+          let yPos = '';
+
+          if (
+            offsetTop - topDiff + popoverRect.height >=
+            Math.abs(top) + window.innerHeight - 15
+          ) {
+            if (props.placement.match(XM_REG)) {
+              yPos = 'bottom';
+              topDiff = popoverRect.height - targetRect.height;
+            } else {
+              yPos = 'top';
+              topDiff = popoverRect.height + 10;
+            }
+          }
+          if (offsetTop - topDiff <= Math.abs(top)) {
+            if (props.placement.match(XM_REG)) {
+              yPos = 'top';
+              topDiff = 0;
+            } else {
+              yPos = 'bottom';
+              topDiff = -(targetRect.height + 10);
+            }
+          }
+
+          if (posLeft <= Math.abs(left)) {
+            xPos = 'right';
+            leftDiff = -(targetRect.width + 10);
+          }
+          if (
+            posLeft + popoverRect.width >=
+            Math.abs(left) + window.innerWidth - 15
+          ) {
+            xPos = 'left';
+            leftDiff = popoverRect.width + 10;
+          }
+          if (xPos === '' && yPos === '') {
+            tmpPlace = props.placement;
+          } else {
+            console.log(xPos);
+            console.log(yPos);
+            if (xPos === '') {
+              if (props.placement.match(/left/i)) {
+                xPos = 'left';
+              } else if (props.placement.match(/right/i)) {
+                xPos = 'right';
+              }
+            }
+            if (yPos === '') {
+              if (props.placement.match(/top/i)) {
+                yPos = 'top';
+              }
+              if (props.placement.match(/bottom/i)) {
+                yPos = 'bottom';
+              }
+            }
+            if (props.placement.match(/^(left)|(right)/)) {
+              const yName =
+                yPos === '' ? '' : yPos[0].toUpperCase() + yPos.substring(1);
+              tmpPlace = `${xPos}${yName}` as any;
+            } else if (props.placement.match(/^(top)|(bottom)/)) {
+              const xName =
+                xPos === '' ? '' : xPos[0].toUpperCase() + xPos.substring(1);
+              tmpPlace = `${yPos}${xName}` as any;
+            }
           }
         }
+        const posTop = round(offsetTop - topDiff);
+        const posLeft = round(offsetLeft - leftDiff);
         posStyle.value = {
-          top: `${top - offsetTop}px`,
-          left: `${left - offsetLeft}px`,
+          top: `${posTop}px`,
+          left: `${posLeft}px`,
         };
+        place.value = tmpPlace;
       });
     }
 
@@ -192,7 +279,7 @@ export default defineComponent({
                         ...attrs,
                         class: [
                           'nt-popover',
-                          `nt-popover-${props.placement}`,
+                          `nt-popover-${place.value}`,
                           attrs.class,
                         ],
                         style: [attrs.style, posStyle.value],
