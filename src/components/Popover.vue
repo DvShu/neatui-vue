@@ -8,10 +8,13 @@ import {
   Transition,
   nextTick,
   withDirectives,
+  onMounted,
+  watch,
 } from 'vue';
-import type { PropType } from 'vue';
+import type { PropType, Ref } from 'vue';
 import Clickoutside from '../directives/clickoutside';
 import { round } from 'ph-utils';
+import { elem } from 'ph-utils/dom';
 
 const XM_REG = /^(left)|(right)/;
 
@@ -71,6 +74,13 @@ export default defineComponent({
       >,
       default: 'top',
     },
+    /** 受控模式显示/隐藏 */
+    visible: {
+      type: Boolean,
+      default: undefined,
+    },
+    /** 受控模式时对应的节点 */
+    to: [Object, String] as PropType<HTMLElement | string | Ref<HTMLElement>>,
   },
   setup(props, { slots, attrs }) {
     const show = ref(false);
@@ -82,12 +92,42 @@ export default defineComponent({
 
     const posStyle = ref({});
 
+    onMounted(() => {
+      if (props.visible === true) {
+        showVisible();
+      }
+    });
+
+    watch(
+      () => props.visible,
+      () => {
+        if (props.visible === true) {
+          showVisible();
+        } else {
+          show.value = false;
+        }
+      },
+    );
+
+    function showVisible() {
+      if (props.to != null) {
+        if (props.to instanceof HTMLElement) {
+          showFn(props.to);
+        } else if (typeof props.to === 'string') {
+          showFn(elem(props.to)[0]);
+        } else {
+          showFn(props.to.value);
+        }
+      }
+    }
+
     function showFn($target: HTMLElement) {
       if (show.value) {
         clearHide();
         return;
       }
       show.value = true;
+
       nextTick(() => {
         const { offsetLeft, offsetTop, top, left } =
           getDistanceToContainer($target);
@@ -169,8 +209,6 @@ export default defineComponent({
           if (xPos === '' && yPos === '') {
             tmpPlace = props.placement;
           } else {
-            console.log(xPos);
-            console.log(yPos);
             if (xPos === '') {
               if (props.placement.match(/left/i)) {
                 xPos = 'left';
@@ -252,18 +290,21 @@ export default defineComponent({
 
     return () => {
       const firstVNode = getFirstTriggerVNode(slots);
-      if (firstVNode == null) {
-        return null;
-      }
+
       const prop: any = {};
-      if (props.trigger === 'hover') {
-        prop.onMouseenter = handleMouseEnter;
-        prop.onMouseleave = hanldeMouseLeave;
-      } else {
-        prop.onClick = handleClick;
+      if (props.visible == null) {
+        if (props.trigger === 'hover') {
+          prop.onMouseenter = handleMouseEnter;
+          prop.onMouseleave = hanldeMouseLeave;
+        } else {
+          prop.onClick = handleClick;
+        }
       }
+
       return [
-        withDirectives(h(firstVNode, prop), [[Clickoutside, handleOutside]]),
+        firstVNode
+          ? withDirectives(h(firstVNode, prop), [[Clickoutside, handleOutside]])
+          : null,
         h(
           Teleport,
           { to: 'body' },

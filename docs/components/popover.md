@@ -6,6 +6,13 @@
 
 <script setup>
   import { Popover, Button } from '../../src'
+  import { ref } from 'vue'
+
+  const show = ref(false)
+
+  function toggleShow() {
+    show.value = !show.value
+  }
 
   function click1() {
     console.log('click1')
@@ -219,19 +226,28 @@
 
 ### 受控模式
 
-不需要自动弹出，需要进行手动控制是否展示；通过传递 `open` 属性设置是否展示，然后设置 `to` 属性指向弹层对标节点。
+不需要自动弹出，需要进行手动控制是否展示；通过传递 `visible` 属性设置是否展示，然后设置 `to` 属性指向弹层对标节点。
 
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
   <script setup>
+  import { ref } from 'vue'
+  const show = ref(false)
+  function toggleShow() {
+    show.value = !show.value
+  }
   </script>
   <template>
-    <hr />
+    <span id="popoverTo">对标元素</span>
+    <nt-button @click='toggleShow' class="ml-10">弹出/隐藏</nt-button>
+    <nt-popover to="#popoverTo" content="提示内容" :visible="show"></nt-popover>
   </template>
   </textarea>
   <template #preview>
-    console.log()
+    <span id="popoverTo">对标元素</span>
+    <Button @click='toggleShow' class="ml-10">弹出/隐藏</Button>
+    <Popover to="#popoverTo" content="提示内容" :visible="show"></Popover>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -240,6 +256,19 @@
 
 ### Popover Props
 
+<!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
-| ---- | ---- | ---- | ------ |
-| x    | x    | x    | x      |
+| --- | --- | --- | --- |
+| `trigger` | 触发方式 | `hover`、`click` | `hover` |
+| `content` | 显示内容, 也可以通过 `default-slot` 显示 | `string` | - |
+| `placement` | 弹出位置 | `topLeft`、`top`、`topRight`、`leftTop`、`left`、`leftBottom`、`rightTop`、`right`、`rightBottom`、`bottomLeft`、`bottom`、`bottomRight` | `top` |
+| `visible` | 受控模式显示与隐藏 | `boolean` | - |
+| `to` | 受控模式下起泡对标元素 | `HTMLElement`、`string`、`Ref<HTMLElement>` | - |
+
+### Popover Slots
+
+<!-- prettier-ignore -->
+| 名称 | 说明 |
+| --- | --- |
+| `default` | 自定义内容 |
+| `trigger` | 自定义触发元素 |
