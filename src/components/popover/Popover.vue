@@ -10,6 +10,7 @@ import {
   withDirectives,
   onMounted,
   watch,
+  vShow,
 } from 'vue';
 import { popoverProps } from './constant';
 import Clickoutside from '../../directives/clickoutside';
@@ -285,30 +286,31 @@ export default defineComponent({
             { name: 'nt-opacity' },
             {
               default: () =>
-                show.value
-                  ? h(
-                      'div',
-                      {
-                        ...attrs,
-                        class: [
-                          'nt-popover',
-                          `nt-popover-${place.value}`,
-                          attrs.class,
-                        ],
-                        style: [attrs.style, posStyle.value],
-                        ref: $popover,
-                        ...prop,
-                      },
-                      [
-                        slots.default != null
-                          ? slots.default()
-                          : props.content != null
-                            ? h('span', props.content)
-                            : null,
-                        h('span', { class: 'nt-popover-arrow' }),
+                withDirectives(
+                  h(
+                    'div',
+                    {
+                      ...attrs,
+                      class: [
+                        'nt-popover',
+                        `nt-popover-${place.value}`,
+                        attrs.class,
                       ],
-                    )
-                  : null,
+                      style: [attrs.style, posStyle.value],
+                      ref: $popover,
+                      ...prop,
+                    },
+                    [
+                      slots.default != null
+                        ? slots.default()
+                        : props.content != null
+                          ? h('span', props.content)
+                          : null,
+                      h('span', { class: 'nt-popover-arrow' }),
+                    ],
+                  ),
+                  [[vShow, show.value]],
+                ),
             },
           ),
         ),

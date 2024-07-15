@@ -1,9 +1,9 @@
 <script lang="ts">
 import { defineComponent, watch, h, Teleport, Transition } from 'vue';
 import type { PropType } from 'vue';
-import Shadow from './Shadow.vue';
-import Button from './Button.vue';
-import CloseIcon from './icon/Close.vue';
+import Shadow from '../Shadow.vue';
+import Button from '../Button.vue';
+import CloseIcon from '../icon/Close.vue';
 
 export default defineComponent({
   props: {

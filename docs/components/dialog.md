@@ -6,10 +6,12 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { Dialog } from "../../src"
+  import { Dialog, AlertDialog } from "../../src"
 
-  const show = ref(true)
+  const show = ref(false)
 </script>
+
+<AlertDialog></AlertDialog>
 
 ### 基础用法
 

@@ -39,6 +39,8 @@ export { default as Card } from './components/Card.vue';
 
 export { default as Popover } from './components/popover/Popover.vue';
 export { default as Tooltip } from './components/popover/Tooltip.vue';
+export { default as Dialog } from './components/dialog/Dialog.vue';
+export { default as AlertDialog } from './components/dialog/AlertDialog.vue';
 
 export { default as Qrcode } from './components/Qrcode.vue';
 
@@ -53,7 +55,6 @@ export { default as DescriptionPanel } from './components/DescriptionPanel.vue';
 export { default as Tabbar } from './components/tabbar/Tabbar.vue';
 export { default as TabbarItem } from './components/tabbar/TabbarItem.vue';
 export { default as List } from './components/List.vue';
-export { default as Dialog } from './components/Dialog.vue';
 
 export { default as Clickoutside } from './directives/clickoutside';
 export { default as Loading } from './directives/loading';
