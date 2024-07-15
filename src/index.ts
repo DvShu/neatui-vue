@@ -18,6 +18,7 @@ export { default as ReductionIcon } from './components/icon/Reduction.vue';
 export { default as RefreshLeftIcon } from './components/icon/RefreshLeft.vue';
 export { default as RefreshRightIcon } from './components/icon/RefreshRight.vue';
 export { default as SortIcon } from './components/icon/Sort.vue';
+export { default as CloseIcon } from './components/icon/Close.vue';
 
 export { default as Input } from './components/Input.vue';
 export { default as Button } from './components/Button.vue';
