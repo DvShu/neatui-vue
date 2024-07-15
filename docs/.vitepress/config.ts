@@ -44,7 +44,7 @@ export default defineConfig({
     sidebar: [
       {
         text: '指南',
-        collapsed: false,
+        collapsed: true,
         items: [
           {
             text: '快速上手',
@@ -61,45 +61,65 @@ export default defineConfig({
         ],
       },
       {
-        text: '组件',
-        collapsed: false,
+        text: '通用',
+        collapsed: true,
         items: [
           { text: 'Container 容器布局', link: '/components/container' },
-          { text: 'Directives 指令', link: '/components/directives' },
+          { text: 'Polygon 多边形', link: '/components/polygon' },
           { text: 'Icon 图标', link: '/components/icon' },
+        ],
+      },
+      {
+        text: '表单',
+        collapsed: true,
+        items: [
           { text: 'Button 按钮', link: '/components/button' },
           { text: 'Input 输入框', link: '/components/input' },
-          { text: 'Tooltip 文字提示', link: '/components/tooltip' },
-          { text: 'Message 消息提示', link: '/components/message' },
+          { text: 'Checkbox 复选框', link: '/components/checkbox' },
+          { text: 'Radio 单选框', link: '/components/radio' },
+          { text: 'Switch 开关', link: '/components/switch' },
+          { text: 'Form 表单', link: '/components/form' },
+        ],
+      },
+      {
+        text: '数据展示',
+        collapsed: true,
+        items: [
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'Qrcode 二维码', link: '/components/qrcode' },
           { text: 'Image 图片', link: '/components/image' },
           { text: 'Shadow 阴影', link: '/components/shadow' },
           { text: 'Table 表格', link: '/components/table' },
-          { text: 'Checkbox 复选框', link: '/components/checkbox' },
-          { text: 'Radio 单选框', link: '/components/radio' },
-          { text: 'Switch 开关', link: '/components/switch' },
-          { text: 'Polygon 多边形', link: '/components/polygon' },
-          { text: 'Form 表单', link: '/components/form' },
           { text: 'Collapse 折叠面板', link: '/components/collapse' },
           { text: 'Progress 进度条', link: '/components/progress' },
-          { text: 'Loading 加载', link: '/components/loading' },
           {
             text: 'DescriptionPanel 简介面板',
             link: '/components/descriptionpanel',
           },
           {
-            text: 'Tabbar 标签栏',
-            link: '/components/tabbar',
+            text: 'List 滚动列表',
+            link: '/components/list',
           },
           {
             text: 'Tabs 标签页',
             link: '/components/tabs',
           },
+        ],
+      },
+      {
+        text: '导航',
+        collapsed: true,
+        items: [
           {
-            text: 'List 滚动列表',
-            link: '/components/list',
+            text: 'Tabbar 标签栏',
+            link: '/components/tabbar',
           },
+        ],
+      },
+      {
+        text: '反馈',
+        collapsed: true,
+        items: [
           {
             text: 'Popover 弹出气泡',
             link: '/components/popover',
@@ -108,6 +128,16 @@ export default defineConfig({
             text: 'Dialog 对话框',
             link: '/components/dialog',
           },
+          { text: 'Tooltip 文字提示', link: '/components/tooltip' },
+          { text: 'Message 消息提示', link: '/components/message' },
+        ],
+      },
+      {
+        text: '自定义指令',
+        collapsed: true,
+        items: [
+          { text: 'Directives 简单指令', link: '/components/directives' },
+          { text: 'Loading 加载', link: '/components/loading' },
         ],
       },
     ],

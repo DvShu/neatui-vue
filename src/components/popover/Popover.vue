@@ -11,8 +11,8 @@ import {
   onMounted,
   watch,
 } from 'vue';
-import type { PropType, Ref } from 'vue';
-import Clickoutside from '../directives/clickoutside';
+import { popoverProps } from './constant';
+import Clickoutside from '../../directives/clickoutside';
 import { round } from 'ph-utils';
 import { elem } from 'ph-utils/dom';
 
@@ -48,40 +48,7 @@ function getDistanceToContainer(el: HTMLElement) {
 }
 
 export default defineComponent({
-  props: {
-    /** 触发方式: hover - 渲染, click - 点击 */
-    trigger: {
-      type: String as PropType<'hover' | 'click'>,
-      default: 'hover',
-    },
-    /** 显示的内容，也可以通过写入默认 slot 修改显示内容 */
-    content: String,
-    /** 弹出位置 */
-    placement: {
-      type: String as PropType<
-        | 'topLeft'
-        | 'top'
-        | 'topRight'
-        | 'bottomLeft'
-        | 'bottom'
-        | 'bottomRight'
-        | 'left'
-        | 'leftTop'
-        | 'leftBottom'
-        | 'right'
-        | 'rightTop'
-        | 'rightBottom'
-      >,
-      default: 'top',
-    },
-    /** 受控模式显示/隐藏 */
-    visible: {
-      type: Boolean,
-      default: undefined,
-    },
-    /** 受控模式时对应的节点 */
-    to: [Object, String] as PropType<HTMLElement | string | Ref<HTMLElement>>,
-  },
+  props: popoverProps,
   setup(props, { slots, attrs }) {
     const show = ref(false);
     const place = ref(props.placement);
@@ -126,6 +93,7 @@ export default defineComponent({
         clearHide();
         return;
       }
+      if ($target.classList.contains('nt-popover')) return;
       show.value = true;
 
       nextTick(() => {
@@ -138,9 +106,9 @@ export default defineComponent({
           const popoverRect = $popover.value.getBoundingClientRect();
           const targetRect = $target.getBoundingClientRect();
           if (props.placement.startsWith('top')) {
-            topDiff = popoverRect.height + 10;
+            topDiff = popoverRect.height + 8;
           } else if (props.placement.startsWith('bottom')) {
-            topDiff = -(targetRect.height + 10);
+            topDiff = -(targetRect.height + 8);
           } else if (
             props.placement === 'left' ||
             props.placement === 'right'
@@ -154,9 +122,9 @@ export default defineComponent({
           }
 
           if (props.placement.startsWith('left')) {
-            leftDiff = popoverRect.width + 10;
+            leftDiff = popoverRect.width + 8;
           } else if (props.placement.startsWith('right')) {
-            leftDiff = -(targetRect.width + 10);
+            leftDiff = -(targetRect.width + 8);
           } else if (
             props.placement === 'top' ||
             props.placement === 'bottom'
@@ -182,7 +150,7 @@ export default defineComponent({
               topDiff = popoverRect.height - targetRect.height;
             } else {
               yPos = 'top';
-              topDiff = popoverRect.height + 10;
+              topDiff = popoverRect.height + 8;
             }
           }
           if (offsetTop - topDiff <= Math.abs(top)) {
@@ -191,20 +159,20 @@ export default defineComponent({
               topDiff = 0;
             } else {
               yPos = 'bottom';
-              topDiff = -(targetRect.height + 10);
+              topDiff = -(targetRect.height + 8);
             }
           }
 
           if (posLeft <= Math.abs(left)) {
             xPos = 'right';
-            leftDiff = -(targetRect.width + 10);
+            leftDiff = -(targetRect.width + 8);
           }
           if (
             posLeft + popoverRect.width >=
             Math.abs(left) + window.innerWidth - 15
           ) {
             xPos = 'left';
-            leftDiff = popoverRect.width + 10;
+            leftDiff = popoverRect.width + 8;
           }
           if (xPos === '' && yPos === '') {
             tmpPlace = props.placement;
@@ -303,7 +271,11 @@ export default defineComponent({
 
       return [
         firstVNode
-          ? withDirectives(h(firstVNode, prop), [[Clickoutside, handleOutside]])
+          ? props.trigger === 'click'
+            ? withDirectives(h(firstVNode, prop), [
+                [Clickoutside, handleOutside],
+              ])
+            : h(firstVNode, prop)
           : null,
         h(
           Teleport,

@@ -1,13 +1,16 @@
 .nt-popover {
   --nt-popover-border-color: #e4e4e4;
+  --nt-popover-color: #666666;
+  --nt-popover-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --nt-popover-background: #ffffff;
   position: absolute;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.12);
-  background: #ffffff;
+  box-shadow: var(--nt-popover-box-shadow);
+  background: var(--nt-popover-background);
   border: 1px solid var(--nt-popover-border-color);
   border-radius: 4px;
   padding: 10px;
   z-index: 30;
-  color: #666666;
+  color: var(--nt-popover-color);
   box-sizing: border-box;
 }
 
@@ -24,7 +27,7 @@
   width: 8px;
   height: 8px;
   transform: rotate3d(0, 0, 1, 45deg);
-  background-color: #ffffff;
+  background-color: var(--nt-popover-background);
   border-width: 1px;
   border-style: solid;
 }

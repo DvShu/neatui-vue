@@ -1,86 +1,9 @@
-.nt-tooltip {
-  position: relative;
-  display: inline-block;
-}
-.nt-tooltip-content {
-  position: absolute;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
-  transition: all 0.3s;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 100;
-}
-
-/* 从顶部弹出的弹窗 */
-.nt-tooltip-top {
-  bottom: 100%;
-}
-/* 从底部弹出 */
-.nt-tooltip-bottom {
-  top: 100%;
-}
-
-/* 左边上对齐 */
-.nt-tooltip-start {
-  left: 0;
-  transform: translate3d(0, 0, 0);
-}
-
-/* 右边对齐 */
-.nt-tooltip-end {
-  left: auto;
-  right: 0;
-  transform: translate3d(0, 0, 0);
-}
-
-.nt-tooltip-hover:hover .nt-tooltip-content {
-  opacity: 1;
-  visibility: visible;
-}
-
-.nt-tooltip.nt-tooltip-visible .nt-tooltip-content {
-  opacity: 1;
-  visibility: visible;
-}
-
-.nt-tooltip--default {
-  color: #fff;
-  text-shadow: 0 -1px 0px #383838;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
-  background: #383838;
-  border-radius: 3px;
-  padding: 5px;
+.nt-popover.nt-tooltip {
+  --nt-popover-color: #fff;
+  --nt-popover-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  --nt-popover-background: #383838;
+  border-radius: 5px;
+  padding: 8px;
   font-size: 12px;
-  white-space: nowrap;
-}
-.nt-tooltip--default::after {
-  content: '';
-  position: absolute;
-  border-width: 5px;
-  border-style: solid;
-  left: 50%;
-  margin-left: -5px;
-}
-.nt-tooltip-top.nt-tooltip--default {
-  bottom: calc(100% + 7px);
-}
-.nt-tooltip-top.nt-tooltip--default::after {
-  top: 100%;
-  border-color: #383838 transparent transparent transparent;
-}
-.nt-tooltip-bottom.nt-tooltip--default {
-  top: calc(100% + 7px);
-}
-.nt-tooltip-bottom.nt-tooltip--default::after {
-  bottom: 100%;
-  border-color: transparent transparent #383838 transparent;
-}
-.nt-tooltip-start.nt-tooltip--default::after {
-  left: 15px;
-}
-.nt-tooltip-end.nt-tooltip--default::after {
-  right: 10px;
-  left: auto;
-  margin-left: 0;
+  line-height: 1;
 }
