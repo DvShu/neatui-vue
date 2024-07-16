@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, watch, h, Teleport, Transition } from 'vue';
-import type { PropType } from 'vue';
+import type { PropType, VNode } from 'vue';
 import Shadow from '../Shadow.vue';
 import Button from '../Button.vue';
 import CloseIcon from '../icon/Close.vue';
@@ -127,18 +127,14 @@ export default defineComponent({
                     },
                     {
                       default: () => {
-                        const $contents = [];
-                        if (slots.header != null) {
-                          $contents.push(slots.header());
-                        } else if (props.title != null) {
-                          $contents.push(
-                            h(
-                              'div',
-                              { class: 'nt-dialog-header' },
-                              props.title,
-                            ),
-                          );
-                        }
+                        const $contents: VNode[] = [
+                          h(
+                            'header',
+                            { class: 'nt-dialog-header' },
+                            slots.header != null ? slots.header() : props.title,
+                          ),
+                        ];
+
                         if (props.showClose !== 0) {
                           $contents.push(
                             h(
@@ -167,34 +163,36 @@ export default defineComponent({
                             slots.default != null ? slots.default() : undefined,
                           ),
                         );
-                        if (slots.footer != null) {
-                          $contents.push(slots.footer());
-                        } else {
-                          $contents.push(
-                            h('div', { class: 'nt-dialog-footer' }, [
-                              props.showCancel
-                                ? h(
-                                    Button,
-                                    {
-                                      type: 'normal',
-                                      onClick: () => close('close'),
-                                    },
-                                    { default: () => '取消' },
-                                  )
-                                : undefined,
-                              props.showOk
-                                ? h(
-                                    Button,
-                                    {
-                                      type: 'primary',
-                                      onClick: () => close('ok'),
-                                    },
-                                    { default: () => '确定' },
-                                  )
-                                : undefined,
-                            ]),
-                          );
-                        }
+                        $contents.push(
+                          h(
+                            'footer',
+                            { class: 'nt-dialog-footer' },
+                            slots.footer
+                              ? (slots.footer() as any)
+                              : [
+                                  props.showCancel
+                                    ? h(
+                                        Button,
+                                        {
+                                          type: 'normal',
+                                          onClick: () => close('close'),
+                                        },
+                                        { default: () => '取消' },
+                                      )
+                                    : undefined,
+                                  props.showOk
+                                    ? h(
+                                        Button,
+                                        {
+                                          type: 'primary',
+                                          onClick: () => close('ok'),
+                                        },
+                                        { default: () => '确定' },
+                                      )
+                                    : undefined,
+                                ],
+                          ),
+                        );
                         return h(
                           'div',
                           {

@@ -9,7 +9,6 @@ export default defineComponent({
     const showCode = ref(false);
 
     return () => {
-      console.log(slots.preview());
       return h('div', { class: 'code-preview' }, [
         h(
           'div',
