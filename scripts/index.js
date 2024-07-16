@@ -74,7 +74,7 @@ async function createComponentTemplate(name) {
     `### ${name} Props\r\n`,
     '<!-- prettier-ignore -->',
     '| 参数 | 说明 | 类型 | 默认值 |',
-    '| ---- | ---- | ---- | ---- |',
+    '| --- | --- | --- | --- |',
     '| x | x | x | x |',
   ];
   await write(

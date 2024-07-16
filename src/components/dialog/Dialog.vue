@@ -42,6 +42,11 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    /** 主体样式 */
+    mainClass: {
+      type: String,
+      default: '',
+    },
     /** 内容区域样式 */
     containerClass: {
       type: String,
@@ -52,7 +57,7 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    /** 关闭前的回调, 会暂停 Dialog 的关闭. 回调返回 true 表明关闭对话框. */
+    /** 关闭前的回调, 会暂停 Dialog 的关闭. */
     beforeClose: {
       type: Function as PropType<
         (type: 'cancel' | 'ok' | 'close', done: () => void) => void
@@ -130,7 +135,9 @@ export default defineComponent({
                         const $contents: VNode[] = [
                           h(
                             'header',
-                            { class: 'nt-dialog-header' },
+                            {
+                              class: 'nt-dialog-header',
+                            },
                             slots.header != null ? slots.header() : props.title,
                           ),
                         ];
@@ -196,7 +203,7 @@ export default defineComponent({
                         return h(
                           'div',
                           {
-                            class: 'nt-dialog-main',
+                            class: ['nt-dialog-main', props.mainClass],
                             style: {
                               width: props.width,
                             },

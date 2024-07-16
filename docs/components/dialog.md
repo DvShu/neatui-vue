@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { Dialog, AlertDialog, Button, InfoIcon } from "../../src"
+  import { Dialog, AlertDialog, Button, InfoIcon, Loading, Message } from "../../src"
 
   const show = ref(false)
   const show1 = ref(false)
@@ -15,11 +15,16 @@
 
   function handleBeforeClose(type: 'cancel' | 'close' | 'ok', done) {
     if (type === 'ok') {
-      console.log('ok')
+      const loading = Loading.open({
+        to: '.edit-dialog',
+        bar: true
+      })
       // 模拟数据提交
       setTimeout(() => {
+        loading.close()
+        Message.success("提交成功")
         done()
-      }, 1000);
+      }, 2000);
     } else {
       done()
     }
@@ -28,7 +33,7 @@
 
 ### 基础用法
 
-需要设置 `model-value / v-model` 属性，它接收 `Boolean`，当为 `true` 时显示 `Dialog`。`title` 属性用于定义标题，它是可选的，默认值为空。`before-close` 关闭前的回调，会暂停 `Dialog` 的关闭. 返回 `true` 则关闭，返回 `false` 则不关闭。
+需要设置 `model-value / v-model` 属性，它接收 `Boolean`，当为 `true` 时显示 `Dialog`。`title` 属性用于定义标题，它是可选的，默认值为空。
 
 <ClientOnly>
   <CodePreview>
@@ -37,26 +42,11 @@
     import { ref } from 'vue';
     //-
     const show = ref(false);
-    //-
-    /**
-     * @param type 事件类型, cancel - 底部取消按钮触发, close - 关闭, ok - 底部确认按钮触发
-     * @param done 只有调用 done 参数方法的时候才是真正关闭对话框的时候.
-     */
-    function handleBeforeClose(type: 'cancel' | 'close' | 'ok', done) {
-      if (type === 'ok') {
-        // 模拟数据提交
-        setTimeout(() => {
-          done();
-        }, 1000);
-      } else {
-        done();
-      }
-    }
   </script>
   <template>
     <nt-button type="primary" @click="show = true">显示 Dialog</nt-button>
     <!---->
-    <nt-dialog v-model="show" title="Title" :before-close="handleBeforeClose">
+    <nt-dialog v-model="show" title="Title">
       这是内容
     </nt-dialog>
   </template>
@@ -64,7 +54,7 @@
   <template #preview>
     <Button type="primary" @click="show = true">显示 Dialog</Button>
     <!---->
-    <Dialog v-model="show" title="Title" :before-close="handleBeforeClose">
+    <Dialog v-model="show" title="Title">
       这是内容
     </Dialog>
   </template>
@@ -109,29 +99,50 @@
   </CodePreview>
 </ClientOnly>
 
-### 自定义内容
+### 异步关闭
 
-对话框的内容除了可以是简单的文本外，也可以是复杂的表单或者表格等。
+有时候点击对话框完毕后，我们需要提交数据，提交成功则关闭对话框，提交失败则给出提示。
+
+`before-close` 对话框关闭前的回调，通过调用回调的 `done()` 函数来关闭对话框；通过 `main-class` 给对话框主体添加样式；搭配 [Loading](/components/loading) 就能实现数据提交带上进度。
 
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue">
   <script setup lang="ts">
+    import { ref } from 'vue';
+    //-
+    const show = ref(false);
+    //-
+    function handleBeforeClose(type: 'cancel' | 'close' | 'ok', done) {
+      if (type === 'ok') {
+        const loading = NtLoading.open({
+          to: '.edit-dialog',
+          bar: true
+        })
+        // 模拟数据提交
+        setTimeout(() => {
+          loading.close()
+          NtMessage.success("提交成功")
+          done()
+        }, 2000);
+      } else {
+        done()
+      }
+    }
   </script>
   <template>
-    <hr />
+    <nt-button type="primary" @click="show3 = true">显示 Dialog</nt-button>
+    <!---->
+    <nt-dialog v-model="show3" title="Title" main-class="edit-dialog" :before-close="handleBeforeClose">
+      这是内容
+    </nt-dialog>
   </template>
   </textarea>
   <template #preview>
-    <Button type="primary" @click="show3 = true">显示表单弹窗</Button>
-    <Button type="primary" @click="show4 = true">显示表格弹窗</Button>
+    <Button type="primary" @click="show3 = true">显示 Dialog</Button>
     <!---->
-    <Dialog v-model="show3" width="300px">
-      <template #header>
-        <InfoIcon />
-        <span>提示</span>
-      </template>
-      提示内容
+    <Dialog v-model="show3" title="Title" main-class="edit-dialog" :before-close="handleBeforeClose">
+      这是内容
     </Dialog>
   </template>
   </CodePreview>
@@ -143,5 +154,14 @@
 
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
-| ---- | ---- | ---- | ---- |
-| x | x | x | x |
+| --- | --- | --- | --- |
+| `mask` | 是否需要遮罩层 | `Boolean` | `true` |
+| `mask-closable` | 是否可以通过点击遮罩关闭对话框 | `Boolean` | `true` |
+| `model-value / v-model` | `是否显示 Dialog` | `Boolean` | - |
+| `title` | 标题， 也可通过具名 `slot-header` 传入 | `String` | - |
+| `show-close` | 右上角关闭按钮显示, `1`-显示在框内，`2`-显示在框角, `0`-不显示 | `0/1/2` | `1` |
+| `show-cancel` | 是否显示底部取消按钮 | `Boolean` | `true` |
+| `show-ok` | 是否显示底部确定按钮 | `Boolean` | `true` |
+| `main-class` | 主体样式类名 | `String` | - |
+| `width` | 宽度 | `String` | `30%` |
+| `before-close` | 关闭前的回调，会暂停关闭对话框, 通过调用回调函数的 `done` 关闭对话框; `cancel`-点击取消按钮触发, `close`-关闭时触发[右上角关闭按钮、遮罩], `ok`-点击确定按钮触发 | `(type: 'cancel' \| 'close' \| 'ok', done: () => void) => void` | - |
