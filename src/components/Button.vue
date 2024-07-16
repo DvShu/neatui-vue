@@ -8,6 +8,7 @@
       circle ? 'nt-btn-circle' : '',
       loading ? 'nt-btn-loading' : '',
       ghost ? 'nt-btn-ghost' : '',
+      text ? 'nt-btn-text' : '',
     ]"
     :disabled="disabled || loading"
     :type="htmlType"
@@ -32,7 +33,7 @@ const props = withDefaults(
     /**
      * 设置按钮类型；primary, text, normal
      */
-    type?: 'primary' | 'text' | 'normal' | string;
+    type?: 'primary' | 'normal' | string;
     /** 是否禁用状态 */
     disabled?: boolean;
     /** 原生的 type 属性 */
@@ -51,6 +52,8 @@ const props = withDefaults(
     ghost?: boolean;
     /** 自定义按钮颜色 */
     color?: string;
+    /** 文本按钮 */
+    text?: boolean;
   }>(),
   {
     disabled: false,
@@ -62,6 +65,8 @@ const props = withDefaults(
     loading: false,
     ghost: false,
     color: undefined,
+    text: false,
+    type: 'normal',
   },
 );
 
@@ -69,17 +74,24 @@ const colorStyle = computed(() => {
   if (props.color != null) {
     const lighten = adjust(props.color, 1, true);
     const darken = adjust(props.color, 3, false);
-    return {
-      '--nt-btn-border-color': props.color,
-      '--nt-btn-color': props.ghost ? props.color : '#ffffff',
-      '--nt-btn-hover-color': props.ghost ? lighten : '#ffffff',
-      '--nt-btn-bg-color': props.ghost ? 'transparent' : props.color,
-      '--nt-btn-active-color': props.ghost ? darken : '#ffffff',
-      '--nt-btn-hover-border-color': lighten,
-      '--nt-btn-hover-bg-color': props.ghost ? 'transparent' : lighten,
-      '--nt-btn-active-bg-color': props.ghost ? 'transparent' : darken,
-      '--nt-btn-active-border-color': darken,
+    const cssVars = {
+      '--nt-btn-border-color': props.text ? 'transparent' : props.color,
+      '--bt-btn-text-color':
+        props.ghost || props.text ? props.color : '#ffffff',
+      '--nt-btn-hover-text-color':
+        props.ghost || props.text ? lighten : '#ffffff',
+      '--nt-btn-background':
+        props.ghost || props.text ? 'transparent' : props.color,
+      '--nt-btn-active-text-color':
+        props.ghost || props.text ? darken : '#ffffff',
+      '--nt-btn-hover-border-color': props.text ? 'transparent' : lighten,
+      '--nt-btn-hover-background':
+        props.ghost || props.text ? 'transparent' : lighten,
+      '--nt-btn-active-background':
+        props.ghost || props.text ? 'transparent' : darken,
+      '--nt-btn-active-border-color': props.text ? 'transparent' : darken,
     };
+    return cssVars;
   }
   return {};
 });

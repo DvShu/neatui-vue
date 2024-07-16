@@ -8,15 +8,14 @@ export default defineComponent({
   setup(_props, { slots }: any) {
     const showCode = ref(false);
 
-    return () =>
-      h('div', { class: 'code-preview' }, [
+    return () => {
+      console.log(slots.preview());
+      return h('div', { class: 'code-preview' }, [
         h(
           'div',
           { class: 'preview-container' },
           slots.preview
-            ? h(CodeRender, null, {
-                preview: () => slots.preview(),
-              })
+            ? slots.preview()
             : h(CodeRender, null, {
                 default: () => slots.default(),
               }),
@@ -25,7 +24,8 @@ export default defineComponent({
           h(
             Button,
             {
-              type: 'text',
+              type: 'primary',
+              text: true,
               onclick: function () {
                 showCode.value = !showCode.value;
               },
@@ -40,6 +40,7 @@ export default defineComponent({
           h(SourceCode, null, { default: () => slots.default() }),
         ],
       ]);
+    };
   },
 });
 </script>

@@ -4,18 +4,28 @@
 
 ## 演示
 
-<script setup>
+<script setup lang="ts">
   import { ref } from 'vue'
-  import { Dialog, AlertDialog } from "../../src"
+  import { Dialog, AlertDialog, Button } from "../../src"
 
   const show = ref(false)
-</script>
 
-<AlertDialog></AlertDialog>
+  function handleBeforeClose(type: 'cancel' | 'close' | 'ok', done) {
+    if (type === 'ok') {
+      console.log('ok')
+      // 模拟数据提交
+      setTimeout(() => {
+        done()
+      }, 1000);
+    } else {
+      done()
+    }
+  }
+</script>
 
 ### 基础用法
 
-基础用法
+需要设置 `model-value / v-model` 属性，它接收 `Boolean`，当为 `true` 时显示 `Dialog`。`title` 属性用于定义标题，它是可选的，默认值为空。`before-close` 关闭前的回调，会暂停 `Dialog` 的关闭. 返回 `true` 则关闭，返回 `false` 则不关闭。
 
 <ClientOnly>
   <CodePreview>
@@ -27,7 +37,9 @@
   </template>
   </textarea>
   <template #preview>
-    <Dialog v-model="show" title="Title">
+    <Button type="primary" @click="show = true">显示 Dialog</Button>
+    <!---->
+    <Dialog v-model="show" title="Title" :before-close="handleBeforeClose">
       这是内容
     </Dialog>
   </template>

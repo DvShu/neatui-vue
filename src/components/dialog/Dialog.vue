@@ -17,10 +17,6 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
-    type: {
-      type: String as PropType<'normal'>,
-      default: 'normal',
-    },
     /** 是否显示对话框 */
     modelValue: {
       type: Boolean,
@@ -37,7 +33,7 @@ export default defineComponent({
       default: 1,
     },
     /** 是否显示底部取消按钮 */
-    showCandel: {
+    showCancel: {
       type: Boolean,
       default: true,
     },
@@ -58,8 +54,15 @@ export default defineComponent({
     },
     /** 关闭前的回调, 会暂停 Dialog 的关闭. 回调返回 true 表明关闭对话框. */
     beforeClose: {
-      type: Function as PropType<(type: string) => boolean | undefined>,
-      default: () => true,
+      type: Function as PropType<
+        (type: 'cancel' | 'ok' | 'close', done: () => void) => void
+      >,
+      default: undefined,
+    },
+    /** 对话框宽度 */
+    width: {
+      type: String,
+      default: '30%',
     },
   },
   emits: ['update:modelValue'],
@@ -85,9 +88,15 @@ export default defineComponent({
       }
     }
 
-    function close(type: 'cancel' | 'close') {
-      if (props.beforeClose(type)) {
+    function done() {
+      emit('update:modelValue', false);
+    }
+
+    function close(type: 'cancel' | 'close' | 'ok') {
+      if (props.beforeClose == null) {
         emit('update:modelValue', false);
+      } else {
+        props.beforeClose(type, done);
       }
     }
 
@@ -109,7 +118,6 @@ export default defineComponent({
                     {
                       shadowClass: [
                         'nt-dialog',
-                        'nt-dialog-' + props.type,
                         props.alignCenter ? 'nt-dialog-align-center' : '',
                       ]
                         .join(' ')
@@ -164,7 +172,7 @@ export default defineComponent({
                         } else {
                           $contents.push(
                             h('div', { class: 'nt-dialog-footer' }, [
-                              props.showCandel
+                              props.showCancel
                                 ? h(
                                     Button,
                                     {
@@ -175,12 +183,28 @@ export default defineComponent({
                                   )
                                 : undefined,
                               props.showOk
-                                ? h(Button, {}, { default: () => '确定' })
+                                ? h(
+                                    Button,
+                                    {
+                                      type: 'primary',
+                                      onClick: () => close('ok'),
+                                    },
+                                    { default: () => '确定' },
+                                  )
                                 : undefined,
                             ]),
                           );
                         }
-                        return h('div', { class: 'nt-dialog-main' }, $contents);
+                        return h(
+                          'div',
+                          {
+                            class: 'nt-dialog-main',
+                            style: {
+                              width: props.width,
+                            },
+                          },
+                          $contents,
+                        );
                       },
                     },
                   )
