@@ -67,7 +67,12 @@ export default defineComponent({
     /** 对话框宽度 */
     width: {
       type: String,
-      default: '30%',
+      default: undefined,
+    },
+    /** 主题, normal - 普通, mobile - 移动风格 */
+    theme: {
+      type: String as PropType<'normal' | 'mobile'>,
+      default: 'normal',
     },
   },
   emits: ['update:modelValue'],
@@ -182,6 +187,7 @@ export default defineComponent({
                                         Button,
                                         {
                                           type: 'normal',
+                                          text: props.theme === 'mobile',
                                           onClick: () => close('close'),
                                         },
                                         { default: () => '取消' },
@@ -192,6 +198,7 @@ export default defineComponent({
                                         Button,
                                         {
                                           type: 'primary',
+                                          text: props.theme === 'mobile',
                                           onClick: () => close('ok'),
                                         },
                                         { default: () => '确定' },
@@ -203,9 +210,13 @@ export default defineComponent({
                         return h(
                           'div',
                           {
-                            class: ['nt-dialog-main', props.mainClass],
+                            class: [
+                              'nt-dialog-main',
+                              'nt-dialog-' + props.theme,
+                              props.mainClass,
+                            ],
                             style: {
-                              width: props.width,
+                              width: props.width ? props.width : undefined,
                             },
                           },
                           $contents,

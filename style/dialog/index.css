@@ -3,6 +3,7 @@ body.nt-body-lock {
 }
 
 .nt-dialog {
+  --nt-dialog-line-color: rgba(0, 0, 0, 0.06);
   display: block;
 }
 
@@ -28,9 +29,9 @@ body.nt-body-lock {
 
 .nt-dialog-header {
   padding: 10px;
-  font-size: 14px;
-  border-bottom: 1px solid #dedede;
-  font-weight: bold;
+  font-size: 16px;
+  border-bottom: 1px solid var(--nt-dialog-line-color);
+  font-weight: 600;
 }
 
 /* 右上角关闭按钮 */
@@ -62,7 +63,7 @@ body.nt-body-lock {
 .nt-dialog-footer {
   padding: 10px;
   text-align: right;
-  border-top: 1px solid #dedede;
+  border-top: 1px solid var(--nt-dialog-line-color);
 }
 
 .nt-dialog-close2 {
@@ -86,8 +87,38 @@ body.nt-body-lock {
   }
 }
 
+/* theme: mobile */
+.nt-dialog-mobile {
+  border-radius: 10px;
+}
+.nt-dialog-mobile .nt-dialog-header {
+  text-align: center;
+  border-bottom-color: transparent;
+  padding: 20px 10px 5px;
+}
+.nt-dialog-mobile .nt-dialog-container {
+  padding: 5px 15px 20px;
+  text-align: center;
+}
+.nt-dialog-mobile .nt-dialog-footer {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  padding: 0;
+  text-align: center;
+  height: 50px;
+}
+.nt-dialog-mobile .nt-btn {
+  flex-grow: 1;
+}
+
+.nt-dialog-mobile .nt-btn + .nt-btn {
+  border-left: 1px solid var(--nt-dialog-line-color);
+}
+
 @media screen and (max-width: 768px) {
   .nt-dialog .nt-dialog-main {
     width: 80%;
+    max-width: 300px;
   }
 }

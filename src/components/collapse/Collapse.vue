@@ -32,7 +32,7 @@ const props = withDefaults(
     borderRadius?: string;
   }>(),
   {
-    accordion: true,
+    accordion: false,
     arrowPlacement: 'left',
     headerJustify: undefined,
     background: false,

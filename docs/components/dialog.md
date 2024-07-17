@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { Dialog, AlertDialog, Button, InfoIcon, Loading, Message } from "../../src"
+  import { Dialog, AlertDialog, Button, InfoIcon, Loading, Message, DialogBox } from "../../src"
 
   const show = ref(false)
   const show1 = ref(false)
@@ -29,6 +29,8 @@
       done()
     }
   }
+
+  DialogBox.alert()
 </script>
 
 ### 基础用法
@@ -148,6 +150,36 @@
   </CodePreview>
 </ClientOnly>
 
+### 移动风格
+
+默认情况下对话框为 `pc` 端风格，可以通过传递 `theme=mobile` 将对话框变为移动风格；具体表现为：文本居中，下方按钮平铺
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup lang="ts">
+    import { ref } from 'vue'
+    //-
+    const show4 = ref(false);
+  </script>
+  <template>
+    <nt-button type="primary" @click="show4 = true">显示 Dialog</nt-button>
+    <!---->
+    <nt-dialog v-model="show4" title="标题" theme="mobile" :show-close="0" align-center>
+      弹窗内容
+    </nt-dialog>
+  </template>
+  </textarea>
+  <template #preview>
+    <Button type="primary" @click="show4 = true">显示 Dialog</Button>
+    <!---->
+    <Dialog v-model="show4" title="标题" theme="mobile" :show-close="0" align-center>
+      弹窗内容
+    </Dialog>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Dialog Props
@@ -163,5 +195,6 @@
 | `show-cancel` | 是否显示底部取消按钮 | `Boolean` | `true` |
 | `show-ok` | 是否显示底部确定按钮 | `Boolean` | `true` |
 | `main-class` | 主体样式类名 | `String` | - |
-| `width` | 宽度 | `String` | `30%` |
+| `width` | 宽度 | `String` | `pc`端`30%`, 移动端 `80%` |
 | `before-close` | 关闭前的回调，会暂停关闭对话框, 通过调用回调函数的 `done` 关闭对话框; `cancel`-点击取消按钮触发, `close`-关闭时触发[右上角关闭按钮、遮罩], `ok`-点击确定按钮触发 | `(type: 'cancel' \| 'close' \| 'ok', done: () => void) => void` | - |
+| `theme` | 主题风格 | `normal`、`mobile` | `normal` |
