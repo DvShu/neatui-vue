@@ -69,6 +69,10 @@ export default defineComponent({
       type: String,
       default: undefined,
     },
+    to: {
+      type: [Object, String] as PropType<HTMLElement | 'string'>,
+      default: 'body',
+    },
     /** 主题, normal - 普通, mobile - 移动风格 */
     theme: {
       type: String as PropType<'normal' | 'mobile'>,
@@ -111,9 +115,10 @@ export default defineComponent({
     }
 
     return () => {
+      console.log(props.to);
       return h(
         Teleport,
-        { to: 'body' },
+        { to: props.to },
         h(
           Transition,
           {

@@ -31,6 +31,7 @@ import '../../../style/tooltip';
 import '../../../style/util/tabs.css';
 import '../../../style/list';
 import '../../../style/dialog';
+import '../../../style/dialog-box';
 
 export default {
   extends: DefaultTheme,

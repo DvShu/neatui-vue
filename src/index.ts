@@ -40,7 +40,6 @@ export { default as Card } from './components/Card.vue';
 export { default as Popover } from './components/popover/Popover.vue';
 export { default as Tooltip } from './components/popover/Tooltip.vue';
 export { default as Dialog } from './components/dialog/Dialog.vue';
-export { default as AlertDialog } from './components/dialog/AlertDialog.vue';
 export { default as DialogBox } from './components/dialog/DialogBox';
 
 export { default as Qrcode } from './components/Qrcode.vue';

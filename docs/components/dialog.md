@@ -30,7 +30,25 @@
     }
   }
 
-  DialogBox.alert()
+  function openAlert() {
+    DialogBox.alert("这是 Alert Content", 'Alert Title').then((result) => {
+      if (result === true) {
+        Message.success("点击了确定")
+      } else {
+        Message.info("点击了关闭")
+      }
+    })
+  }
+
+  function openConfirm() {
+    DialogBox.confirm("这是 Confirm Content", 'Confirm Title', { type: 'success' }).then((result) => {
+      if (result === true) {
+        Message.success("点击了确定")
+      } else {
+        Message.info("点击了关闭")
+      }
+    })
+  }
 </script>
 
 ### 基础用法
@@ -176,6 +194,28 @@
     <Dialog v-model="show4" title="标题" theme="mobile" :show-close="0" align-center>
       弹窗内容
     </Dialog>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 消息弹窗
+
+模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。系统自带有3种消息弹窗：`alert`、`confirm`、`prompt` 但是其样式比较简陋不太美观，消息弹窗优化了样式。
+
+分别通过 `NtDialogBox.alert()`、`NtDialogBox.confirm()`、`NtDialogBox.prompt()` 调用
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+  </script>
+  <template>
+  </template>
+  </textarea>
+  <template #preview>
+    <Button @click="openAlert">alert</Button>
+    <Button @click="openConfirm">confirm</Button>
+    <Button>prompt</Button>
   </template>
   </CodePreview>
 </ClientOnly>
