@@ -16,8 +16,16 @@
 
 ### Input Props
 
-| 参数                      | 说明                                                                                                    | 类型     | 默认值 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------- | -------- | ------ |
-| `html-type`               | 原始的 [type](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#input_%E7%B1%BB%E5%9E%8B) | `string` | `text` |
-| `model-value` / `v-model` | 绑定值                                                                                                  | `string` | —      |
-| `placeholder`             | 占位文本                                                                                                | `string` | —      |
+<!-- prettier-ignore -->
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `html-type` | 原始的 [type](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#input_%E7%B1%BB%E5%9E%8B) | `string` | `text` |
+| `model-value` / `v-model` | 绑定值  | `string` | — |
+| `placeholder` | 占位文本 | `string` | — |
+
+### Input Exposes
+
+<!-- prettier-ignore -->
+| 名称 | 说明 | 类型 |
+| --- | --- | --- |
+| `focus` | 使输入框获取焦点 | `() => void` |

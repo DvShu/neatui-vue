@@ -49,6 +49,12 @@
       }
     })
   }
+
+  function openPrompt() {
+    DialogBox.prompt("请输入用户名", 'Prompt Title').then((result) => {
+      Message.info('用户名：' + result)
+    })
+  }
 </script>
 
 ### 基础用法
@@ -207,15 +213,43 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue">
-  <script setup>
+  <script setup lang="ts">
+    function openAlert() {
+      NtDialogBox.alert("这是 Alert Content", 'Alert Title').then((result) => {
+        if (result === true) {
+          NtMessage.success("点击了确定")
+        } else {
+          NtMessage.info("点击了关闭")
+        }
+      })
+    }
+    //-
+    function openConfirm() {
+      NtDialogBox.confirm("这是 Confirm Content", 'Confirm Title', { type: 'success' }).then((result) => {
+        if (result === true) {
+          NtMessage.success("点击了确定")
+        } else {
+          NtMessage.info("点击了关闭")
+        }
+      })
+    }
+    //-
+    function openPrompt() {
+      NtDialogBox.prompt("请输入用户名", 'Prompt Title').then((result) => {
+        NtMessage.info('用户名：' + result)
+      })
+    }
   </script>
   <template>
+    <nt-button @click="openAlert">alert</nt-button>
+    <nt-button @click="openConfirm">confirm</nt-button>
+    <nt-button @click="openPrompt">prompt</nt-button>
   </template>
   </textarea>
   <template #preview>
     <Button @click="openAlert">alert</Button>
     <Button @click="openConfirm">confirm</Button>
-    <Button>prompt</Button>
+    <Button @click="openPrompt">prompt</Button>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -238,3 +272,18 @@
 | `width` | 宽度 | `String` | `pc`端`30%`, 移动端 `80%` |
 | `before-close` | 关闭前的回调，会暂停关闭对话框, 通过调用回调函数的 `done` 关闭对话框; `cancel`-点击取消按钮触发, `close`-关闭时触发[右上角关闭按钮、遮罩], `ok`-点击确定按钮触发 | `(type: 'cancel' \| 'close' \| 'ok', done: () => void) => void` | - |
 | `theme` | 主题风格 | `normal`、`mobile` | `normal` |
+
+### DialogBox API
+
+#### 1. `alert(message: string, title: string, options?: DialogBoxOptions): Promise<void>`
+
+#### 2. `confirm(message: string, title: string, options?: DialogBoxOptions): Promise<boolean>`
+
+#### 3. `prompt(tip: string, tip: string, options?: DialogBoxOptions): Promise<string | null>`
+
+### DialogBoxOptions
+
+<!-- prettier-ignore -->
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `showCancel` | 是否显示取消按钮 | `boolean` | - |

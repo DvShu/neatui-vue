@@ -8,7 +8,7 @@
     }"
   >
     <div
-      class="nt-collapse-item__header"
+      :class="['nt-collapse-item__header', headerClass]"
       :style="headerStyleObj"
       @click="toggle"
     >
@@ -17,7 +17,9 @@
         v-if="collapseCtx.arrowPlacement === 'left'"
         :class="['nt-collapse-arrow__' + collapseCtx.arrowPlacement]"
       ></ArrowRightIcon>
-      <span class="nt-collapse-item__title">{{ title }}</span>
+      <slot name="title">
+        <span class="nt-collapse-item__title">{{ title }}</span>
+      </slot>
       <ArrowRightIcon
         class="nt-collapse-arrow-icon"
         v-if="collapseCtx.arrowPlacement === 'right'"
@@ -74,14 +76,16 @@ function onLeave(el: Element) {
 const props = withDefaults(
   defineProps<{
     /** 面板标题 */
-    title: string;
+    title?: string;
     /** 唯一标志符 */
     name: string | number;
     /** 是否禁用 */
     disabled?: boolean;
+    headerClass?: string;
   }>(),
   {
     disabled: false,
+    headerClass: '',
   },
 );
 

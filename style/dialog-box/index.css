@@ -1,3 +1,7 @@
+.nt-dialog-box-main {
+  width: 340px;
+}
+
 .nt-message-dialog-container {
   display: flex;
   align-items: center;
@@ -17,4 +21,13 @@
 }
 .nt-confirm-icon--warn {
   color: var(--nt-warn-color, #f90);
+}
+
+.nt-prompt-tip {
+  font-size: 14px;
+  margin: 0 0 5px 0;
+}
+
+.nt-prompt-dialog-container .nt-input {
+  width: 100%;
 }

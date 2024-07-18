@@ -115,7 +115,6 @@ export default defineComponent({
     }
 
     return () => {
-      console.log(props.to);
       return h(
         Teleport,
         { to: props.to },
