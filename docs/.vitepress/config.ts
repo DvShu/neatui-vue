@@ -64,34 +64,82 @@ export default defineConfig({
         text: '通用',
         collapsed: true,
         items: [
-          { text: 'Container 容器布局', link: '/components/container' },
-          { text: 'Polygon 多边形', link: '/components/polygon' },
-          { text: 'Icon 图标', link: '/components/icon' },
+          {
+            text: 'Container 容器布局',
+            link: '/components/container',
+          },
+          {
+            text: 'Polygon 多边形',
+            link: '/components/polygon',
+          },
+          {
+            text: 'Icon 图标',
+            link: '/components/icon',
+          },
         ],
       },
       {
         text: '表单',
         collapsed: true,
         items: [
-          { text: 'Button 按钮', link: '/components/button' },
-          { text: 'Input 输入框', link: '/components/input' },
-          { text: 'Checkbox 复选框', link: '/components/checkbox' },
-          { text: 'Radio 单选框', link: '/components/radio' },
-          { text: 'Switch 开关', link: '/components/switch' },
-          { text: 'Form 表单', link: '/components/form' },
+          {
+            text: 'Button 按钮',
+            link: '/components/button',
+          },
+          {
+            text: 'Input 输入框',
+            link: '/components/input',
+          },
+          {
+            text: 'Checkbox 复选框',
+            link: '/components/checkbox',
+          },
+          {
+            text: 'Radio 单选框',
+            link: '/components/radio',
+          },
+          {
+            text: 'Switch 开关',
+            link: '/components/switch',
+          },
+          {
+            text: 'Form 表单',
+            link: '/components/form',
+          },
         ],
       },
       {
         text: '数据展示',
         collapsed: true,
         items: [
-          { text: 'Card 卡片', link: '/components/card' },
-          { text: 'Qrcode 二维码', link: '/components/qrcode' },
-          { text: 'Image 图片', link: '/components/image' },
-          { text: 'Shadow 阴影', link: '/components/shadow' },
-          { text: 'Table 表格', link: '/components/table' },
-          { text: 'Collapse 折叠面板', link: '/components/collapse' },
-          { text: 'Progress 进度条', link: '/components/progress' },
+          {
+            text: 'Card 卡片',
+            link: '/components/card',
+          },
+          {
+            text: 'Qrcode 二维码',
+            link: '/components/qrcode',
+          },
+          {
+            text: 'Image 图片',
+            link: '/components/image',
+          },
+          {
+            text: 'Shadow 阴影',
+            link: '/components/shadow',
+          },
+          {
+            text: 'Table 表格',
+            link: '/components/table',
+          },
+          {
+            text: 'Collapse 折叠面板',
+            link: '/components/collapse',
+          },
+          {
+            text: 'Progress 进度条',
+            link: '/components/progress',
+          },
           {
             text: 'DescriptionPanel 简介面板',
             link: '/components/descriptionpanel',
@@ -128,16 +176,32 @@ export default defineConfig({
             text: 'Dialog 对话框',
             link: '/components/dialog',
           },
-          { text: 'Tooltip 文字提示', link: '/components/tooltip' },
-          { text: 'Message 消息提示', link: '/components/message' },
+          {
+            text: 'Tooltip 文字提示',
+            link: '/components/tooltip',
+          },
+          {
+            text: 'Message 消息提示',
+            link: '/components/message',
+          },
+          {
+            text: 'Popconfirm 气泡确认框',
+            link: '/components/popconfirm',
+          },
         ],
       },
       {
         text: '自定义指令',
         collapsed: true,
         items: [
-          { text: 'Directives 简单指令', link: '/components/directives' },
-          { text: 'Loading 加载', link: '/components/loading' },
+          {
+            text: 'Directives 简单指令',
+            link: '/components/directives',
+          },
+          {
+            text: 'Loading 加载',
+            link: '/components/loading',
+          },
         ],
       },
     ],

@@ -32,6 +32,7 @@ import '../../../style/util/tabs.css';
 import '../../../style/list';
 import '../../../style/dialog';
 import '../../../style/dialog-box';
+import '../../../style/popconfirm';
 
 export default {
   extends: DefaultTheme,

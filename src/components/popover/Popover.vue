@@ -50,7 +50,8 @@ function getDistanceToContainer(el: HTMLElement) {
 
 export default defineComponent({
   props: popoverProps,
-  setup(props, { slots, attrs }) {
+  inheritAttrs: false,
+  setup(props, { slots, attrs, expose }) {
     const show = ref(false);
     const place = ref(props.placement);
 
@@ -165,16 +166,17 @@ export default defineComponent({
           }
 
           if (posLeft <= Math.abs(left)) {
-            xPos = 'right';
-            leftDiff = -(targetRect.width + 8);
+            xPos = 'left';
+            leftDiff = 0;
           }
           if (
             posLeft + popoverRect.width >=
             Math.abs(left) + window.innerWidth - 15
           ) {
             xPos = 'left';
-            leftDiff = popoverRect.width + 8;
+            leftDiff = 0;
           }
+
           if (xPos === '' && yPos === '') {
             tmpPlace = props.placement;
           } else {
@@ -236,6 +238,10 @@ export default defineComponent({
       hideFn();
     }
 
+    function close() {
+      show.value = false;
+    }
+
     function handleClick(e: Event) {
       const $target = e.currentTarget as HTMLElement;
       // 点击的不是 popover 元素，才切换 popover
@@ -256,6 +262,10 @@ export default defineComponent({
     function handleOutside() {
       hideFn();
     }
+
+    expose({
+      close,
+    });
 
     return () => {
       const firstVNode = getFirstTriggerVNode(slots);

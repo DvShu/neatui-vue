@@ -41,6 +41,7 @@ export { default as Popover } from './components/popover/Popover.vue';
 export { default as Tooltip } from './components/popover/Tooltip.vue';
 export { default as Dialog } from './components/dialog/Dialog.vue';
 export { default as DialogBox } from './components/dialog/DialogBox';
+export { default as Popconfirm } from './components/Popconfirm.vue';
 
 export { default as Qrcode } from './components/Qrcode.vue';
 
