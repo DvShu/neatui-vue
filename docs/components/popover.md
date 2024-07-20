@@ -272,3 +272,10 @@
 | --- | --- |
 | `default` | 自定义内容 |
 | `trigger` | 自定义触发元素 |
+
+### Popover Exposes
+
+<!-- prettier-ignore -->
+| 名称 | 说明 | 类型 |
+| --- | --- | --- |
+| `close` | 关闭弹层 | `() => void` |
