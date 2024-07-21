@@ -106,6 +106,10 @@ export default defineConfig({
             text: 'Form 表单',
             link: '/components/form',
           },
+          {
+            text: 'SelectOri 原生下拉选择',
+            link: '/components/selectori',
+          },
         ],
       },
       {

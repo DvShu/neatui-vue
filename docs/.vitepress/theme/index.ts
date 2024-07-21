@@ -33,6 +33,7 @@ import '../../../style/list';
 import '../../../style/dialog';
 import '../../../style/dialog-box';
 import '../../../style/popconfirm';
+import '../../../style/select-ori';
 
 export default {
   extends: DefaultTheme,

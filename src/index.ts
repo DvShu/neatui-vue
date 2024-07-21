@@ -31,6 +31,7 @@ export { default as FormItem } from './components/form/FormItem.vue';
 export { default as Form } from './components/form/Form.vue';
 export { default as Image } from './components/Image.vue';
 export { default as ImagePreview } from './components/ImagePreview.vue';
+export { default as SelectOri } from './components/SelectOri.vue';
 
 export { default as Table } from './components/Table.vue';
 
