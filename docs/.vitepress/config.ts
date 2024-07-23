@@ -110,6 +110,10 @@ export default defineConfig({
             text: 'SelectOri 原生下拉选择',
             link: '/components/selectori',
           },
+          {
+            "text": "DatePickerOri 日期选择",
+            "link": "/components/datepickerori"
+          }
         ],
       },
       {
