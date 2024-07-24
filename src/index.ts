@@ -61,3 +61,4 @@ export { default as List } from './components/List.vue';
 
 export { default as Clickoutside } from './directives/clickoutside';
 export { default as Loading } from './directives/loading';
+export { default as PageHeader } from "./components/PageHeader.vue";

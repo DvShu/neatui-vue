@@ -1,0 +1,47 @@
+.nt-page-header {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.nt-page-header-operator {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nt-page-header-left,
+.nt-page-header-right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.nt-page-header-content {
+  display: flex;
+  align-items: center;
+}
+
+.nt-page-header-sub-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #999999;
+  margin-left: 10px;
+}
+
+.nt-page-header-align-left .nt-page-header-left {
+  margin-right: 15px;
+}
+.nt-page-header-align-left .nt-page-header-right {
+  margin-left: 15px;
+}
+
+.nt-page-header-align-left .nt-page-header-content {
+  flex: 1 0 auto;
+}
+
+.nt-page-header-title {
+  font-size: 16px;
+  font-weight: 600;
+}

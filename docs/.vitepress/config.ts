@@ -111,9 +111,9 @@ export default defineConfig({
             link: '/components/selectori',
           },
           {
-            "text": "DatePickerOri 日期选择",
-            "link": "/components/datepickerori"
-          }
+            text: 'DatePickerOri 日期选择',
+            link: '/components/datepickerori',
+          },
         ],
       },
       {
@@ -159,6 +159,10 @@ export default defineConfig({
           {
             text: 'Tabs 标签页',
             link: '/components/tabs',
+          },
+          {
+            text: 'PageHeader 页头',
+            link: '/components/pageheader',
           },
         ],
       },
