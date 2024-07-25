@@ -5,9 +5,11 @@
       'nt-radio': true,
       'nt-radio--disabled': disabled,
       'nt-radio--button': type === 'button',
+      'is-checked': isChecked,
     }"
   >
     <input
+      ref="radio"
       type="radio"
       :name="name"
       class="nt-radio__input"
@@ -23,7 +25,11 @@
   </label>
 </template>
 <script setup lang="ts">
-import { watch, inject, Ref, ref } from 'vue';
+import { inject, Ref, ref, computed } from 'vue';
+import { random } from 'ph-utils';
+import { timeStamp } from 'ph-utils/date';
+
+const radio = ref<HTMLInputElement>();
 
 const checkedModel = defineModel();
 
@@ -34,13 +40,11 @@ const props = withDefaults(
     label?: string;
     type?: 'button';
     disabled?: boolean;
-    /** 是否选中 */
-    checked?: boolean;
   }>(),
   {
     disabled: false,
-    checked: undefined,
     value: undefined,
+    name: `r${timeStamp()}${random(2)}`,
   },
 );
 
@@ -52,10 +56,7 @@ const { checkedValue, updateCheck } = inject<{
   updateCheck: null,
 });
 
-function initIsChecked(): boolean {
-  if (props.checked != null) {
-    return props.checked;
-  }
+const isChecked = computed(() => {
   if (checkedValue != null) {
     return checkedValue.value === props.value;
   }
@@ -63,16 +64,7 @@ function initIsChecked(): boolean {
     return checkedModel.value === props.value;
   }
   return checkedModel.value as boolean;
-}
-
-const isChecked = ref(initIsChecked());
-
-watch(
-  () => props.checked,
-  (val) => {
-    isChecked.value = val as boolean;
-  },
-);
+});
 
 const emits = defineEmits(['change']);
 

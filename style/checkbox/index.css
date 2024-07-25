@@ -45,6 +45,7 @@
   border-top: none;
   transform: rotate(-45deg);
   transition: border-color 0.2s ease-in-out;
+  margin-top: -3px;
 }
 .nt-checkbox--indeterminate .nt-checkbox__inner {
   background-color: var(--nt-checkbox-checked-color);

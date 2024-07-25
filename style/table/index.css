@@ -49,10 +49,10 @@
   cursor: pointer;
 }
 .nt-table .sort-asc .ascending {
-  border-bottom-color: #4998f4;
+  border-bottom-color: var(--nt-primary-color, #52c41a);
 }
 .nt-table .sort-desc .descending {
-  border-top-color: #4998f4;
+  border-top-color: var(--nt-primary-color, #52c41a);
 }
 .nt-table td,
 .nt-table th {

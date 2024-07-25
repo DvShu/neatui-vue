@@ -22,10 +22,10 @@ export { default as CloseIcon } from './components/icon/Close.vue';
 
 export { default as Input } from './components/Input.vue';
 export { default as Button } from './components/Button.vue';
-export { default as Checkbox } from './components/Checkbox.vue';
-export { default as CheckboxGroup } from './components/CheckboxGroup.vue';
-export { default as Radio } from './components/Radio.vue';
-export { default as RadioGroup } from './components/RadioGroup.vue';
+export { default as Checkbox } from './components/checkbox/Checkbox.vue';
+export { default as CheckboxGroup } from './components/checkbox/CheckboxGroup.vue';
+export { default as Radio } from './components/radio/Radio.vue';
+export { default as RadioGroup } from './components/radio/RadioGroup.vue';
 export { default as Switch } from './components/Switch.vue';
 export { default as FormItem } from './components/form/FormItem.vue';
 export { default as Form } from './components/form/Form.vue';

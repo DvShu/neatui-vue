@@ -1,8 +1,8 @@
 <script lang="ts">
-import { defineComponent, h, PropType, ref, watch } from 'vue';
+import { defineComponent, h, PropType, ref, toRaw, watch } from 'vue';
 import type { VNode } from 'vue';
-import Radio from './Radio.vue';
-import Checkbox from './Checkbox.vue';
+import Radio from './radio/Radio.vue';
+import Checkbox from './checkbox/Checkbox.vue';
 import { random } from 'ph-utils';
 import { format } from 'ph-utils/date';
 
@@ -46,7 +46,10 @@ interface SortOption {
   order: string;
 }
 
-type SorterFnOption = (data: any[]) => any[];
+type SorterFnOption = (
+  data: any[],
+  sortInfo: { order: string; key: string },
+) => any[];
 
 type RowKeyOption = (row: any) => any;
 
@@ -232,20 +235,23 @@ export default defineComponent({
     function dataSort(
       data: any[],
       sortInfo: SortOption,
-      sorterFn?: (data: any[]) => any[],
+      sorterFn?: (
+        data: any[],
+        sortInfo: { order: string; key: string },
+      ) => any[],
     ) {
       let oriData = [...data];
       if (sorterFn) {
-        return sorterFn(oriData);
+        return sorterFn(oriData, toRaw(sortInfo));
       }
       if (sortInfo.key === '') {
         return oriData;
       }
       return oriData.sort((a, b) => {
         if (sortInfo.order === 'asc') {
-          return a[sortInfo.key] - b[sortInfo.key];
+          return a[sortInfo.key] >= b[sortInfo.key] ? 1 : -1;
         }
-        return b[sortInfo.key] - a[sortInfo.key];
+        return a[sortInfo.key] >= b[sortInfo.key] ? -1 : 1;
       });
     }
 

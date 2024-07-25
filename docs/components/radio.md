@@ -10,7 +10,7 @@
 
   const sex = ref('0')
 
-  const allowService = ref(false)
+  const allowService = ref(true)
 </script>
 
 ### 基础用法
@@ -110,35 +110,6 @@
   </CodePreview>
 </ClientOnly>
 
-### 受控
-
-有时候需要自己手动控制选中状态时，只需要传递一个 `checked` 属性，`true` 选中, `false` 为未选中
-
-<ClientOnly>
-  <CodePreview>
-  <textarea lang="vue">
-  <script setup>
-    import { ref } from 'vue';
-    const allowService = ref(false);
-  </script>
-  <template>
-    <nt-radio label="同意隐私协议" :checked="allowService"></nt-radio>
-    <div class="mt-15">
-      <nt-button @click="allowService = false">未选中</nt-button>
-      <nt-button type="primary" class="ml-10" @click="allowService = true">选中</nt-button>
-    </div>
-  </template>
-  </textarea>
-  <template #preview>
-    <Radio label="同意隐私协议" :checked="allowService"></Radio>
-    <div class="mt-15">
-      <Button @click="allowService = false">未选中</Button>
-      <Button type="primary" class="ml-10" @click="allowService = true">选中</Button>
-    </div>
-  </template>
-  </CodePreview>
-</ClientOnly>
-
 ## API
 
 ### Radio Props
@@ -151,7 +122,6 @@
 | `value`                 | 原生 `value` 属性  | `string`  | -       |
 | `label`                 | 显示的标签         | `string`  | -       |
 | `type`                  | 是否设置为按钮风格 | `button`  | -       |
-| `checked`               | 是否选中           | `boolean` | -       |
 
 ### RadioGroup Props
 
