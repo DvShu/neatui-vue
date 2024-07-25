@@ -32,6 +32,7 @@ export { default as Form } from './components/form/Form.vue';
 export { default as Image } from './components/Image.vue';
 export { default as ImagePreview } from './components/ImagePreview.vue';
 export { default as SelectOri } from './components/SelectOri.vue';
+export { default as DatePickerOri } from './components/DatePickerOri.vue';
 
 export { default as Table } from './components/Table.vue';
 
@@ -60,3 +61,4 @@ export { default as List } from './components/List.vue';
 
 export { default as Clickoutside } from './directives/clickoutside';
 export { default as Loading } from './directives/loading';
+export { default as PageHeader } from "./components/PageHeader.vue";

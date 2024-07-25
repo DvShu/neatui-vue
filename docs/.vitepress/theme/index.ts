@@ -34,6 +34,8 @@ import '../../../style/dialog';
 import '../../../style/dialog-box';
 import '../../../style/popconfirm';
 import '../../../style/select-ori';
+import '../../../style/date-picker-ori';
+import '../../../style/page-header';
 
 export default {
   extends: DefaultTheme,
