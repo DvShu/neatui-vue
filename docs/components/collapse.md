@@ -9,6 +9,8 @@
   import { ref } from 'vue'
 
   const activeNames = ref(['1'])
+
+  const active1 = ref(['1'])
 </script>
 
 ### 基础用法
@@ -33,14 +35,14 @@
   </CodePreview>
 </ClientOnly>
 
-### 默认展开
+### 手动展开
 
-通过传递 `default-expanded-names` 数组，来设置默认展开的面板。
+通过传递 `v-model` 来设置展开的面板。
 
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse :default-expanded-names='["1"]' arrow-placement="right">
+  <nt-collapse v-model='active1' arrow-placement="right">
     <nt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
     </nt-collapse-item>
@@ -53,12 +55,15 @@
   </nt-collapse>
   </textarea>
   <template #preview>
-    <Collapse :default-expanded-names='["1"]'>
+    <Collapse v-model="active1">
       <CollapseItem title="红灯" name="1" >
         <div>红灯 - 停</div>
       </CollapseItem>
       <CollapseItem title="绿灯" name="2" >
         <div>绿灯 - 行</div>
+      </CollapseItem>
+      <CollapseItem title="黄灯" name="3" >
+        <div>黄灯 - 注意</div>
       </CollapseItem>
     </Collapse>
   </template>
@@ -210,19 +215,51 @@
   </CodePreview>
 </ClientOnly>
 
+### 网格模式
+
+通过传递 `grid` 属性让折叠面板变为网格模式。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-collapse
+    arrow-placement="right"
+    header-justify="space-between"
+    background
+    border-radius="5px"
+    gap="10px"
+    grid
+  >
+    <nt-collapse-item title="红灯" name="1" >
+      <div>红灯 - 停</div>
+    </nt-collapse-item>
+    <nt-collapse-item title="绿灯" name="2" >
+      <div>绿灯 - 行</div>
+    </nt-collapse-item>
+    <nt-collapse-item title="黄灯" name="3" >
+      <div>黄灯 - 注意</div>
+    </nt-collapse-item>
+  </nt-collapse>
+  </textarea>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Collapse Props
 
-| 参数                     | 说明                               | 类型                            | 默认值       |
-| ------------------------ | ---------------------------------- | ------------------------------- | ------------ |
-| `accordion`              | 手风琴模式，是否只允许展开一个面板 | `boolean`                       | `false`      |
+<!-- prettier-ignore -->
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `v-model` | 展开的面板 | `(string\|numberr)[]` | `[]` |
+| `accordion` | 手风琴模式，是否只允许展开一个面板 | `boolean`                       | `false`      |
 | `arrow-placement`        | 箭头位置                           | `left` \| `right`               | `left`       |
 | `header-justify`         | 面板头部, 水平对齐方式             | `flex-start` \| `space-between` | `flex-start` |
 | `background`             | 是否带有背景和边框                 | `boolean`                       | `false`      |
 | `gap`                    | 面板之间的间隔                     | `string`                        | -            |
 | `default-expanded-names` | 默认展开的面板                     | `(string \| number)[]`          | -            |
 | `border-radius`          | 边框圆角                           | `string`                        | -            |
+| `grid` | 网格模式 | `boolean` | `false` |
 
 ### Collapse Events
 

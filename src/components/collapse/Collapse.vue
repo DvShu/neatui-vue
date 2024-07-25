@@ -4,6 +4,7 @@
     :class="{
       'nt-collapse--background': props.background,
       'nt-collapse--space': props.gap != null,
+      'nt-collapse--grid': props.grid,
     }"
     :style="styles"
   >
@@ -31,6 +32,8 @@ const props = withDefaults(
     /** 边框圆角 */
     borderRadius?: string;
     modelValue?: (string | number)[];
+    /** 网格模式 */
+    grid?: boolean;
   }>(),
   {
     accordion: false,
@@ -40,6 +43,7 @@ const props = withDefaults(
     gap: undefined,
     defaultExpandedNames: () => [],
     modelValue: () => [],
+    grid: false,
   },
 );
 
