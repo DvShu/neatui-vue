@@ -21,6 +21,7 @@
 .nt-page-header-content {
   display: flex;
   align-items: center;
+  line-height: 1;
 }
 
 .nt-page-header-sub-title {
@@ -28,6 +29,14 @@
   font-weight: 500;
   color: #999999;
   margin-left: 10px;
+}
+
+.nt-page-header-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.nt-page-header-backbtn {
+  padding: 5px 0;
 }
 
 .nt-page-header-align-left .nt-page-header-left {
@@ -41,7 +50,22 @@
   flex: 1 0 auto;
 }
 
-.nt-page-header-title {
-  font-size: 16px;
-  font-weight: 600;
+.nt-page-header-align-center {
+  border-bottom: 1px solid #dedede;
+}
+
+.nt-page-header-align-center .nt-page-header-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  z-index: -1;
+}
+.nt-page-header-align-center .nt-page-header-backbtn {
+  padding: 8px 0;
+}
+.nt-page-header-align-center .nt-page-header-backbtn [class*='nt-icon'] + span {
+  margin-left: 0;
 }
