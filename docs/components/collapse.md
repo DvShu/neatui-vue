@@ -168,12 +168,12 @@
 
 ### 项间距
 
-通过设置 `item-space` 设置项间距
+通过设置 `gap` 设置项间距
 
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse arrow-placement="right" header-justify="space-between" background item-space="10px">
+  <nt-collapse arrow-placement="right" header-justify="space-between" background gap="10px">
     <nt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
     </nt-collapse-item>
@@ -195,7 +195,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse arrow-placement="right" header-justify="space-between" background border-radius="5px">
+  <nt-collapse arrow-placement="right" header-justify="space-between" background border-radius="5px" gap="10px">
     <nt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
     </nt-collapse-item>
@@ -220,7 +220,7 @@
 | `arrow-placement`        | 箭头位置                           | `left` \| `right`               | `left`       |
 | `header-justify`         | 面板头部, 水平对齐方式             | `flex-start` \| `space-between` | `flex-start` |
 | `background`             | 是否带有背景和边框                 | `boolean`                       | `false`      |
-| `item-space`             | 面板之间的间隔                     | `string`                        | -            |
+| `gap`                    | 面板之间的间隔                     | `string`                        | -            |
 | `default-expanded-names` | 默认展开的面板                     | `(string \| number)[]`          | -            |
 | `border-radius`          | 边框圆角                           | `string`                        | -            |
 
