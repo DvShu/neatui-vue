@@ -43,23 +43,13 @@ jobs:
           # for more options
           release-type: node
 
-      - name: is published
-        id: is-published
-        # these if statements ensure that a publication only occurs when
-        # a new release is created:
-        # prs_created 是否拉取, pull-request 没有拉取
-        run: |
-          echo "is_published: ${{ steps.release.outputs.releases_created }}"
-          echo "prs_created: ${{ steps.release.outputs.prs_created }}"
-          echo "release_created: ${{ steps.release.outputs.release_created }}"
-
       - name: Output Release Created
         id: output-release-created
+        # prs_created 是否拉取, pull-request 没有拉取
         run: |
-          release_created=${{ steps.release.outputs.release_created }}
-          b=1
-          echo "release_created={release_created}" >> "$GITHUB_OUTPUT"
-          echo "b={b}" >> "$GITHUB_OUTPUT"
+          echo "release_created=${{ steps.release.outputs.release_created }}" >> "$GITHUB_OUTPUT"
+          echo "prs_created=${{ steps.release.outputs.prs_created }}" >> "$GITHUB_OUTPUT"
+          echo "is_published=${{ steps.release.outputs.releases_created }}" >> "$GITHUB_OUTPUT"
 
   check-release:
     runs-on: ubuntu-latest
