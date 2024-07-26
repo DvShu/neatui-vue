@@ -4,7 +4,10 @@
   top: 20px;
   padding: 10px;
   transform: translate3d(-50%, 0, 0);
-  transition: opacity 0.3s, transform 0.3s, top 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    top 0.3s;
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -19,17 +22,21 @@
 .nt-message.nt-message-success {
   background: #edfff3;
   color: var(--nt-success-color);
-  border-color:#bbf2cf;
+  border-color: #bbf2cf;
 }
 .nt-message.nt-message-error {
   background: #ffefe6;
   color: var(--nt-error-color);
-  border-color:#ffcfb8;
+  border-color: #ffcfb8;
 }
 .nt-message.nt-message-warn {
   background: #fff9e6;
   color: var(--nt-warn-color);
-  border-color:#ffe7a3;
+  border-color: #ffe7a3;
+}
+.nt-message-container {
+  display: flex;
+  align-items: center;
 }
 
 .nt-message-fade-enter-from,
@@ -37,6 +44,7 @@
   opacity: 0;
   transform: translate3d(-50%, -100%, 0);
 }
+
 @media screen and (max-width: 768px) {
   .nt-message {
     width: 90%;

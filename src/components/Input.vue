@@ -10,11 +10,15 @@
     @input="
       $emit('update:modelValue', ($event.target as HTMLInputElement).value)
     "
+    ref="el"
   />
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 const model = defineModel();
+
+const el = ref<HTMLInputElement>();
 
 withDefaults(
   defineProps<{
@@ -28,4 +32,14 @@ withDefaults(
     autosize: false,
   },
 );
+
+function focus() {
+  if (el.value != null) {
+    el.value.focus();
+  }
+}
+
+defineExpose({
+  focus,
+});
 </script>

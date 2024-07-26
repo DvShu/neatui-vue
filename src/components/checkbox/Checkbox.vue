@@ -21,7 +21,7 @@
   </label>
 </template>
 <script setup lang="ts">
-import { Ref, ref, inject, watch } from 'vue';
+import { ref, inject } from 'vue';
 
 const checkedModel = defineModel();
 
@@ -36,13 +36,10 @@ const props = withDefaults(
     disabled?: boolean;
     value?: string | number | boolean;
     type?: 'button';
-    /** 是否选中 */
-    checked?: boolean;
   }>(),
   {
     indeterminate: false,
     disabled: false,
-    checked: undefined,
     value: undefined,
   },
 );
@@ -50,7 +47,7 @@ const props = withDefaults(
 const emits = defineEmits(['change']);
 
 const { checkList, updateCheck } = inject<{
-  checkList: Ref<any[]> | null;
+  checkList: null | (string | number)[];
   updateCheck: null | ((value: any) => void);
 }>('nt-checkbox-group-check', {
   checkList: null,
@@ -58,11 +55,8 @@ const { checkList, updateCheck } = inject<{
 });
 
 function initIsChecked(): boolean {
-  if (props.checked != null) {
-    return props.checked;
-  }
   if (checkList != null) {
-    return checkList.value.includes(props.value);
+    return checkList.includes(props.value as string);
   }
   if (props.value != null) {
     return checkedModel.value === props.value;
@@ -70,13 +64,6 @@ function initIsChecked(): boolean {
   return checkedModel.value as boolean;
 }
 const isChecked = ref<boolean>(initIsChecked());
-
-watch(
-  () => props.checked,
-  (checked) => {
-    isChecked.value = checked as boolean;
-  },
-);
 
 function handleChange(e: Event) {
   const target = e.target as HTMLInputElement;

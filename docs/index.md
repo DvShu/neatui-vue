@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: 'NeatUi'
+  name: 'NeatUI'
   text: 'Vue3 的 UI 组件库'
   tagline: 轻量、样式可控、TypeScript
   actions:

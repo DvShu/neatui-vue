@@ -10,14 +10,26 @@
 
 ### 按钮类型
 
-使用 `type` 控制按钮类型, 提供三种类型: `normal`, `primary`, `text`。
+使用 `type` 控制按钮类型, 提供两种类型: `normal`, `primary`。
 
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
   <nt-button type="normal">Default</nt-button>
   <nt-button type="primary" class="ml-10">Primary</nt-button>
-  <nt-button type="text" class="ml-10">Text</nt-button>
+  </textarea>
+  </CodePreview>
+</ClientOnly>
+
+### 文本按钮
+
+通过传递 `text` 属性将按钮变为文本按钮，配合 `type` 能有更多风格。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-button type="normal" text>Default</nt-button>
+  <nt-button type="primary" text class="ml-10">Primary</nt-button>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -101,6 +113,7 @@
   <textarea lang="vue-html">
   <nt-button color="#722ed1">按钮</nt-button>
   <nt-button color="#eb2f96" ghost class="ml-10">按钮</nt-button>
+  <nt-button color="#4998f4" text class="ml-10">按钮</nt-button>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -164,14 +177,14 @@
 
 | 名称                             | 描述                     | 默认值                       |
 | -------------------------------- | ------------------------ | ---------------------------- |
-| `--nt-btn-color`                 | 按钮的文字颜色           | `rgba(0, 0, 0, 0.65)`        |
+| `--nt-btn-text-color`            | 按钮的文字颜色           | `rgba(0, 0, 0, 0.65)`        |
 | `--nt-btn-background`            | 按钮的背景颜色           | `	#fff`                       |
 | `--nt-btn-border-color`          | 按钮的边框颜色           | `#d9d9d9`                    |
 | `--nt-form-edit-height`          | 按钮的高度               | `32px`                       |
-| `--nt-btn-hover-color`           | 鼠标悬浮时按钮的文字颜色 | `#79b3f7`                    |
+| `--nt-btn-hover-text-color`      | 鼠标悬浮时按钮的文字颜色 | `#79b3f7`                    |
 | `--nt-btn-hover-border-color`    | 鼠标悬浮时按钮的边框颜色 | `var(--nt-btn-hover-color)`  |
 | `--nt-btn-hover-background`      | 鼠标悬浮时按钮的背景颜色 | `var(--nt-btn-background)`   |
-| `--nt-btn-active-color`          | 点击时按钮的颜色         | `#197df1`                    |
+| `--nt-btn-active-text-color`     | 点击时按钮的颜色         | `#197df1`                    |
 | `--nt-btn-active-background`     | 点击时按钮的背景颜色     | `var(--nt-btn-background)`   |
 | `--nt-btn-active-border-color`   | 点击时按钮的边框颜色     | `var(--nt-btn-active-color)` |
 | `--nt-btn-disabled-color`        | 禁用时按钮的文字颜色     | `#c9c9c9`                    |

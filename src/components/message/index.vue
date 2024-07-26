@@ -11,7 +11,7 @@
       :style="bindStyle"
       :class="['nt-message', `nt-message-${type}`, customClass]"
     >
-      <div>
+      <div class="nt-message-container">
         <component :is="icon" class="nt-message-icon"></component>
         <span class="nt-message-content">{{ message }}</span>
       </div>

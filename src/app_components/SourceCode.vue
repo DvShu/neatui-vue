@@ -27,6 +27,34 @@ withDefaults(
 
 const vpCode = ref<HTMLDivElement>();
 
+/**
+ * 格式化匹配的代码, 只是去除多余的空格, 使对齐
+ *
+ * @param {string} sourceStr 源代码字符串
+ *
+ * @returns {string} 对齐后的源代码
+ */
+function formatCode(sourceStr: string) {
+  const rows = sourceStr.split('\n');
+  let startTrimCount = -1;
+  const res = [];
+  for (let row of rows) {
+    if (row === '' && startTrimCount === -1) continue;
+    // 计算开头的空格数量
+    if (startTrimCount === -1) {
+      startTrimCount = 0;
+      const startTrimMatch = row.match(/^\s*/);
+      if (startTrimMatch != null) {
+        startTrimCount = startTrimMatch[0].length;
+      }
+    }
+    row = row.replace(new RegExp(`^(\\s{${startTrimCount}})`), '');
+    row = row.replace('<!---->', '').replace('//-', '');
+    res.push(row);
+  }
+  return res.join('\n');
+}
+
 onMounted(async () => {
   if (vpCode.value != null) {
     const $codeArea = vpCode.value.querySelector('textarea');
@@ -34,8 +62,7 @@ onMounted(async () => {
       if ($codeArea.hasAttribute('lang')) {
         lang.value = $codeArea.getAttribute('lang') as string;
       }
-      let sourceCode = $codeArea.value;
-      sourceCode = sourceCode.trim().replaceAll('\n  ', '\n');
+      let sourceCode = formatCode($codeArea.value);
       if (typeof sourceCode === 'string' && !isBlank(sourceCode)) {
         let preCode = await codeToHtml(sourceCode.trim(), {
           lang: lang.value,

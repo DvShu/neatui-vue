@@ -8,7 +8,7 @@
     }"
   >
     <div
-      class="nt-collapse-item__header"
+      :class="['nt-collapse-item__header', headerClass]"
       :style="headerStyleObj"
       @click="toggle"
     >
@@ -16,13 +16,15 @@
         class="nt-collapse-arrow-icon"
         v-if="collapseCtx.arrowPlacement === 'left'"
         :class="['nt-collapse-arrow__' + collapseCtx.arrowPlacement]"
-      ></ArrowRightIcon>
-      <span class="nt-collapse-item__title">{{ title }}</span>
+      />
+      <slot name="title">
+        <span class="nt-collapse-item__title">{{ title }}</span>
+      </slot>
       <ArrowRightIcon
         class="nt-collapse-arrow-icon"
         v-if="collapseCtx.arrowPlacement === 'right'"
         :class="['nt-collapse-arrow__' + collapseCtx.arrowPlacement]"
-      ></ArrowRightIcon>
+      />
     </div>
     <Transition
       name="collapse"
@@ -44,10 +46,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import ArrowRightIcon from '../icon/ArrowRight.vue';
 import { computed, inject } from 'vue';
 import { collapseContext } from './constant';
 import { queryHideNodeSize } from 'ph-utils/dom';
+import ArrowRightIcon from '../icon/ArrowRight.vue';
 
 function onBeforeEnter(el: Element) {
   (el as HTMLDivElement).style.height = '0px';
@@ -74,14 +76,16 @@ function onLeave(el: Element) {
 const props = withDefaults(
   defineProps<{
     /** 面板标题 */
-    title: string;
+    title?: string;
     /** 唯一标志符 */
     name: string | number;
     /** 是否禁用 */
     disabled?: boolean;
+    headerClass?: string;
   }>(),
   {
     disabled: false,
+    headerClass: '',
   },
 );
 

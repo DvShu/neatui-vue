@@ -209,3 +209,20 @@
   border-radius: 10px;
   padding: 10px;
 }
+
+.list-wrapper {
+  height: 300px;
+}
+.list-item {
+  padding: 10px;
+  border-bottom: 1px solid #dedede;
+}
+.popover-p-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+select {
+  appearance: auto;
+}
