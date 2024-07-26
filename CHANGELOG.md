@@ -1,5 +1,46 @@
 # Changelog
 
+## [0.11.0](https://github.com/DvShu/neatui-vue/compare/v0.10.1...v0.11.0) (2024-07-26)
+
+
+### Features
+
+* **Animation:** 新增动画 ([cc9e431](https://github.com/DvShu/neatui-vue/commit/cc9e431379385ac5f9ec442f4685dfdad5abd9c2))
+* **Button:** 重构 Button ([848cdf9](https://github.com/DvShu/neatui-vue/commit/848cdf9703918dd05c78b4ea3b2c21ee16182163))
+* **Button:** 重构按钮 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Collapse:** 新增网格模式 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **DatePickerOri:** 原生日期选择 ([59392ea](https://github.com/DvShu/neatui-vue/commit/59392ea1ada4dd6cbe5d74c389f75e4e136b882c))
+* **DatePickerOri:** 新增原生日期选择组件 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Dialog:** 新增对话框 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Dialog:** 移动端模式 ([77838c6](https://github.com/DvShu/neatui-vue/commit/77838c67be7b4fcd343b02b1389836f21c4ca4a8))
+* **List:** 新增 List 组件 ([cc9e431](https://github.com/DvShu/neatui-vue/commit/cc9e431379385ac5f9ec442f4685dfdad5abd9c2))
+* **PageHeader:** 新增页头组件 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **PageHeader:** 新建页头组件 ([5a65c77](https://github.com/DvShu/neatui-vue/commit/5a65c77812e065e0de56d735d6335b5dbbaf483f))
+* Popconfirm ([98a7433](https://github.com/DvShu/neatui-vue/commit/98a743384689e128bd7fb28cddd609ceb6723755))
+* **Popconfirm:** 新增弹窗确认组件 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* Popover bottom ([ef30b02](https://github.com/DvShu/neatui-vue/commit/ef30b022bc85e3754fb8a7ac26a4d0eef49e43d9))
+* Popover 样式完成 ([98ba6c4](https://github.com/DvShu/neatui-vue/commit/98ba6c4f28c3bdcb41ba2e3e4d7b50b7e0f8118a))
+* **Popover:** 完成基础的12个弹出位置 ([02c4c41](https://github.com/DvShu/neatui-vue/commit/02c4c412bc3c32516b5d4f06b582d604136538c5))
+* **Popover:** 新增气泡弹窗组件 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Popover:** 自定调整位置 ([216b3a4](https://github.com/DvShu/neatui-vue/commit/216b3a47272f68e4060731df9b5593659918b25a))
+* **SelectOri:** 原生下拉选择 ([5fb5354](https://github.com/DvShu/neatui-vue/commit/5fb5354ec87ceb97fb799f7be30750fc101b82d3))
+* **SelectOri:** 新增原生下拉选择框 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Tooltip:** 使用 Popover 重构 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* 增加计算元素到滚动容器顶部的距离 ([f2b8f69](https://github.com/DvShu/neatui-vue/commit/f2b8f695fa95e39503cd0274262ed3a58f457f90))
+* 完成 Dialog 组件 ([2045681](https://github.com/DvShu/neatui-vue/commit/2045681ce7b6f328a1a57a93eab453b8982cbabf))
+
+
+### Bug Fixes
+
+* **CloseIcon:** 修复未正确导出 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Collapse:** 修复 title-slot ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Collapse:** 修复首项外边距 ([3714d32](https://github.com/DvShu/neatui-vue/commit/3714d3298bb9f46119f11f3603a0fc20dc7e02e0))
+* **Icon:** 修复未正确导出 CloseIcon ([6004a98](https://github.com/DvShu/neatui-vue/commit/6004a98f2e40ced694b2e6831a0577d22dcb3e97))
+* **Popover:** 使用 v-show 而不是 v-if ([43c4c43](https://github.com/DvShu/neatui-vue/commit/43c4c4363b7adeabbf30ddcccbd05e05f4679224))
+* **Radio:** 修复无法选择 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Table:** 修复排序错误 ([b037913](https://github.com/DvShu/neatui-vue/commit/b0379134bfb54a9d9eabd5e873eda313b6e04308))
+* **Table:** 修复排序错误 ([6a31f40](https://github.com/DvShu/neatui-vue/commit/6a31f4049e8098e5a44615f4629d33f4c9a5d7e5))
+
 ## [0.10.1](https://github.com/DvShu/neatui-vue/compare/v0.10.0...v0.10.1) (2024-07-05)
 
 
