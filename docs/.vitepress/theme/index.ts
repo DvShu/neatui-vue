@@ -37,6 +37,7 @@ import '../../../style/select-ori';
 import '../../../style/date-picker-ori';
 import '../../../style/page-header';
 import '../../../style/tag';
+import '../../../style/pagination';
 
 export default {
   extends: DefaultTheme,

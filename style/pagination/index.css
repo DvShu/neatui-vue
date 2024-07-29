@@ -1,0 +1,38 @@
+.nt-pagination {
+  white-space: nowrap;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  color: #333333;
+  list-style: none;
+}
+.nt-pagination-item {
+  height: 30px;
+}
+.nt-pagination-item:not(:first-child) {
+  margin-left: 5px;
+}
+
+.nt-pagination-item .nt-btn {
+  padding: 0;
+  width: 30px;
+  height: 100%;
+}
+
+.nt-pagination-item a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 100%;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.nt-pagination-item a:hover {
+  color: var(--nt-primary-color-light1, #73d13d);
+}
+.nt-pagination-item a:active {
+  color: var(--nt-primary-color-dark1, #389e0d);
+}
