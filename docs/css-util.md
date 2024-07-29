@@ -14,6 +14,7 @@ import { ref } from 'vue';
 
 const show = ref(true)
 const show1 = ref(true)
+const show2 = ref(true)
 </script>
 
 ### 1.2 使用
@@ -65,6 +66,27 @@ const show1 = ref(true)
 </Transition>
 </template>
 </CodePreview></ClientOnly>
+
+#### 1.2.3 `nt-scale`
+
+缩放进入/退出
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-button @click="show = !show">Toggle</nt-button>
+    <Transition name="nt-opacity">
+  <p v-if="show">Hello world</p>
+  </Transition>
+  </textarea>
+  <template #preview>
+    <Button @click="show2 = !show2">Toggle</Button>
+    <Transition name="nt-scale" appear>
+      <div class="inline ml-10" v-if="show2">Hello world</div>
+    </Transition>
+  </template>
+  </CodePreview>
+</ClientOnly>
 
 ### 样式变量
 

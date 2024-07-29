@@ -36,6 +36,7 @@ import '../../../style/popconfirm';
 import '../../../style/select-ori';
 import '../../../style/date-picker-ori';
 import '../../../style/page-header';
+import '../../../style/tag';
 
 export default {
   extends: DefaultTheme,

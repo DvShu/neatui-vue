@@ -17,3 +17,13 @@
   opacity: 0;
   transform: translateY(var(--nt-fadein-offset, -20px));
 }
+
+.nt-scale-enter-from,
+.nt-scale-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+.nt-scale-enter-active,
+.nt-scale-leave-active {
+  transition: all var(--nt-transition-times, 0.3s) ease-in-out;
+}
