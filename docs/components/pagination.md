@@ -6,6 +6,7 @@
 
 <script setup>
   import { Pagination } from "../../src"
+  import { ref, watch } from 'vue'
 </script>
 
 ### 基础用法
@@ -16,13 +17,39 @@
   <CodePreview>
   <textarea lang="vue">
   <script setup lang="ts">
+    function handlePageChange(currentPage: number) {
+      console.log(currentPage)
+    }
   </script>
   <template>
-    <hr />
+    <nt-pagination :total="100" @change="handlePageChange"></nt-pagination>
   </template>
   </textarea>
   <template #preview>
     <Pagination :total="100"></Pagination>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 对齐方式
+
+通过 `align` 可以设置对齐方式，取值有: `start`**默认**、`center`、`end`
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-pagination :total="100" align="start"></nt-pagination>
+  <hr />
+  <nt-pagination :total="100" align="center"></nt-pagination>
+  <hr />
+  <nt-pagination :total="100" align="end"></nt-pagination>
+  </textarea>
+  <template #preview>
+    <Pagination :total="100" align="start"></Pagination>
+    <hr />
+    <Pagination :total="100" align="center"></Pagination>
+    <hr />
+    <Pagination :total="100" align="end"></Pagination>
   </template>
   </CodePreview>
 </ClientOnly>
