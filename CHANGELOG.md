@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/DvShu/neatui-vue/compare/v0.11.0...v0.12.0) (2024-07-29)
+
+
+### Features
+
+* **Tag:** 新增标签组件 ([07b59c0](https://github.com/DvShu/neatui-vue/commit/07b59c02a645e96e1b74bb687e16af505708442a))
+
 ## [0.11.0](https://github.com/DvShu/neatui-vue/compare/v0.10.1...v0.11.0) (2024-07-26)
 
 
