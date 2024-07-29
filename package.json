@@ -1,7 +1,7 @@
 {
   "name": "@asteres/neatui-vue",
   "description": "基于 Vue3 的 UI 组件库",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "type": "module",
   "scripts": {
     "g:c": "node scripts/index.js template",
