@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { inject, Ref, ref, computed } from 'vue';
 import { random } from 'ph-utils';
-import { timeStamp } from 'ph-utils/date';
+import { timestamp } from 'ph-utils/date';
 
 const radio = ref<HTMLInputElement>();
 
@@ -44,7 +44,7 @@ const props = withDefaults(
   {
     disabled: false,
     value: undefined,
-    name: `r${timeStamp()}${random(2)}`,
+    name: `r${timestamp()}${random(2)}`,
   },
 );
 

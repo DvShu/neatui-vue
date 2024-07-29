@@ -164,6 +164,10 @@ export default defineConfig({
             text: 'PageHeader 页头',
             link: '/components/pageheader',
           },
+          {
+            text: 'Tag 标签',
+            link: '/components/tag',
+          },
         ],
       },
       {
