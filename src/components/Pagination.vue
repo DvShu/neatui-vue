@@ -1,5 +1,8 @@
 <template>
-  <ul :class="['nt-pagination', `nt-pagination-${align}`]">
+  <ul
+    :class="['nt-pagination', `nt-pagination-${align}`]"
+    v-if="!hideOnSinglePage || totalPage > 1"
+  >
     <!-- 上一页切换按钮 -->
     <li class="nt-pagination-item">
       <Button
@@ -98,11 +101,14 @@ const props = withDefaults(
     defaultCurrentPage?: number;
     /** 对齐方式 */
     align?: 'start' | 'center' | 'end';
+    /** 只有一页时是否隐藏分页器 */
+    hideOnSinglePage?: boolean;
   }>(),
   {
     pageSize: 10,
     defaultCurrentPage: 1,
     align: 'start',
+    hideOnSinglePage: false,
   },
 );
 

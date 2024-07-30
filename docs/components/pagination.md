@@ -5,8 +5,10 @@
 ## 演示
 
 <script setup>
-  import { Pagination } from "../../src"
+  import { Pagination, Switch, FormItem } from "../../src"
   import { ref, watch } from 'vue'
+
+  const singleHide = ref(false)
 </script>
 
 ### 基础用法
@@ -50,6 +52,34 @@
     <Pagination :total="100" align="center"></Pagination>
     <hr />
     <Pagination :total="100" align="end"></Pagination>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 单页隐藏
+
+当只有一页时，通过 `single-hide` 配置隐藏分页
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup lang="ts">
+    const singleHide = ref(false)
+  </script>
+  <template>
+    <nt-form-item label="单页隐藏">
+      <nt-switch v-model="singleHide" />
+    </nt-form-item>
+    <hr />
+    <nt-pagination :page-count="1" :hide-on-single-page="singleHide"></nt-pagination>
+  </template>
+  </textarea>
+  <template #preview>
+    <FormItem label="单页隐藏">
+      <Switch v-model="singleHide" />
+    </FormItem>
+    <hr />
+    <Pagination :page-count="1" :hide-on-single-page="singleHide"></Pagination>
   </template>
   </CodePreview>
 </ClientOnly>
