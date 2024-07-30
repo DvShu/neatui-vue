@@ -84,6 +84,21 @@
   </CodePreview>
 </ClientOnly>
 
+### 简单分页
+
+简单的分页，在空间有限的情况下，可以使用简单分页。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-pagination :page-count="100" simple></nt-pagination>
+  </textarea>
+  <template #preview>
+    <Pagination :page-count="100" simple></Pagination>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Pagination Props

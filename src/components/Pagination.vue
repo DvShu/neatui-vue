@@ -13,57 +13,75 @@
         <ArrowLeft></ArrowLeft>
       </Button>
     </li>
-    <!-- 首页按钮 -->
-    <li :class="['nt-pagination-item', currentPage === 1 ? 'is-active' : '']">
-      <a href="javascript:void" title="1" @click="handleTo(1)">1</a>
-    </li>
-    <!-- 向前5页 -->
-    <li class="nt-pagination-item" v-if="currentPage > 4">
-      <a
-        href="javascript:void"
-        @mouseenter="handleMoreHover(1)"
-        @mouseleave="handleMoreHover(0)"
-        title="向前5页"
-        @click="handleTo(currentPage - 5)"
+    <template v-if="simple">
+      <li class="nt-pagination-item nt-pagination-simple-layout">
+        <input
+          class="nt-input nt-pagination-simple-input"
+          :value="currentPage"
+          type="text"
+          inputmode="numeric"
+          @input="handlePageInput"
+          @keyup.enter="handlePageSure"
+          @blur="handlePageSure"
+        />
+        <span class="nt-pagination-simple-divide">/</span>
+        <span>{{ totalPage }}</span>
+      </li>
+    </template>
+    <template v-else>
+      <!-- 首页按钮 -->
+      <li :class="['nt-pagination-item', currentPage === 1 ? 'is-active' : '']">
+        <a href="javascript:void" title="1" @click="handleTo(1)">1</a>
+      </li>
+      <!-- 向前5页 -->
+      <li class="nt-pagination-item" v-if="currentPage > 4">
+        <a
+          href="javascript:void"
+          @mouseenter="handleMoreHover(1)"
+          @mouseleave="handleMoreHover(0)"
+          title="向前5页"
+          @click="handleTo(currentPage - 5)"
+        >
+          <More v-if="moreFocus !== 1"></More>
+          <DArrowLeft v-else-if="moreFocus === 1"></DArrowLeft>
+        </a>
+      </li>
+      <!-- 中间部分，显示包括当前页在内的最多5页 -->
+      <li
+        v-for="n in centerRange"
+        :key="n"
+        :class="['nt-pagination-item', currentPage === n ? 'is-active' : '']"
       >
-        <More v-if="moreFocus !== 1"></More>
-        <DArrowLeft v-else-if="moreFocus === 1"></DArrowLeft>
-      </a>
-    </li>
-    <!-- 中间部分，显示包括当前页在内的最多5页 -->
-    <li
-      v-for="n in centerRange"
-      :key="n"
-      :class="['nt-pagination-item', currentPage === n ? 'is-active' : '']"
-    >
-      <a href="javascript:void" :title="String(n)" @click="handleTo(n)">{{
-        n
-      }}</a>
-    </li>
-    <!-- 向后5页 -->
-    <li class="nt-pagination-item" v-if="currentPage < totalPage - 3">
-      <a
-        href="javascript:void"
-        @mouseenter="handleMoreHover(2)"
-        @mouseleave="handleMoreHover(0)"
-        title="向前5页"
-        @click="handleTo(currentPage + 5)"
+        <a href="javascript:void" :title="String(n)" @click="handleTo(n)">{{
+          n
+        }}</a>
+      </li>
+      <!-- 向后5页 -->
+      <li class="nt-pagination-item" v-if="currentPage < totalPage - 3">
+        <a
+          href="javascript:void"
+          @mouseenter="handleMoreHover(2)"
+          @mouseleave="handleMoreHover(0)"
+          title="向前5页"
+          @click="handleTo(currentPage + 5)"
+        >
+          <More v-if="moreFocus !== 2"></More>
+          <DArrowRight v-else-if="moreFocus === 2"></DArrowRight>
+        </a>
+      </li>
+      <!-- 末尾页按钮 -->
+      <li
+        v-if="totalPage > 1"
+        @click="handleTo(totalPage)"
+        :class="[
+          'nt-pagination-item',
+          currentPage === totalPage ? 'is-active' : '',
+        ]"
       >
-        <More v-if="moreFocus !== 2"></More>
-        <DArrowRight v-else-if="moreFocus === 2"></DArrowRight>
-      </a>
-    </li>
-    <!-- 末尾页按钮 -->
-    <li
-      v-if="totalPage > 1"
-      @click="handleTo(totalPage)"
-      :class="[
-        'nt-pagination-item',
-        currentPage === totalPage ? 'is-active' : '',
-      ]"
-    >
-      <a href="javascript:void" :title="totalPage + ''">{{ totalPage }}</a>
-    </li>
+        <a href="javascript:void" :title="totalPage + ''">{{ totalPage }}</a>
+      </li>
+    </template>
+
     <!-- 下一页切换按钮 -->
     <li class="nt-pagination-item">
       <Button
@@ -103,12 +121,15 @@ const props = withDefaults(
     align?: 'start' | 'center' | 'end';
     /** 只有一页时是否隐藏分页器 */
     hideOnSinglePage?: boolean;
+    /** 是否为简单分页 */
+    simple?: boolean;
   }>(),
   {
     pageSize: 10,
     defaultCurrentPage: 1,
     align: 'start',
     hideOnSinglePage: false,
+    simple: false,
   },
 );
 
@@ -173,6 +194,35 @@ function handleTo(p: number) {
     currentPage.value = p;
     emits('update:page', p);
     emits('change', p);
+  }
+}
+
+function handlePageInput(e: Event) {
+  const $target = e.target as HTMLInputElement;
+  const value = $target.value;
+  let val: string | number = parseInt(value, 10);
+  if (Number.isNaN(val)) {
+    val = '';
+  } else {
+    val = Math.abs(val);
+    if (val < 1) {
+      val = 1;
+    } else if (val > totalPage.value) {
+      val = totalPage.value;
+    }
+  }
+  val = String(val);
+  if (val !== value) {
+    $target.value = val;
+  }
+}
+
+function handlePageSure(e: Event) {
+  const $target = e.target as HTMLInputElement;
+  const value = $target.value;
+  const pageValue = parseInt(value, 10);
+  if (!Number.isNaN(pageValue)) {
+    handleTo(pageValue);
   }
 }
 </script>

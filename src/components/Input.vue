@@ -32,7 +32,7 @@ const props = withDefaults(
   },
 );
 
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue', 'input']);
 
 function focus() {
   if (el.value != null) {
@@ -43,6 +43,7 @@ function focus() {
 function handleInput(e: Event) {
   const $target = e.target as HTMLInputElement;
   let value = $target.value;
+  emits('input', e);
   if (props.parser != null) {
     value = props.parser(value) as string;
     $target.value = String(value);

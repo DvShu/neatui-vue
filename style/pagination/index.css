@@ -52,3 +52,16 @@
   color: var(--nt-primary-color, #52c41a);
   border-color: var(--nt-primary-color, #52c41a);
 }
+
+.nt-pagination .nt-pagination-simple-input {
+  --nt-input-width: 60px;
+  --nt-form-edit-height: 100%;
+  text-align: center;
+}
+.nt-pagination-simple-layout {
+  display: inline-flex;
+  align-items: center;
+}
+.nt-pagination-simple-divide {
+  margin: 0 5px;
+}
