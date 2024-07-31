@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/DvShu/neatui-vue/compare/v0.12.0...v0.13.0) (2024-07-31)
+
+
+### Features
+
+* **Pagination:** 分页 ([6f14af4](https://github.com/DvShu/neatui-vue/commit/6f14af4a230a1611fb2790f10e8be4a3051ab0b5))
+
 ## [0.12.0](https://github.com/DvShu/neatui-vue/compare/v0.11.0...v0.12.0) (2024-07-29)
 
 
