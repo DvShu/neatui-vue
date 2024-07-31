@@ -106,4 +106,18 @@
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| x | x | x | x |
+| `total` | 数据总数 | `number` | - |
+| `page-count` | 页码总数, `total` 和 `page-count` 设置任意一个就可以达到显示页码的功能 | `number` | - |
+| `page-size` | 每页的数据条数 | `number` | `10` |
+| `default-current-page` | 当前页数的默认初始值，不设置时默认为 1 | `number` | `1` |
+| `align` | 对齐方式 | `start \| center \| end` | `start` |
+| `hide-on-single-page` | 只有一页时是否隐藏分页器 | `boolean` | `false` |
+| `simple` | 简单分页 | `boolean` | `false` |
+| `page \| v-model:page` | 当前页数[受控模式] | `number` | - |
+
+### Pagination Emits
+
+<!-- prettier-ignore -->
+| 事件名 | 说明 | 回调参数 |
+| --- | --- | --- |
+| `change` | 当前页改变时触发 | `currentPage: number` |

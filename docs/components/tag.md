@@ -28,4 +28,14 @@
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| x | x | x | x |
+| `type` | 类型 | `primary` | `primary` |
+| `color` | 颜色, 自定义颜色 | `string` | - |
+
+### Css Variables
+
+<!-- prettier-ignore -->
+| 变量 | 默认值 | 说明 |
+| --- | --- | --- |
+| `--nt-tag-bg` | `var(--nt-primary-color-light5, #f6ffed)` | 标签背景色 |
+| `--nt-tag-color` | `var(--nt-primary-color, #52c41a)` | 标签文本颜色 |
+| `--nt-tag-border-color` | `var(--nt-primary-color-light3, #b7eb8f)` | 标签边框颜色 |
