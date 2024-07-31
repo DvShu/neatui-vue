@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent, h, PropType, ref, toRaw, watch } from 'vue';
 import type { VNode } from 'vue';
-import Radio from './radio/Radio.vue';
-import Checkbox from './checkbox/Checkbox.vue';
+import Radio from '../radio/Radio.vue';
+import Checkbox from '../checkbox/Checkbox.vue';
 import { random } from 'ph-utils';
 import { format } from 'ph-utils/date';
 

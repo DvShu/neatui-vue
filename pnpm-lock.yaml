@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@tanstack/vue-table':
+        specifier: ^8.19.3
+        version: 8.19.3(vue@3.4.34(typescript@5.5.4))
       ph-utils:
         specifier: ^0.8.2
         version: 0.8.2
@@ -496,6 +499,16 @@ packages:
 
   '@shikijs/transformers@1.12.0':
     resolution: {integrity: sha512-ZS6RzDCWbnDljViMaeuraGaoMesCzDxzO2Slhpvic6j+Wqq4RXfQgb2ITTSrtBjv2HGCLP22mvXydtWCOKea8g==}
+
+  '@tanstack/table-core@8.19.3':
+    resolution: {integrity: sha512-IqREj9ADoml9zCAouIG/5kCGoyIxPFdqdyoxis9FisXFi5vT+iYfEfLosq4xkU/iDbMcEuAj+X8dWRLvKYDNoQ==}
+    engines: {node: '>=12'}
+
+  '@tanstack/vue-table@8.19.3':
+    resolution: {integrity: sha512-vSgrV1HikfenUDyCWbsA8Mw6+Zr3OhTFi6D6Ictj4hrPLc/UeixjaEU6ccNw59zomyNIT+qBSP+/5iCE10oC6A==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      vue: '>=3.2'
 
   '@types/argparse@1.0.38':
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
@@ -1979,6 +1992,13 @@ snapshots:
   '@shikijs/transformers@1.12.0':
     dependencies:
       shiki: 1.12.0
+
+  '@tanstack/table-core@8.19.3': {}
+
+  '@tanstack/vue-table@8.19.3(vue@3.4.34(typescript@5.5.4))':
+    dependencies:
+      '@tanstack/table-core': 8.19.3
+      vue: 3.4.34(typescript@5.5.4)
 
   '@types/argparse@1.0.38': {}
 

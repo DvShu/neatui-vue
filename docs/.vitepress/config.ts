@@ -141,6 +141,10 @@ export default defineConfig({
             link: '/components/table',
           },
           {
+            text: 'TanstackTable',
+            link: '/components/tanstacktable',
+          },
+          {
             text: 'Collapse 折叠面板',
             link: '/components/collapse',
           },

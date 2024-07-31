@@ -2,6 +2,9 @@
 
 用于展示大量结构化数据
 
+这个表格只是一个简单的数据展示功能，只包含有固定表头和列、排序功能。如果当前组件不能满足需求需要使用更多功能的时候，可以考虑使用 [TanstackTable](/components/tanstacktable)
+
+
 ## 演示
 
 <script setup>
@@ -727,6 +730,37 @@
   </template>
   </CodePreview>
 </ClientOnly>
+
+### 基本结构
+
+整个表格的基本结构为：
+
+```vue-html
+<!-- 外层容器, 当需要固定行滚动时, 以及后续需要处理虚拟滚动操作 -->
+<div class="nt-table-wrapper" style="max-height:300px;">
+  <table class="nt-table nt-table-stripe nt-table-fixed">
+    <thead class="nt-fixed">
+      <th class="nt-fixed" style="left: 0"></th>
+      <th></th>
+      <th class="nt-fixed" style="right: 0"></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="nt-fixed" style="left: 0"></td>
+        <td></td>
+        <td class="nt-fixed" style="right: 0"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+说明:
+
+- `div.nt-table-wrapper`: 外层容器, 当需要固定行滚动时, 以及后续需要处理虚拟滚动操作; 如果需要固定表头, 则添加 `max-height` 样式.
+- `table.nt-table`: 表格容器; 如果需要为表格添加斑马纹则添加 `nt-table-stripe` 类; 如果需要固定列则添加 `nt-table-fixed` 类用于改变表格的 `table-layout` 布局.
+- `thead`: 如果需要固定表头, 则添加 `nt-fixed` 类否则不用添加.
+- `th.fixed,td.fixed`: 如果需要固定列则给列添加 `nt-fixed` 类, 然后设置 `left` 或者 `right` 样式.
 
 ## API
 

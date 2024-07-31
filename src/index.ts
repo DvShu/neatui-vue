@@ -37,7 +37,8 @@ export { default as ImagePreview } from './components/ImagePreview.vue';
 export { default as SelectOri } from './components/SelectOri.vue';
 export { default as DatePickerOri } from './components/DatePickerOri.vue';
 
-export { default as Table } from './components/Table.vue';
+export { default as Table } from './components/table/Table.vue';
+export { default as TanstackTable } from './components/table/TanstackTable.vue';
 
 export { default as Message } from './components/message/index';
 export { default as Card } from './components/Card.vue';
