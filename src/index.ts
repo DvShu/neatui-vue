@@ -19,6 +19,9 @@ export { default as RefreshLeftIcon } from './components/icon/RefreshLeft.vue';
 export { default as RefreshRightIcon } from './components/icon/RefreshRight.vue';
 export { default as SortIcon } from './components/icon/Sort.vue';
 export { default as CloseIcon } from './components/icon/Close.vue';
+export { default as MoreIcon } from './components/icon/More.vue';
+export { default as DArrowLeft } from './components/icon/DArrowLeft.vue';
+export { default as DArrowRight } from './components/icon/DArrowRight.vue';
 
 export { default as Input } from './components/Input.vue';
 export { default as Button } from './components/Button.vue';
@@ -61,5 +64,6 @@ export { default as List } from './components/List.vue';
 
 export { default as Clickoutside } from './directives/clickoutside';
 export { default as Loading } from './directives/loading';
-export { default as PageHeader } from "./components/PageHeader.vue";
-export { default as Tag } from "./components/Tag.vue";
+export { default as PageHeader } from './components/PageHeader.vue';
+export { default as Tag } from './components/Tag.vue';
+export { default as Pagination } from './components/Pagination.vue';

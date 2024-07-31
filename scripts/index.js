@@ -52,7 +52,7 @@ async function createComponentTemplate(name) {
   configContent = configContent.replace(configReg, (m, b) => {
     const configJson = looseJsonParse(b);
     const sidebar = configJson.themeConfig.sidebar;
-    sidebar[1].items.push({
+    sidebar[3].items.push({
       text: name,
       link: `/components/${name.toLowerCase()}`,
     });

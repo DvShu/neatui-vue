@@ -1,15 +1,17 @@
 .nt-form-item {
   display: flex;
-  margin-bottom: 20px;
+
   font-size: 14px;
 }
 .nt-form-item__label {
+  --nt-form-label-width: auto;
+  --nt-form-edit-height: auto;
   display: inline-flex;
   align-items: flex-start;
   justify-content: flex-end;
-  width: var(--nt-form-label-width, 80px);
-  height: var(--nt-form-edit-height, 32px);
-  line-height: var(--nt-form-edit-height, 32px);
+  width: var(--nt-form-label-width);
+  height: var(--nt-form-edit-height);
+  line-height: var(--nt-form-edit-height);
   color: #606266;
   padding: 0 10px 0 0;
 }
@@ -21,6 +23,8 @@
 .nt-form-item__content {
   flex: 1;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .nt-form-item__error {
   font-size: 12px;
@@ -36,6 +40,14 @@
 }
 .nt-form-item .nt-input {
   width: 100%;
+}
+
+.nt-form .nt-form-item {
+  margin-bottom: 20px;
+}
+.nt-form .nt-form-item__label {
+  --nt-form-label-width: 80px;
+  --nt-form-edit-height: 32px;
 }
 
 /** 行内表单 */

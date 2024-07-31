@@ -136,6 +136,20 @@
   </CodePreview>
 </ClientOnly>
 
+### 只使用 FormItem
+
+`FormItem` 可以不放在 `Form` 里面，从而进行单独使用。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-form-item label="开关">
+    <nt-switch />
+  </nt-form-item>
+  </textarea>
+  </CodePreview>
+</ClientOnly>`
+
 ## API
 
 ### Form Props

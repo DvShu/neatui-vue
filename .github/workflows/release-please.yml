@@ -23,7 +23,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.output-release-created.outputs.release_created }}
+      release_created: ${{ steps.release-output.outputs.release_created }}
+      prs_created: ${{ steps.release-output.outputs.prs_created }}
+      is_published: ${{ steps.release-output.outputs.is_published }}
     steps:
       - name: Check event type
         id: check_event
@@ -43,8 +45,8 @@ jobs:
           # for more options
           release-type: node
 
-      - name: Output Release Created
-        id: output-release-created
+      - name: Release Output
+        id: release-output
         # prs_created 是否拉取, pull-request 没有拉取
         run: |
           echo "release_created=${{ steps.release.outputs.release_created }}" >> "$GITHUB_OUTPUT"

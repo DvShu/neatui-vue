@@ -1,5 +1,5 @@
 .nt-switch {
-  --nt-switch-height: 20px;
+  --nt-switch-height: 22px;
   --nt-switch-width: calc(var(--nt-switch-height) * 2);
   display: inline-flex;
   width: var(--nt-switch-width);
@@ -15,9 +15,6 @@
   vertical-align: middle;
 }
 
-.nt-switch:hover {
-  background-color: var(--nt-primary-color-light1, #d9f7be);
-}
 .nt-switch--checked {
   background-color: var(--nt-primary-color, #52c41a);
 }

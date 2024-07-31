@@ -168,6 +168,10 @@ export default defineConfig({
             text: 'Tag 标签',
             link: '/components/tag',
           },
+          {
+            text: 'Pagination 分页',
+            link: '/components/pagination',
+          },
         ],
       },
       {
