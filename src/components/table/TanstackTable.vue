@@ -1,5 +1,12 @@
 <template>
-  <table class="nt-table">
+  <table
+    :class="[
+      'nt-table',
+      props.stripe ? 'nt-table-stripe' : '',
+      props.tableLayout === 'fixed' ? 'nt-table-fixed' : '',
+      props.border ? 'nt-table-border' : '',
+    ]"
+  >
     <thead>
       <tr v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
         <th v-for="header in headerGroup.headers" :key="header.id">
@@ -23,99 +30,59 @@
     </tbody>
   </table>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import {
   createColumnHelper,
   useVueTable,
   getCoreRowModel,
   FlexRender,
 } from '@tanstack/vue-table';
-import { h } from 'vue';
+import type { CellContext, ColumnDef } from '@tanstack/vue-table';
+import type { VNode } from 'vue';
+import { computed } from 'vue';
 
-type Person = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
+const columnHelper = createColumnHelper<T>();
+
+type ColumnDict = {
+  id?: string;
+  /** 标题 */
+  title?: string;
+  /** 标题 */
+  header?: string;
+  key?: string;
+  accessorKey?: string;
+  cell?: (info: CellContext<T, unknown>) => VNode | VNode[] | string;
 };
 
-const defaultData: Person[] = [
-  {
-    firstName: 'tanner',
-    lastName: 'linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
-  {
-    firstName: 'tandy',
-    lastName: 'miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'joe',
-    lastName: 'dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-];
+const cols = computed<Array<ColumnDef<T, any>>>(() => {
+  const resCols: Array<ColumnDef<T, any>> = [];
+  for (const column of props.columns) {
+    if (column.header) {
+    }
+  }
+  return resCols;
+});
 
-const columnHelper = createColumnHelper<Person>();
+const props = withDefaults(
+  defineProps<{
+    stripe?: boolean;
+    border?: boolean;
+    tableLayout?: 'auto' | 'fixed';
+    columns: Array<ColumnDict | ColumnDef<T, any>>;
+    data: Array<T>;
+  }>(),
+  {
+    stripe: true,
+    border: false,
+    tableLayout: 'auto',
+  },
+);
 
-const columns = [
-  columnHelper.display({
-    id: 'Name',
-    header: () => '姓名',
-    cell: (cell) =>
-      `${cell.row.original.firstName}.${cell.row.original.lastName}`,
-    footer: (info) => info.column.id,
-  }),
-  {
-    accessorKey: 'age',
-    cell: (info) => info.getValue(),
-  },
-];
-
-const data: Person[] = [
-  {
-    firstName: 'tanner',
-    lastName: 'linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
-  {
-    firstName: 'tandy',
-    lastName: 'miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'joe',
-    lastName: 'dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-];
-
-const table = useVueTable({
+const table = useVueTable<T>({
   get data() {
-    return data;
+    return props.data;
   },
-  columns,
+  columns: cols.value,
   getCoreRowModel: getCoreRowModel(),
 });
 </script>

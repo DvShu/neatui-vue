@@ -1,1 +1,2 @@
-import "./index.css";
+import '../table/index.js';
+import './index.css';
