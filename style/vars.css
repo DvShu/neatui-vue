@@ -2,17 +2,25 @@
   /* button、input 元素高度 */
   --nt-form-edit-height: 32px;
   /* 主题(primary)颜色 */
-  --nt-primary-color: #52c41a;
-  --nt-primary-color-light1: #73d13d;
-  --nt-primary-color-light2: #95de64;
-  --nt-primary-color-light3: #b7eb8f;
-  --nt-primary-color-light4: #d9f7be;
-  --nt-primary-color-light5: #f6ffed;
-  --nt-primary-color-dark1: #389e0d;
+  --nt-primary-color: #722ed1;
+  --nt-primary-color-light1: #9254de;
+  --nt-primary-color-light2: #b37feb;
+  --nt-primary-color-light3: #d3adf7;
+  --nt-primary-color-light4: #efdbff;
+  --nt-primary-color-light5: #f9f0ff;
+  --nt-primary-color-dark1: #531dab;
   /* 表示错误(error)的颜色 */
-  --nt-error-color: #ed3f13;
+  --nt-error-color: #f5222d;
+  --nt-error-color-light3: #ffa39e;
+  --nt-error-color-light5: #fff1f0;
   /* 表示成功(success)的颜色 */
-  --nt-success-color: #19bf6c;
+  --nt-success-color: #52c41a;
+  --nt-success-color-light1: #73d13d;
+  --nt-success-color-light2: #95de64;
+  --nt-success-color-light3: #b7eb8f;
+  --nt-success-color-light4: #d9f7be;
+  --nt-success-color-light5: #f6ffed;
+  --nt-success-color-dark1: #389e0d;
   /* 表示警告(warn)的颜色 */
   --nt-warn-color: #f90;
   /* 表示信息(info)的颜色 */

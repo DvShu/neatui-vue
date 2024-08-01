@@ -11,7 +11,7 @@ import { adjust } from 'ph-utils/color';
 import { isBlank } from 'ph-utils';
 const props = withDefaults(
   defineProps<{
-    type?: 'primary';
+    type?: 'primary' | 'error' | 'success';
     color?: string;
   }>(),
   {
@@ -24,7 +24,7 @@ const styleObj = computed(() => {
   if (!isBlank(props.color)) {
     obj = {
       '--nt-tag-color': props.color,
-      '--nt-tag-border-color': adjust(props.color, 3, true),
+      '--nt-tag-border-color': props.color,
       '--nt-tag-bg': adjust(props.color, 5, true),
     };
   }

@@ -12,9 +12,9 @@ npm install @tanstack/vue-table
 
 ## 演示
 
-<script setup>
-  import { TanstackTable } from "../../src"
-
+<script setup lang="ts">
+  import { TanstackTable, Tag, Button } from "../../src"
+  import { h } from 'vue'
 
   type Person = {
     firstName: string;
@@ -31,31 +31,161 @@ npm install @tanstack/vue-table
       lastName: 'linsley',
       age: 24,
       visits: 100,
-      status: 'In Relationship',
-      progress: 50,
+      status: 'loading',
     },
     {
       firstName: 'tandy',
       lastName: 'miller',
       age: 40,
       visits: 40,
-      status: 'Single',
-      progress: 80,
+      status: 'success',
     },
     {
-      firstName: 'joe',
-      lastName: 'dirte',
-      age: 45,
-      visits: 20,
-      status: 'Complicated',
-      progress: 10,
+      firstName: 'tanner',
+      lastName: 'linsley',
+      age: 24,
+      visits: 100,
+      status: 'loading',
     },
   ];
+
+  const columns = [
+    {
+      header: '姓名',
+      cell: (row) => {
+        return `${row.firstName}.${row.lastName}`
+      },
+    },
+    {
+      key: 'age',
+      title: '年龄'
+    },
+    {
+      key: 'visits',
+      title: '访问次数'
+    },
+    {
+      header: '状态',
+      key: 'status',
+      cell: (row) => {
+        let type = 'primary'
+        if (row.status === 'success') {
+          type = 'success'
+        } else if (row.status === 'error') {
+          type = 'error'
+        }
+        return h(Tag, { type: type }, { default: () => row.status })
+      }
+    },
+    {
+      header: '操作',
+      id: 'operation',
+      cell: () => {
+        return [
+          h(Button, { type: 'primary', text: true }, { default: () => '编辑' }),
+          h(Button, { type: 'primary', text: true }, { default: () => '删除' })
+        ]
+      }
+    }
+  ]
 </script>
 
 ### 基础用法
 
 展示一个简单的表格
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup lang="ts">
+    import { h } from 'vue'
+    //-
+    type Person = {
+      firstName: string;
+      lastName: string;
+      age: number;
+      visits: number;
+      status: string;
+      progress: number;
+    };
+    //-
+    const data: Person[] = [
+      {
+        firstName: 'tanner',
+        lastName: 'linsley',
+        age: 24,
+        visits: 100,
+        status: 'loading',
+      },
+      {
+        firstName: 'tandy',
+        lastName: 'miller',
+        age: 40,
+        visits: 40,
+        status: 'success',
+      },
+      {
+        firstName: 'joe',
+        lastName: 'dirte',
+        age: 45,
+        visits: 20,
+        status: 'error',
+      },
+    ];
+    //-
+    const columns = [
+      {
+        header: '姓名',
+        cell: (row) => {
+          return `${row.firstName}.${row.lastName}`
+        },
+      },
+      {
+        key: 'age',
+        title: '年龄'
+      },
+      {
+        key: 'visits',
+        title: '访问次数'
+      },
+      {
+        header: '状态',
+        key: 'status',
+        cell: (row) => {
+          let type = 'primary'
+          if (row.status === 'success') {
+            type = 'success'
+          } else if (row.status === 'error') {
+            type = 'error'
+          }
+          return h(NtTag, { type: type }, { default: () => row.status })
+        }
+      },
+      {
+        header: '操作',
+        id: 'operation',
+        cell: () => {
+          return [
+            h(NtButton, { type: 'primary', text: true }, { default: () => '编辑' }),
+            h(NtButton, { type: 'primary', text: true }, { default: () => '删除' })
+          ]
+        }
+      }
+    ]
+  </script>
+  <template>
+    <nt-tanstack-table :data="data" :columns="columns" border></nt-tanstack-table>
+  </template>
+  </textarea>
+  <template #preview>
+    <TanstackTable :data="data" :columns="columns" border></TanstackTable>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 固定表头和列
+
+给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。
 
 <ClientOnly>
   <CodePreview>
@@ -67,7 +197,7 @@ npm install @tanstack/vue-table
   </template>
   </textarea>
   <template #preview>
-    <TanstackTable>1234</TanstackTable>
+    <TanstackTable :data="data" :columns="columns" fixed-head style="max-height:150px;"></TanstackTable>
   </template>
   </CodePreview>
 </ClientOnly>

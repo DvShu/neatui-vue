@@ -15,7 +15,9 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-tag>标签</nt-tag>
+  <nt-tag type="primary" class="ml-10">标签</nt-tag>
+  <nt-tag type="success" class="ml-10">标签</nt-tag>
+  <nt-tag type="error" class="ml-10">标签</nt-tag>
   <nt-tag class="ml-10" color="#409eff">标签</nt-tag>
   </textarea>
   </CodePreview>
@@ -28,7 +30,7 @@
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `type` | 类型 | `primary` | `primary` |
+| `type` | 类型 | `primary \| success \| error` | `primary` |
 | `color` | 颜色, 自定义颜色 | `string` | - |
 
 ### Css Variables
@@ -38,4 +40,4 @@
 | --- | --- | --- |
 | `--nt-tag-bg` | `var(--nt-primary-color-light5, #f6ffed)` | 标签背景色 |
 | `--nt-tag-color` | `var(--nt-primary-color, #52c41a)` | 标签文本颜色 |
-| `--nt-tag-border-color` | `var(--nt-primary-color-light3, #b7eb8f)` | 标签边框颜色 |
+| `--nt-tag-border-color` | `var(--nt-primary-color, #52c41a)` | 标签边框颜色 |

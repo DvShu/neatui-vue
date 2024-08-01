@@ -159,6 +159,7 @@
   .nt-table {
     display: table;
     margin: 0;
+    border-collapse: collapse;
 
     tr {
       border-top: none;
