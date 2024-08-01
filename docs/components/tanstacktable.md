@@ -88,6 +88,53 @@ npm install @tanstack/vue-table
       }
     }
   ]
+
+  const columns1 = [
+    {
+      header: '姓名',
+      cell: (row) => {
+        return `${row.firstName}.${row.lastName}`
+      },
+      size:200,
+      fixed: 'left'
+    },
+    {
+      key: 'age',
+      title: '年龄',
+      size: 80
+    },
+    {
+      key: 'visits',
+      title: '访问次数',
+      size: 160
+    },
+    {
+      header: '状态',
+      key: 'status',
+      cell: (row) => {
+        let type = 'primary'
+        if (row.status === 'success') {
+          type = 'success'
+        } else if (row.status === 'error') {
+          type = 'error'
+        }
+        return h(Tag, { type: type }, { default: () => row.status })
+      },
+      size: 180
+    },
+    {
+      header: '操作',
+      id: 'operation',
+      cell: () => {
+        return [
+          h(Button, { type: 'primary', text: true }, { default: () => '编辑' }),
+          h(Button, { type: 'primary', text: true }, { default: () => '删除' })
+        ]
+      },
+      size: 200,
+      fixed: 'right'
+    }
+  ]
 </script>
 
 ### 基础用法
@@ -185,19 +232,71 @@ npm install @tanstack/vue-table
 
 ### 固定表头和列
 
-给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。
+- 固定表头: 给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头
+- 固定列: 给列设置 `size` 列宽，然后给需要固定的列, 配置 `fixed` 取值为: `left`、`right`
 
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue">
   <script setup lang="ts">
+    const columns1 = [
+      {
+        header: '姓名',
+        cell: (row) => {
+          return `${row.firstName}.${row.lastName}`
+        },
+        size:200,
+        fixed: 'left'
+      },
+      {
+        key: 'age',
+        title: '年龄',
+        size: 80
+      },
+      {
+        key: 'visits',
+        title: '访问次数',
+        size: 160
+      },
+      {
+        header: '状态',
+        key: 'status',
+        cell: (row) => {
+          let type = 'primary'
+          if (row.status === 'success') {
+            type = 'success'
+          } else if (row.status === 'error') {
+            type = 'error'
+          }
+          return h(NtTag, { type: type }, { default: () => row.status })
+        },
+        size: 180
+      },
+      {
+        header: '操作',
+        id: 'operation',
+        cell: () => {
+          return [
+            h(NtButton, { type: 'primary', text: true }, { default: () => '编辑' }),
+            h(NtButton, { type: 'primary', text: true }, { default: () => '删除' })
+          ]
+        },
+        size: 200,
+        fixed: 'right'
+      }
+    ]
   </script>
   <template>
-    <hr />
+    <nt-tanstack-table
+      :data="data"
+      :columns="columns1"
+      fixed-head
+      style="max-height:150px;"
+    ></nt-tanstack-table>
   </template>
   </textarea>
   <template #preview>
-    <TanstackTable :data="data" :columns="columns" fixed-head style="max-height:150px;"></TanstackTable>
+    <TanstackTable :data="data" :columns="columns1" fixed-head style="max-height:150px;"></TanstackTable>
   </template>
   </CodePreview>
 </ClientOnly>

@@ -23,7 +23,9 @@
           <th
             v-for="header in headerGroup.headers"
             :key="header.id"
-            :style="getCommonPinningStyles(header.column)"
+            :style="
+              isFixedLayout ? getCommonPinningStyles(header.column) : undefined
+            "
           >
             <FlexRender
               v-if="!header.isPlaceholder"
@@ -38,7 +40,9 @@
           <td
             v-for="cell in row.getVisibleCells()"
             :key="cell.id"
-            :style="getCommonPinningStyles(cell.column)"
+            :style="
+              isFixedLayout ? getCommonPinningStyles(cell.column) : undefined
+            "
           >
             <FlexRender
               :render="cell.column.columnDef.cell"
@@ -76,8 +80,8 @@ export type ColumnDict<T> = {
 export type ColumnOption<T> = ColumnDict<T> & ColumnDef<T>;
 
 const cols = shallowRef<Array<ColumnDef<T, any>>>([]);
-let leftFixed: string[] = [];
-let rightFixed: string[] = [];
+let leftFixed = shallowRef<string[]>([]);
+let rightFixed = shallowRef<string[]>([]);
 
 /** 缓存固定列时的列样式, 避免每次遍历列都重新计算 */
 const fixedColStyles: Record<string, CSSProperties> = {};
@@ -126,11 +130,20 @@ const getCommonPinningStyles = (column: Column<T>): CSSProperties => {
     return fixedColStyles[id];
   }
   const isPinned = column.getIsPinned();
+  const isLastLeftPinnedColumn =
+    isPinned === 'left' && column.getIsLastColumn('left');
+  const isFirstRightPinnedColumn =
+    isPinned === 'right' && column.getIsFirstColumn('right');
   const styl: CSSProperties = {
+    boxShadow: isLastLeftPinnedColumn
+      ? '-4px 0 4px -4px #d9d9d9 inset'
+      : isFirstRightPinnedColumn
+        ? '4px 0 4px -4px #d9d9d9 inset'
+        : undefined,
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     position: isPinned ? 'sticky' : 'relative',
-    width: column.getSize(),
+    width: `${column.getSize()}px`,
     zIndex: isPinned ? 1 : 0,
   };
   fixedColStyles[id] = styl;
@@ -156,15 +169,17 @@ const props = withDefaults(
 
 const ccols = createColumns(props.columns);
 cols.value = ccols.columns;
-leftFixed = ccols.leftFixed;
-rightFixed = ccols.rightFixed;
+leftFixed.value = ccols.leftFixed;
+rightFixed.value = ccols.rightFixed;
 
 const isFixedLayout = computed(() => {
-  if (leftFixed.length > 0 || rightFixed.length > 0) {
+  if (leftFixed.value.length > 0 || rightFixed.value.length > 0) {
     return true;
   }
   return props.tableLayout === 'fixed';
 });
+
+console.log(rightFixed);
 
 const table = useVueTable<T>({
   get data() {
@@ -174,8 +189,8 @@ const table = useVueTable<T>({
   getCoreRowModel: getCoreRowModel(),
   initialState: {
     columnPinning: {
-      left: leftFixed,
-      right: rightFixed,
+      left: leftFixed.value,
+      right: rightFixed.value,
     },
   },
 });
