@@ -56,16 +56,23 @@
 </template>
 <script setup lang="ts" generic="T">
 import { useVueTable, getCoreRowModel, FlexRender } from '@tanstack/vue-table';
-import type { CellContext, ColumnDef, Column } from '@tanstack/vue-table';
+import type {
+  CellContext,
+  ColumnDef,
+  Column,
+  Table,
+} from '@tanstack/vue-table';
 import type { VNode, CSSProperties } from 'vue';
-import { computed, shallowRef } from 'vue';
+import { computed, shallowRef, h } from 'vue';
+import Radio from '../radio/Radio.vue';
+import Checkbox from '../checkbox/Checkbox.vue';
 
 export type ColumnDict<T> = {
   id?: string;
   /** 标题 */
   title?: string;
   /** 标题 */
-  header?: string;
+  header?: string | ((opts: { table: Table<T> }) => VNode | string);
   key?: string;
   accessorKey?: string;
   cell?: (
@@ -76,6 +83,8 @@ export type ColumnDict<T> = {
   /** 列宽 */
   size?: number;
   fixed?: 'left' | 'right';
+  /** 设置列为可选择 */
+  type?: 'radio' | 'checkbox';
 };
 export type ColumnOption<T> = ColumnDict<T> & ColumnDef<T>;
 
@@ -115,6 +124,26 @@ function createColumns(columns: Array<ColumnOption<T>>) {
       leftFixed.push(colOpts.id as string);
     } else if (colOpts.fixed === 'right') {
       rightFixed.push(colOpts.id as string);
+    }
+    if (colOpts.type != null) {
+      colOpts.id = colOpts.type;
+      if (colOpts.type === 'checkbox') {
+        colOpts.header = ({ table }: { table: Table<T> }) => {
+          return h(Checkbox, {
+            checked: table.getIsAllRowsSelected(),
+            indeterminate: table.getIsSomeRowsSelected(),
+            onChange: (v) => table.toggleAllRowsSelected(v),
+          });
+        };
+        colOpts.cell = (({ row }: CellContext<T, unknown>) => {
+          return h(Checkbox, {
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: (v) => row.toggleSelected(v),
+          });
+        }) as any;
+      }
     }
     delete colOpts.title;
     delete colOpts.key;
@@ -158,12 +187,14 @@ const props = withDefaults(
     columns: Array<ColumnOption<T>>;
     data: Array<T>;
     fixedHead?: boolean;
+    multiSelection?: boolean;
   }>(),
   {
     stripe: true,
     border: false,
     tableLayout: 'auto',
     fixedHead: false,
+    multiSelection: true,
   },
 );
 
@@ -179,13 +210,12 @@ const isFixedLayout = computed(() => {
   return props.tableLayout === 'fixed';
 });
 
-console.log(rightFixed);
-
 const table = useVueTable<T>({
   get data() {
     return props.data;
   },
   columns: cols.value,
+  enableMultiRowSelection: props.multiSelection === true,
   getCoreRowModel: getCoreRowModel(),
   initialState: {
     columnPinning: {

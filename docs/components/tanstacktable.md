@@ -135,6 +135,10 @@ npm install @tanstack/vue-table
       fixed: 'right'
     }
   ]
+
+  const columns2 = [{
+    type: 'checkbox'
+  }, ...columns]
 </script>
 
 ### 基础用法
@@ -297,6 +301,25 @@ npm install @tanstack/vue-table
   </textarea>
   <template #preview>
     <TanstackTable :data="data" :columns="columns1" fixed-head style="max-height:150px;"></TanstackTable>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 选中行
+
+通过将第一列配置 `type=selection` 让行变为可选的。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup lang="ts">
+  </script>
+  <template>
+    <hr />
+  </template>
+  </textarea>
+  <template #preview>
+    <TanstackTable :data="data" :columns="columns2"></TanstackTable>
   </template>
   </CodePreview>
 </ClientOnly>
