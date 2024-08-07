@@ -44,6 +44,7 @@
   height: 0;
   border: 5px solid transparent;
   position: absolute;
+  border-radius: 3px;
 }
 .nt-table .sort-column {
   cursor: pointer;

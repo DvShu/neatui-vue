@@ -23,7 +23,7 @@ const props = withDefaults(
     placeholder?: string;
     autosize?: boolean;
     parser?: (value: string) => string;
-    modelValue?: string;
+    modelValue?: string | number;
   }>(),
   {
     htmlType: 'text',
