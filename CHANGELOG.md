@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/DvShu/neatui-vue/compare/v0.13.0...v0.14.0) (2024-08-08)
+
+
+### Features
+
+* **TanstackTable:** 基于 TanStack Table ([ee24681](https://github.com/DvShu/neatui-vue/commit/ee24681bae887e497f2cba8475b5d19a8f3b0742))
+
 ## [0.13.0](https://github.com/DvShu/neatui-vue/compare/v0.12.0...v0.13.0) (2024-07-31)
 
 
