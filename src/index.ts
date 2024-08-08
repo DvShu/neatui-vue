@@ -1,4 +1,4 @@
-export type { ColumnOption } from './components/Table.vue';
+export type { ColumnOption } from './components/table/Table.vue';
 
 export { default as BaseIcon } from './components/icon/Base.vue';
 export { default as MaskCloseIcon } from './components/icon/MaskClose.vue';

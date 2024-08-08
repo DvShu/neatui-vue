@@ -21,7 +21,7 @@ const value = ref('');
 
 const $input = ref();
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     show?: boolean;
     title?: string;

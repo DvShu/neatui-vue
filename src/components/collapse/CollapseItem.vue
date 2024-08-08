@@ -2,7 +2,7 @@
   <div
     class="nt-collapse-item"
     :class="{
-      'nt-collapse-item--active': collapseCtx.actives.value.includes(
+      'nt-collapse-item--active': (collapseCtx as any).actives.value.includes(
         props.name,
       ),
     }"
@@ -14,16 +14,16 @@
     >
       <ArrowRightIcon
         class="nt-collapse-arrow-icon"
-        v-if="collapseCtx.arrowPlacement === 'left'"
-        :class="['nt-collapse-arrow__' + collapseCtx.arrowPlacement]"
+        v-if="(collapseCtx as any).arrowPlacement === 'left'"
+        :class="['nt-collapse-arrow__' + (collapseCtx as any).arrowPlacement]"
       />
       <slot name="title">
         <span class="nt-collapse-item__title">{{ title }}</span>
       </slot>
       <ArrowRightIcon
         class="nt-collapse-arrow-icon"
-        v-if="collapseCtx.arrowPlacement === 'right'"
-        :class="['nt-collapse-arrow__' + collapseCtx.arrowPlacement]"
+        v-if="(collapseCtx as any).arrowPlacement === 'right'"
+        :class="['nt-collapse-arrow__' + (collapseCtx as any).arrowPlacement]"
       />
     </div>
     <Transition
@@ -36,7 +36,7 @@
     >
       <div
         class="nt-collapse-item--content"
-        v-if="collapseCtx.actives.value.includes(props.name)"
+        v-if="(collapseCtx as any).actives.value.includes(props.name)"
       >
         <div class="nt-collapse-content--box">
           <slot></slot>
