@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'nt-checkbox-group': true
+      'nt-checkbox-group': true,
     }"
   >
     <slot></slot>
@@ -9,34 +9,25 @@
 </template>
 
 <script setup lang="ts">
-import { provide } from 'vue'
+import { provide } from 'vue';
 
-const props = withDefaults(
-  defineProps<{
-    modelValue?: (string | number)[]
-  }>(),
-  {
-    modelValue: () => []
-  }
-)
-
-// const checkList = defineModel({ default: () => [] as any[] })
-const emits = defineEmits(['change', 'update:modelValue'])
+const checkList = defineModel({ default: () => [] as any[] });
+const emits = defineEmits(['change', 'update:modelValue']);
 
 function updateCheck(val: any) {
-  const oldValues = props.modelValue
-  let index = oldValues.indexOf(val)
+  const oldValues = checkList.value;
+  let index = oldValues.indexOf(val);
   if (index === -1) {
-    oldValues.push(val)
+    oldValues.push(val);
   } else {
-    oldValues.splice(index, 1)
+    oldValues.splice(index, 1);
   }
-  emits('update:modelValue', [...oldValues])
-  emits('change', [...oldValues])
+  checkList.value = [...oldValues];
+  emits('change', [...oldValues]);
 }
 
 provide('nt-checkbox-group-check', {
-  checkList: props.modelValue,
-  updateCheck
-})
+  checkList: checkList,
+  updateCheck,
+});
 </script>

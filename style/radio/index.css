@@ -1,5 +1,5 @@
 .nt-radio {
-  --nt-radio-size: 14px;
+  --nt-radio-size: 16px;
   --nt-radio-label-color: #333;
   --nt-radio-disabled-color: #e6e6e6;
   --nt-radio-disabled-label-color: #c0c4cc;
@@ -14,6 +14,7 @@
 .nt-radio__label {
   color: var(--nt-radio-label-color);
   transition: color 0.3s ease-in-out;
+  margin-left: 5px;
 }
 
 .nt-radio__input {
@@ -32,7 +33,7 @@
   height: var(--nt-radio-size);
   border: 1px solid #dcddd9;
   border-radius: 50%;
-  margin-right: 5px;
+
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
 }
@@ -83,6 +84,7 @@
   padding: 0 15px;
   border: 1px solid #c0c4cc;
   border-left-width: 0;
+  margin-left: 0;
 }
 .nt-radio--button:first-child .nt-radio__label {
   border-left-width: 1px;

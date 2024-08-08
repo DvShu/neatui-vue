@@ -10,12 +10,12 @@
 
   const sex = ref('0')
 
-  const allowService = ref(true)
+  const allowService = ref(false)
 </script>
 
 ### 基础用法
 
-当只有一个选项时，可以直接通过 `v-model` 绑定一个 `boolean` 值来控制是否选中；使用 `slot-label` 来重写选项的文字。
+当只有一个选项时，可以直接通过 `v-model` 绑定一个 `boolean` 值来控制是否选中；使用 `slot-default` 来重写选项的文字。
 
 <ClientOnly>
   <CodePreview>
@@ -26,23 +26,19 @@
   </script>
   <template>
     <nt-radio v-model="allowService">
-      <template #label>
-        <span>
-          <span>同意</span>
-          <a href='#'>隐私协议</a>
-        </span>
-      </template>
+      <span>
+        <span>同意</span>
+        <a href='#'>隐私协议</a>
+      </span>
     </nt-radio>
   </template>
   </textarea>
   <template #preview>
     <Radio v-model="allowService">
-      <template #label>
-        <span>
-          <span>同意</span>
-          <a href='#'>隐私协议</a>
-        </span>
-      </template>
+      <span>
+        <span>同意</span>
+        <a href='#'>隐私协议</a>
+      </span>
     </Radio>
   </template>
   </CodePreview>
@@ -55,8 +51,11 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-radio label="禁用" disabled>
+  <nt-radio label="禁用" disabled></nt-radio>
   </textarea>
+  <template #preview>
+    <Radio label="禁用" disabled />
+  </template>
   </CodePreview>
 </ClientOnly>
 
@@ -122,6 +121,7 @@
 | `value`                 | 原生 `value` 属性  | `string`  | -       |
 | `label`                 | 显示的标签         | `string`  | -       |
 | `type`                  | 是否设置为按钮风格 | `button`  | -       |
+| `checked`               | 是否选中           | `boolean` | -       |
 
 ### RadioGroup Props
 
@@ -143,6 +143,6 @@
 
 ### Radio Slots
 
-| 名称    | 说明           |
-| ------- | -------------- |
-| `label` | 自定义文本内容 |
+| 名称      | 说明                |
+| --------- | ------------------- |
+| `default` | 自定义 `label` 内容 |

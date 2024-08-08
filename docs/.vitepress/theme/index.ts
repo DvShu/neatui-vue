@@ -38,6 +38,7 @@ import '../../../style/date-picker-ori';
 import '../../../style/page-header';
 import '../../../style/tag';
 import '../../../style/pagination';
+import '../../../style/tanstack-table';
 
 export default {
   extends: DefaultTheme,

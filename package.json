@@ -63,6 +63,7 @@
   },
   "license": "MulanPSL-2.0",
   "dependencies": {
+    "@tanstack/vue-table": "^8.20.2",
     "ph-utils": "^0.8.2",
     "qrcode-generator-es": "^0.0.4",
     "vue-router": "^4.4.0"
