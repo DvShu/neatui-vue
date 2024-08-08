@@ -272,6 +272,11 @@ npm install @tanstack/vue-table
     { key: 'lastName' },
     { key: 'age' }
   ]
+
+  const expandable = {
+    rowExpandable: (record) => record.age < 40,
+    expandedRowRender: (record) => h('div', JSON.stringify(record, null, 8))
+  }
 </script>
 
 ### 基础用法
@@ -631,6 +636,31 @@ npm install @tanstack/vue-table
 
 > 当前树形展开选择时存在bug: [选中状态不正确](https://github.com/TanStack/table/issues/5620#issue-2365424488)
 
+### 展开行
+
+当表格内容较多不能一次性完全展示时。可以使用 `Table` 展开行功能。
+
+通过配置表格的 `expandable` 对象属性可以开启展开行功能。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup lang="ts">
+    const expandable = {
+      rowExpandable: (record) => record.age < 40,
+      expandedRowRender: (record) => h('div', JSON.stringify(record, null, 8))
+    }
+  </script>
+  <template>
+    <nt-tanstack-table :data="data" :columns="columns" :expandable="expandable"></nt-tanstack-table>
+  </template>
+  </textarea>
+  <template #preview>
+    <TanstackTable :data="data" :columns="columns" :expandable="expandable"></TanstackTable>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### TanstackTable Props
@@ -638,4 +668,37 @@ npm install @tanstack/vue-table
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| x | x | x | x |
+| `stripe` | 是否为斑马纹 | `boolean` | `true` |
+| `border` | 是否显示四周边框 | `boolean` | `false` |
+| `columns` | 表格列配置 | [ColumnDef](/components/tanstacktable#tanstacktable-columndef) | `[]` |
+| `table-layout` | 表格布局 | `fixed \| auto` | `auto` |
+| `data` | 表格数据 | `any[]` | `[]` |
+| `fixed-head` | 是否固定表头 | `boolean` | `false` |
+| `multi-selection` | 当配置列为可选择时，是否允许多选 | `boolean` | `true` |
+| `default-sorter` | 默认排序字段 | `{ id: string, desc: boolean }` | - |
+| `expandable` | 配置展开属性 | [ExpandableOption](/components/tanstacktable#tanstacktable-expandableoption) | - |
+
+### TanstackTable ColumnDef
+
+<!-- prettier-ignore -->
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `title` | 列标题 | `string` | - |
+| `header` | 表头, 如果为空，但是设置了 `title`，则会使用 `title` 作为表头 | `string \| ((opts: { table: Table<T> }) => VNode \| string)` | - |
+| `accessorKey` | 对应数据对象的 `key`; 如果没有配置 `cell` 将会使用该 `key` 对象的数据值渲染单元格 | `string` | - |
+| `key` | 对应数据对象的 `key`; 同 `accessorKey` | `string` | - |
+| `id` | 列唯一标识, 如果未传, 但是传了 `key` 或者 `accessorKey` 将会以此作为 `id`；如果传了 `header` 是字符串，将会以 `header` 作为此 `id` | `string` | - |
+| `size` | 列宽 | `number` | - |
+| `fixed` | 是否固定列 | `left \| right` | - |
+| `type` | 列类型, 配置列可选择时使用 | `selection` | - |
+| `sorter` | 排序 | `boolean \| ((rowA: T, rowB: T) => number)` | - |
+| `cell` | 单元格渲染函数; 如果不配, 将会使用配置的 `key` 对应的值渲染单元格 | `(row: T, index: number, info: CellContext<T, unknown>) => VNode \| VNode[] \| string` | - |
+| `columns` | 子列, 通常用于配置表头分组 | `ColumnDef[]` | - |
+
+### TanstackTable ExpandableOption
+
+<!-- prettier-ignore -->
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `rowExpandable` | 设置是否允许行展开 | `(row: T) => boolean` | - |
+| `expandedRowRender` | 展开行渲染函数 | `(row: T) => VNode \| VNode[]` | - |

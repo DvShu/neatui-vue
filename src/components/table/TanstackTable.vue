@@ -48,18 +48,28 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="row in table.getRowModel().rows" :key="row.id">
-          <td
-            v-for="cell in row.getVisibleCells()"
-            :key="cell.id"
-            :style="getCommonPinningStyles(cell.column)"
-          >
-            <FlexRender
-              :render="cell.column.columnDef.cell"
-              :props="cell.getContext()"
-            />
-          </td>
-        </tr>
+        <template v-for="row in table.getRowModel().rows" :key="row.id">
+          <tr>
+            <td
+              v-for="cell in row.getVisibleCells()"
+              :key="cell.id"
+              :style="getCommonPinningStyles(cell.column)"
+            >
+              <FlexRender
+                :render="cell.column.columnDef.cell"
+                :props="cell.getContext()"
+              />
+            </td>
+          </tr>
+          <tr v-if="expandable != null && row.getIsExpanded()">
+            <td :colspan="row.getAllCells().length">
+              <FlexRender
+                :render="expandable.expandedRowRender(row.original)"
+                :props="null"
+              />
+            </td>
+          </tr>
+        </template>
       </tbody>
     </table>
   </div>
@@ -304,6 +314,31 @@ function createColumns(
     }
     resCols.push(colOpts as any);
   }
+  if (!isCreateExpand && props.expandable != null) {
+    let insertIndex = 0;
+    if ((resCols[0] as any).type === 'selection') {
+      insertIndex = 1;
+    }
+    resCols.splice(insertIndex, 0, {
+      id: 'expandable',
+      cell: (cellContext: CellContext<T, unknown>) => {
+        return h(
+          Button,
+          {
+            class: {
+              'nt-table-expand-icon': true,
+              'nt-table-expand-icon--expanded': cellContext.row.getIsExpanded(),
+              'nt-table-expand-placeholder': !cellContext.row.getCanExpand(),
+            },
+            onClick: cellContext.row.getToggleExpandedHandler(),
+          },
+          {
+            default: () => h(ArrowRight),
+          },
+        );
+      },
+    });
+  }
   return { columns: resCols, leftFixed, rightFixed };
 }
 
@@ -344,6 +379,13 @@ const props = withDefaults(
     multiSelection?: boolean;
     /** 默认排序 */
     defaultSorter?: ColumnSort;
+    /** 配置展开属性  */
+    expandable?: {
+      /** 设置是否允许行展开 */
+      rowExpandable: (row: T) => boolean;
+      /** 展开行渲染内容 */
+      expandedRowRender: (row: T) => VNode | VNode[];
+    };
   }>(),
   {
     stripe: true,
@@ -375,6 +417,13 @@ const table = useVueTable<T>({
   getSubRows: (row) => (row as any).children,
   enableMultiRowSelection: props.multiSelection === true,
   getCoreRowModel: getCoreRowModel(),
+  getRowCanExpand: (row) => {
+    return (row.original as any).children != null
+      ? true
+      : props.expandable != null
+        ? props.expandable.rowExpandable(row.original)
+        : false;
+  },
   initialState: {
     columnPinning: {
       left: leftFixed.value,
