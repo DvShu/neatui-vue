@@ -5,7 +5,7 @@
 ## 演示
 
 <script setup>
-  import { PageHeader } from "../../src"
+  import { PageHeader, MoreIcon } from "../../src"
 </script>
 
 ### 基础用法
@@ -14,16 +14,31 @@
 
 <ClientOnly>
   <CodePreview>
-  <textarea lang="vue">
-  <script setup>
-  </script>
-  <template>
-  </template>
+  <textarea lang="vue-html">
+  <nt-page-header title="标题" sub-title="副标题">
+    <template #extra>
+      <nt-more-icon />
+    </template>
+  </nt-page-header>
+  <hr />
+  <nt-page-header title="标题" title-align="center" height="44px">
+    <template #extra>
+      <nt-more-icon />
+    </template>
+  </nt-page-header>
   </textarea>
   <template #preview>
-    <PageHeader title="标题" sub-title="副标题"></PageHeader>
+    <PageHeader title="标题" sub-title="副标题">
+      <template #extra>
+        <MoreIcon />
+      </template>
+    </PageHeader>
     <hr />
-    <PageHeader title="标题" title-align="center" height="44px"></PageHeader>
+    <PageHeader title="标题" title-align="center" height="44px">
+      <template #extra>
+        <MoreIcon />
+      </template>
+    </PageHeader>
   </template>
   </CodePreview>
 </ClientOnly>

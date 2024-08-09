@@ -52,6 +52,7 @@
 
 .nt-page-header-align-center {
   border-bottom: 1px solid #dedede;
+  justify-content: space-between;
 }
 
 .nt-page-header-align-center .nt-page-header-content {
