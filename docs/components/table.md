@@ -4,7 +4,6 @@
 
 这个表格只是一个简单的数据展示功能，只包含有固定表头和列、排序功能。如果当前组件不能满足需求需要使用更多功能的时候，可以考虑使用 [TanstackTable](/components/tanstacktable)
 
-
 ## 演示
 
 <script setup>
@@ -131,8 +130,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
   const columns2 = [{
@@ -154,8 +153,8 @@
     width: 200,
     fixed: 'right',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
   const columns3 = [{
@@ -172,8 +171,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
   const columns4 = [{
@@ -193,8 +192,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
 
@@ -244,8 +243,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
 
@@ -273,36 +272,9 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
-  }]
-
-  const columns7 = [{
-    type: 'radio',
-    disabled: (rowData) => rowData.name === '张三'
-  }, {
-    title: '姓名',
-    key: 'name',
-  }, {
-    title: '年龄',
-    key: 'age',
-  }, {
-    title: '住址',
-    key: 'address'
-  }]
-
-  const columns8 = [{
-    type: 'checkbox'
-  }, {
-    title: '姓名',
-    key: 'name',
-  }, {
-    title: '年龄',
-    key: 'age',
-  }, {
-    title: '住址',
-    key: 'address'
   }]
 
   const defaultSort = { key: 'age', order: 'desc' }
@@ -683,50 +655,6 @@
     <Table :data="dataSource4" :columns="columns6" border></Table>
     <hr />
     <div>{{ JSON.stringify(dataSource4, null, 2) }}</div>
-  </template>
-  </CodePreview>
-</ClientOnly>
-
-### 可选择(单选)
-
-<ClientOnly>
-  <CodePreview>
-  <textarea lang="vue-html">
-  <script setup>
-  </script>
-  <template>
-    <hr />
-  </template>
-  </textarea>
-  <template #preview>
-    <Table
-      :data="dataSource4"
-      :columns="columns7"
-      :row-key="rowKey"
-      @select-change="handleSelectChange"
-    ></Table>
-  </template>
-  </CodePreview>
-</ClientOnly>
-
-### 可选择(多选)
-
-<ClientOnly>
-  <CodePreview>
-  <textarea lang="vue-html">
-  <script setup>
-  </script>
-  <template>
-    <hr />
-  </template>
-  </textarea>
-  <template #preview>
-    <Table
-      :data="dataSource4"
-      :columns="columns8"
-      :row-key="rowKey"
-      @select-change="handleSelectChange"
-    ></Table>
   </template>
   </CodePreview>
 </ClientOnly>

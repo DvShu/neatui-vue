@@ -48,6 +48,9 @@ function handleInput(e: Event) {
     value = props.parser(value) as string;
     $target.value = String(value);
   }
+  if (typeof props.modelValue === 'number') {
+    value = Number(value) as any;
+  }
   emits('update:modelValue', value);
 }
 

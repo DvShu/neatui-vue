@@ -1,8 +1,6 @@
 <script lang="ts">
 import { defineComponent, h, PropType, ref, toRaw, watch } from 'vue';
 import type { VNode } from 'vue';
-import Radio from '../radio/Radio.vue';
-import Checkbox from '../checkbox/Checkbox.vue';
 import { random } from 'ph-utils';
 import { format } from 'ph-utils/date';
 
@@ -160,18 +158,13 @@ export default defineComponent({
     },
   },
   emits: ['select-change'],
-  setup(props, { emit }) {
+  setup(props) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
     });
-    const allowSelect = calcAllowSelect(); // 允许选择的列表
     const sourceData = ref(props.data);
     const parsedColumns = calculateSpan(props.columns, 0);
-    const selectedValues = ref<any[]>([]);
-    /** 复选的半选、全选状态 */
-    const isIndeterminate = ref(false);
-    const checkedAll = ref(false);
 
     watch(
       () => props.data,
@@ -179,58 +172,6 @@ export default defineComponent({
         sourceData.value = props.data;
       },
     );
-
-    function calcAllowSelect() {
-      let c = [];
-      if (props.columns[0].type === 'checkbox') {
-        for (const d of props.data) {
-          let isDisabled = false;
-          if (props.columns[0].disabled != null) {
-            isDisabled = props.columns[0].disabled(d);
-          }
-          if (!isDisabled && props.rowKey != null) {
-            c.push(props.rowKey(d));
-          }
-        }
-      }
-      return c;
-    }
-
-    function handleSelectionChange(value: any) {
-      const selectType = props.columns[0].type;
-      if (selectType === 'radio') {
-        selectedValues.value = [];
-      }
-      let index = selectedValues.value.indexOf(value);
-      if (index !== -1) {
-        selectedValues.value.splice(index, 1);
-      } else {
-        selectedValues.value.push(value);
-      }
-      if (selectedValues.value.length === 0) {
-        isIndeterminate.value = false;
-        checkedAll.value = false;
-      } else if (selectedValues.value.length === allowSelect.length) {
-        checkedAll.value = true;
-        isIndeterminate.value = false;
-      } else {
-        checkedAll.value = false;
-        isIndeterminate.value = true;
-      }
-      emit('select-change', [...selectedValues.value]);
-    }
-
-    function handleChangeAll(v: boolean) {
-      if (v === true) {
-        selectedValues.value = [...allowSelect];
-        checkedAll.value = true;
-      } else {
-        selectedValues.value = [];
-        checkedAll.value = false;
-      }
-      isIndeterminate.value = false;
-      emit('select-change', [...selectedValues.value]);
-    }
 
     function dataSort(
       data: any[],
@@ -344,32 +285,14 @@ export default defineComponent({
         };
       }
       const colChildren = [];
-      if (column.type != null) {
-        if (column.type === 'checkbox') {
-          colChildren.push(
-            h(
-              'div',
-              {
-                class: 'nt-table-selection-cell',
-              },
-              h(Checkbox, {
-                indeterminate: isIndeterminate.value,
-                checked: checkedAll.value,
-                onChange: handleChangeAll,
-              }),
-            ),
-          );
-        }
-      } else {
-        colChildren.push(h('span', column.title));
-        if (column.sorter === true) {
-          colChildren.push(
-            h('span', { class: 'caret-wrapper' }, [
-              h('span', { class: 'sort-caret ascending' }),
-              h('span', { class: 'sort-caret descending' }),
-            ]),
-          );
-        }
+      colChildren.push(h('span', column.title));
+      if (column.sorter === true) {
+        colChildren.push(
+          h('span', { class: 'caret-wrapper' }, [
+            h('span', { class: 'sort-caret ascending' }),
+            h('span', { class: 'sort-caret descending' }),
+          ]),
+        );
       }
       return h('th', thAttrs, colChildren);
     }
@@ -467,28 +390,6 @@ export default defineComponent({
               );
             } else if (column.key != null) {
               rowChildren.push(h('td', tdAttr, rowData[column.key]));
-            } else if (column.type != null) {
-              const selectionValue =
-                props.rowKey != null ? props.rowKey(rowData) : '';
-              rowChildren.push(
-                h(
-                  'td',
-                  tdAttr,
-                  h(
-                    'div',
-                    { class: 'nt-table-selection-cell' },
-                    h(column.type === 'radio' ? Radio : Checkbox, {
-                      name: selectionName,
-                      value: selectionValue,
-                      checked: selectedValues.value.includes(selectionValue),
-                      disabled: column.disabled
-                        ? column.disabled(rowData)
-                        : false,
-                      onChange: handleSelectionChange,
-                    }),
-                  ),
-                ),
-              );
             } else {
               rowChildren.push(h('td', tdAttr, ''));
             }
