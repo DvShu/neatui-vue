@@ -19,6 +19,9 @@
         </div>
       </slot>
     </div>
+    <div class="nt-page-header-right">
+      <slot name="extra"></slot>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
