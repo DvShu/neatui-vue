@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/DvShu/neatui-vue/compare/v0.14.0...v0.14.1) (2024-08-09)
+
+
+### Bug Fixes
+
+* **PageHeader:** PageHeader 增加 extra 渲染 ([39cd927](https://github.com/DvShu/neatui-vue/commit/39cd927ea102f4ae61e7dd36050a5a35dffad1da))
+
 ## [0.14.0](https://github.com/DvShu/neatui-vue/compare/v0.13.0...v0.14.0) (2024-08-08)
 
 
