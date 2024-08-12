@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, h, PropType, ref, toRaw, watch } from 'vue';
-import type { VNode } from 'vue';
-import { random } from 'ph-utils';
+import type { VNode, CSSProperties } from 'vue';
+import { isBlank, random } from 'ph-utils';
 import { format } from 'ph-utils/date';
 
 export interface ColumnOption {
@@ -27,10 +27,9 @@ export interface ColumnOption {
   titleColspan?: number;
   /** th rowspan */
   titleRowspan?: number;
-  /** 设置可选择 */
-  type?: 'radio' | 'checkbox';
-  /** 为 radio，checkbox 设置是否禁用 */
-  disabled?: (row: any) => boolean;
+  id?: string;
+  style?: CSSProperties;
+  className?: string;
 }
 
 export interface DataSortState {
@@ -51,44 +50,115 @@ type SorterFnOption = (
 
 type RowKeyOption = (row: any) => any;
 
-/** 通过配置的 columns 计算表头跨行，跨列 */
-function calculateSpan(headers: ColumnOption[], level = 0): ColumnOption[] {
-  if (!Array.isArray(headers)) {
-    return [];
+function getLeftStart(id: string, left: [string, number][]) {
+  let start = 0;
+  const len = left.length;
+  let isFirst = false;
+  for (let i = 0; i < len; i++) {
+    const item = left[i];
+    if (item[0] === id) {
+      if (i === 0) {
+        isFirst = true;
+      }
+      break;
+    }
+    start += item[1];
   }
+  return { start, isFirst };
+}
 
-  const spans = headers.map((header) => {
+function getRightStart(id: string, right: [string, number][]) {
+  let start = 0;
+  let isFirst = false;
+  const len = right.length;
+  for (let i = len - 1; i >= 0; i--) {
+    const item = right[i];
+    if (item[0] === id) {
+      if (i === len - 1) {
+        isFirst = true;
+      }
+      break;
+    }
+    start += item[1];
+  }
+  return { start, isFirst };
+}
+
+function getCommonStyle(
+  column: ColumnOption,
+  fl: [string, number][],
+  fr: [string, number][],
+): CSSProperties {
+  const res: CSSProperties = { ...column.style };
+  if (column.width != null) {
+    if (typeof column.width === 'number') {
+      res.width = `${column.width}px`;
+    } else {
+      res.width = column.width;
+    }
+  }
+  return res;
+}
+
+/** 通过配置的 columns 计算表头跨行，跨列 */
+function calculateSpan(
+  headers: ColumnOption[],
+  level = 0,
+  leftFixed: [string, number][],
+  rightFixed: [string, number][],
+): ColumnOption[] {
+  const tmpCols = [];
+  for (let i = 0, len = headers.length; i < len; i++) {
+    const header = headers[i];
+    if (header.id == null) {
+      header.id = header.key || header.title;
+    }
+    if (isBlank(header.id)) {
+      header.id = random(6) as string;
+    }
+    if (header.fixed != null) {
+      const widNum = parseInt(`${header.width || 0}`);
+      if (header.fixed === 'left') {
+        leftFixed.push([header.id as string, widNum]);
+      } else if (header.fixed === 'right') {
+        rightFixed.push([header.id as string, widNum]);
+      }
+    }
     // 如果有子级元素，递归计算
     if (header.children != null) {
       let titleColspan = header.titleColspan;
-      const childrenSpans = calculateSpan(header.children, level + 1);
+      const childrenSpans = calculateSpan(
+        header.children,
+        level + 1,
+        leftFixed,
+        rightFixed,
+      );
       if (titleColspan == null) {
         titleColspan = childrenSpans.reduce(
           (sum, childSpan) => sum + (childSpan.titleColspan || 0),
           0,
         );
       }
-      return {
+      tmpCols.push({
         ...header,
         titleColspan: titleColspan,
         titleRowspan: header.titleRowspan || 1,
         children: childrenSpans,
-      };
+      });
     } else {
       let titleRowspan = header.titleRowspan;
       if (titleRowspan == null) {
         titleRowspan = getMaxDepth(headers);
       }
       // 如果元素没有子级，意味着它占满从当前层级到最底层的所有行
-      return {
+      tmpCols.push({
         ...header,
         titleColspan: header.titleColspan || 1,
         titleRowspan: titleRowspan,
-      };
+      });
     }
-  });
-
-  return spans;
+  }
+  return tmpCols;
 }
 
 // 递归获取最深的层级数
@@ -164,8 +234,18 @@ export default defineComponent({
       order: '',
     });
     const sourceData = ref(props.data);
-    const parsedColumns = calculateSpan(props.columns, 0);
-
+    /** 缓存列样式, 避免每次遍历列都重新计算 */
+    const globalColStyles: Record<string, CSSProperties> = {};
+    /** 左边固定列 */
+    const fixedLeft: [string, number][] = [];
+    /** 右边固定列 */
+    const fixedRight: [string, number][] = [];
+    const parsedColumns = calculateSpan(
+      props.columns,
+      0,
+      fixedLeft,
+      fixedRight,
+    );
     watch(
       () => props.data,
       () => {
@@ -254,10 +334,6 @@ export default defineComponent({
           thAttrs.style.right =
             right.length === 0 ? '0' : `calc(${right.join('+')})`;
         }
-      }
-
-      if (column.type != null && column.width == null) {
-        column.width = 40;
       }
 
       if (column.width) {
