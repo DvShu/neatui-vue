@@ -3,6 +3,7 @@
   outline: none;
   box-sizing: border-box;
   width: var(--nt-input-width);
+  max-width: 100%;
   height: var(--nt-form-edit-height, 32px);
   border: 1px solid #dedede;
   transition: border-color 0.3s;

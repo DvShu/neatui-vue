@@ -15,6 +15,7 @@
       name: '李四',
       age: 19,
       address: '北京朝阳',
+
     },
     {
       name: '张三',
@@ -408,7 +409,7 @@
 
 ### 固定表头和列
 
-给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。 将表格 将 `table-layout` 设置为 `fixed`，然后将需要固定的列设置 `fixed` 为 `left` 或 `right`，就能实现固定列。
+给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。 将需要固定的列设置 `fixed` 为 `left` 或 `right`，就能实现固定列。
 
 <ClientOnly>
   <CodePreview>
@@ -460,18 +461,17 @@
     }]
   </script>
   <template>
-    <nt-table :data="dataSource2" :columns="columns" table-layout="fixed" fixed-head style="max-height:200px;" class="nt-scrollbar"></nt-table>
+    <nt-table :data="dataSource2" :columns="columns" fixed-head style="max-height:200px;" class="nt-scrollbar"></nt-table>
   </template>
   </textarea>
   <template #preview>
-    <Table :data="dataSource2" :columns="columns2" table-layout="fixed" fixed-head style="max-height:200px;" class="nt-scrollbar"></Table>
+    <Table :data="dataSource2" :columns="columns2" fixed-head style="max-height:200px;" class="nt-scrollbar"></Table>
   </template>
   </CodePreview>
 </ClientOnly>
 
-> 1. _切记_: 要固定列，需要使用 `fixed` 布局，不能将 `table-layout` 设置为 `auto`
-> 2. 设置 `max-height` 可以通过直接设置 `style`；也可以通过 [tailwindcss-max-height](https://www.tailwindcss.cn/docs/max-height#setting-the-maximum-height)
-> 3. 如果想改变滚动条样式，参考 [工具样式-滚动条](../css-util#_2-滚动条样式)；引入样式表，然后给 `Table` 组件, 添加 `nt-scrollbar` 的类名: `<nt-table ... fixed-head class="max-h-24 nt-scrollbar"></nt-table>`
+> 1. 设置 `max-height` 可以通过直接设置 `style`；也可以通过 [tailwindcss-max-height](https://www.tailwindcss.cn/docs/max-height#setting-the-maximum-height)
+> 2. 如果想改变滚动条样式，参考 [工具样式-滚动条](../css-util#_2-滚动条样式)；引入样式表，然后给 `Table` 组件, 添加 `nt-scrollbar` 的类名: `<nt-table ... fixed-head class="max-h-24 nt-scrollbar"></nt-table>`
 
 ### 排序
 
@@ -708,6 +708,7 @@
 
 `ColumnOption` 选项:
 
+<!-- prettier-ignore -->
 | 字段           | 说明                   | 类型                                                     | 默认值  |
 | -------------- | ---------------------- | -------------------------------------------------------- | ------- |
 | `title`        | 列名                   | `string`                                                 | -       |
@@ -720,6 +721,8 @@
 | `titleColspan` | 表头的单元格所占的列数 | `number`                                                 | -       |
 | `rowspan`      | 单元格的 `rowspan`     | `number` \| `(rowData: any, rowIndex: number) => number` | -       |
 | `colspan`      | 单元格的 `colspan`     | `number` \| `(rowData: any, rowIndex: number) => number` | -       |
+| `style`        | 表格单元格的样式       | `CSSProperties`                                          | -       |
+| `class` | 表格单元格的类名 | `string` | - |
 
 `SortOption` 选项
 

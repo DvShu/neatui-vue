@@ -29,7 +29,7 @@ export interface ColumnOption {
   titleRowspan?: number;
   id?: string;
   style?: CSSProperties;
-  className?: string;
+  class?: string;
 }
 
 export interface DataSortState {
@@ -82,22 +82,6 @@ function getRightStart(id: string, right: [string, number][]) {
     start += item[1];
   }
   return { start, isFirst };
-}
-
-function getCommonStyle(
-  column: ColumnOption,
-  fl: [string, number][],
-  fr: [string, number][],
-): CSSProperties {
-  const res: CSSProperties = { ...column.style };
-  if (column.width != null) {
-    if (typeof column.width === 'number') {
-      res.width = `${column.width}px`;
-    } else {
-      res.width = column.width;
-    }
-  }
-  return res;
 }
 
 /** 通过配置的 columns 计算表头跨行，跨列 */
@@ -240,12 +224,48 @@ export default defineComponent({
     const fixedLeft: [string, number][] = [];
     /** 右边固定列 */
     const fixedRight: [string, number][] = [];
+    const isFixedColumn = ref(false);
     const parsedColumns = calculateSpan(
       props.columns,
       0,
       fixedLeft,
       fixedRight,
     );
+    isFixedColumn.value = fixedLeft.length > 0 || fixedRight.length > 0;
+
+    function getCommonStyle(
+      column: ColumnOption,
+      fl: [string, number][],
+      fr: [string, number][],
+    ): CSSProperties {
+      const id = column.id as string;
+      if (id in globalColStyles) {
+        return globalColStyles[id];
+      }
+      const res: CSSProperties = { ...column.style };
+      if (column.width != null) {
+        if (typeof column.width === 'number') {
+          res.width = `${column.width}px`;
+        } else {
+          res.width = column.width;
+        }
+      }
+      if (column.fixed != null) {
+        let startInfo = { start: 0, isFirst: false };
+        if (column.fixed === 'left') {
+          startInfo = getLeftStart(id, fl);
+          res.boxShadow = '-4px 0 4px -4px #d9d9d9 inset';
+          res.left = `${startInfo.start}px`;
+        } else if (column.fixed === 'right') {
+          startInfo = getRightStart(id, fr);
+          res.boxShadow = '4px 0 4px -4px #d9d9d9 inset';
+          res.right = `${startInfo.start}px`;
+        }
+      }
+      globalColStyles[id] = res;
+      return res;
+    }
+
     watch(
       () => props.data,
       () => {
@@ -305,12 +325,7 @@ export default defineComponent({
       }
     }
 
-    function renderHeadCol(
-      column: ColumnOption,
-      index: number,
-      left: string[],
-      right: string[],
-    ) {
+    function renderHeadCol(column: ColumnOption, index: number) {
       const thAttrs: any = {
         class: {
           'sort-column': column.sorter === true,
@@ -321,35 +336,11 @@ export default defineComponent({
             sortInfo.value.order === 'desc',
           'nt-fixed': column.fixed,
         },
-        style: {},
+        style: getCommonStyle(column, fixedLeft, fixedRight),
         colspan: column.titleColspan,
         rowspan: column.titleRowspan,
       };
 
-      if (column.fixed) {
-        if (column.fixed === 'left') {
-          thAttrs.style.left =
-            left.length === 0 ? '0' : `calc(${left.join('+')})`;
-        } else {
-          thAttrs.style.right =
-            right.length === 0 ? '0' : `calc(${right.join('+')})`;
-        }
-      }
-
-      if (column.width) {
-        let colWidth: string = column.width as string;
-        if (typeof column.width === 'number') {
-          colWidth = `${column.width}px`;
-        }
-        thAttrs.style.width = colWidth;
-        if (column.fixed != null) {
-          if (column.fixed === 'left') {
-            left.push(colWidth);
-          } else {
-            right.push(colWidth);
-          }
-        }
-      }
       if (column.sorter === true) {
         thAttrs.onClick = () => {
           handleHeadClick({
@@ -375,18 +366,16 @@ export default defineComponent({
 
     function renderHeadRow(
       columns: ColumnOption[],
-      left: string[],
-      right: string[],
       rowChildren: VNode[],
       children: VNode[],
     ) {
       for (let i = 0, len = columns.length; i < len; i++) {
         const column = columns[i];
-        rowChildren.push(renderHeadCol(column, i, left, right));
+        rowChildren.push(renderHeadCol(column, i));
 
         if (column.children != null) {
           let rChildren: VNode[] = [];
-          renderHeadRow(column.children, left, right, rChildren, children);
+          renderHeadRow(column.children, rChildren, children);
           children.push(h('tr', rChildren));
         }
       }
@@ -395,7 +384,7 @@ export default defineComponent({
     function renderHead() {
       const headTrs: VNode[] = [];
       const rootChildren: VNode[] = [];
-      renderHeadRow(parsedColumns, [], [], rootChildren, headTrs);
+      renderHeadRow(parsedColumns, rootChildren, headTrs);
       headTrs.unshift(h('tr', rootChildren));
       return headTrs;
     }
@@ -404,8 +393,6 @@ export default defineComponent({
       columns: ColumnOption[],
       rowIndex: number,
       rowData: any,
-      left: string[],
-      right: string[],
       rowChildren: VNode[],
       selectionName: string,
     ) {
@@ -427,38 +414,11 @@ export default defineComponent({
           }
           if (rowspan !== 0 && colspan !== 0) {
             const tdAttr: any = {
-              style: {},
-              class: {
-                'nt-fixed': column.fixed,
-              },
+              style: getCommonStyle(column, fixedLeft, fixedRight),
+              class: [column.fixed ? 'nt-fixed' : undefined, column.class],
               colspan,
               rowspan,
             };
-
-            if (column.fixed) {
-              if (column.fixed === 'left') {
-                tdAttr.style.left =
-                  left.length === 0 ? '0' : `${left.join('+')}`;
-              } else {
-                tdAttr.style.right =
-                  right.length === 0 ? '0' : `${left.join('+')}`;
-              }
-            }
-
-            if (column.width) {
-              let colWidth: string = column.width as string;
-              if (typeof column.width === 'number') {
-                colWidth = `${column.width}px`;
-              }
-              tdAttr.style.width = colWidth;
-              if (column.fixed != null) {
-                if (column.fixed === 'left') {
-                  left.push(colWidth);
-                } else {
-                  right.push(colWidth);
-                }
-              }
-            }
 
             if (column.render != null) {
               rowChildren.push(
@@ -475,8 +435,6 @@ export default defineComponent({
             column.children,
             rowIndex,
             rowData,
-            left,
-            right,
             rowChildren,
             selectionName,
           );
@@ -491,7 +449,7 @@ export default defineComponent({
       for (let i = 0, len = sourceData.value.length; i < len; i++) {
         const dataItem = sourceData.value[i];
         const $tds: VNode[] = [];
-        renderBodyRow(parsedColumns, i, dataItem, [], [], $tds, selectionName);
+        renderBodyRow(parsedColumns, i, dataItem, $tds, selectionName);
         bodies.push(h('tr', $tds));
       }
       return bodies;
@@ -507,7 +465,9 @@ export default defineComponent({
             class: [
               'nt-table',
               props.stripe ? 'nt-table-stripe' : '',
-              props.tableLayout === 'fixed' ? 'nt-table-fixed' : '',
+              isFixedColumn.value || props.tableLayout === 'fixed'
+                ? 'nt-table-fixed'
+                : '',
               props.border ? 'nt-table-border' : '',
             ],
           },
