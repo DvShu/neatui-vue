@@ -6,7 +6,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { Switch } from '../../src'
+  import { Switch, MoonIcon, SunIcon } from '../../src'
 
   const open = ref(true);
 </script>
@@ -49,6 +49,33 @@
   </CodePreview>
 </ClientOnly>
 
+### 自定义操作图标
+
+使用 `action` 插槽, 配合 `props-checked` 作用域来自定义渲染操作图标。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <template>
+    <nt-switch v-model="open">
+      <template #action="slotProp">
+        <nt-moon-icon v-if="slotProp.checked"></nt-moon-icon>
+        <nt-sun-icon v-else></nt-sun-icon>
+      </template>
+    </nt-switch>
+  </template>
+  </textarea>
+  <template #preview>
+    <Switch v-model="open">
+      <template #action="slotProp">
+        <MoonIcon v-if="slotProp.checked"></MoonIcon>
+        <SunIcon v-else></SunIcon>
+      </template>
+    </Switch>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Switch Props
@@ -71,3 +98,10 @@
 | -------------------- | ----------------------------- | ------------ |
 | `--nt-switch-height` | `20px`                        | 开关按钮高度 |
 | `--nt-switch-width`  | `var(--nt-switch-height) * 2` | 开关按钮宽度 |
+
+### Switch Slots
+
+<!-- prettier-ignore -->
+| 名称 | 描述 | 插槽参数 |
+| --- | --- | --- |
+| `action` | 开关操作按钮内容 | `{ checked: boolean }` |

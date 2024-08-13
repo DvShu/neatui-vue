@@ -22,6 +22,8 @@ export { default as CloseIcon } from './components/icon/Close.vue';
 export { default as MoreIcon } from './components/icon/More.vue';
 export { default as DArrowLeft } from './components/icon/DArrowLeft.vue';
 export { default as DArrowRight } from './components/icon/DArrowRight.vue';
+export { default as SunIcon } from './components/icon/Sun.vue';
+export { default as MoonIcon } from './components/icon/Moon.vue';
 
 export { default as Input } from './components/Input.vue';
 export { default as Button } from './components/Button.vue';
