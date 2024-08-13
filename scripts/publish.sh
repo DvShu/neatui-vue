@@ -31,8 +31,6 @@ if [ "$1" = "push" ]; then
       exit 1
   fi
 
-  echo "开始提交"
-
   # 提交到 dev 分支, 然后 squash 合并并提交到 main 分支
   git add .
   git commit -m "$commit_message"
