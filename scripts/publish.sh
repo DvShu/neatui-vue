@@ -41,9 +41,15 @@ if [ "$1" = "push" ]; then
   git merge dev -m "new version"
   git push origin main
 
-  echo "-----"
+  echo " "
   echo -e "${GREEN}push success${RESET}"
-  echo "-----"
 elif [ "$1" = "pull" ]; then
-  echo "pull"
+  git pull origin main
+  pnpm lib:build
+  npm publish --registry https://registry.npmjs.org/
+  git checkout dev
+  git merge main
+
+  echo " "
+  echo -e "${GREEN}publish success${RESET}"
 fi
