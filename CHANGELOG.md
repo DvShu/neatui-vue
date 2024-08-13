@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.14.3](https://github.com/DvShu/neatui-vue/compare/v0.14.2...v0.14.3) (2024-08-13)
+
+
+### Bug Fixes
+
+* **MoonIcon:** 增加主题按钮 moon ([81d6c97](https://github.com/DvShu/neatui-vue/commit/81d6c9753cae89ed68ed468071129be2c7df8211))
+* **SunIcon:** 增加主题按钮 sun ([81d6c97](https://github.com/DvShu/neatui-vue/commit/81d6c9753cae89ed68ed468071129be2c7df8211))
+* **Switch:** 开关按钮增加替换 action 内容 ([81d6c97](https://github.com/DvShu/neatui-vue/commit/81d6c9753cae89ed68ed468071129be2c7df8211))
+
 ## [0.14.2](https://github.com/DvShu/neatui-vue/compare/v0.14.1...v0.14.2) (2024-08-13)
 
 
