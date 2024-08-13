@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.14.2](https://github.com/DvShu/neatui-vue/compare/v0.14.1...v0.14.2) (2024-08-13)
+
+
+### Bug Fixes
+
+* **Input:** 输入框强行转换为字符串 ([3e10b1b](https://github.com/DvShu/neatui-vue/commit/3e10b1be4b1a457734f8a38caec4b2b7f4c647db))
+* **Table:** 优化列解析, 固定列支持自动识别 ([6c9f950](https://github.com/DvShu/neatui-vue/commit/6c9f950b5f376f6297694b5634de0983fe525f38))
+* **Table:** 表格增加设置单元格样式 ([6c9f950](https://github.com/DvShu/neatui-vue/commit/6c9f950b5f376f6297694b5634de0983fe525f38))
+
 ## [0.14.1](https://github.com/DvShu/neatui-vue/compare/v0.14.0...v0.14.1) (2024-08-09)
 
 
