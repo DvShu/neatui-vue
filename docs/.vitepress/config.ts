@@ -91,6 +91,10 @@ export default defineConfig({
             link: '/components/input',
           },
           {
+            text: 'MdInput 输入框',
+            link: '/components/mdinput',
+          },
+          {
             text: 'Checkbox 复选框',
             link: '/components/checkbox',
           },

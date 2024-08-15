@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { onMounted, ref, nextTick } from 'vue';
 import Dialog from './Dialog.vue';
-import Input from '../Input.vue';
+import Input from '../input/Input.vue';
 
 const value = ref('');
 
