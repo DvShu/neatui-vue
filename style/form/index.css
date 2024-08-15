@@ -35,9 +35,11 @@
   color: var(--nt-error-color, #ed3f13);
   padding-top: 3px;
 }
-.nt-form-item.is-error .nt-input {
+.nt-form-item.is-error .nt-input,
+.nt-form-item.is-error .nt-md-input .nt-md-input__inner {
   border-color: var(--nt-error-color, #ed3f13);
 }
+.nt-form-item .nt-md-input,
 .nt-form-item .nt-input {
   width: 100%;
 }

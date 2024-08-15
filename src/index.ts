@@ -25,7 +25,8 @@ export { default as DArrowRight } from './components/icon/DArrowRight.vue';
 export { default as SunIcon } from './components/icon/Sun.vue';
 export { default as MoonIcon } from './components/icon/Moon.vue';
 
-export { default as Input } from './components/Input.vue';
+export { default as Input } from './components/input/Input.vue';
+export { default as MdInput } from './components/input/MdInput.vue';
 export { default as Button } from './components/Button.vue';
 export { default as Checkbox } from './components/checkbox/Checkbox.vue';
 export { default as CheckboxGroup } from './components/checkbox/CheckboxGroup.vue';

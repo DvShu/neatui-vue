@@ -39,6 +39,7 @@ import '../../../style/page-header';
 import '../../../style/tag';
 import '../../../style/pagination';
 import '../../../style/tanstack-table';
+import '../../../style/md-input';
 
 export default {
   extends: DefaultTheme,

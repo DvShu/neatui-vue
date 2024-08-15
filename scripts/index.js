@@ -68,7 +68,7 @@ async function createComponentTemplate(name) {
     '<script setup>',
     `  import { ${name} } from "../../src"`,
     '</script>\r\n',
-    '### 基础用法\r\n',
+    '### 使用\r\n',
     '基础用法\r\n',
     '## API\r\n',
     `### ${name} Props\r\n`,
