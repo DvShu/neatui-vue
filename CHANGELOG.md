@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/DvShu/neatui-vue/compare/v0.14.3...v0.15.0) (2024-08-15)
+
+
+### Features
+
+* **MdInput:** Material 风格输入框[D[D[D[D[D[D[D[D[[3~[3~[3~[3~[3~[3~[C[C[C[C[C[风格输入框 ([77a9bbc](https://github.com/DvShu/neatui-vue/commit/77a9bbc07a58de99284a9f250a7a4ff2c3ad9687))
+
 ## [0.14.3](https://github.com/DvShu/neatui-vue/compare/v0.14.2...v0.14.3) (2024-08-13)
 
 
