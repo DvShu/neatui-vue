@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/DvShu/neatui-vue/compare/v0.15.0...v0.16.0) (2024-08-22)
+
+
+### Features
+
+* **QrCode:** 新增二维码中间插入图标 ([a1be2db](https://github.com/DvShu/neatui-vue/commit/a1be2db17d3effc7fe02c0d724e0c190f28d5fc6))
+
 ## [0.15.0](https://github.com/DvShu/neatui-vue/compare/v0.14.3...v0.15.0) (2024-08-15)
 
 
