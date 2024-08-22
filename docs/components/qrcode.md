@@ -22,18 +22,29 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-qrcode text="Hello World" fill="#4998f4" size="120"></nt-qrcode>
+<nt-qrcode text="Hello World" fill="#4998f4" :size="120"></nt-qrcode>
 </textarea>
 </CodePreview></ClientOnly>
+
+### 图标
+
+可以将 `logo` 放入二维码
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+    <nt-qrcode text="Hello World" icon-src="/neatui-vue/img_loading.png"></nt-qrcode>
+  </textarea>
+  </CodePreview>
+</ClientOnly>
 
 ## API
 
 ### Qrcode Props
 
-| 参数     | 说明                             | 类型     | 默认值    |
-| -------- | -------------------------------- | -------- | --------- |
-| `text`   | 二维码内容                       | `string` | —         |
-| `fill`   | 二维码颜色                       | `string` | `#000000` |
-| `size`   | 二维码大小                       | `string` | `100`     |
-| `level`  | 二维码容错率, `L`、`M`、`Q`、`H` | `string` | `L`       |
-| `margin` | 二维码边距                       | `number` | `0`       |
+| 参数    | 说明                             | 类型     | 默认值    |
+| ------- | -------------------------------- | -------- | --------- |
+| `text`  | 二维码内容                       | `string` | —         |
+| `fill`  | 二维码颜色                       | `string` | `#000000` |
+| `size`  | 二维码大小                       | `string` | `100`     |
+| `level` | 二维码容错率, `L`、`M`、`Q`、`H` | `string` | `M`       |
