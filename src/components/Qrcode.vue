@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="$canvas" width="100" height="100"</canvas>
+  <canvas ref="$canvas" width="100" height="100"></canvas>
 </template>
 
 <script setup lang="ts">
@@ -19,14 +19,13 @@ const props = withDefaults(
     fill?: string;
     /** 二维码纠错等级, L、M、Q、H */
     level?: string;
-    /** 二维码边距 */
-    margin?: number;
+    iconSrc?: string;
   }>(),
   {
     size: 100,
-    fill: '#000',
-    level: 'L',
-    margin: 0,
+    fill: '#000000',
+    level: 'M',
+    iconSrc: undefined,
   },
 );
 
@@ -34,14 +33,18 @@ onMounted(() => {
   qrcodeRender = new QRCodeRender({
     size: props.size,
     fill: props.fill,
-    level: props.level as any,
-    margin: props.margin,
+    level: props.level as 'L',
     renderFn: renderToCanvas,
     text: props.text,
     el: $canvas.value,
+    icon: props.iconSrc
+      ? {
+          src: props.iconSrc,
+        }
+      : undefined,
   });
   if (props.text != null) {
-    console.log(qrcodeRender.render());
+    qrcodeRender.render();
   }
 });
 
@@ -49,7 +52,7 @@ watch(
   () => props.text,
   (newText) => {
     if (newText != null) {
-      qrcodeRender.addData(newText);
+      qrcodeRender.resetData(newText);
     }
   },
 );

@@ -101,7 +101,7 @@ function calculateSpan(
       header.id = random(6) as string;
     }
     if (header.fixed != null) {
-      const widNum = parseInt(`${header.width || 0}`);
+      const widNum = Number.parseInt(`${header.width || 0}`);
       if (header.fixed === 'left') {
         leftFixed.push([header.id as string, widNum]);
       } else if (header.fixed === 'right') {
