@@ -11,7 +11,7 @@
     "docs:preview": "vitepress preview docs",
     "inspect:eslint": "eslint --inspect-config",
     "push": "pwsh scripts/publish.ps1 push",
-    "publish": "./scripts/publish.ps1 publish"
+    "pull": "pwsh scripts/publish.ps1 publish"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
