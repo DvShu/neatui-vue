@@ -40,6 +40,7 @@ import '../../../style/tag';
 import '../../../style/pagination';
 import '../../../style/tanstack-table';
 import '../../../style/md-input';
+import '../../../style/virtual-list';
 
 export default {
   extends: DefaultTheme,
