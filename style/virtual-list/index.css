@@ -1,9 +1,14 @@
 .nt-virtual-list {
-  height: 100%;
+  max-height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  position: relative;
 }
-
+.nt-virtual-content {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 .nt-virtual-item {
   overflow: hidden;
 }
