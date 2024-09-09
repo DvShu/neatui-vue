@@ -1,5 +1,5 @@
 <template>
-  <div class="nt-virtual-list" ref="$list">
+  <div class="nt-virtual-list" ref="$list" @scroll="handleListScroll">
     <!-- 占位元素, 用于撑开滚动条，达到滚动效果 -->
     <div class="nt-virtual-placeholder" ref="$placeholder"></div>
     <!-- 内容元素, 用于显示列表项 -->
@@ -60,6 +60,15 @@ function renderData() {
       startIndex + visibleCount,
     ) as any[];
   }
+}
+
+function handleListScroll() {
+  debounce(() => {
+    if (loading) return;
+    loading = true;
+    renderData(); // 重新渲染数据
+    loading = false;
+  }, 150)();
 }
 
 onMounted(() => {
