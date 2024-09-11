@@ -21,7 +21,8 @@ if ($Cmd -eq "push") {
   git merge dev -m "new version"
   git push origin main
 
-  Write-Host $Message
+  Write-Host " "
+  Write-Host "提交成功" -ForegroundColor Green
 } elseif (($Cmd -eq "pull") -or ($Cmd -eq "publish")) {
   git pull origin main
   pnpm lib:build

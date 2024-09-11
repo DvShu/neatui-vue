@@ -71,3 +71,4 @@ export { default as Loading } from './directives/loading';
 export { default as PageHeader } from './components/PageHeader.vue';
 export { default as Tag } from './components/Tag.vue';
 export { default as Pagination } from './components/Pagination.vue';
+export { default as VirtualList } from "./components/VirtualList.vue";

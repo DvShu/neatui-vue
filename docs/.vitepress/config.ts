@@ -165,6 +165,10 @@ export default defineConfig({
             link: '/components/list',
           },
           {
+            text: 'VirtualList 虚拟列表',
+            link: '/components/virtuallist',
+          },
+          {
             text: 'Tabs 标签页',
             link: '/components/tabs',
           },

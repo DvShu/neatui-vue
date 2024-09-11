@@ -237,3 +237,7 @@
 select {
   appearance: auto;
 }
+
+.virtual-list-demo-container {
+  height: 240px;
+}
