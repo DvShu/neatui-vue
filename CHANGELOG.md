@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.17.0](https://github.com/DvShu/neatui-vue/compare/v0.16.0...v0.17.0) (2024-09-11)
+
+
+### Features
+
+* **VirtualList:** 初始渲染 ([fa0f3a8](https://github.com/DvShu/neatui-vue/commit/fa0f3a803896118e6e878608a62877e17e50af15))
+* **VirtualList:** 完善功能 ([fc0da47](https://github.com/DvShu/neatui-vue/commit/fc0da47069fad48b41a58de02cbaea729aeb724e))
+* **VirtualList:** 虚拟列表 ([df5e027](https://github.com/DvShu/neatui-vue/commit/df5e027c05aade43aa63759bbaac39ad4c89b70f))
+* **Virtual:** 虚拟列表模板 ([6f82190](https://github.com/DvShu/neatui-vue/commit/6f82190fb645bad3e8858ccb57719d07915ad356))
+
 ## [0.16.0](https://github.com/DvShu/neatui-vue/compare/v0.15.0...v0.16.0) (2024-08-22)
 
 
