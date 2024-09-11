@@ -1,24 +1,24 @@
 <template>
-  <div class="nt-virtual-list" ref="$list" @scroll="handleListScroll">
-    <!-- 占位元素, 用于撑开滚动条，达到滚动效果 -->
-    <div class="nt-virtual-placeholder" ref="$placeholder"></div>
-    <!-- 内容元素, 用于显示列表项 -->
-    <div class="nt-virtual-content" ref="$itemContent">
-      <!-- 列表项 -->
-      <div
-        v-for="(item, index) in visibleData"
-        :style="{ height: props.itemSize + 'px' }"
-        :key="keyField != null ? (item as any)[keyField] : index"
-        :class="['nt-virtual-item', itemClass]"
-      >
-        <slot :item="item"></slot>
+  <div class="nt-virtual-list" ref="$list" @scroll.passive="handleScroll">
+    <div :style="{ height: `${totalSize}px` }">
+      <div :style="{ transform: `translate3d(0px, ${startOffset}px, 0px)` }">
+        <slot name="render" :data="visibleData">
+          <!-- 列表项 -->
+          <div
+            v-for="(item, index) in visibleData"
+            :style="{ height: props.itemSize + 'px' }"
+            :key="keyField != null ? (item as any)[keyField] : index"
+            :class="['nt-virtual-item', itemClass]"
+          >
+            <slot :item="item"></slot>
+          </div>
+        </slot>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts" generic="T">
 import { onMounted, ref } from 'vue';
-import { debounce } from 'ph-utils/web';
 
 const props = withDefaults(
   defineProps<{
@@ -29,58 +29,65 @@ const props = withDefaults(
     itemClass?: string;
     /** 选项 key 的字段名, 用于 v-for 的 key */
     keyField?: string;
+    /** 缓冲区数量，列表会在上下多渲染额外的项 */
+    buffer?: number;
   }>(),
   {
     itemClass: '',
+    buffer: 2,
   },
 );
 
-/** 可视区域内能显示的数据总数 */
-let visibleCount = 0;
-/** 是否正在处理数据 */
-let loading = false;
 const $list = ref<HTMLDivElement>();
-const $itemContent = ref<HTMLDivElement>();
-const $placeholder = ref<HTMLDivElement>();
+
 /** 实际显示的数据列表 */
 const visibleData = ref<T[]>([]);
+/** 容器总高度 */
+const totalSize = ref(0);
+/** 滑动便宜 */
+const startOffset = ref(0);
 
-function renderData() {
+/** 可视区域能够展示的最大元素个数 */
+let numVisible = 0;
+
+/** 滑动延迟处理，滑动完成后，延迟处理更新数据，避免频繁触发数据更新 */
+let _t = -1;
+
+function updateVisibleItems() {
   if ($list.value != null) {
-    // 计算可视区域数据的开始索引
-    const startIndex = Math.floor($list.value.scrollTop / props.itemSize);
-    if ($itemContent.value != null) {
-      // 开始项距离容器顶部的距离, 保证在滚动时数据一直在可视区域内
-      const top = `${startIndex * props.itemSize}px`;
-      $itemContent.value.style.top = top;
-    }
+    // 当前滚动位置
+    const scrollTop = $list.value.scrollTop;
+    /** 可视区域开始索引 */
+    let startIndex = Math.floor(scrollTop / props.itemSize);
+    /** 上缓冲区起始索引 */
+    let topStartIndex = Math.max(0, startIndex - props.buffer);
+    /** 下缓冲区结束索引 */
+    const endIndex = Math.min(
+      props.items.length,
+      startIndex + numVisible + props.buffer,
+    );
+    // 偏移量, 当滑动位置是某一项的一部分的时候,计算已经滚动的那一部分距离
+    let offset = scrollTop - (scrollTop % props.itemSize);
     // 生成可视区域数据
-    visibleData.value = props.items.slice(
-      startIndex,
-      startIndex + visibleCount,
-    ) as any[];
+    visibleData.value = props.items.slice(topStartIndex, endIndex) as any[];
+    /** 当前显示index-缓冲区的index就是缓冲区数量 */
+    startOffset.value = offset - (startIndex - topStartIndex) * props.itemSize;
   }
 }
 
-function handleListScroll() {
-  debounce(() => {
-    if (loading) return;
-    loading = true;
-    renderData(); // 重新渲染数据
-    loading = false;
-  }, 150)();
+function handleScroll() {
+  cancelAnimationFrame(_t);
+  _t = requestAnimationFrame(() => {
+    updateVisibleItems(); // 重新渲染数据
+  });
 }
 
 onMounted(() => {
+  totalSize.value = props.itemSize * props.items.length;
   if ($list.value != null) {
-    visibleCount = Math.ceil($list.value.clientHeight / props.itemSize);
-
-    if ($placeholder.value != null) {
-      const height = props.itemSize * props.items.length;
-      $placeholder.value.style.height = `${height}px`;
-    }
-
-    renderData(); // 初始化渲染数据
+    let rect = $list.value.getBoundingClientRect();
+    numVisible = Math.ceil(rect.height / props.itemSize);
+    updateVisibleItems(); // 初始化渲染数据
   }
 });
 </script>

@@ -79,7 +79,6 @@ onMounted(async () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(preCode, 'text/html');
         const children = doc.body.children;
-
         for (let i = 0, len = children.length; i < len; i++) {
           if (children[i] != null) {
             fragment.appendChild(children[i]);
