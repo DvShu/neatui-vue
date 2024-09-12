@@ -41,6 +41,7 @@ import '../../../style/pagination';
 import '../../../style/tanstack-table';
 import '../../../style/md-input';
 import '../../../style/virtual-list';
+import '../../../style/theme-button';
 
 export default {
   extends: DefaultTheme,

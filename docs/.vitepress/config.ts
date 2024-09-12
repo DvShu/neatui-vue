@@ -76,6 +76,10 @@ export default defineConfig({
             text: 'Icon 图标',
             link: '/components/icon',
           },
+          {
+            text: 'Theme 主题切换',
+            link: '/components/theme',
+          },
         ],
       },
       {
