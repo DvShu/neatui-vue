@@ -20,12 +20,12 @@ createApp(App).use(router).mount('#app');
 :::
 
 <script setup>
-  import { ThemeButton } from '../../src'
+  import { ThemeButton, ThemeSelect } from '../../src'
 </script>
 
 ### 基本使用
 
-通过按钮切换主题模式
+提供多种风格的主题切换按钮: 按钮、下拉选择、单选按钮组、开关
 
 <ClientOnly>
   <CodePreview>
@@ -38,6 +38,7 @@ createApp(App).use(router).mount('#app');
   </textarea>
   <template #preview>
     <ThemeButton></ThemeButton>
+    <ThemeSelect class="ml-10"></ThemeSelect>
   </template>
   </CodePreview>
 </ClientOnly>

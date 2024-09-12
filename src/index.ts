@@ -74,3 +74,4 @@ export { default as Pagination } from './components/Pagination.vue';
 export { default as VirtualList } from './components/VirtualList.vue';
 
 export { default as ThemeButton } from './components/theme/ThemeButton.vue';
+export { default as ThemeSelect } from './components/theme/ThemeSelect.vue';

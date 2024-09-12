@@ -1,4 +1,6 @@
 .nt-theme-btn {
+  --nt-btn-background: transparent;
+  --nt-btn-hover-background: transparent;
   --nt-btn-text-color: rgb(156, 163, 175);
   --nt-btn-hover-text-color: #666666;
   width: var(--nt-form-edit-height, 32px);
@@ -6,10 +8,6 @@
   font-size: 20px;
 }
 
-@media (prefers-color-scheme: dark) or (html.dark) {
-  .nt-theme-btn {
-    --nt-btn-border-color: #ffffff;
-    --nt-btn-background: transparent;
-    --nt-btn-text-color: red;
-  }
+html.dark .nt-theme-btn {
+  --nt-btn-hover-text-color: #ffffff;
 }

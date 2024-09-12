@@ -42,6 +42,7 @@ import '../../../style/tanstack-table';
 import '../../../style/md-input';
 import '../../../style/virtual-list';
 import '../../../style/theme-button';
+import '../../../style/theme-select';
 
 export default {
   extends: DefaultTheme,
