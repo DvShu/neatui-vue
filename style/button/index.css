@@ -1,9 +1,9 @@
 /* 默认按钮，按钮的基础样式 */
 .nt-btn {
   /* 按钮的文字颜色 */
-  --bt-btn-text-color: #ffffff;
-  --nt-btn-hover-text-color: var(--bt-btn-text-color);
-  --nt-btn-active-text-color: var(--bt-btn-text-color);
+  --nt-btn-text-color: #ffffff;
+  --nt-btn-hover-text-color: var(--nt-btn-text-color);
+  --nt-btn-active-text-color: var(--nt-btn-text-color);
   /* 按钮的背景色 */
   /* 按钮的边框颜色 */
   --nt-btn-border-color: var(--nt-primary-color, #52c41a);
@@ -30,7 +30,7 @@
   height: var(--nt-form-edit-height, 32px);
   border-radius: 3px;
   font-size: 14px;
-  color: var(--bt-btn-text-color);
+  color: var(--nt-btn-text-color);
   background: var(--nt-btn-background);
   border: 1px solid var(--nt-btn-border-color);
   transition:
@@ -76,7 +76,7 @@
 
 .nt-btn-normal {
   /* 按钮的文字颜色 */
-  --bt-btn-text-color: rgba(0, 0, 0, 0.65);
+  --nt-btn-text-color: rgba(0, 0, 0, 0.65);
   /* 按钮的背景色 */
   --nt-btn-background: #fff;
   /* 按钮的边框颜色 */
@@ -126,14 +126,14 @@
   padding: 5px;
 }
 .nt-btn-primary.nt-btn-text {
-  --bt-btn-text-color: var(--nt-primary-color, #52c41a);
+  --nt-btn-text-color: var(--nt-primary-color, #52c41a);
   --nt-btn-hover-text-color: var(--nt-primary-color-light1, #31890a);
   --nt-btn-active-text-color: var(--nt-primary-color-dark1, #31890a);
 }
 
 .nt-btn-ghost {
   /* 按钮的颜色 */
-  --bt-btn-text-color: var(--nt-btn-border-color);
+  --nt-btn-text-color: var(--nt-btn-border-color);
   /* 按钮的背景色 */
   --nt-btn-background: transparent;
   --nt-btn-hover-background: transparent;
