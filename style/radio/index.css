@@ -12,7 +12,6 @@
 }
 
 .nt-radio__label {
-  color: var(--nt-radio-label-color);
   transition: color 0.3s ease-in-out;
   margin-left: 5px;
 }
@@ -98,9 +97,7 @@
 .is-checked.nt-radio--button .nt-radio__label {
   background-color: var(--nt-radio-checked-color);
   color: #fff;
-  border-top-color: var(--nt-radio-checked-color);
-  border-bottom-color: var(--nt-radio-checked-color);
-  border-right-color: #fff;
+  border-color: var(--nt-radio-checked-color);
 }
 .nt-radio-group .nt-radio--button:not(:first-child) {
   margin-left: 0;

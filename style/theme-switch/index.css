@@ -1,0 +1,9 @@
+.nt-theme-switch.nt-switch--checked {
+  background-color: rgba(101, 117, 113, 0.16);
+  border-color: #3c3f44;
+}
+
+.nt-theme-switch.nt-switch--checked .nt-switch-action {
+  background-color: #000000;
+  color: #ffffff;
+}

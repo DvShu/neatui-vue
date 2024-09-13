@@ -1,3 +1,5 @@
+import exp from 'constants';
+
 export type { ColumnOption } from './components/table/Table.vue';
 
 export { default as BaseIcon } from './components/icon/Base.vue';
@@ -24,6 +26,7 @@ export { default as DArrowLeft } from './components/icon/DArrowLeft.vue';
 export { default as DArrowRight } from './components/icon/DArrowRight.vue';
 export { default as SunIcon } from './components/icon/Sun.vue';
 export { default as MoonIcon } from './components/icon/Moon.vue';
+export { default as ThemeDefaultIcon } from './components/icon/ThemeDefault.vue';
 
 export { default as Input } from './components/input/Input.vue';
 export { default as MdInput } from './components/input/MdInput.vue';
@@ -75,3 +78,5 @@ export { default as VirtualList } from './components/VirtualList.vue';
 
 export { default as ThemeButton } from './components/theme/ThemeButton.vue';
 export { default as ThemeSelect } from './components/theme/ThemeSelect.vue';
+export { default as ThemeSwitch } from './components/theme/ThemeSwitch.vue';
+export { default as ThemeRadio } from './components/theme/ThemeRadio.vue';

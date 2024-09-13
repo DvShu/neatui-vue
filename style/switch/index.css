@@ -1,33 +1,40 @@
 .nt-switch {
   --nt-switch-height: 22px;
-  --nt-switch-width: calc(var(--nt-switch-height) * 2);
+  --nt-switch-width: 40px;
   display: inline-flex;
   width: var(--nt-switch-width);
   height: var(--nt-switch-height);
   align-items: center;
   justify-content: flex-start;
-  background-color: #d9d9d9;
+  background-color: #dcdfe6;
   border-radius: calc(var(--nt-switch-height) / 2);
   padding: 2px;
   position: relative;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   vertical-align: middle;
+  border: 1px solid #c2c2c2;
+}
+
+.nt-switch:hover,
+.nt-switch.nt-switch--checked:hover {
+  border-color: var(--nt-primary-color, #722ed1);
 }
 
 .nt-switch--checked {
-  background-color: var(--nt-primary-color, #52c41a);
+  background-color: var(--nt-primary-color, #722ed1);
+  border-color: var(--nt-primary-color, #722ed1);
 }
 
 .nt-switch-action {
   position: absolute;
-  width: calc(var(--nt-switch-height) - 4px);
+  width: calc(var(--nt-switch-height) - 6px);
   top: 2px;
   left: 2px;
   bottom: 2px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 50%;
-  transition: left 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,12 +44,12 @@
 
 .nt-switch-text {
   color: #fff;
-  padding-left: calc(var(--nt-switch-width) - 18px);
+  padding-left: calc(var(--nt-switch-width) - 20px);
   transition: padding-left 0.3s ease-in-out;
 }
 
 .nt-switch--checked .nt-switch-action {
-  left: calc(var(--nt-switch-width) - var(--nt-switch-height) + 2px);
+  left: calc(var(--nt-switch-width) - var(--nt-switch-height) + 3px);
 }
 .nt-switch--checked .nt-switch-text {
   padding-left: 5px;

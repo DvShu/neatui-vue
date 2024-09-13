@@ -43,6 +43,8 @@ import '../../../style/md-input';
 import '../../../style/virtual-list';
 import '../../../style/theme-button';
 import '../../../style/theme-select';
+import '../../../style/theme-switch';
+import '../../../style/theme-radio';
 
 export default {
   extends: DefaultTheme,
