@@ -45,6 +45,7 @@ import '../../../style/theme-button';
 import '../../../style/theme-select';
 import '../../../style/theme-switch';
 import '../../../style/theme-radio';
+import '../../../style/color-picker';
 
 export default {
   extends: DefaultTheme,

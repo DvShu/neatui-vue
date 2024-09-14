@@ -29,16 +29,28 @@ createApp(App).use(router).mount('#app');
     MoonIcon,
     ThemeDefaultIcon,
     Radio,
-    RadioGroup
+    RadioGroup,
+    ThemeColor
   } from '../../src';
+  import SourceCode from '../../src/app_components/SourceCode.vue'
   import { ref, watch } from 'vue';
   import { getTheme, applyTheme } from 'ph-utils/theme'
 
   const theme = ref(getTheme());
+  const code = ref(':root { color: red }')
 
-  watch(theme, (val) => {
-    applyTheme(val).then();
+  watch(theme, async (val) => {
+    await applyTheme(val);
   });
+
+  function handleColorChange() {
+    const $style = document.getElementById('color-theme-style');
+    if ($style != null) {
+      const tmpCode = $style.innerHTML;
+      code.value = tmpCode;
+      console.log(code.value)
+    }
+  }
 </script>
 
 ### 基本使用
@@ -122,3 +134,33 @@ initTheme().then();
   </template>
   </CodePreview>
 </ClientOnly>
+
+### 更改主题色
+
+除了修改主题风格，还可以修改主题色，通过修改 `ThemeColor` 来实现。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html" v-pre>
+  <nt-theme-color></nt-theme-color>
+  </textarea>
+  <template #preview>
+    <ThemeColor @change='handleColorChange'></ThemeColor>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+生成的主题色代码如下:
+
+```css-vue
+{{ code }}
+```
+
+> 跟主题模式一样，如果想要再下次启动时也应用选择的主题色，需要在应用启动时，调用 `initColorTheme()` 函数
+
+```js
+// main.js
+import { initColorTheme } from 'ph-utils/theme';
+
+initColorTheme().then();
+```

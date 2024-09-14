@@ -122,6 +122,10 @@ export default defineConfig({
             text: 'DatePickerOri 日期选择',
             link: '/components/datepickerori',
           },
+          {
+            text: 'ColorPicker 颜色选择',
+            link: '/components/colorpicker',
+          },
         ],
       },
       {
