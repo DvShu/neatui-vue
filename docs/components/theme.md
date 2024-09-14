@@ -37,7 +37,7 @@ createApp(App).use(router).mount('#app');
   import { getTheme, applyTheme } from 'ph-utils/theme'
 
   const theme = ref(getTheme());
-  const code = ref(':root { color: red }')
+  const code = ref(``)
 
   watch(theme, async (val) => {
     await applyTheme(val);
@@ -46,9 +46,9 @@ createApp(App).use(router).mount('#app');
   function handleColorChange() {
     const $style = document.getElementById('color-theme-style');
     if ($style != null) {
-      const tmpCode = $style.innerHTML;
+      let tmpCode = $style.innerHTML;
+      tmpCode = tmpCode.replace('{', ' {\r\n  ').replaceAll(';', ';\r\n  ').replace('  }', '}')
       code.value = tmpCode;
-      console.log(code.value)
     }
   }
 </script>
@@ -152,9 +152,19 @@ initTheme().then();
 
 生成的主题色代码如下:
 
-```css-vue
-{{ code }}
-```
+<ClientOnly>
+<SourceCode :source-code="code"><textarea lang="css">
+:root {
+  --nt-primary-color: #722ed1;
+  --nt-primary-color-light1: #9254de;
+  --nt-primary-color-light2: #b37feb;
+  --nt-primary-color-light3: #d3adf7;
+  --nt-primary-color-light4: #efdbff;
+  --nt-primary-color-light5: #f9f0ff;
+  --nt-primary-color-dark1: #531dab;
+}
+</textarea></SourceCode>
+</ClientOnly>
 
 > 跟主题模式一样，如果想要再下次启动时也应用选择的主题色，需要在应用启动时，调用 `initColorTheme()` 函数
 
