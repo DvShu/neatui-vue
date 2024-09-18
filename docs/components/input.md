@@ -64,6 +64,18 @@
   </CodePreview>
 </ClientOnly>
 
+### 禁用状态
+
+通过 `disabled` 属性设置输入框为禁用状态。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-input placeholder="请输入内容" disabled></nt-input>
+  </textarea>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Input Props

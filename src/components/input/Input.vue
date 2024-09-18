@@ -9,11 +9,13 @@
     :placeholder="placeholder"
     @input="handleInput"
     ref="el"
+    :disabled="isDisabled"
   />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import useDisabled from '../../hooks/useFormDisabled.js';
 
 const el = ref<HTMLInputElement>();
 
@@ -24,15 +26,19 @@ const props = withDefaults(
     autosize?: boolean;
     parser?: (value: string) => string;
     modelValue?: string | number;
+    disabled?: boolean;
   }>(),
   {
     htmlType: 'text',
     placeholder: '',
     autosize: false,
+    disabled: undefined,
   },
 );
 
 const emits = defineEmits(['update:modelValue', 'input']);
+
+const isDisabled = useDisabled(() => props.disabled);
 
 function focus() {
   if (el.value != null) {

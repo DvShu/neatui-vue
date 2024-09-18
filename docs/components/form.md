@@ -62,8 +62,8 @@
     }
   </script>
   <template>
-    <nt-form :model="formFields" :rules="rules">
-      <nt-form-item label="用户名" required name="username">
+    <nt-form :model="formFields" :rules="rules" >
+      <nt-form-item label="用户名" required name="username" >
         <nt-input placeholder="请输入用户名" v-model="formFields.username"></nt-input>
       </nt-form-item>
       <nt-form-item label="密码" required name="password">

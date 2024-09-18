@@ -1,6 +1,8 @@
 :root {
   /* button、input 元素高度 */
   --nt-form-edit-height: 32px;
+  /** 禁用状态颜色 */
+  --nt-disabled-color: #f5f7fa;
   /* 主题(primary)颜色 */
   --nt-primary-color: #722ed1;
   --nt-primary-color-light1: #9254de;
@@ -27,4 +29,7 @@
   --nt-info-color: #999;
   /* 边框颜色 */
   --nt-border-color: #dedede;
+}
+html.dark {
+  --nt-disabled-color: #262727;
 }

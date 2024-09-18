@@ -1,5 +1,3 @@
-import exp from 'constants';
-
 export type { ColumnOption } from './components/table/Table.vue';
 
 export { default as BaseIcon } from './components/icon/Base.vue';
