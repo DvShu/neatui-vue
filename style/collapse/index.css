@@ -3,13 +3,16 @@
   --nt-collapse-border-color: #dedede;
   /* 圆角 */
   --nt-collapse-border-radius: 0px;
+  --nt-collapse-gap: 0px;
+  display: grid;
+  gap: var(--nt-collapse-gap, 0px);
+  grid-template-columns: 1fr;
 }
 
 .nt-collapse-item {
   border-bottom: 1px solid var(--nt-collapse-border-color);
   color: #333;
   font-size: 14px;
-  margin-top: var(--nt-collapse-item-space, 0px);
 }
 .nt-collapse-item:first-child {
   border-top-left-radius: var(--nt-collapse-border-radius, 0px);
@@ -83,4 +86,10 @@
 }
 .nt-collapse--space .nt-collapse-item {
   border-radius: var(--nt-collapse-border-radius, 0px);
+}
+
+/* 网格模式 */
+.nt-collapse--grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: start;
 }

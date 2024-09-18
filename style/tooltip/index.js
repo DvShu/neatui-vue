@@ -1,1 +1,2 @@
-import "./index.css";
+import '../popover/index.css';
+import './index.css';

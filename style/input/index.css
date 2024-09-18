@@ -3,10 +3,10 @@
   outline: none;
   box-sizing: border-box;
   width: var(--nt-input-width);
+  max-width: 100%;
   height: var(--nt-form-edit-height, 32px);
-  border: 1px solid #dedede;
+  border: 1px solid var(--nt-border-color, #dedede);
   transition: border-color 0.3s;
-  background-color: #ffffff;
   text-align: inherit;
   padding: 0 5px;
   border-radius: 3px;
@@ -17,4 +17,8 @@
 }
 .nt-input:focus {
   border-color: var(--nt-primary-color, #52c41a);
+}
+.nt-input:disabled {
+  cursor: not-allowed;
+  background: var(--nt-disabled-color, #f5f7fa);
 }

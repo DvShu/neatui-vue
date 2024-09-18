@@ -1,9 +1,7 @@
 <script lang="ts">
-import { defineComponent, h, PropType, ref, watch } from 'vue';
-import type { VNode } from 'vue';
-import Radio from './Radio.vue';
-import Checkbox from './Checkbox.vue';
-import { random } from 'ph-utils';
+import { defineComponent, h, PropType, ref, toRaw, watch } from 'vue';
+import type { VNode, CSSProperties } from 'vue';
+import { isBlank, random } from 'ph-utils';
 import { format } from 'ph-utils/date';
 
 export interface ColumnOption {
@@ -29,10 +27,9 @@ export interface ColumnOption {
   titleColspan?: number;
   /** th rowspan */
   titleRowspan?: number;
-  /** 设置可选择 */
-  type?: 'radio' | 'checkbox';
-  /** 为 radio，checkbox 设置是否禁用 */
-  disabled?: (row: any) => boolean;
+  id?: string;
+  style?: CSSProperties;
+  class?: string;
 }
 
 export interface DataSortState {
@@ -46,48 +43,106 @@ interface SortOption {
   order: string;
 }
 
-type SorterFnOption = (data: any[]) => any[];
+type SorterFnOption = (
+  data: any[],
+  sortInfo: { order: string; key: string },
+) => any[];
 
 type RowKeyOption = (row: any) => any;
 
-/** 通过配置的 columns 计算表头跨行，跨列 */
-function calculateSpan(headers: ColumnOption[], level = 0): ColumnOption[] {
-  if (!Array.isArray(headers)) {
-    return [];
+function getLeftStart(id: string, left: [string, number][]) {
+  let start = 0;
+  const len = left.length;
+  let isFirst = false;
+  for (let i = 0; i < len; i++) {
+    const item = left[i];
+    if (item[0] === id) {
+      if (i === 0) {
+        isFirst = true;
+      }
+      break;
+    }
+    start += item[1];
   }
+  return { start, isFirst };
+}
 
-  const spans = headers.map((header) => {
+function getRightStart(id: string, right: [string, number][]) {
+  let start = 0;
+  let isFirst = false;
+  const len = right.length;
+  for (let i = len - 1; i >= 0; i--) {
+    const item = right[i];
+    if (item[0] === id) {
+      if (i === len - 1) {
+        isFirst = true;
+      }
+      break;
+    }
+    start += item[1];
+  }
+  return { start, isFirst };
+}
+
+/** 通过配置的 columns 计算表头跨行，跨列 */
+function calculateSpan(
+  headers: ColumnOption[],
+  level = 0,
+  leftFixed: [string, number][],
+  rightFixed: [string, number][],
+): ColumnOption[] {
+  const tmpCols = [];
+  for (let i = 0, len = headers.length; i < len; i++) {
+    const header = headers[i];
+    if (header.id == null) {
+      header.id = header.key || header.title;
+    }
+    if (isBlank(header.id)) {
+      header.id = random(6) as string;
+    }
+    if (header.fixed != null) {
+      const widNum = Number.parseInt(`${header.width || 0}`);
+      if (header.fixed === 'left') {
+        leftFixed.push([header.id as string, widNum]);
+      } else if (header.fixed === 'right') {
+        rightFixed.push([header.id as string, widNum]);
+      }
+    }
     // 如果有子级元素，递归计算
     if (header.children != null) {
       let titleColspan = header.titleColspan;
-      const childrenSpans = calculateSpan(header.children, level + 1);
+      const childrenSpans = calculateSpan(
+        header.children,
+        level + 1,
+        leftFixed,
+        rightFixed,
+      );
       if (titleColspan == null) {
         titleColspan = childrenSpans.reduce(
           (sum, childSpan) => sum + (childSpan.titleColspan || 0),
           0,
         );
       }
-      return {
+      tmpCols.push({
         ...header,
         titleColspan: titleColspan,
         titleRowspan: header.titleRowspan || 1,
         children: childrenSpans,
-      };
+      });
     } else {
       let titleRowspan = header.titleRowspan;
       if (titleRowspan == null) {
         titleRowspan = getMaxDepth(headers);
       }
       // 如果元素没有子级，意味着它占满从当前层级到最底层的所有行
-      return {
+      tmpCols.push({
         ...header,
         titleColspan: header.titleColspan || 1,
         titleRowspan: titleRowspan,
-      };
+      });
     }
-  });
-
-  return spans;
+  }
+  return tmpCols;
 }
 
 // 递归获取最深的层级数
@@ -157,18 +212,59 @@ export default defineComponent({
     },
   },
   emits: ['select-change'],
-  setup(props, { emit }) {
+  setup(props) {
     const sortInfo = ref<SortOption>({
       key: '',
       order: '',
     });
-    const allowSelect = calcAllowSelect(); // 允许选择的列表
     const sourceData = ref(props.data);
-    const parsedColumns = calculateSpan(props.columns, 0);
-    const selectedValues = ref<any[]>([]);
-    /** 复选的半选、全选状态 */
-    const isIndeterminate = ref(false);
-    const checkedAll = ref(false);
+    /** 缓存列样式, 避免每次遍历列都重新计算 */
+    const globalColStyles: Record<string, CSSProperties> = {};
+    /** 左边固定列 */
+    const fixedLeft: [string, number][] = [];
+    /** 右边固定列 */
+    const fixedRight: [string, number][] = [];
+    const isFixedColumn = ref(false);
+    const parsedColumns = calculateSpan(
+      props.columns,
+      0,
+      fixedLeft,
+      fixedRight,
+    );
+    isFixedColumn.value = fixedLeft.length > 0 || fixedRight.length > 0;
+
+    function getCommonStyle(
+      column: ColumnOption,
+      fl: [string, number][],
+      fr: [string, number][],
+    ): CSSProperties {
+      const id = column.id as string;
+      if (id in globalColStyles) {
+        return globalColStyles[id];
+      }
+      const res: CSSProperties = { ...column.style };
+      if (column.width != null) {
+        if (typeof column.width === 'number') {
+          res.width = `${column.width}px`;
+        } else {
+          res.width = column.width;
+        }
+      }
+      if (column.fixed != null) {
+        let startInfo = { start: 0, isFirst: false };
+        if (column.fixed === 'left') {
+          startInfo = getLeftStart(id, fl);
+          res.boxShadow = '-4px 0 4px -4px #d9d9d9 inset';
+          res.left = `${startInfo.start}px`;
+        } else if (column.fixed === 'right') {
+          startInfo = getRightStart(id, fr);
+          res.boxShadow = '4px 0 4px -4px #d9d9d9 inset';
+          res.right = `${startInfo.start}px`;
+        }
+      }
+      globalColStyles[id] = res;
+      return res;
+    }
 
     watch(
       () => props.data,
@@ -177,75 +273,26 @@ export default defineComponent({
       },
     );
 
-    function calcAllowSelect() {
-      let c = [];
-      if (props.columns[0].type === 'checkbox') {
-        for (const d of props.data) {
-          let isDisabled = false;
-          if (props.columns[0].disabled != null) {
-            isDisabled = props.columns[0].disabled(d);
-          }
-          if (!isDisabled && props.rowKey != null) {
-            c.push(props.rowKey(d));
-          }
-        }
-      }
-      return c;
-    }
-
-    function handleSelectionChange(value: any) {
-      const selectType = props.columns[0].type;
-      if (selectType === 'radio') {
-        selectedValues.value = [];
-      }
-      let index = selectedValues.value.indexOf(value);
-      if (index !== -1) {
-        selectedValues.value.splice(index, 1);
-      } else {
-        selectedValues.value.push(value);
-      }
-      if (selectedValues.value.length === 0) {
-        isIndeterminate.value = false;
-        checkedAll.value = false;
-      } else if (selectedValues.value.length === allowSelect.length) {
-        checkedAll.value = true;
-        isIndeterminate.value = false;
-      } else {
-        checkedAll.value = false;
-        isIndeterminate.value = true;
-      }
-      emit('select-change', [...selectedValues.value]);
-    }
-
-    function handleChangeAll(v: boolean) {
-      if (v === true) {
-        selectedValues.value = [...allowSelect];
-        checkedAll.value = true;
-      } else {
-        selectedValues.value = [];
-        checkedAll.value = false;
-      }
-      isIndeterminate.value = false;
-      emit('select-change', [...selectedValues.value]);
-    }
-
     function dataSort(
       data: any[],
       sortInfo: SortOption,
-      sorterFn?: (data: any[]) => any[],
+      sorterFn?: (
+        data: any[],
+        sortInfo: { order: string; key: string },
+      ) => any[],
     ) {
       let oriData = [...data];
       if (sorterFn) {
-        return sorterFn(oriData);
+        return sorterFn(oriData, toRaw(sortInfo));
       }
       if (sortInfo.key === '') {
         return oriData;
       }
       return oriData.sort((a, b) => {
         if (sortInfo.order === 'asc') {
-          return a[sortInfo.key] - b[sortInfo.key];
+          return a[sortInfo.key] >= b[sortInfo.key] ? 1 : -1;
         }
-        return b[sortInfo.key] - a[sortInfo.key];
+        return a[sortInfo.key] >= b[sortInfo.key] ? -1 : 1;
       });
     }
 
@@ -278,12 +325,7 @@ export default defineComponent({
       }
     }
 
-    function renderHeadCol(
-      column: ColumnOption,
-      index: number,
-      left: string[],
-      right: string[],
-    ) {
+    function renderHeadCol(column: ColumnOption, index: number) {
       const thAttrs: any = {
         class: {
           'sort-column': column.sorter === true,
@@ -294,39 +336,11 @@ export default defineComponent({
             sortInfo.value.order === 'desc',
           'nt-fixed': column.fixed,
         },
-        style: {},
+        style: getCommonStyle(column, fixedLeft, fixedRight),
         colspan: column.titleColspan,
         rowspan: column.titleRowspan,
       };
 
-      if (column.fixed) {
-        if (column.fixed === 'left') {
-          thAttrs.style.left =
-            left.length === 0 ? '0' : `calc(${left.join('+')})`;
-        } else {
-          thAttrs.style.right =
-            right.length === 0 ? '0' : `calc(${right.join('+')})`;
-        }
-      }
-
-      if (column.type != null && column.width == null) {
-        column.width = 40;
-      }
-
-      if (column.width) {
-        let colWidth: string = column.width as string;
-        if (typeof column.width === 'number') {
-          colWidth = `${column.width}px`;
-        }
-        thAttrs.style.width = colWidth;
-        if (column.fixed != null) {
-          if (column.fixed === 'left') {
-            left.push(colWidth);
-          } else {
-            right.push(colWidth);
-          }
-        }
-      }
       if (column.sorter === true) {
         thAttrs.onClick = () => {
           handleHeadClick({
@@ -338,50 +352,30 @@ export default defineComponent({
         };
       }
       const colChildren = [];
-      if (column.type != null) {
-        if (column.type === 'checkbox') {
-          colChildren.push(
-            h(
-              'div',
-              {
-                class: 'nt-table-selection-cell',
-              },
-              h(Checkbox, {
-                indeterminate: isIndeterminate.value,
-                checked: checkedAll.value,
-                onChange: handleChangeAll,
-              }),
-            ),
-          );
-        }
-      } else {
-        colChildren.push(h('span', column.title));
-        if (column.sorter === true) {
-          colChildren.push(
-            h('span', { class: 'caret-wrapper' }, [
-              h('span', { class: 'sort-caret ascending' }),
-              h('span', { class: 'sort-caret descending' }),
-            ]),
-          );
-        }
+      colChildren.push(h('span', column.title));
+      if (column.sorter === true) {
+        colChildren.push(
+          h('span', { class: 'caret-wrapper' }, [
+            h('span', { class: 'sort-caret ascending' }),
+            h('span', { class: 'sort-caret descending' }),
+          ]),
+        );
       }
       return h('th', thAttrs, colChildren);
     }
 
     function renderHeadRow(
       columns: ColumnOption[],
-      left: string[],
-      right: string[],
       rowChildren: VNode[],
       children: VNode[],
     ) {
       for (let i = 0, len = columns.length; i < len; i++) {
         const column = columns[i];
-        rowChildren.push(renderHeadCol(column, i, left, right));
+        rowChildren.push(renderHeadCol(column, i));
 
         if (column.children != null) {
           let rChildren: VNode[] = [];
-          renderHeadRow(column.children, left, right, rChildren, children);
+          renderHeadRow(column.children, rChildren, children);
           children.push(h('tr', rChildren));
         }
       }
@@ -390,7 +384,7 @@ export default defineComponent({
     function renderHead() {
       const headTrs: VNode[] = [];
       const rootChildren: VNode[] = [];
-      renderHeadRow(parsedColumns, [], [], rootChildren, headTrs);
+      renderHeadRow(parsedColumns, rootChildren, headTrs);
       headTrs.unshift(h('tr', rootChildren));
       return headTrs;
     }
@@ -399,8 +393,6 @@ export default defineComponent({
       columns: ColumnOption[],
       rowIndex: number,
       rowData: any,
-      left: string[],
-      right: string[],
       rowChildren: VNode[],
       selectionName: string,
     ) {
@@ -422,38 +414,11 @@ export default defineComponent({
           }
           if (rowspan !== 0 && colspan !== 0) {
             const tdAttr: any = {
-              style: {},
-              class: {
-                'nt-fixed': column.fixed,
-              },
+              style: getCommonStyle(column, fixedLeft, fixedRight),
+              class: [column.fixed ? 'nt-fixed' : undefined, column.class],
               colspan,
               rowspan,
             };
-
-            if (column.fixed) {
-              if (column.fixed === 'left') {
-                tdAttr.style.left =
-                  left.length === 0 ? '0' : `${left.join('+')}`;
-              } else {
-                tdAttr.style.right =
-                  right.length === 0 ? '0' : `${left.join('+')}`;
-              }
-            }
-
-            if (column.width) {
-              let colWidth: string = column.width as string;
-              if (typeof column.width === 'number') {
-                colWidth = `${column.width}px`;
-              }
-              tdAttr.style.width = colWidth;
-              if (column.fixed != null) {
-                if (column.fixed === 'left') {
-                  left.push(colWidth);
-                } else {
-                  right.push(colWidth);
-                }
-              }
-            }
 
             if (column.render != null) {
               rowChildren.push(
@@ -461,28 +426,6 @@ export default defineComponent({
               );
             } else if (column.key != null) {
               rowChildren.push(h('td', tdAttr, rowData[column.key]));
-            } else if (column.type != null) {
-              const selectionValue =
-                props.rowKey != null ? props.rowKey(rowData) : '';
-              rowChildren.push(
-                h(
-                  'td',
-                  tdAttr,
-                  h(
-                    'div',
-                    { class: 'nt-table-selection-cell' },
-                    h(column.type === 'radio' ? Radio : Checkbox, {
-                      name: selectionName,
-                      value: selectionValue,
-                      checked: selectedValues.value.includes(selectionValue),
-                      disabled: column.disabled
-                        ? column.disabled(rowData)
-                        : false,
-                      onChange: handleSelectionChange,
-                    }),
-                  ),
-                ),
-              );
             } else {
               rowChildren.push(h('td', tdAttr, ''));
             }
@@ -492,8 +435,6 @@ export default defineComponent({
             column.children,
             rowIndex,
             rowData,
-            left,
-            right,
             rowChildren,
             selectionName,
           );
@@ -508,7 +449,7 @@ export default defineComponent({
       for (let i = 0, len = sourceData.value.length; i < len; i++) {
         const dataItem = sourceData.value[i];
         const $tds: VNode[] = [];
-        renderBodyRow(parsedColumns, i, dataItem, [], [], $tds, selectionName);
+        renderBodyRow(parsedColumns, i, dataItem, $tds, selectionName);
         bodies.push(h('tr', $tds));
       }
       return bodies;
@@ -524,7 +465,9 @@ export default defineComponent({
             class: [
               'nt-table',
               props.stripe ? 'nt-table-stripe' : '',
-              props.tableLayout === 'fixed' ? 'nt-table-fixed' : '',
+              isFixedColumn.value || props.tableLayout === 'fixed'
+                ? 'nt-table-fixed'
+                : '',
               props.border ? 'nt-table-border' : '',
             ],
           },

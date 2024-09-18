@@ -1,29 +1,18 @@
-import vue from 'eslint-plugin-vue';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
-import js from '@eslint/js';
 import globals from 'globals';
+import pluginJs from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import pluginVue, { rules } from 'eslint-plugin-vue';
+import markdown from '@eslint/markdown';
 
 export default [
-  js.configs.recommended,
-  typescriptEslint.configs.recommended,
-  vue.configs['vue3-essential'],
+  { files: ['src/**/*.{js,ts,vue}', 'docs/**/*.md'] },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...pluginVue.configs['flat/essential'],
+  ...markdown.configs.recommended,
   {
-    name: 'neatui-vue',
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      parser: typescriptParser,
-      globals: {
-        ...globals.browser,
-        ...globals.es2021,
-      },
-    },
-    plugins: {
-      vue: vue,
-      '@typescript-eslint': typescriptEslint,
-    },
-    files: ['src/**/*.{ts,vue}'],
-    rules: {},
+    files: ['**/*.vue'],
+    languageOptions: { parserOptions: { parser: tseslint.parser } },
   },
 ];

@@ -24,8 +24,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Ref, computed, inject } from 'vue';
-import { formContext } from './constant';
+import { Ref, computed, inject, provide } from 'vue';
+import { formContext, formItemDisabledContext } from '../../utils/constant';
 
 const props = withDefaults(
   defineProps<{
@@ -39,11 +39,13 @@ const props = withDefaults(
     name?: string;
     /** 表单域验证错误时的提示信息。设置该值会导致表单验证状态变为 error，并显示该错误信息。 */
     error?: string;
+    disabled?: boolean;
   }>(),
   {
     required: undefined,
     error: undefined,
     label: undefined,
+    disabled: undefined,
   },
 );
 
@@ -78,4 +80,6 @@ const isRequired = computed(() => {
   }
   return false;
 });
+
+provide(formItemDisabledContext, () => props.disabled);
 </script>

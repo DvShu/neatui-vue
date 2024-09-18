@@ -7,7 +7,9 @@
     }"
     @click="handleChange"
   >
-    <span class="nt-switch-action"></span>
+    <div class="nt-switch-action">
+      <slot name="action" :checked="checked"></slot>
+    </div>
     <span v-if="checked || uncheckedText" class="nt-switch-text">
       {{ checked ? checkedText || '' : uncheckedText || '' }}
     </span>
@@ -16,7 +18,7 @@
 <script setup lang="ts">
 const checked = defineModel({ default: false });
 
-const emits = defineEmits(['change'])
+const emits = defineEmits(['change']);
 
 withDefaults(
   defineProps<{

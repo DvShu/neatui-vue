@@ -9,8 +9,9 @@
     <div ref="$content"><slot></slot></div>
     <div class="nt-desc-panel-operator" v-if="showMore">
       <Button
-        type="text"
+        type="primary"
         class="nt-desc-panel-btnmore"
+        text
         @click="collapse = !collapse"
       >
         <span>{{ collapse ? '查看更多' : '收起' }}</span>

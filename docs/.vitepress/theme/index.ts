@@ -2,7 +2,7 @@ import type { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import '../../../style/icon';
 import '../../../style/button';
-import '../../../style/tooltip';
+
 import '../../../style/util/transition.css';
 import '../../../style/polygon';
 import '../../../style/vars.css';
@@ -26,7 +26,26 @@ import '../../../style/progress';
 import '../../../style/loading';
 import '../../../style/description-panel';
 import '../../../style/tabbar';
+import '../../../style/popover';
+import '../../../style/tooltip';
 import '../../../style/util/tabs.css';
+import '../../../style/list';
+import '../../../style/dialog';
+import '../../../style/dialog-box';
+import '../../../style/popconfirm';
+import '../../../style/select-ori';
+import '../../../style/date-picker-ori';
+import '../../../style/page-header';
+import '../../../style/tag';
+import '../../../style/pagination';
+import '../../../style/tanstack-table';
+import '../../../style/md-input';
+import '../../../style/virtual-list';
+import '../../../style/theme-button';
+import '../../../style/theme-select';
+import '../../../style/theme-switch';
+import '../../../style/theme-radio';
+import '../../../style/color-picker';
 
 export default {
   extends: DefaultTheme,

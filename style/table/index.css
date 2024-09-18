@@ -44,19 +44,20 @@
   height: 0;
   border: 5px solid transparent;
   position: absolute;
+  border-radius: 3px;
 }
 .nt-table .sort-column {
   cursor: pointer;
 }
 .nt-table .sort-asc .ascending {
-  border-bottom-color: #4998f4;
+  border-bottom-color: var(--nt-primary-color, #52c41a);
 }
 .nt-table .sort-desc .descending {
-  border-top-color: #4998f4;
+  border-top-color: var(--nt-primary-color, #52c41a);
 }
 .nt-table td,
 .nt-table th {
-  padding: 10px 5px;
+  padding: 10px;
   border-bottom: 1px solid #e6e6e6;
 }
 .nt-table th,

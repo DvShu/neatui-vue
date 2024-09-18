@@ -15,7 +15,7 @@
 
 ### 基础用法
 
-当只有一个选项时，可以直接通过 `v-model` 绑定一个 `boolean` 值来控制是否选中；使用 `slot-label` 来重写选项的文字。
+当只有一个选项时，可以直接通过 `v-model` 绑定一个 `boolean` 值来控制是否选中；使用 `slot-default` 来重写选项的文字。
 
 <ClientOnly>
   <CodePreview>
@@ -26,23 +26,19 @@
   </script>
   <template>
     <nt-radio v-model="allowService">
-      <template #label>
-        <span>
-          <span>同意</span>
-          <a href='#'>隐私协议</a>
-        </span>
-      </template>
+      <span>
+        <span>同意</span>
+        <a href='#'>隐私协议</a>
+      </span>
     </nt-radio>
   </template>
   </textarea>
   <template #preview>
     <Radio v-model="allowService">
-      <template #label>
-        <span>
-          <span>同意</span>
-          <a href='#'>隐私协议</a>
-        </span>
-      </template>
+      <span>
+        <span>同意</span>
+        <a href='#'>隐私协议</a>
+      </span>
     </Radio>
   </template>
   </CodePreview>
@@ -55,8 +51,11 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-radio label="禁用" disabled>
+  <nt-radio label="禁用" disabled></nt-radio>
   </textarea>
+  <template #preview>
+    <Radio label="禁用" disabled />
+  </template>
   </CodePreview>
 </ClientOnly>
 
@@ -110,35 +109,6 @@
   </CodePreview>
 </ClientOnly>
 
-### 受控
-
-有时候需要自己手动控制选中状态时，只需要传递一个 `checked` 属性，`true` 选中, `false` 为未选中
-
-<ClientOnly>
-  <CodePreview>
-  <textarea lang="vue">
-  <script setup>
-    import { ref } from 'vue';
-    const allowService = ref(false);
-  </script>
-  <template>
-    <nt-radio label="同意隐私协议" :checked="allowService"></nt-radio>
-    <div class="mt-15">
-      <nt-button @click="allowService = false">未选中</nt-button>
-      <nt-button type="primary" class="ml-10" @click="allowService = true">选中</nt-button>
-    </div>
-  </template>
-  </textarea>
-  <template #preview>
-    <Radio label="同意隐私协议" :checked="allowService"></Radio>
-    <div class="mt-15">
-      <Button @click="allowService = false">未选中</Button>
-      <Button type="primary" class="ml-10" @click="allowService = true">选中</Button>
-    </div>
-  </template>
-  </CodePreview>
-</ClientOnly>
-
 ## API
 
 ### Radio Props
@@ -173,6 +143,6 @@
 
 ### Radio Slots
 
-| 名称    | 说明           |
-| ------- | -------------- |
-| `label` | 自定义文本内容 |
+| 名称      | 说明                |
+| --------- | ------------------- |
+| `default` | 自定义 `label` 内容 |

@@ -3,7 +3,8 @@
     class="nt-collapse"
     :class="{
       'nt-collapse--background': props.background,
-      'nt-collapse--space': props.itemSpace != null,
+      'nt-collapse--space': props.gap != null,
+      'nt-collapse--grid': props.grid,
     }"
     :style="styles"
   >
@@ -11,7 +12,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue';
+import { computed, provide, ref, watch } from 'vue';
 import { collapseContext } from './constant';
 
 const props = withDefaults(
@@ -25,31 +26,37 @@ const props = withDefaults(
     /** 是否带有边框和背景 */
     background?: boolean;
     /** 面板之间的间隔 */
-    itemSpace?: string;
+    gap?: string;
     /** 默认展开的面板 */
     defaultExpandedNames?: (string | number)[];
     /** 边框圆角 */
     borderRadius?: string;
+    modelValue?: (string | number)[];
+    /** 网格模式 */
+    grid?: boolean;
   }>(),
   {
-    accordion: true,
+    accordion: false,
     arrowPlacement: 'left',
     headerJustify: undefined,
     background: false,
-    itemSpace: undefined,
+    gap: undefined,
     defaultExpandedNames: () => [],
+    modelValue: () => [],
+    grid: false,
   },
 );
 
-const emits = defineEmits(['change']);
+const emits = defineEmits(['change', 'update:modelValue']);
 
 /** 当前展开的面板 */
-const actives = ref<(string | number)[]>(props.defaultExpandedNames);
+
+const actives = ref<(string | number)[]>(props.modelValue);
 
 const styles = computed(() => {
   const styleRes: { [index: string]: string } = {};
-  if (props.itemSpace != null) {
-    styleRes['--nt-collapse-item-space'] = props.itemSpace;
+  if (props.gap != null) {
+    styleRes['--nt-collapse-gap'] = props.gap;
   }
   if (props.borderRadius != null) {
     styleRes['--nt-collapse-border-radius'] = props.borderRadius;
@@ -72,8 +79,18 @@ function updateActive(name: string | number) {
   } else {
     actives.value.splice(index, 1);
   }
+  emits('update:modelValue', actives.value);
   emits('change', actives.value);
 }
+
+watch(
+  () => props.modelValue,
+  (v) => {
+    if (v != null) {
+      actives.value = v;
+    }
+  },
+);
 
 provide(collapseContext, {
   arrowPlacement: props.arrowPlacement,

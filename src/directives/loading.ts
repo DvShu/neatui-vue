@@ -169,6 +169,9 @@ class LoadingInstance {
     if (toElem == null) {
       toElem = document.body;
     }
+    if (toElem.tagName !== 'BODY') {
+      this.option.fullscreen = false;
+    }
     this.el = toElem;
     addLoading(this.el, this.option, this.option.bar ? 'bar' : '');
   }

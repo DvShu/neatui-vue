@@ -55,6 +55,8 @@ import '@asteres/neatui-vue/style/vars.css';
 
 [中文 文档](https://dvshu.github.io/neatui-vue/)
 
+## [更新记录](https://github.com/DvShu/neatui-vue/blob/main/CHANGELOG.md)
+
 ## LICENSE
 
 neatui-vue is open source software licensed as [MulanPSL-2.0](https://github.com/DvShu/neatui-vue/blob/main/LICENSE).

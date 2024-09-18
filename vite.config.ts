@@ -42,7 +42,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['vue', 'ph-utils'],
+      external: ['vue', 'ph-utils', 'vue-router', '@tanstack/vue-table'],
       output: {
         chunkFileNames: '[name]-[hash].js',
       },

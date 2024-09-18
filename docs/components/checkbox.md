@@ -5,24 +5,26 @@
 ## 演示
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
   import { Checkbox, CheckboxGroup } from '../../src'
 
   const cities= [['CD', '成都'], ['BJ', '北京'], ['SZ', '深圳'], ['HZ', '杭州']]
+
+  const isCheckOption = ref(true)
 
   const checkedCities = ref(['CD', 'SZ'])
   const checkAll = ref(false)
   const isIndeterminate = ref(true)
 
   function handleCheckAllChange(val: boolean) {
-    checkedCities.value = val ? cities.map(c => c[0]) : []
     isIndeterminate.value = false
+    checkedCities.value = val ? cities.map(c => c[0]) : []
   }
   function handleGroupChange(val: string[]) {
     const checkedCount = val.length
     checkAll.value = checkedCount === cities.length
     if (checkedCount === 0) {
-      isIndeterminate.value = 0
+      isIndeterminate.value = false
     } else {
       isIndeterminate.value = checkedCount < cities.length
     }
@@ -36,8 +38,11 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-checkbox label="Option1"></nt-checkbox>
+  <nt-checkbox label="Option1" v-model="isCheckOption"></nt-checkbox>
   </textarea>
+  <template #preview>
+    <Checkbox label="Option1" v-model="isCheckOption"></Checkbox>
+  </template>
   </CodePreview>
 </ClientOnly>
 
@@ -183,18 +188,6 @@
   </CodePreview>
 </ClientOnly>
 
-### 受控选中
-
-复选框的选中状态是可控的，通过传递 `checked` 属性，`true` 为选中，`false` 为未选中。
-
-<ClientOnly>
-  <CodePreview>
-  <textarea lang="vue-html">
-  <nt-checkbox label="协议" checked></nt-checkbox>
-  </textarea>
-  </CodePreview>
-</ClientOnly>
-
 ## API
 
 ### Checkbox Props
@@ -208,7 +201,6 @@
 | `value`                 | 原生 `value` 属性              | `string`  | -       |
 | `label`                 | 显示的标签                     | `string`  | -       |
 | `type`                  | 是否设置为按钮风格             | `button`  | -       |
-| `checked`               | 是否选中                       | `boolean` | -       |
 
 ### CheckboxGroup Props
 

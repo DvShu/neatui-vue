@@ -16,7 +16,7 @@
 import { ref, provide, watch } from 'vue';
 import Validator from 'ph-utils/validator';
 import type { SchemaType } from 'ph-utils/validator';
-import { formContext } from './constant';
+import { formContext, formDisabledContext } from '../../utils/constant.js';
 
 const props = withDefaults(
   defineProps<{
@@ -28,9 +28,11 @@ const props = withDefaults(
     rules?: SchemaType[];
     /** 是否行内表单 */
     inline?: boolean;
+    disabled?: boolean;
   }>(),
   {
     inline: false,
+    disabled: false,
   },
 );
 
@@ -91,6 +93,8 @@ provide(formContext, {
   /** 必填字段列表 */
   requiredKeys,
 });
+
+provide(formDisabledContext, () => props.disabled);
 
 function handleSubmit(e: Event) {
   e.preventDefault();

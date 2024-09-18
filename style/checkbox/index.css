@@ -1,5 +1,5 @@
 .nt-checkbox {
-  --nt-checkbox-size: 14px;
+  --nt-checkbox-size: 16px;
   --nt-checkbox-label-color: #333;
   --nt-checkbox-checked-color: var(--nt-primary-color, #4998f4);
   --nt-checkbox-disabled-color: #e6e6e6;
@@ -10,6 +10,7 @@
   align-items: center;
   cursor: pointer;
   position: relative;
+  vertical-align: middle;
 }
 .nt-checkbox__input {
   opacity: 0;
@@ -21,6 +22,7 @@
 .nt-checkbox__label {
   color: var(--nt-checkbox-label-color);
   transition: color 0.3s ease-in-out;
+  margin-left: 5px;
 }
 .nt-checkbox__inner {
   width: var(--nt-checkbox-size);
@@ -33,7 +35,6 @@
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
   position: relative;
-  margin-right: 5px;
 }
 .nt-checkbox__inner::after {
   content: '';
@@ -45,6 +46,7 @@
   border-top: none;
   transform: rotate(-45deg);
   transition: border-color 0.2s ease-in-out;
+  margin-top: -3px;
 }
 .nt-checkbox--indeterminate .nt-checkbox__inner {
   background-color: var(--nt-checkbox-checked-color);
@@ -103,6 +105,7 @@
   padding: 0 15px;
   border: 1px solid #c0c4cc;
   border-left-width: 0;
+  margin-left: 0;
 }
 .nt-checkbox--button:first-child .nt-checkbox__label {
   border-left-width: 1px;

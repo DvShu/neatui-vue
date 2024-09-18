@@ -48,4 +48,3 @@ async function handleCopyIcon(name: string) {
 </script>
 
 <style lang="less"></style>
-../components/message/index

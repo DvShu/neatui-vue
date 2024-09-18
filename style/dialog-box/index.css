@@ -1,0 +1,33 @@
+.nt-dialog-box-main {
+  width: 340px;
+}
+
+.nt-message-dialog-container {
+  display: flex;
+  align-items: center;
+}
+
+.nt-confirm-icon {
+  margin-right: 5px;
+}
+.nt-confirm-icon--info {
+  color: var(--nt-success-color, #999999);
+}
+.nt-confirm-icon--success {
+  color: var(--nt-success-color, #19bf6c);
+}
+.nt-confirm-icon--error {
+  color: var(--nt-error-color, #ed3f13);
+}
+.nt-confirm-icon--warn {
+  color: var(--nt-warn-color, #f90);
+}
+
+.nt-prompt-tip {
+  font-size: 14px;
+  margin: 0 0 5px 0;
+}
+
+.nt-prompt-dialog-container .nt-input {
+  width: 100%;
+}

@@ -9,11 +9,12 @@ import '@asteres/neatui-vue/style/util/transition.css';
 <script setup>
 import SourceCode from '../src/app_components/SourceCode.vue';
 import CodePreview from '../src/app_components/CodePreview.vue';
-import { Button } from '../src'
+import { Button, LoadingIcon } from '../src'
 import { ref } from 'vue';
 
 const show = ref(true)
 const show1 = ref(true)
+const show2 = ref(true)
 </script>
 
 ### 1.2 使用
@@ -66,6 +67,27 @@ const show1 = ref(true)
 </template>
 </CodePreview></ClientOnly>
 
+#### 1.2.3 `nt-scale`
+
+缩放进入/退出
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-button @click="show = !show">Toggle</nt-button>
+    <Transition name="nt-opacity">
+  <p v-if="show">Hello world</p>
+  </Transition>
+  </textarea>
+  <template #preview>
+    <Button @click="show2 = !show2">Toggle</Button>
+    <Transition name="nt-scale" appear>
+      <div class="inline ml-10" v-if="show2">Hello world</div>
+    </Transition>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ### 样式变量
 
 组件提供了下列 CSS 变量，可用于自定义样式
@@ -75,7 +97,52 @@ const show1 = ref(true)
 | `--nt-transition-times` | 渐变时长, 所有渐变都支持            | `0.3s`  |
 | `--nt-fadein-offset`    | 渐变距离, 支持的渐变有: `nt-fadein` | `-20px` |
 
-## 2. 滚动条样式
+## 2. `CSS Animation` 动画
+
+### 引入样式
+
+```ts
+import '@asteres/neatui-vue/style/util/animation.css';
+```
+
+### 使用
+
+可以直接通过动画名称，添加 `css class`、也可以通过 `css animation` 使用动画名称；例如：
+
+#### 添加 `css class`
+
+所有的动画的 `class` 规则为: `nt-` + 动画名称 + `-anim`；例如旋转动画为: `nt-rotate-anim`
+
+```html
+<nt-loading-icon class="nt-rotate-anim" />
+```
+
+#### 通过 `css animation` 使用动画名称
+
+所有的动画的 `animation` 名称规则为：`nt-` + 动画名称 + `-frame`；例如旋转动画为: `nt-rotate-frame`
+
+```vue
+<template>
+  <nt-loading-icon class="custome-rotate" />
+</template>
+
+<style>
+.custome-rotate {
+  animation: nt-rotate-frame 1.5s infinite linear;
+}
+</style>
+```
+
+### 内置动画
+
+<div class="icon-list mt-15">
+  <div class="icon-item center">
+    <LoadingIcon class="nt-rotate-anim" />
+    <span class="icon-name">rotate</span>
+  </div>
+</div>
+
+## 3. 滚动条样式
 
 如果觉得默认滚动条不好看，想修改滚动条样式
 

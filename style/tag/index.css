@@ -1,0 +1,30 @@
+.nt-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  height: 22px;
+  padding: 0 8px;
+  font-size: 12px;
+  line-height: 1;
+  border: 1px solid var(--nt-tag-border-color, #999);
+  border-radius: 4px;
+  background: var(--nt-tag-bg, #fff);
+  white-space: nowrap;
+  color: var(--nt-tag-color, #333);
+}
+.nt-tag--primary {
+  --nt-tag-border-color: var(--nt-primary-color-light3, #b7eb8f);
+  --nt-tag-bg: var(--nt-primary-color-light5, #f6ffed);
+  --nt-tag-color: var(--nt-primary-color-light3, #b7eb8f);
+}
+.nt-tag--error {
+  --nt-tag-color: var(--nt-error-color, #ed3f13);
+  --nt-tag-bg: var(--nt-error-color-light5, #fff1f0);
+  --nt-tag-border-color: var(--nt-error-color, #ed3f13);
+}
+.nt-tag--success {
+  --nt-tag-color: var(--nt-success-color, #a0d911);
+  --nt-tag-bg: var(--nt-success-color-light5, #fcffe6);
+  --nt-tag-border-color: var(--nt-success-color, #a0d911);
+}

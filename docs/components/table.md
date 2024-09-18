@@ -2,6 +2,8 @@
 
 用于展示大量结构化数据
 
+这个表格只是一个简单的数据展示功能，只包含有固定表头和列、排序功能。如果当前组件不能满足需求需要使用更多功能的时候，可以考虑使用 [TanstackTable](/components/tanstacktable)
+
 ## 演示
 
 <script setup>
@@ -13,6 +15,7 @@
       name: '李四',
       age: 19,
       address: '北京朝阳',
+
     },
     {
       name: '张三',
@@ -128,8 +131,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
   const columns2 = [{
@@ -151,8 +154,8 @@
     width: 200,
     fixed: 'right',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
   const columns3 = [{
@@ -169,8 +172,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
   const columns4 = [{
@@ -190,8 +193,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
 
@@ -241,8 +244,8 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
   }]
 
@@ -270,36 +273,9 @@
     title: '操作',
     key: 'action',
     render: () => [
-      h(Button, { type: 'text' }, { default: () => '编辑'}),
-      h(Button, { type: 'text' }, { default: () => '删除'})
+      h(Button, { type: 'primary', text: true }, { default: () => '编辑'}),
+      h(Button, { type: 'primary', text: true }, { default: () => '删除'})
     ]
-  }]
-
-  const columns7 = [{
-    type: 'radio',
-    disabled: (rowData) => rowData.name === '张三'
-  }, {
-    title: '姓名',
-    key: 'name',
-  }, {
-    title: '年龄',
-    key: 'age',
-  }, {
-    title: '住址',
-    key: 'address'
-  }]
-
-  const columns8 = [{
-    type: 'checkbox'
-  }, {
-    title: '姓名',
-    key: 'name',
-  }, {
-    title: '年龄',
-    key: 'age',
-  }, {
-    title: '住址',
-    key: 'address'
   }]
 
   const defaultSort = { key: 'age', order: 'desc' }
@@ -433,7 +409,7 @@
 
 ### 固定表头和列
 
-给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。 将表格 将 `table-layout` 设置为 `fixed`，然后将需要固定的列设置 `fixed` 为 `left` 或 `right`，就能实现固定列。
+给表格设置 `max-height` 样式，然后设置 `fixed-head` 属性为 `true` 即可实现固定表头。 将需要固定的列设置 `fixed` 为 `left` 或 `right`，就能实现固定列。
 
 <ClientOnly>
   <CodePreview>
@@ -485,18 +461,17 @@
     }]
   </script>
   <template>
-    <nt-table :data="dataSource2" :columns="columns" table-layout="fixed" fixed-head style="max-height:200px;" class="nt-scrollbar"></nt-table>
+    <nt-table :data="dataSource2" :columns="columns" fixed-head style="max-height:200px;" class="nt-scrollbar"></nt-table>
   </template>
   </textarea>
   <template #preview>
-    <Table :data="dataSource2" :columns="columns2" table-layout="fixed" fixed-head style="max-height:200px;" class="nt-scrollbar"></Table>
+    <Table :data="dataSource2" :columns="columns2" fixed-head style="max-height:200px;" class="nt-scrollbar"></Table>
   </template>
   </CodePreview>
 </ClientOnly>
 
-> 1. _切记_: 要固定列，需要使用 `fixed` 布局，不能将 `table-layout` 设置为 `auto`
-> 2. 设置 `max-height` 可以通过直接设置 `style`；也可以通过 [tailwindcss-max-height](https://www.tailwindcss.cn/docs/max-height#setting-the-maximum-height)
-> 3. 如果想改变滚动条样式，参考 [工具样式-滚动条](../css-util#_2-滚动条样式)；引入样式表，然后给 `Table` 组件, 添加 `nt-scrollbar` 的类名: `<nt-table ... fixed-head class="max-h-24 nt-scrollbar"></nt-table>`
+> 1. 设置 `max-height` 可以通过直接设置 `style`；也可以通过 [tailwindcss-max-height](https://www.tailwindcss.cn/docs/max-height#setting-the-maximum-height)
+> 2. 如果想改变滚动条样式，参考 [工具样式-滚动条](../css-util#_2-滚动条样式)；引入样式表，然后给 `Table` 组件, 添加 `nt-scrollbar` 的类名: `<nt-table ... fixed-head class="max-h-24 nt-scrollbar"></nt-table>`
 
 ### 排序
 
@@ -684,49 +659,36 @@
   </CodePreview>
 </ClientOnly>
 
-### 可选择(单选)
+### 基本结构
 
-<ClientOnly>
-  <CodePreview>
-  <textarea lang="vue-html">
-  <script setup>
-  </script>
-  <template>
-    <hr />
-  </template>
-  </textarea>
-  <template #preview>
-    <Table
-      :data="dataSource4"
-      :columns="columns7"
-      :row-key="rowKey"
-      @select-change="handleSelectChange"
-    ></Table>
-  </template>
-  </CodePreview>
-</ClientOnly>
+整个表格的基本结构为：
 
-### 可选择(多选)
+```vue-html
+<!-- 外层容器, 当需要固定行滚动时, 以及后续需要处理虚拟滚动操作 -->
+<div class="nt-table-wrapper" style="max-height:300px;">
+  <table class="nt-table nt-table-stripe nt-table-fixed">
+    <thead class="nt-fixed">
+      <th class="nt-fixed" style="left: 0"></th>
+      <th></th>
+      <th class="nt-fixed" style="right: 0"></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="nt-fixed" style="left: 0"></td>
+        <td></td>
+        <td class="nt-fixed" style="right: 0"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
 
-<ClientOnly>
-  <CodePreview>
-  <textarea lang="vue-html">
-  <script setup>
-  </script>
-  <template>
-    <hr />
-  </template>
-  </textarea>
-  <template #preview>
-    <Table
-      :data="dataSource4"
-      :columns="columns8"
-      :row-key="rowKey"
-      @select-change="handleSelectChange"
-    ></Table>
-  </template>
-  </CodePreview>
-</ClientOnly>
+说明:
+
+- `div.nt-table-wrapper`: 外层容器, 当需要固定行滚动时, 以及后续需要处理虚拟滚动操作; 如果需要固定表头, 则添加 `max-height` 样式.
+- `table.nt-table`: 表格容器; 如果需要为表格添加斑马纹则添加 `nt-table-stripe` 类; 如果需要固定列则添加 `nt-table-fixed` 类用于改变表格的 `table-layout` 布局.
+- `thead`: 如果需要固定表头, 则添加 `nt-fixed` 类否则不用添加.
+- `th.fixed,td.fixed`: 如果需要固定列则给列添加 `nt-fixed` 类, 然后设置 `left` 或者 `right` 样式.
 
 ## API
 
@@ -746,6 +708,7 @@
 
 `ColumnOption` 选项:
 
+<!-- prettier-ignore -->
 | 字段           | 说明                   | 类型                                                     | 默认值  |
 | -------------- | ---------------------- | -------------------------------------------------------- | ------- |
 | `title`        | 列名                   | `string`                                                 | -       |
@@ -758,6 +721,8 @@
 | `titleColspan` | 表头的单元格所占的列数 | `number`                                                 | -       |
 | `rowspan`      | 单元格的 `rowspan`     | `number` \| `(rowData: any, rowIndex: number) => number` | -       |
 | `colspan`      | 单元格的 `colspan`     | `number` \| `(rowData: any, rowIndex: number) => number` | -       |
+| `style`        | 表格单元格的样式       | `CSSProperties`                                          | -       |
+| `class` | 表格单元格的类名 | `string` | - |
 
 `SortOption` 选项
 

@@ -42,31 +42,31 @@ const imgs = [
   </textarea>
     <template #preview>
       <div class="grid grid-cols-5">
-        <Tooltip placement="topStart" title="被替换的内容正好填充元素的内容框。整个对象将完全填充此框。如果对象的宽高比与内容框不相匹配，那么该对象将被拉伸以适应内容框">
+        <Tooltip content="被替换的内容正好填充元素的内容框。整个对象将完全填充此框。如果对象的宽高比与内容框不相匹配，那么该对象将被拉伸以适应内容框">
           <div class="demo-img-item">
             <Image src="/neatui-vue/img1.svg" width="100" height="100" fit="fill"></Image>
             <span class="mt-15">fill</span>
           </div>
         </Tooltip>
-        <Tooltip placement="topStart" title="被替换的内容将被缩放，以在填充元素的内容框时保持其宽高比。整个对象在填充盒子的同时保留其长宽比">
+        <Tooltip content="被替换的内容将被缩放，以在填充元素的内容框时保持其宽高比。整个对象在填充盒子的同时保留其长宽比">
           <div class="demo-img-item">
             <Image src="/neatui-vue/img1.svg" width="100" height="100" fit="contain"></Image>
             <span class="mt-15">contain</span>
           </div>
         </Tooltip>
-        <Tooltip placement="top" title="被替换的内容在保持其宽高比的同时填充元素的整个内容框。如果对象的宽高比与内容框不相匹配，该对象将被剪裁以适应内容框">
+        <Tooltip content="被替换的内容在保持其宽高比的同时填充元素的整个内容框。如果对象的宽高比与内容框不相匹配，该对象将被剪裁以适应内容框">
           <div class="demo-img-item">
             <Image src="/neatui-vue/img1.svg" width="100" height="100" fit="cover"></Image>
             <span class="mt-15">cover</span>
           </div>
         </Tooltip>
-        <Tooltip placement="topEnd" title="被替换的内容将保持其原有的尺寸">
+        <Tooltip content="被替换的内容将保持其原有的尺寸">
           <div class="demo-img-item">
             <Image src="/neatui-vue/img1.svg" width="100" height="100" fit="none"></Image>
             <span class="mt-15">none</span>
           </div>
         </Tooltip>
-        <Tooltip placement="topEnd" title="内容的尺寸与 none 或 contain 中的一个相同，取决于它们两个之间谁得到的对象尺寸会更小一些">
+        <Tooltip content="内容的尺寸与 none 或 contain 中的一个相同，取决于它们两个之间谁得到的对象尺寸会更小一些">
           <div class="demo-img-item">
             <Image src="/neatui-vue/img1.svg" width="100" height="100" fit="scale-down"></Image>
             <span class="mt-15">scale-down</span>

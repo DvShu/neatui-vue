@@ -1,0 +1,13 @@
+.nt-theme-btn {
+  --nt-btn-background: transparent;
+  --nt-btn-hover-background: transparent;
+  --nt-btn-text-color: rgb(156, 163, 175);
+  --nt-btn-hover-text-color: #666666;
+  width: var(--nt-form-edit-height, 32px);
+  padding: 0;
+  font-size: 20px;
+}
+
+html.dark .nt-theme-btn {
+  --nt-btn-hover-text-color: #ffffff;
+}

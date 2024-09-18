@@ -62,8 +62,8 @@
     }
   </script>
   <template>
-    <nt-form :model="formFields" :rules="rules">
-      <nt-form-item label="用户名" required name="username">
+    <nt-form :model="formFields" :rules="rules" >
+      <nt-form-item label="用户名" required name="username" >
         <nt-input placeholder="请输入用户名" v-model="formFields.username"></nt-input>
       </nt-form-item>
       <nt-form-item label="密码" required name="password">
@@ -135,6 +135,20 @@
   </template>
   </CodePreview>
 </ClientOnly>
+
+### 只使用 FormItem
+
+`FormItem` 可以不放在 `Form` 里面，从而进行单独使用。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-form-item label="开关">
+    <nt-switch />
+  </nt-form-item>
+  </textarea>
+  </CodePreview>
+</ClientOnly>`
 
 ## API
 
