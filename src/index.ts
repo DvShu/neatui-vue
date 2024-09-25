@@ -25,6 +25,7 @@ export { default as DArrowRight } from './components/icon/DArrowRight.vue';
 export { default as SunIcon } from './components/icon/Sun.vue';
 export { default as MoonIcon } from './components/icon/Moon.vue';
 export { default as ThemeDefaultIcon } from './components/icon/ThemeDefault.vue';
+export { default as FontIcon } from './components/icon/IconFont.vue';
 
 export { default as Input } from './components/input/Input.vue';
 export { default as MdInput } from './components/input/MdInput.vue';
