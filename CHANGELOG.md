@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/DvShu/neatui-vue/compare/v0.18.0...v0.18.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* 修复未导出 IconFont 组件 ([041e108](https://github.com/DvShu/neatui-vue/commit/041e108f97d0c1bd3fcdb9146866a710d1b3f48e))
+
 ## [0.18.0](https://github.com/DvShu/neatui-vue/compare/v0.17.0...v0.18.0) (2024-09-18)
 
 
