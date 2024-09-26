@@ -25,7 +25,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { random } from 'ph-utils';
+import { random, isBlank } from 'ph-utils';
 
 const el = ref<HTMLInputElement>();
 
@@ -69,9 +69,7 @@ function handleInputBlur() {
 }
 
 watch(modelValue, (v) => {
-  if (v != null) {
-    hasValue.value = true;
-  }
+  hasValue.value = isBlank(v) ? false : true;
 });
 
 defineExpose({
