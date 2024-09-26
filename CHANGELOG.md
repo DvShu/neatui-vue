@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.1](https://github.com/DvShu/neatui-vue/compare/v0.19.0...v0.19.1) (2024-09-26)
+
+
+### Bug Fixes
+
+* **MdInput:** 修复样式以及输入错误 ([c639207](https://github.com/DvShu/neatui-vue/commit/c6392077b04faad303a8c5c78556926b1937e3ad))
+
 ## [0.19.0](https://github.com/DvShu/neatui-vue/compare/v0.18.1...v0.19.0) (2024-09-26)
 
 
