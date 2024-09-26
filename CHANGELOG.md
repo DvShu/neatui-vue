@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.2](https://github.com/DvShu/neatui-vue/compare/v0.19.1...v0.19.2) (2024-09-26)
+
+
+### Bug Fixes
+
+* **MdInput:** 修复赋予初始值时显示异常 ([3c1c96a](https://github.com/DvShu/neatui-vue/commit/3c1c96a4c07cd76895e6110f510b506252ac3e66))
+
 ## [0.19.1](https://github.com/DvShu/neatui-vue/compare/v0.19.0...v0.19.1) (2024-09-26)
 
 
