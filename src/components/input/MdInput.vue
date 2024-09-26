@@ -12,6 +12,7 @@
       :id="elId"
       ref="el"
       :type="htmlType"
+      :inputmode="inputmode"
       :name="name"
       :placeholder="!focused ? '' : placeholder"
       @focus="handleInputFocus"
@@ -24,7 +25,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { random, isBlank } from 'ph-utils';
 
 const el = ref<HTMLInputElement>();
@@ -32,7 +33,6 @@ const el = ref<HTMLInputElement>();
 const modelValue = defineModel<string | number>();
 
 const focused = ref(false);
-const hasValue = ref(false);
 
 const props = withDefaults(
   defineProps<{
@@ -41,8 +41,9 @@ const props = withDefaults(
     outline?: boolean;
     label?: string;
     placeholder?: string;
-    htmlType?: 'text' | 'number' | 'password';
+    htmlType?: 'text' | 'number' | 'password' | 'tel';
     name?: string;
+    inputmode?: 'text' | 'numeric' | 'decimal' | 'tel';
   }>(),
   {
     outline: false,
@@ -68,8 +69,8 @@ function handleInputBlur() {
   focused.value = false;
 }
 
-watch(modelValue, (v) => {
-  hasValue.value = isBlank(v) ? false : true;
+const hasValue = computed(() => {
+  return isBlank(modelValue.value as string) ? false : true;
 });
 
 defineExpose({
