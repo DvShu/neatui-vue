@@ -3,7 +3,6 @@ export type { ColumnOption } from './components/table/Table.vue';
 export { default as BaseIcon } from './components/icon/Base.vue';
 export { default as MaskCloseIcon } from './components/icon/MaskClose.vue';
 export { default as SearchIcon } from './components/icon/Search.vue';
-export { default as IconFont } from './components/icon/IconFont.vue';
 export { default as LoadingIcon } from './components/icon/Loading.vue';
 export { default as InfoIcon } from './components/icon/Info.vue';
 export { default as WarnIcon } from './components/icon/Warn.vue';
@@ -61,6 +60,7 @@ export { default as Polygon } from './components/Polygon.vue';
 export { default as Shadow } from './components/Shadow.vue';
 
 export { default as useFormReset } from './hooks/useFormReset';
+
 export { default as Collapse } from './components/collapse/Collapse.vue';
 export { default as CollapseItem } from './components/collapse/CollapseItem.vue';
 export { default as Progress } from './components/Progress.vue';
