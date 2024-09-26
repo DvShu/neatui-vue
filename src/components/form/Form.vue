@@ -4,9 +4,6 @@
       'nt-form': true,
       'nt-form-inline': inline,
     }"
-    :style="{
-      '--nt-form-label-width': labelWidth ? labelWidth : undefined,
-    }"
     @submit="handleSubmit"
   >
     <slot></slot>
@@ -29,10 +26,12 @@ const props = withDefaults(
     /** 是否行内表单 */
     inline?: boolean;
     disabled?: boolean;
+    labelPosition?: 'left' | 'right' | 'top';
   }>(),
   {
     inline: false,
     disabled: false,
+    labelPosition: 'right',
   },
 );
 
@@ -92,6 +91,8 @@ provide(formContext, {
   errors,
   /** 必填字段列表 */
   requiredKeys,
+  labelWidth: () => props.labelWidth,
+  labelPosition: () => props.labelPosition,
 });
 
 provide(formDisabledContext, () => props.disabled);

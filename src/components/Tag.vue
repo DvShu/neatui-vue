@@ -6,7 +6,7 @@
   </Transition>
 </template>
 <script setup lang="ts">
-import { computed, Transition } from 'vue';
+import { computed } from 'vue';
 import { adjust } from 'ph-utils/color';
 import { isBlank } from 'ph-utils';
 const props = withDefaults(

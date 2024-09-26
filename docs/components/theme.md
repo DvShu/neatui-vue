@@ -33,15 +33,22 @@ createApp(App).use(router).mount('#app');
     ThemeColor
   } from '../../src';
   import SourceCode from '../../src/app_components/SourceCode.vue'
-  import { ref, watch } from 'vue';
-  import { getTheme, applyTheme } from 'ph-utils/theme'
+  import { ref, watch, onMounted } from 'vue';
 
-  const theme = ref(getTheme());
-  const code = ref(``)
+  const theme = ref('');
+  const code = ref('');
 
-  watch(theme, async (val) => {
-    await applyTheme(val);
+  watch(theme, (val) => {
+    import('ph-utils/theme').then((module) => {
+      return module.applyTheme(val);
+    })
   });
+
+  onMounted(() => {
+    import('ph-utils/theme').then((module) => {
+      theme.value = module.getTheme();
+    })
+  })
 
   function handleColorChange() {
     const $style = document.getElementById('color-theme-style');

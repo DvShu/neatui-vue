@@ -1,17 +1,13 @@
 .nt-form-item {
   display: flex;
-
   font-size: 14px;
 }
 .nt-form-item__label {
-  --nt-form-label-width: auto;
-  --nt-form-edit-height: auto;
-  display: inline-flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  --nt-form-label-width: 80px;
+  display: inline-block;
   width: var(--nt-form-label-width);
-  height: var(--nt-form-edit-height);
-  line-height: var(--nt-form-edit-height);
+  height: var(--nt-form-edit-height, 32px);
+  line-height: var(--nt-form-edit-height, 32px);
   color: #606266;
   padding: 0 10px 0 0;
 }
@@ -19,6 +15,7 @@
   content: '*';
   margin-right: 4px;
   color: var(--nt-warn-color, #f56c6c);
+  vertical-align: middle;
 }
 .nt-form-item__content {
   flex: 1;
@@ -44,12 +41,24 @@
   width: 100%;
 }
 
+.nt-form-item.nt-form-item-label-right .nt-form-item__label {
+  text-align: right;
+}
+.nt-form-item.nt-form-item-label-left .nt-form-item__label {
+  text-align: left;
+}
+.nt-form-item.nt-form-item-label-top {
+  flex-direction: column;
+}
+.nt-form-item.nt-form-item-label-top .nt-form-item__label {
+  text-align: left;
+}
+.nt-form-item.nt-form-item-label-top .nt-form-item__label:empty {
+  display: none;
+}
+
 .nt-form .nt-form-item {
   margin-bottom: 20px;
-}
-.nt-form .nt-form-item__label {
-  --nt-form-label-width: 80px;
-  --nt-form-edit-height: 32px;
 }
 
 /** 行内表单 */
