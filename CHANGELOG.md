@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.19.0](https://github.com/DvShu/neatui-vue/compare/v0.18.1...v0.19.0) (2024-09-26)
+
+
+### Features
+
+* 表单增加 label-position ([ab373ff](https://github.com/DvShu/neatui-vue/commit/ab373ffb90e68c147b5a513c0bc96fe1d9f5b4c9))
+
+
+### Bug Fixes
+
+* 修复 IconFont 导出错误 ([ab373ff](https://github.com/DvShu/neatui-vue/commit/ab373ffb90e68c147b5a513c0bc96fe1d9f5b4c9))
+
 ## [0.18.1](https://github.com/DvShu/neatui-vue/compare/v0.18.0...v0.18.1) (2024-09-25)
 
 
