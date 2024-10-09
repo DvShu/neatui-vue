@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.3](https://github.com/DvShu/neatui-vue/compare/v0.19.2...v0.19.3) (2024-10-09)
+
+
+### Bug Fixes
+
+* **PageHeader:** 修复样式错误导致无法显示标题 ([e250e8f](https://github.com/DvShu/neatui-vue/commit/e250e8f5c8092b5dfc547ca634cf1e8b332a968c))
+
 ## [0.19.2](https://github.com/DvShu/neatui-vue/compare/v0.19.1...v0.19.2) (2024-09-26)
 
 
