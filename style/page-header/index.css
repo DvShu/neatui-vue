@@ -16,6 +16,7 @@
   display: flex;
   align-items: center;
   flex: 0 0 auto;
+  z-index: 1;
 }
 
 .nt-page-header-content {
@@ -62,7 +63,6 @@
   top: 0;
   bottom: 0;
   justify-content: center;
-  z-index: -1;
 }
 .nt-page-header-align-center .nt-page-header-backbtn {
   padding: 8px 0;
