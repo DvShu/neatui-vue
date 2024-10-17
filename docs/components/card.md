@@ -18,7 +18,7 @@ import { Card, Button } from '../../src'
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<nt-button type="text">按钮</nt-button>
+<nt-button text>按钮</nt-button>
 </template>
 </nt-card>
 </textarea>
@@ -28,7 +28,7 @@ import { Card, Button } from '../../src'
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<Button type="text">按钮</Button>
+<Button text>按钮</Button>
 </template>
 </Card>
 </template>
@@ -68,7 +68,7 @@ import { Card, Button } from '../../src'
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<nt-button type="text">按钮</nt-button>
+<nt-button text>按钮</nt-button>
 </template>
 </nt-card>
 </textarea>
@@ -78,7 +78,7 @@ import { Card, Button } from '../../src'
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<Button type="text">按钮</Button>
+<Button text type="primary">按钮</Button>
 </template>
 </Card>
 </template>

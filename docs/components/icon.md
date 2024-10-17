@@ -72,3 +72,4 @@ import IconList from '../../src/app_components/IconList.vue'
 - 推荐图标库：[iconify](https://iconify.design/) 它提供了超过 200000 个开源图标。
 - 两种方式可以使用 `iconify`: [@iconify/vue](https://www.npmjs.com/package/@iconify/vue) 和 [unplugin-icons](https://github.com/unplugin/unplugin-icons)
 - 推荐使用 [unplugin-icons](https://github.com/unplugin/unplugin-icons) 既能离线加载，也能自定义图标
+- 其它图标库: [Lucide](https://lucide.dev/)
