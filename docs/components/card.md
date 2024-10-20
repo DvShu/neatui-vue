@@ -99,7 +99,7 @@ import { Card, Button } from '../../src'
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<nt-button type="text">按钮</nt-button>
+<nt-button text>按钮</nt-button>
 </template>
 <template v-slot:footer>
 <span style="color: orange">卡片标题</span>
@@ -115,7 +115,7 @@ import { Card, Button } from '../../src'
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<Button type="text">按钮</Button>
+<Button text>按钮</Button>
 </template>
 <template v-slot:footer>
 <span style="color: orange">卡片标题</span>
@@ -139,7 +139,7 @@ import { Card, Button } from '../../src'
         <div>卡片内容1</div>
       </template>
       <template v-slot:header-extra>
-        <nt-button type="text">按钮</nt-button>
+        <nt-button text>按钮</nt-button>
       </template>
     </nt-card>
     <nt-card header-text="卡片标题2">
@@ -147,7 +147,7 @@ import { Card, Button } from '../../src'
         <div>卡片内容2</div>
       </template>
       <template v-slot:header-extra>
-        <nt-button type="text">按钮</nt-button>
+        <nt-button text>按钮</nt-button>
       </template>
     </nt-card>
     <nt-card header-text="卡片标题3">
@@ -155,7 +155,7 @@ import { Card, Button } from '../../src'
         <div>卡片内容3</div>
       </template>
       <template v-slot:header-extra>
-        <nt-button type="text">按钮</nt-button>
+        <nt-button text>按钮</nt-button>
       </template>
     </nt-card>
   </div>
@@ -167,7 +167,7 @@ import { Card, Button } from '../../src'
           <div>卡片内容1</div>
         </template>
         <template v-slot:header-extra>
-          <Button type="text">按钮</Button>
+          <Button text>按钮</Button>
         </template>
       </Card>
       <Card header-text="卡片标题2">
@@ -175,7 +175,7 @@ import { Card, Button } from '../../src'
           <div>卡片内容2</div>
         </template>
         <template v-slot:header-extra>
-          <Button type="text">按钮</Button>
+          <Button text>按钮</Button>
         </template>
       </Card>
       <Card header-text="卡片标题3">
@@ -183,7 +183,7 @@ import { Card, Button } from '../../src'
           <div>卡片内容3</div>
         </template>
         <template v-slot:header-extra>
-          <Button type="text">按钮</Button>
+          <Button text>按钮</Button>
         </template>
       </Card>
     </div>

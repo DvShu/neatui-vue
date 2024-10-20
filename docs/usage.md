@@ -81,6 +81,24 @@ import './style.css';
 
 通过上面就能修改，当然也能在侧边栏的样式的地方，手动覆盖变量也能实现
 
+### 修改主题色
+
+通常只需要覆盖 `--nt-primary-color` 相关 `CSS` 变量就能实现主题色覆盖，例如: `--nt-primary-color`、`--nt-primary-color-light1`
+
+```css
+:root {
+  --nt-primary-color: #722ed1;
+  --nt-primary-color-light1: #9254de;
+  --nt-primary-color-light2: #b37feb;
+  --nt-primary-color-light3: #d3adf7;
+  --nt-primary-color-light4: #efdbff;
+  --nt-primary-color-light5: #f9f0ff;
+  --nt-primary-color-dark1: #531dab;
+}
+```
+
+> 也可以通过 `ph-utils/theme` 工具类的 `initColorTheme、toggleColorTheme、applyColorTheme` 函数来实现主题色切换
+
 ### 修改组件样式
 
 组件所有的样式都基本只有一层，所以如果要修改样式，在需要套一个层级就能修改
