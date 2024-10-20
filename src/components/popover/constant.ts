@@ -11,18 +11,18 @@ export const popoverProps = {
   /** 弹出位置 */
   placement: {
     type: String as PropType<
-      | 'topLeft'
+      | 'topStart'
       | 'top'
-      | 'topRight'
-      | 'bottomLeft'
+      | 'topEnd'
+      | 'bottomStart'
       | 'bottom'
-      | 'bottomRight'
+      | 'bottomEnd'
       | 'left'
-      | 'leftTop'
-      | 'leftBottom'
+      | 'leftStart'
+      | 'leftEnd'
       | 'right'
-      | 'rightTop'
-      | 'rightBottom'
+      | 'rightStart'
+      | 'rightEnd'
     >,
     default: 'top',
   },
