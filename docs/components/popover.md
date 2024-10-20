@@ -252,6 +252,29 @@
   </CodePreview>
 </ClientOnly>
 
+### 不显示箭头
+
+通过传递 `show-arrow` 为 `false` 来取消箭头显示
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue-html">
+  <nt-popover content="悬浮提示" :show-arrow="false">
+    <template #trigger>
+      <span>悬浮</span>
+    </template>
+  </nt-popover>
+  </textarea>
+  <template #preview>
+    <Popover content="悬浮提示" :show-arrow="false">
+      <template #trigger>
+        <span>悬浮</span>
+      </template>
+    </Popover>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Popover Props

@@ -240,7 +240,9 @@ export default defineComponent({
                         : props.content != null
                           ? h('span', props.content)
                           : null,
-                      h('span', { class: 'nt-popover-arrow' }),
+                      props.showArrow
+                        ? h('span', { class: 'nt-popover-arrow' })
+                        : null,
                     ],
                   ),
                   [[vShow, show.value]],
