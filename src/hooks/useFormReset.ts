@@ -32,11 +32,11 @@ export default function useFormReset<T>(params: T) {
    * set({ age: 1, name: 'test'})
    */
   function set(values: Record<string, any>): void;
-  function set() {
-    if (arguments.length === 1) {
-      formFields.value = { ...formFields.value, ...arguments[0] };
+  function set(...args: any[]) {
+    if (args.length === 1) {
+      formFields.value = { ...formFields.value, ...args[0] };
     } else {
-      formFields.value[arguments[0] as keyof T] = arguments[1];
+      formFields.value[args[0] as keyof T] = args[1];
     }
   }
 
