@@ -8,7 +8,7 @@
   </select>
 </template>
 <script setup lang="ts">
-const value = defineModel<string>();
+const value = defineModel<string | number>();
 
 defineProps<{
   options?: { label: string; value: string | number }[];
