@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.19.4](https://github.com/DvShu/neatui-vue/compare/v0.19.3...v0.19.4) (2024-10-21)
+
+
+### Bug Fixes
+
+* **Button:** 修复暗黑模式下样式显示异常 ([011a02e](https://github.com/DvShu/neatui-vue/commit/011a02eb1201f29fae7aa3793756b372648792d7))
+* **Card:** 修复暗黑模式下样式显示异常 ([9f67504](https://github.com/DvShu/neatui-vue/commit/9f67504df474d52b39b769cf04dcbc827c7b4661))
+* **Image:** 修复无法传递自定义样式、支持自定义fallback ([2009296](https://github.com/DvShu/neatui-vue/commit/2009296a13a3d7127f7b071ae3ff83fcb5f0414b))
+* **SelectOri:** 修复选择框 ts 类型错误 ([8b07d66](https://github.com/DvShu/neatui-vue/commit/8b07d668bafd39f274b2f17ac32da141e48b8708))
+
 ## [0.19.3](https://github.com/DvShu/neatui-vue/compare/v0.19.2...v0.19.3) (2024-10-09)
 
 
