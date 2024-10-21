@@ -1,13 +1,28 @@
 <template>
-  <img
-    :loading="loading"
-    :src="actualSrc"
-    :class="['nt-image', previewDisable ? '' : 'nt-image--preview']"
-    :style="computedStyle"
-    :alt="alt"
-    @error="handleLoadError"
-    @click="handleClick"
-  />
+  <div class="nt-image" v-bind="$attrs">
+    <img
+      :loading="loading"
+      :src="actualSrc"
+      :class="[
+        'nt-image',
+        previewDisable ? '' : 'nt-image--preview',
+        customFallback && isError ? 'nt-image-hide' : '',
+      ]"
+      :style="computedStyle"
+      :alt="alt"
+      @error="handleLoadError"
+      @click="handleClick"
+      @load="handleLoad"
+    />
+    <div
+      v-if="customFallback && isError"
+      class="nt-image"
+      :style="computedStyle"
+    >
+      <slot name="fallback"></slot>
+    </div>
+  </div>
+
   <ImagePreview
     v-model:show="showPreview"
     :url-list="previewSrcList || [src]"
@@ -19,6 +34,7 @@ import { computed, ref, watch, onUnmounted } from 'vue';
 import ImagePreview from './ImagePreview.vue';
 
 const showPreview = ref(false);
+const isError = ref(false);
 
 const props = withDefaults(
   defineProps<{
@@ -39,11 +55,13 @@ const props = withDefaults(
     /** 预览图片地址列表, 多图预览时使用 */
     previewSrcList?: string[];
     initialIndex?: number;
+    customFallback?: boolean;
   }>(),
   {
     loading: 'eager',
     previewDisable: false,
     initialIndex: 0,
+    customFallback: false,
   },
 );
 let img: HTMLImageElement | null;
@@ -80,18 +98,14 @@ function handleClick() {
   }
 }
 
+function handleLoad() {
+  isError.value = false;
+}
+
 const computedStyle = computed(() => {
   return {
-    width: props.width
-      ? props.width.endsWith('px')
-        ? props.width
-        : `${props.width}px`
-      : undefined,
-    height: props.height
-      ? props.height.endsWith('px')
-        ? props.height
-        : `${props.height}px`
-      : undefined,
+    width: props.width ? props.width : undefined,
+    height: props.height ? props.height : undefined,
     objectFit: props.fit != null ? props.fit : undefined,
   };
 });
@@ -100,6 +114,7 @@ function handleLoadError(e: Event) {
   if (props.fallback != null) {
     (e.target as HTMLImageElement).src = props.fallback;
   }
+  isError.value = true;
 }
 
 function clearImg() {

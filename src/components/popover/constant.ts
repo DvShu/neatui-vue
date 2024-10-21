@@ -11,18 +11,18 @@ export const popoverProps = {
   /** 弹出位置 */
   placement: {
     type: String as PropType<
-      | 'topLeft'
+      | 'topStart'
       | 'top'
-      | 'topRight'
-      | 'bottomLeft'
+      | 'topEnd'
+      | 'bottomStart'
       | 'bottom'
-      | 'bottomRight'
+      | 'bottomEnd'
       | 'left'
-      | 'leftTop'
-      | 'leftBottom'
+      | 'leftStart'
+      | 'leftEnd'
       | 'right'
-      | 'rightTop'
-      | 'rightBottom'
+      | 'rightStart'
+      | 'rightEnd'
     >,
     default: 'top',
   },
@@ -33,4 +33,9 @@ export const popoverProps = {
   },
   /** 受控模式时对应的节点 */
   to: [Object, String] as PropType<HTMLElement | string | Ref<HTMLElement>>,
+  /** 是否显示箭头 */
+  showArrow: {
+    type: Boolean,
+    default: true,
+  },
 };

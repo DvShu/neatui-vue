@@ -58,6 +58,10 @@ export default defineConfig({
             text: '工具样式',
             link: '/css-util',
           },
+          {
+            text: '暗黑模式',
+            link: '/dark',
+          },
         ],
       },
       {
