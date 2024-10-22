@@ -95,6 +95,8 @@ provide(formContext, {
   errors,
   /** 必填字段列表 */
   requiredKeys,
+  labelWidth: () => props.labelWidth,
+  labelPosition: () => props.labelPosition,
 });
 
 provide(formDisabledContext, () => props.disabled);

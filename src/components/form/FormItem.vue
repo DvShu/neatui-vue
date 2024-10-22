@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { Ref, computed, inject, provide } from 'vue';
 import { formContext, formItemDisabledContext } from '../../utils/constant';
+import type { MaybeRefOrGetter } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -44,9 +45,13 @@ const props = withDefaults(
 const defaultFormCtx: {
   errors?: Ref<Record<string, any>>;
   requiredKeys?: Ref<string[]>;
+  labelWidth: MaybeRefOrGetter<string | undefined>;
+  labelPosition: MaybeRefOrGetter<'left' | 'right' | 'top' | undefined>;
 } = {
   errors: undefined,
   requiredKeys: undefined,
+  labelWidth: () => undefined,
+  labelPosition: () => undefined,
 };
 let { errors, requiredKeys } = inject(formContext, defaultFormCtx);
 
