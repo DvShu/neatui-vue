@@ -240,3 +240,12 @@
 | `label-width` | 标签宽度，例如 `50px`                                                                  | `string`  | -      |
 | `error`       | 表单域验证错误时的提示信息。设置该值会导致表单验证状态变为 `error`，并显示该错误信息。 | `string`  | -      |
 | `label-position` | 标签位置, *可选* | `left`、`right`、`top` | - |
+
+### Form Methods
+
+<!-- prettier-ignore -->
+| 方法名 | 说明 | 参数 |
+| ------ | ---- | ---- |
+| `validate` | 对整个表单进行校验的方法 | `() => void` |
+| `validateField` | 对部分表单字段进行校验的方法 | `(field: string \| string[]) => void` |
+| `clearValidate` | 移除表单项的校验结果 | `-` |

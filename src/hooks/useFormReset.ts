@@ -15,5 +15,30 @@ export default function useFormReset<T>(params: T) {
     formFields.value = cloneDeep(params);
   }
 
-  return { formFields, resetFields };
+  /**
+   * 设置单个 key 的值
+   * @param key 指定的key
+   * @param value 指定的值
+   *
+   * @example
+   * set('age', 1);
+   */
+  function setFields(key: string, value: any): void;
+  /**
+   * 设置多个值
+   * @param values 键值对数据
+   *
+   * @example
+   * set({ age: 1, name: 'test'})
+   */
+  function setFields(values: Record<string, any>): void;
+  function setFields(...args: any[]) {
+    if (args.length === 1) {
+      formFields.value = { ...formFields.value, ...args[0] };
+    } else {
+      formFields.value[args[0] as keyof T] = args[1];
+    }
+  }
+
+  return { formFields, resetFields, setFields };
 }

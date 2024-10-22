@@ -13,11 +13,13 @@ import SunIcon from '../icon/Sun.vue';
 import { getTheme, applyTheme } from 'ph-utils/theme';
 
 const theme = ref(getTheme() === 'dark' ? 'dark' : 'auto');
+const emits = defineEmits(['change']);
 
 const toggleTheme = async () => {
   const newTheme = theme.value === 'dark' ? 'auto' : 'dark';
   theme.value = newTheme;
   await applyTheme(newTheme);
+  emits('change', newTheme);
 };
 </script>
 

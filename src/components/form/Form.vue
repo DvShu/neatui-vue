@@ -60,7 +60,7 @@ if (props.model != null && validator != null) {
   const watcher = [];
   for (const key in props.model) {
     keys.push(key);
-    //@ts-ignore
+    //@ts-expect-error: Unreachable code error
     watcher.push(() => props.model[key]);
   }
   if (watcher.length > 0) {
@@ -100,6 +100,17 @@ provide(formDisabledContext, () => props.disabled);
 function handleSubmit(e: Event) {
   e.preventDefault();
   if (validator != null) {
+    validate();
+  } else {
+    emits('submit');
+  }
+}
+
+/**
+ * 校验全部表单数据
+ */
+function validate() {
+  if (validator != null && props.model != null) {
     validator
       .validate(props.model)
       .then(() => {
@@ -111,8 +122,48 @@ function handleSubmit(e: Event) {
           [err.key]: err.message,
         };
       });
-  } else {
-    emits('submit');
   }
 }
+
+/**
+ * 校验部分表单数据
+ * @param field
+ */
+function validateField(field: string | string[]) {
+  if (validator != null && props.model != null) {
+    const tacks: Promise<{
+      key: string;
+      value: any;
+    }>[] = [];
+    if (Array.isArray(field)) {
+      for (let i = 0, len = field.length; i < len; i++) {
+        tacks.push(
+          validator.validateKey(field[i], props.model[field[i]], props.model),
+        );
+      }
+    } else {
+      tacks.push(validator.validateKey(field, props.model[field], props.model));
+    }
+    Promise.allSettled(tacks).then((results) => {
+      for (let i = 0, len = results.length; i < len; i++) {
+        const result = results[i];
+        if (result.status === 'rejected') {
+          errors.value[result.reason.key] = result.reason.message;
+        } else {
+          errors.value[result.value.key] = undefined;
+        }
+      }
+    });
+  }
+}
+
+function clearValidate() {
+  errors.value = {};
+}
+
+defineExpose({
+  validate,
+  validateField,
+  clearValidate,
+});
 </script>

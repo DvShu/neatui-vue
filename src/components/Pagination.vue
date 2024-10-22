@@ -31,12 +31,12 @@
     <template v-else>
       <!-- 首页按钮 -->
       <li :class="['nt-pagination-item', currentPage === 1 ? 'is-active' : '']">
-        <a href="javascript:void" title="1" @click="handleTo(1)">1</a>
+        <a href="javascript:void(0)" title="1" @click="handleTo(1)">1</a>
       </li>
       <!-- 向前5页 -->
       <li class="nt-pagination-item" v-if="currentPage > 4">
         <a
-          href="javascript:void"
+          href="javascript:void(0)"
           @mouseenter="handleMoreHover(1)"
           @mouseleave="handleMoreHover(0)"
           title="向前5页"
@@ -52,14 +52,14 @@
         :key="n"
         :class="['nt-pagination-item', currentPage === n ? 'is-active' : '']"
       >
-        <a href="javascript:void" :title="String(n)" @click="handleTo(n)">{{
+        <a href="javascript:void(0)" :title="String(n)" @click="handleTo(n)">{{
           n
         }}</a>
       </li>
       <!-- 向后5页 -->
       <li class="nt-pagination-item" v-if="currentPage < totalPage - 3">
         <a
-          href="javascript:void"
+          href="javascript:void(0)"
           @mouseenter="handleMoreHover(2)"
           @mouseleave="handleMoreHover(0)"
           title="向前5页"
@@ -78,7 +78,7 @@
           currentPage === totalPage ? 'is-active' : '',
         ]"
       >
-        <a href="javascript:void" :title="totalPage + ''">{{ totalPage }}</a>
+        <a href="javascript:void(0)" :title="totalPage + ''">{{ totalPage }}</a>
       </li>
     </template>
 
