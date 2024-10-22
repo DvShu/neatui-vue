@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.20.0](https://github.com/DvShu/neatui-vue/compare/v0.19.4...v0.20.0) (2024-10-22)
+
+
+### Features
+
+* **BorderLoading:** 新增边框加载自定义指令 ([a8cfad9](https://github.com/DvShu/neatui-vue/commit/a8cfad91dc89023dcce40ac78a434230a81a5915))
+
+
+### Bug Fixes
+
+* **Form:** 表单增加 validate、validateField、clearValidate 手动验证函数 ([20f328f](https://github.com/DvShu/neatui-vue/commit/20f328fe1690a9fa5477fb65c438603b3d4c3e6e))
+* **Input:** 增加只允许输入数字 ([c1e6811](https://github.com/DvShu/neatui-vue/commit/c1e681196a7d6c1e28120f3893e28646c1178def))
+* **Pagination:** 修复点击报错 ([4291b69](https://github.com/DvShu/neatui-vue/commit/4291b6998cd7180d7f846888fc9631419a512fd8))
+* **Theme:** 增加 change 事件 ([6a1d70e](https://github.com/DvShu/neatui-vue/commit/6a1d70ec240430649df6e0f3ece9ffc2580ff173))
+* **useFormReset:** 增加设置函数 ([5a98d11](https://github.com/DvShu/neatui-vue/commit/5a98d110d51bc35028095b283047058d41cf5a83))
+
 ## [0.19.4](https://github.com/DvShu/neatui-vue/compare/v0.19.3...v0.19.4) (2024-10-21)
 
 
