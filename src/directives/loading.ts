@@ -7,6 +7,7 @@ function addLoading(
   modifiers: Record<string, boolean | string>,
   arg?: string,
 ) {
+  if (el.classList.contains('nt-loading')) return;
   let $mask: HTMLElement;
   if (modifiers.fullscreen) {
     // 全屏组件唯一

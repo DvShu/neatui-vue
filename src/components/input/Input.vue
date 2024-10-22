@@ -64,7 +64,7 @@ function numberInputParse(
   }
   const match = val.match(
     new RegExp(
-      `^(${negative}\\d+\\.\\d{0,${config.precition}})|(${negative}\\d*)`,
+      `(${negative}\\d+\\.\\d{0,${config.precition}})|(${negative}\\d*)`,
     ),
   );
   if (match != null) {

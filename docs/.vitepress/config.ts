@@ -246,6 +246,10 @@ export default defineConfig({
             text: 'Loading 加载',
             link: '/components/loading',
           },
+          {
+            text: 'BorderLoading 边框加载',
+            link: '/components/border_loading',
+          },
         ],
       },
     ],
