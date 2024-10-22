@@ -23,7 +23,7 @@ export default function useFormReset<T>(params: T) {
    * @example
    * set('age', 1);
    */
-  function set(key: string, value: any): void;
+  function setFields(key: string, value: any): void;
   /**
    * 设置多个值
    * @param values 键值对数据
@@ -31,8 +31,8 @@ export default function useFormReset<T>(params: T) {
    * @example
    * set({ age: 1, name: 'test'})
    */
-  function set(values: Record<string, any>): void;
-  function set(...args: any[]) {
+  function setFields(values: Record<string, any>): void;
+  function setFields(...args: any[]) {
     if (args.length === 1) {
       formFields.value = { ...formFields.value, ...args[0] };
     } else {
@@ -40,5 +40,5 @@ export default function useFormReset<T>(params: T) {
     }
   }
 
-  return { formFields, resetFields, set };
+  return { formFields, resetFields, setFields };
 }
