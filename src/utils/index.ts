@@ -126,7 +126,7 @@ export function impactDetect(
   const maxWidth = window.innerWidth + scrollLeft - 10;
   // 判断 垂直 方向是否在显示区域内
   let y = targetRect.top + scrollTop - topDiff;
-  let yEnd = y + popoverRect.height;
+  const yEnd = y + popoverRect.height;
   // 1. 首先判断下边界是否超出屏幕
   if (yEnd > maxHeight) {
     // 下边距超出屏幕
@@ -154,7 +154,7 @@ export function impactDetect(
   // 判断 水平 方向是否在显示区域内
   // 1. 首先判断右边界是否超出屏幕
   let x = targetRect.left + scrollLeft - leftDiff;
-  let xEnd = x + popoverRect.width;
+  const xEnd = x + popoverRect.width;
   if (xEnd > maxWidth) {
     // 右边距超出屏幕
     if (mainAlign === 'top' || mainAlign === 'bottom') {

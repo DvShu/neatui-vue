@@ -10,6 +10,10 @@
 
   const inputInt = ref('')
 
+  const input1 = ref('')
+  const input2 = ref('')
+  const input3 = ref('')
+
   function numericParse(value: string) {
     let val = parseInt(value, 10)
     if (Number.isNaN(val)) {
@@ -64,6 +68,27 @@
   </CodePreview>
 </ClientOnly>
 
+### 允许输入的值
+
+通过传递 `allow-input` 来限制输入的值。`integer` 只能输入正整数, `number` 只能输入正数；以 `-` 开头表明允许输入负数; 以 `.2` 结尾表明小数点后精度; 例如: `-number.4` 表明允许输入数字，且小数点后保留4位小数。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue" v-pre>
+  <script setup lang="ts">
+  </script>
+  <template>
+    <hr />
+  </template>
+  </textarea>
+  <template #preview>
+    <Input v-model="input1" placeholder="只能输入正整数" allow-input="integer" />
+    <Input v-model="input2" placeholder="只能输入整数" allow-input="-integer" />
+    <Input v-model="input3" placeholder="输入数字,保留2位小数" allow-input="-number.2" />
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ### 禁用状态
 
 通过 `disabled` 属性设置输入框为禁用状态。
@@ -87,6 +112,7 @@
 | `model-value` / `v-model` | 绑定值  | `string` | — |
 | `placeholder` | 占位文本 | `string` | — |
 | `parser` | 输入时解析值 | `(value: string) => string` | — |
+| `allow-input` | 允许输入的值; `number`、`integer`,前面包含 `-` 表明允许小数, 以 `.2` 结尾表明小数点后精度 | `string` | - |
 
 ### Input Exposes
 
