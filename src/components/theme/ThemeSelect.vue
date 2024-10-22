@@ -23,9 +23,11 @@ const options = [
 ];
 
 const theme = ref(getTheme());
+const emits = defineEmits(['change']);
 
 watch(theme, (val) => {
   applyTheme(val as 'auto').then();
+  emits('change', val);
 });
 </script>
 

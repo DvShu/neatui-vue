@@ -76,7 +76,7 @@ const colorStyle = computed(() => {
     const darken = adjust(props.color, 3, false);
     const cssVars = {
       '--nt-btn-border-color': props.text ? 'transparent' : props.color,
-      '--bt-btn-text-color':
+      '--nt-btn-text-color':
         props.ghost || props.text ? props.color : '#ffffff',
       '--nt-btn-hover-text-color':
         props.ghost || props.text ? lighten : '#ffffff',

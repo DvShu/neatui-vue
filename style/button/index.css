@@ -33,23 +33,11 @@
   color: var(--nt-btn-text-color);
   background: var(--nt-btn-background);
   border: 1px solid var(--nt-btn-border-color);
+  position: relative;
   transition:
     border-color 0.3s,
     background-color 0.3s,
     color 0.3s;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Helvetica Neue,
-    Arial,
-    Noto Sans,
-    sans-serif,
-    apple color emoji,
-    segoe ui emoji,
-    Segoe UI Symbol,
-    noto color emoji;
 }
 
 .nt-btn:hover {
@@ -76,9 +64,9 @@
 
 .nt-btn-normal {
   /* 按钮的文字颜色 */
-  --nt-btn-text-color: rgba(0, 0, 0, 0.65);
+  --nt-btn-text-color: auto;
   /* 按钮的背景色 */
-  --nt-btn-background: #fff;
+  --nt-btn-background: transparent;
   /* 按钮的边框颜色 */
   --nt-btn-border-color: #d9d9d9;
   /* 按钮的悬浮边框 less lighten(var(--nt-primary-color), 10) */
@@ -163,4 +151,12 @@
 
 .nt-btn:not(.nt-btn-text) + .nt-btn {
   margin-left: 10px;
+}
+
+html.dark {
+  .nt-btn:disabled {
+    --nt-btn-disabled-background: rgba(255, 255, 255, 0.08);
+    --nt-btn-disabled-color: rgba(255, 255, 255, 0.3);
+    --nt-btn-disabled-border-color: rgba(255, 255, 255, 0.3);
+  }
 }

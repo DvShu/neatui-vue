@@ -16,36 +16,19 @@ import { popoverProps } from './constant';
 import Clickoutside from '../../directives/clickoutside';
 import { round } from 'ph-utils';
 import { elem } from 'ph-utils/dom';
+import {
+  getPopoverOffsetX,
+  getPopoverOffsetY,
+  impactDetect,
+} from '../../utils';
 
-const XM_REG = /^(left)|(right)/;
+const POS_REG = /^(left|right|top|bottom)(Start|Center|End)?$/;
 
 function getFirstTriggerVNode(slots: any): VNode | null {
   if (slots.trigger != null) {
     return slots.trigger()[0];
   }
   return null;
-}
-
-/** 获取某个节点距离容器顶部和左边的距离 */
-function getDistanceToContainer(el: HTMLElement) {
-  let offsetLeft = 0;
-  let offsetTop = 0;
-  let top = 0;
-  let bottom = 0;
-  let left = 0;
-  let right = 0;
-  while (el) {
-    const rect = el.getBoundingClientRect();
-    offsetTop += el.offsetTop;
-    offsetLeft += el.offsetLeft;
-    top = rect.top;
-    bottom = rect.bottom;
-    left = rect.left;
-    right = rect.right;
-    el = el.offsetParent as HTMLElement;
-  }
-
-  return { offsetLeft, offsetTop, top, bottom, left, right };
 }
 
 export default defineComponent({
@@ -99,120 +82,61 @@ export default defineComponent({
       show.value = true;
 
       nextTick(() => {
-        const { offsetLeft, offsetTop, top, left } =
-          getDistanceToContainer($target);
-        let topDiff = 0;
-        let leftDiff = 0;
-        let tmpPlace = props.placement;
+        // 获取水平和垂直方向的位置
+        let mainPos = 'bottom';
+        let crossPos = '';
+        const poss = props.placement.match(POS_REG);
+        if (poss != null) {
+          mainPos = poss[1];
+          crossPos = poss[2] || '';
+        }
+        let x = 0,
+          y = 0;
+        // 获取滚动容器
+        const container = document.documentElement;
+        // 滚动条水平方向滚动距离
+        const scrollLeft = container.scrollLeft;
+        // 滚动条垂直方向滚动距离
+        const scrollTop = container.scrollTop;
+
         if ($popover.value != null) {
           const popoverRect = $popover.value.getBoundingClientRect();
           const targetRect = $target.getBoundingClientRect();
-          if (props.placement.startsWith('top')) {
-            topDiff = popoverRect.height + 8;
-          } else if (props.placement.startsWith('bottom')) {
-            topDiff = -(targetRect.height + 8);
-          } else if (
-            props.placement === 'left' ||
-            props.placement === 'right'
-          ) {
-            topDiff = popoverRect.height / 2 - targetRect.height / 2;
-          } else if (
-            props.placement === 'leftBottom' ||
-            props.placement === 'rightBottom'
-          ) {
-            topDiff = popoverRect.height - targetRect.height;
-          }
-
-          if (props.placement.startsWith('left')) {
-            leftDiff = popoverRect.width + 8;
-          } else if (props.placement.startsWith('right')) {
-            leftDiff = -(targetRect.width + 8);
-          } else if (
-            props.placement === 'top' ||
-            props.placement === 'bottom'
-          ) {
-            leftDiff = popoverRect.width / 2 - targetRect.width / 2;
-          } else if (
-            props.placement === 'bottomRight' ||
-            props.placement === 'topRight'
-          ) {
-            leftDiff = popoverRect.width - targetRect.width;
-          }
-
-          const posLeft = offsetLeft - leftDiff;
-          let xPos = '';
-          let yPos = '';
-
-          if (
-            offsetTop - topDiff + popoverRect.height >=
-            Math.abs(top) + window.innerHeight - 15
-          ) {
-            if (props.placement.match(XM_REG)) {
-              yPos = 'bottom';
-              topDiff = popoverRect.height - targetRect.height;
-            } else {
-              yPos = 'top';
-              topDiff = popoverRect.height + 8;
-            }
-          }
-          if (offsetTop - topDiff <= Math.abs(top)) {
-            if (props.placement.match(XM_REG)) {
-              yPos = 'top';
-              topDiff = 0;
-            } else {
-              yPos = 'bottom';
-              topDiff = -(targetRect.height + 8);
-            }
-          }
-
-          if (posLeft <= Math.abs(left)) {
-            xPos = 'left';
-            leftDiff = 0;
-          }
-          if (
-            posLeft + popoverRect.width >=
-            Math.abs(left) + window.innerWidth - 15
-          ) {
-            xPos = 'left';
-            leftDiff = 0;
-          }
-
-          if (xPos === '' && yPos === '') {
-            tmpPlace = props.placement;
-          } else {
-            if (xPos === '') {
-              if (props.placement.match(/left/i)) {
-                xPos = 'left';
-              } else if (props.placement.match(/right/i)) {
-                xPos = 'right';
-              }
-            }
-            if (yPos === '') {
-              if (props.placement.match(/top/i)) {
-                yPos = 'top';
-              }
-              if (props.placement.match(/bottom/i)) {
-                yPos = 'bottom';
-              }
-            }
-            if (props.placement.match(/^(left)|(right)/)) {
-              const yName =
-                yPos === '' ? '' : yPos[0].toUpperCase() + yPos.substring(1);
-              tmpPlace = `${xPos}${yName}` as any;
-            } else if (props.placement.match(/^(top)|(bottom)/)) {
-              const xName =
-                xPos === '' ? '' : xPos[0].toUpperCase() + xPos.substring(1);
-              tmpPlace = `${yPos}${xName}` as any;
-            }
-          }
+          // 获取水平、垂直方向弹窗坐标点偏移
+          const yOffset = getPopoverOffsetY(
+            targetRect,
+            popoverRect,
+            mainPos,
+            crossPos,
+          );
+          const xOffset = getPopoverOffsetX(
+            targetRect,
+            popoverRect,
+            mainPos,
+            crossPos,
+          );
+          // 碰撞检测
+          const impactRes = impactDetect(
+            targetRect,
+            popoverRect,
+            mainPos,
+            crossPos,
+            scrollLeft,
+            scrollTop,
+            xOffset,
+            yOffset,
+          );
+          x = impactRes.x;
+          y = impactRes.y;
+          mainPos = impactRes.mainAlign;
+          crossPos = impactRes.crossAlign;
         }
-        const posTop = round(offsetTop - topDiff);
-        const posLeft = round(offsetLeft - leftDiff);
+
         posStyle.value = {
-          top: `${posTop}px`,
-          left: `${posLeft}px`,
+          top: `${round(y)}px`,
+          left: `${round(x)}px`,
         };
-        place.value = tmpPlace;
+        place.value = `${mainPos}${crossPos}` as any;
       });
     }
 
@@ -316,7 +240,9 @@ export default defineComponent({
                         : props.content != null
                           ? h('span', props.content)
                           : null,
-                      h('span', { class: 'nt-popover-arrow' }),
+                      props.showArrow
+                        ? h('span', { class: 'nt-popover-arrow' })
+                        : null,
                     ],
                   ),
                   [[vShow, show.value]],

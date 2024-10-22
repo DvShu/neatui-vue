@@ -1,5 +1,55 @@
 # Changelog
 
+## [0.19.4](https://github.com/DvShu/neatui-vue/compare/v0.19.3...v0.19.4) (2024-10-21)
+
+
+### Bug Fixes
+
+* **Button:** 修复暗黑模式下样式显示异常 ([011a02e](https://github.com/DvShu/neatui-vue/commit/011a02eb1201f29fae7aa3793756b372648792d7))
+* **Card:** 修复暗黑模式下样式显示异常 ([9f67504](https://github.com/DvShu/neatui-vue/commit/9f67504df474d52b39b769cf04dcbc827c7b4661))
+* **Image:** 修复无法传递自定义样式、支持自定义fallback ([2009296](https://github.com/DvShu/neatui-vue/commit/2009296a13a3d7127f7b071ae3ff83fcb5f0414b))
+* **SelectOri:** 修复选择框 ts 类型错误 ([8b07d66](https://github.com/DvShu/neatui-vue/commit/8b07d668bafd39f274b2f17ac32da141e48b8708))
+
+## [0.19.3](https://github.com/DvShu/neatui-vue/compare/v0.19.2...v0.19.3) (2024-10-09)
+
+
+### Bug Fixes
+
+* **PageHeader:** 修复样式错误导致无法显示标题 ([e250e8f](https://github.com/DvShu/neatui-vue/commit/e250e8f5c8092b5dfc547ca634cf1e8b332a968c))
+
+## [0.19.2](https://github.com/DvShu/neatui-vue/compare/v0.19.1...v0.19.2) (2024-09-26)
+
+
+### Bug Fixes
+
+* **MdInput:** 修复赋予初始值时显示异常 ([3c1c96a](https://github.com/DvShu/neatui-vue/commit/3c1c96a4c07cd76895e6110f510b506252ac3e66))
+
+## [0.19.1](https://github.com/DvShu/neatui-vue/compare/v0.19.0...v0.19.1) (2024-09-26)
+
+
+### Bug Fixes
+
+* **MdInput:** 修复样式以及输入错误 ([c639207](https://github.com/DvShu/neatui-vue/commit/c6392077b04faad303a8c5c78556926b1937e3ad))
+
+## [0.19.0](https://github.com/DvShu/neatui-vue/compare/v0.18.1...v0.19.0) (2024-09-26)
+
+
+### Features
+
+* 表单增加 label-position ([ab373ff](https://github.com/DvShu/neatui-vue/commit/ab373ffb90e68c147b5a513c0bc96fe1d9f5b4c9))
+
+
+### Bug Fixes
+
+* 修复 IconFont 导出错误 ([ab373ff](https://github.com/DvShu/neatui-vue/commit/ab373ffb90e68c147b5a513c0bc96fe1d9f5b4c9))
+
+## [0.18.1](https://github.com/DvShu/neatui-vue/compare/v0.18.0...v0.18.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* 修复未导出 IconFont 组件 ([041e108](https://github.com/DvShu/neatui-vue/commit/041e108f97d0c1bd3fcdb9146866a710d1b3f48e))
+
 ## [0.18.0](https://github.com/DvShu/neatui-vue/compare/v0.17.0...v0.18.0) (2024-09-18)
 
 

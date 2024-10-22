@@ -1,0 +1,34 @@
+/** 加载框 */
+.nt-loading-inner {
+  --nt-loading-color: var(--nt-primary-color, #722ed1);
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 2px solid var(--nt-loading-color);
+  border-radius: var(--nt-loading-border-radius, 0);
+  animation: borderLoadingAnim var(--nt-loading-timing, 5s) infinite linear;
+}
+@keyframes borderLoadingAnim {
+  0%,
+  100% {
+    clip: rect(0 var(--nt-loading-width) 2px 0);
+  }
+  25% {
+    clip: rect(
+      0 var(--nt-loading-width) var(--nt-loading-height)
+        calc(var(--nt-loading-width) - 2px)
+    );
+  }
+  50% {
+    clip: rect(
+      calc(var(--nt-loading-height) - 2px) var(--nt-loading-width)
+        var(--nt-loading-height) 0
+    );
+  }
+  75% {
+    clip: rect(0 2px var(--nt-loading-height) 0);
+  }
+}

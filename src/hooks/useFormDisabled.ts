@@ -17,6 +17,7 @@ export default function useDisabled(
       return toValue<boolean>(formItemDisabeld as boolean);
     if (toValue(formDisabled) != null)
       return toValue<boolean>(formDisabled as boolean);
+    return false;
   });
 
   return isDisabled;

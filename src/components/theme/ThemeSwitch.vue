@@ -15,8 +15,10 @@ import SunIcon from '../icon/Sun.vue';
 import { getTheme, applyTheme } from 'ph-utils/theme';
 
 const isDark = ref(getTheme() === 'dark');
+const emits = defineEmits(['change']);
 
 watch(isDark, (val) => {
   applyTheme(val ? 'dark' : 'auto').then();
+  emits('change', val);
 });
 </script>

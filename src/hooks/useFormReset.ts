@@ -1,5 +1,6 @@
 import { ref } from 'vue';
 import { cloneDeep } from '../utils';
+import type { Ref } from 'vue';
 
 /**
  * 数据重置, 通常用于表单
@@ -7,12 +8,37 @@ import { cloneDeep } from '../utils';
  * @param params 表单数据
  * @returns
  */
-export default function useFormReset<T extends Record<string, any>>(params: T) {
-  const formFields = ref<T>(cloneDeep(params));
+export default function useFormReset<T>(params: T) {
+  const formFields: Ref<T> = ref(cloneDeep(params));
 
   function resetFields() {
     formFields.value = cloneDeep(params);
   }
 
-  return { formFields, resetFields };
+  /**
+   * 设置单个 key 的值
+   * @param key 指定的key
+   * @param value 指定的值
+   *
+   * @example
+   * set('age', 1);
+   */
+  function setFields(key: string, value: any): void;
+  /**
+   * 设置多个值
+   * @param values 键值对数据
+   *
+   * @example
+   * set({ age: 1, name: 'test'})
+   */
+  function setFields(values: Record<string, any>): void;
+  function setFields(...args: any[]) {
+    if (args.length === 1) {
+      formFields.value = { ...formFields.value, ...args[0] };
+    } else {
+      formFields.value[args[0] as keyof T] = args[1];
+    }
+  }
+
+  return { formFields, resetFields, setFields };
 }

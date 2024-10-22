@@ -58,6 +58,10 @@ export default defineConfig({
             text: '工具样式',
             link: '/css-util',
           },
+          {
+            text: '暗黑模式',
+            link: '/dark',
+          },
         ],
       },
       {
@@ -241,6 +245,10 @@ export default defineConfig({
           {
             text: 'Loading 加载',
             link: '/components/loading',
+          },
+          {
+            text: 'BorderLoading 边框加载',
+            link: '/components/border_loading',
           },
         ],
       },

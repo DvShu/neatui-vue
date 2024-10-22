@@ -1,8 +1,10 @@
 .nt-card {
+  --nt-background-color: #ffffff;
+  --nt-text-color: #333;
   border-radius: 4px;
   border: 1px solid var(--nt-border-color);
-  background-color: #ffffff;
-  color: #333;
+  background-color: var(--nt-background-color);
+  color: var(--nt-text-color);
   box-shadow:
     0 1px 3px 0 rgb(0 0 0 / 0.1),
     0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -23,4 +25,12 @@
 .nt-card__body,
 .nt-card__footer {
   padding: 15px;
+}
+.nt-header-extra:empty {
+  display: none;
+}
+html.dark .nt-card {
+  --nt-background-color: #232324;
+  --nt-text-color: rgba(255, 255, 255, 0.7);
+  --nt-border-color: rgb(72, 72, 73);
 }

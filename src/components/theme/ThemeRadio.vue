@@ -13,9 +13,11 @@ import RadioGroup from '../radio/RadioGroup.vue';
 import { applyTheme, getTheme } from 'ph-utils/theme';
 
 const theme = ref(getTheme());
+const emits = defineEmits(['change']);
 
 watch(theme, (val) => {
   applyTheme(val as 'auto').then();
+  emits('change', val);
 });
 </script>
 
