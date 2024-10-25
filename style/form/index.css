@@ -1,11 +1,19 @@
+.nt-form {
+  display: grid;
+  grid-template-columns: var(--nt-form-label-width, auto) 1fr;
+  row-gap: 20px;
+}
 .nt-form-item {
   display: flex;
   font-size: 14px;
 }
+.nt-form .nt-form-item {
+  display: contents;
+}
 .nt-form-item__label {
-  --nt-form-label-width: 80px;
+  text-align: right;
   display: inline-block;
-  width: var(--nt-form-label-width);
+  width: var(--nt-form-label-width, auto);
   height: var(--nt-form-edit-height, 32px);
   line-height: var(--nt-form-edit-height, 32px);
   color: #606266;
@@ -41,32 +49,31 @@
   width: 100%;
 }
 
-.nt-form-item.nt-form-item-label-right .nt-form-item__label {
-  text-align: right;
-}
-.nt-form-item.nt-form-item-label-left .nt-form-item__label {
+.nt-form--left .nt-form-item__label {
   text-align: left;
 }
-.nt-form-item.nt-form-item-label-top {
-  flex-direction: column;
+.nt-form--top {
+  grid-template-columns: 1fr;
 }
-.nt-form-item.nt-form-item-label-top .nt-form-item__label {
+.nt-form--top .nt-form-item {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.nt-form--top .nt-form-item__label {
   text-align: left;
 }
-.nt-form-item.nt-form-item-label-top .nt-form-item__label:empty {
+.nt-form--top .nt-form-item__label:empty {
   display: none;
 }
 
-.nt-form .nt-form-item {
-  margin-bottom: 20px;
+/** 行内表单 */
+.nt-form-inline {
+  display: flex;
+  gap: 20px;
+  flex-flow: row wrap;
 }
 
-/** 行内表单 */
 .nt-form-inline .nt-form-item {
   display: inline-flex;
   vertical-align: middle;
-  margin-right: 20px;
-}
-.nt-form-inline .nt-form-item__label {
-  --nt-form-label-width: auto;
 }

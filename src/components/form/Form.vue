@@ -1,10 +1,14 @@
 <template>
   <form
-    :class="{
-      'nt-form': true,
-      'nt-form-inline': inline,
-    }"
+    :class="[
+      'nt-form',
+      inline ? 'nt-form-inline' : undefined,
+      `nt-form--${labelPosition}`,
+    ]"
     @submit="handleSubmit"
+    :style="{
+      '--nt-form-label-width': labelWidth ? labelWidth : undefined,
+    }"
   >
     <slot></slot>
   </form>
@@ -91,8 +95,6 @@ provide(formContext, {
   errors,
   /** 必填字段列表 */
   requiredKeys,
-  labelWidth: () => props.labelWidth,
-  labelPosition: () => props.labelPosition,
 });
 
 provide(formDisabledContext, () => props.disabled);

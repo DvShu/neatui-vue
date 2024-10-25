@@ -175,23 +175,15 @@
     <nt-form-item label="密码">
       <nt-input placeholder="请输入密码"></nt-input>
     </nt-form-item>
-    <nt-form-item>
+    <nt-form-item label="">
       <nt-button html-type="submit">提交</nt-button>
     </nt-form-item>
   </nt-form>
   </textarea>
   <template #preview>
-    <Form label-width="120px" :label-position="formAlign">
+    <Form :label-position="formAlign">
       <FormItem label="FormAlign" :label-position="itemAlign">
         <RadioGroup v-model="formAlign">
-          <Radio label="Left" value="left" type="button" />
-          <Radio label="Right" value="right" type="button" />
-          <Radio label="Top" value="top" type="button" />
-        </RadioGroup>
-      </FormItem>
-      <FormItem label="FormItemAlign" :label-position="itemAlign">
-        <RadioGroup v-model="formItemAlign">
-          <Radio label="Null" value="null" type="button" />
           <Radio label="Left" value="left" type="button" />
           <Radio label="Right" value="right" type="button" />
           <Radio label="Top" value="top" type="button" />
@@ -216,11 +208,11 @@
 ### Form Props
 
 <!-- prettier-ignore -->
-| 参数          | 说明                                                                        | 类型                  | 默认值 |
-| ------------- | --------------------------------------------------------------------------- | --------------------- | ------ |
-| `model`       | 表单数据对象                                                                | `Record<string, any>` | -      |
-| `rules`       | 表单验证规则                                                                | `FormRule[]`          | -      |
-| `label-width` | 标签的长度，例如 `50px`。 作为 `Form` 直接子元素的 `form-item` 会继承该值。 | `string`              | -      |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `model` | 表单数据对象 | `Record<string, any>` | - |
+| `rules` | 表单验证规则 | `FormRule[]` | - |
+| `label-width` | 标签的长度，例如 `50px`。 作为 `Form` 直接子元素的 `form-item` 会继承该值。 | `string` | `auto` |
 | `label-position` | 标签的位置 | `left`、`right`、`top` | `right` |
 
 ### Form Events
@@ -232,14 +224,12 @@
 ### FormItem Props
 
 <!-- prettier-ignore -->
-| 参数          | 说明                                                                                   | 类型      | 默认值 |
-| ------------- | -------------------------------------------------------------------------------------- | --------- | ------ |
-| `label`       | 标签文本                                                                               | `string`  | -      |
-| `required`    | 是否为必填项，如不设置，则会根据校验规则确认                                           | `boolean` | -      |
-| `name`        | `model` 的键名; 使用表单校验时必填                                                     | `string`  | -      |
-| `label-width` | 标签宽度，例如 `50px`                                                                  | `string`  | -      |
-| `error`       | 表单域验证错误时的提示信息。设置该值会导致表单验证状态变为 `error`，并显示该错误信息。 | `string`  | -      |
-| `label-position` | 标签位置, *可选* | `left`、`right`、`top` | - |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `label` | 标签文本 | `string`  | - |
+| `required` | 是否为必填项，如不设置，则会根据校验规则确认 | `boolean` | - |
+| `name` | `model` 的键名; 使用表单校验时必填 | `string` | - |
+| `error`| 表单域验证错误时的提示信息。设置该值会导致表单验证状态变为 `error`，并显示该错误信息。 | `string`  | - |
 
 ### Form Methods
 

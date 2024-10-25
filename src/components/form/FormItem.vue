@@ -2,12 +2,11 @@
   <div
     :class="[
       'nt-form-item',
-      'nt-form-item-label-' + lpRef,
       isRequired ? 'is-required' : undefined,
       errorMsg != null ? 'is-error' : undefined,
     ]"
   >
-    <label class="nt-form-item__label" :style="styleObj" v-if="label != null">
+    <label class="nt-form-item__label" v-if="label != null">
       {{ label }}
     </label>
     <div class="nt-form-item__content">
@@ -19,17 +18,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Ref, computed, inject, provide, toValue } from 'vue';
+import { Ref, computed, inject, provide } from 'vue';
 import { formContext, formItemDisabledContext } from '../../utils/constant';
-import type { MaybeRefOrGetter } from 'vue';
 
 const props = withDefaults(
   defineProps<{
     /** 标签文本 */
     label?: string;
-    /** 标签的宽度, 默认: 80px */
-    labelWidth?: string;
-    labelPosition?: 'left' | 'right' | 'top';
     /** 字段是否必须 */
     required?: boolean;
     /** model 的键名; 在使用了 validate、resetFields 的方法时，该属性是必填的 */
@@ -49,18 +44,11 @@ const props = withDefaults(
 const defaultFormCtx: {
   errors?: Ref<Record<string, any>>;
   requiredKeys?: Ref<string[]>;
-  labelWidth: MaybeRefOrGetter<string | undefined>;
-  labelPosition: MaybeRefOrGetter<'left' | 'right' | 'top' | undefined>;
 } = {
   errors: undefined,
   requiredKeys: undefined,
-  labelWidth: () => undefined,
-  labelPosition: () => undefined,
 };
-let { errors, requiredKeys, labelWidth, labelPosition } = inject(
-  formContext,
-  defaultFormCtx,
-);
+let { errors, requiredKeys } = inject(formContext, defaultFormCtx);
 
 // 是否有错误
 const errorMsg = computed(() => {
@@ -82,28 +70,6 @@ const isRequired = computed(() => {
     return requiredKeys.value.includes(props.name);
   }
   return false;
-});
-
-const styleObj = computed(() => {
-  const styl: Record<string, string> = {};
-  // label-width
-  if (toValue(labelWidth) != null) {
-    styl['--nt-form-label-width'] = toValue(labelWidth) as string;
-  }
-  if (props.labelWidth != null) {
-    styl['--nt-form-label-width'] = props.labelWidth;
-  }
-  return styl;
-});
-
-const lpRef = computed(() => {
-  let lp = 'right';
-  if (props.labelPosition != null) {
-    lp = props.labelPosition;
-  } else if (toValue(labelPosition) != null) {
-    lp = toValue(labelPosition) as string;
-  }
-  return lp;
 });
 
 provide(formItemDisabledContext, () => props.disabled);
