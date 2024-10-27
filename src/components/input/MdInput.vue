@@ -31,6 +31,7 @@ import { random, isBlank } from 'ph-utils';
 const el = ref<HTMLInputElement>();
 
 const modelValue = defineModel<string | number>();
+const emits = defineEmits(['focus', 'blur']);
 
 const focused = ref(false);
 
@@ -63,10 +64,12 @@ function focus() {
 
 function handleInputFocus() {
   focused.value = true;
+  emits('focus');
 }
 
 function handleInputBlur() {
   focused.value = false;
+  emits('blur');
 }
 
 const hasValue = computed(() => {
