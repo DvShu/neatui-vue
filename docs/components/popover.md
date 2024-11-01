@@ -83,9 +83,9 @@
   <CodePreview>
   <textarea lang="vue-html">
   <div class="popover-p-row">
-    <nt-popover content="提示内容" placement="topStart">
+    <nt-popover content="提示内容" placement="top-start">
       <template #trigger>
-        <nt-button>topStart</nt-button>
+        <nt-button>top-start</nt-button>
       </template>
     </nt-popover>
     <nt-popover content="提示内容" placement="top">
@@ -93,16 +93,16 @@
         <nt-button>top</nt-button>
       </template>
     </nt-popover>
-    <nt-popover content="提示内容" placement="topEnd">
+    <nt-popover content="提示内容" placement="top-end">
       <template #trigger>
-        <nt-button>topEnd</nt-button>
+        <nt-button>top-end</nt-button>
       </template>
     </nt-popover>
   </div>
   <div class="popover-p-row">
-    <nt-popover content="提示内容" placement="leftStart">
+    <nt-popover content="提示内容" placement="left-start">
       <template #trigger>
-        <nt-button>leftStart</nt-button>
+        <nt-button>left-start</nt-button>
       </template>
     </nt-popover>
     <nt-popover content="提示内容" placement="left">
@@ -110,16 +110,16 @@
         <nt-button>left</nt-button>
       </template>
     </nt-popover>
-    <nt-popover content="提示内容" placement="leftEnd">
+    <nt-popover content="提示内容" placement="left-end">
       <template #trigger>
-        <nt-button>leftEnd</nt-button>
+        <nt-button>left-end</nt-button>
       </template>
     </nt-popover>
   </div>
   <div class="popover-p-row">
-    <nt-popover content="提示内容" placement="rightStart">
+    <nt-popover content="提示内容" placement="right-start">
       <template #trigger>
-        <nt-button>rightStart</nt-button>
+        <nt-button>right-start</nt-button>
       </template>
     </nt-popover>
     <nt-popover content="提示内容" placement="right">
@@ -127,16 +127,16 @@
         <nt-button>right</nt-button>
       </template>
     </nt-popover>
-    <nt-popover content="提示内容" placement="rightEnd">
+    <nt-popover content="提示内容" placement="right-end">
       <template #trigger>
-        <nt-button>rightEnd</nt-button>
+        <nt-button>right-end</nt-button>
       </template>
     </nt-popover>
   </div>
   <div class="popover-p-row">
-    <nt-popover content="提示内容" placement="bottomStart">
+    <nt-popover content="提示内容" placement="bottom-start">
       <template #trigger>
-        <nt-button>bottomStart</nt-button>
+        <nt-button>bottom-start</nt-button>
       </template>
     </nt-popover>
     <nt-popover content="提示内容" placement="bottom">
@@ -144,18 +144,18 @@
         <nt-button>bottom</nt-button>
       </template>
     </nt-popover>
-    <nt-popover content="提示内容" placement="bottomEnd">
+    <nt-popover content="提示内容" placement="bottom-end">
       <template #trigger>
-        <nt-button>bottomEnd</nt-button>
+        <nt-button>bottom-end</nt-button>
       </template>
     </nt-popover>
   </div>
   </textarea>
   <template #preview>
     <div class="popover-p-row">
-      <Popover content="提示内容" placement="topStart">
+      <Popover content="提示内容" placement="top-start">
         <template #trigger>
-          <Button>topStart</Button>
+          <Button>top-start</Button>
         </template>
       </Popover>
       <Popover content="提示内容" placement="top">
@@ -163,16 +163,16 @@
           <Button>top</Button>
         </template>
       </Popover>
-      <Popover content="提示内容" placement="topEnd">
+      <Popover content="提示内容" placement="top-end">
         <template #trigger>
-          <Button>topEnd</Button>
+          <Button>top-end</Button>
         </template>
       </Popover>
     </div>
     <div class="popover-p-row">
-      <Popover content="提示内容" placement="leftStart">
+      <Popover content="提示内容" placement="left-start">
         <template #trigger>
-          <Button>leftStart</Button>
+          <Button>left-start</Button>
         </template>
       </Popover>
       <Popover content="提示内容" placement="left">
@@ -180,16 +180,16 @@
           <Button>left</Button>
         </template>
       </Popover>
-      <Popover content="提示内容" placement="leftEnd">
+      <Popover content="提示内容" placement="left-end">
         <template #trigger>
-          <Button>leftEnd</Button>
+          <Button>left-end</Button>
         </template>
       </Popover>
     </div>
     <div class="popover-p-row">
-      <Popover content="提示内容" placement="rightStart">
+      <Popover content="提示内容" placement="right-start">
         <template #trigger>
-          <Button>rightStart</Button>
+          <Button>right-start</Button>
         </template>
       </Popover>
       <Popover content="提示内容" placement="right">
@@ -197,16 +197,16 @@
           <Button>right</Button>
         </template>
       </Popover>
-      <Popover content="提示内容" placement="rightEnd">
+      <Popover content="提示内容" placement="right-end">
         <template #trigger>
-          <Button>rightEnd</Button>
+          <Button>right-end</Button>
         </template>
       </Popover>
     </div>
     <div class="popover-p-row">
-      <Popover content="提示内容" placement="bottomStart">
+      <Popover content="提示内容" placement="bottom-start">
         <template #trigger>
-          <Button>bottomStart</Button>
+          <Button>bottom-start</Button>
         </template>
       </Popover>
       <Popover content="提示内容" placement="bottom">
@@ -214,9 +214,9 @@
           <Button>bottom</Button>
         </template>
       </Popover>
-      <Popover content="提示内容" placement="bottomEnd">
+      <Popover content="提示内容" placement="bottom-end">
         <template #trigger>
-          <Button>bottomEnd</Button>
+          <Button>bottom-end</Button>
         </template>
       </Popover>
     </div>
@@ -284,7 +284,7 @@
 | --- | --- | --- | --- |
 | `trigger` | 触发方式 | `hover`、`click` | `hover` |
 | `content` | 显示内容, 也可以通过 `default-slot` 显示 | `string` | - |
-| `placement` | 弹出位置 | `topStart`、`top`、`topEnd`、`leftStart`、`left`、`leftEnd`、`rightStart`、`right`、`rightEnd`、`bottomStart`、`bottom`、`bottomEnd` | `top` |
+| `placement` | 弹出位置 | `top-start`、`top`、`top-end`、`left-start`、`left`、`left-end`、`right-start`、`right`、`right-end`、`bottom-start`、`bottom`、`bottom-end` | `top` |
 | `visible` | 受控模式显示与隐藏 | `boolean` | - |
 | `to` | 受控模式下起泡对标元素 | `HTMLElement`、`string`、`Ref<HTMLElement>` | - |
 

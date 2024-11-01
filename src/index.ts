@@ -49,6 +49,7 @@ export { default as Message } from './components/message/index';
 export { default as Card } from './components/Card.vue';
 
 export { default as Popover } from './components/popover/Popover.vue';
+export { default as FloatingPopover } from './components/popover/FloatingPopover.vue';
 export { default as Tooltip } from './components/popover/Tooltip.vue';
 export { default as Dialog } from './components/dialog/Dialog.vue';
 export { default as DialogBox } from './components/dialog/DialogBox';

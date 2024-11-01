@@ -217,6 +217,10 @@ export default defineConfig({
             link: '/components/popover',
           },
           {
+            text: 'FloatingPopover',
+            link: '/components/floating_popover',
+          },
+          {
             text: 'Dialog 对话框',
             link: '/components/dialog',
           },

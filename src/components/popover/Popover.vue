@@ -22,8 +22,6 @@ import {
   impactDetect,
 } from '../../utils';
 
-const POS_REG = /^(left|right|top|bottom)(Start|Center|End)?$/;
-
 function getFirstTriggerVNode(slots: any): VNode | null {
   if (slots.trigger != null) {
     return slots.trigger()[0];
@@ -85,10 +83,10 @@ export default defineComponent({
         // 获取水平和垂直方向的位置
         let mainPos = 'bottom';
         let crossPos = '';
-        const poss = props.placement.match(POS_REG);
+        const poss = props.placement.split('-');
         if (poss != null) {
-          mainPos = poss[1];
-          crossPos = poss[2] || '';
+          mainPos = poss[0];
+          crossPos = poss[1] || '';
         }
         let x = 0,
           y = 0;
@@ -136,7 +134,8 @@ export default defineComponent({
           top: `${round(y)}px`,
           left: `${round(x)}px`,
         };
-        place.value = `${mainPos}${crossPos}` as any;
+        place.value =
+          `${mainPos}${crossPos === '' ? '' : '-' + crossPos}` as any;
       });
     }
 

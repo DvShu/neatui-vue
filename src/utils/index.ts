@@ -83,7 +83,7 @@ export function getPopoverOffsetY(
   } else if (mainAlign === 'left' || mainAlign === 'right') {
     if (crossAlign === '') {
       topDiff = popoverRect.height / 2 - targetRect.height / 2;
-    } else if (crossAlign === 'End') {
+    } else if (crossAlign === 'end') {
       topDiff = popoverRect.height - targetRect.height;
     }
   }
@@ -105,7 +105,7 @@ export function getPopoverOffsetX(
   } else if (mainAlign === 'top' || mainAlign === 'bottom') {
     if (crossAlign === '') {
       leftDiff = popoverRect.width / 2 - targetRect.width / 2;
-    } else if (crossAlign === 'End') {
+    } else if (crossAlign === 'end') {
       leftDiff = popoverRect.width - targetRect.width;
     }
   }
@@ -131,7 +131,7 @@ export function impactDetect(
   if (yEnd > maxHeight) {
     // 下边距超出屏幕
     if (mainAlign === 'left' || mainAlign === 'right') {
-      crossAlign = 'End';
+      crossAlign = 'end';
     } else {
       mainAlign = 'top';
     }
@@ -143,7 +143,7 @@ export function impactDetect(
   if (y < scrollTop) {
     // 上边距超出屏幕
     if (mainAlign === 'left' || mainAlign === 'right') {
-      crossAlign = 'Start';
+      crossAlign = 'start';
     } else {
       mainAlign = 'bottom';
     }
@@ -158,7 +158,7 @@ export function impactDetect(
   if (xEnd > maxWidth) {
     // 右边距超出屏幕
     if (mainAlign === 'top' || mainAlign === 'bottom') {
-      crossAlign = 'End';
+      crossAlign = 'end';
     } else {
       mainAlign = 'left';
     }
@@ -175,7 +175,7 @@ export function impactDetect(
   if (x < scrollLeft) {
     // 左边距超出屏幕
     if (mainAlign === 'top' || mainAlign === 'bottom') {
-      crossAlign = 'Start';
+      crossAlign = 'start';
     } else {
       mainAlign = 'right';
     }

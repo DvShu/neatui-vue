@@ -3,7 +3,7 @@ import type { PropType, Ref } from 'vue';
 export const popoverProps = {
   /** 触发方式: hover - 渲染, click - 点击 */
   trigger: {
-    type: String as PropType<'hover' | 'click'>,
+    type: String as PropType<'hover' | 'click' | 'focus'>,
     default: 'hover',
   },
   /** 显示的内容，也可以通过写入默认 slot 修改显示内容 */
@@ -11,18 +11,18 @@ export const popoverProps = {
   /** 弹出位置 */
   placement: {
     type: String as PropType<
-      | 'topStart'
+      | 'top-start'
       | 'top'
-      | 'topEnd'
-      | 'bottomStart'
+      | 'top-end'
+      | 'bottom-start'
       | 'bottom'
-      | 'bottomEnd'
+      | 'bottom-end'
       | 'left'
-      | 'leftStart'
-      | 'leftEnd'
+      | 'left-start'
+      | 'left-end'
       | 'right'
-      | 'rightStart'
-      | 'rightEnd'
+      | 'right-start'
+      | 'right-end'
     >,
     default: 'top',
   },
