@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.20.2](https://github.com/DvShu/neatui-vue/compare/v0.20.1...v0.20.2) (2024-11-04)
+
+### Features
+
+- **FloatingPopover** 新增基于 floating-ui 的 popover 组件 ([6c54698 ](https://github.com/DvShu/neatui-vue/commit/6c54698))
+
 ## [0.20.1](https://github.com/DvShu/neatui-vue/compare/v0.20.0...v0.20.1) (2024-10-27)
 
 ### Bug Fixes
