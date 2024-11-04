@@ -2,31 +2,36 @@
 import {
   defineComponent,
   h,
-  onMounted,
-  reactive,
+  nextTick,
   ref,
   Teleport,
   Transition,
+  vShow,
+  withDirectives,
 } from 'vue';
 import { popoverProps } from './constant';
-import { arrow, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { computePosition, flip, offset, shift } from '@floating-ui/dom';
+import useDebounce from '../../hooks/useDebounce';
+import Clickoutside from '../../directives/clickoutside';
 
 export default defineComponent({
   name: 'FloatingPopover',
   props: popoverProps,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     /** 是否显示浮窗 */
     const show = ref(false);
+    const place = ref(props.placement);
 
     const $reference = ref<HTMLElement>();
     const $floating = ref<HTMLDivElement>();
-    const $arrow = ref<HTMLSpanElement>();
     const popoverStyle = ref({});
-    const arrowStyle = ref({});
 
-    const triggerProps: any = {
-      ref: $reference,
-    };
+    const { run: hideFn, cancel: cancelHide } = useDebounce(
+      () => (show.value = false),
+      100,
+    );
+
+    const triggerProps: any = {};
     if (props.trigger === 'hover') {
       // 鼠标悬浮
       triggerProps.onMouseleave = handleTriggerLeave;
@@ -40,64 +45,83 @@ export default defineComponent({
       triggerProps.onBlur = handleTriggerBlur;
     }
 
-    function handleTriggerClick() {}
+    function handleTriggerClick(e: Event) {
+      const $target = e.currentTarget as HTMLElement;
+      // 点击的不是 popover 元素，才切换 popover
+      if (!$target.classList.contains('nt-popover')) {
+        if (!show.value) {
+          showFn(e.target as HTMLElement);
+        } else {
+          show.value = false;
+        }
+      } else {
+        cancelHide();
+      }
+    }
 
     function handleTriggerLeave() {
-      console.log('mouseLeave');
+      hideFn();
     }
 
-    function handleTriggerEnter() {
-      console.log('mouseEnter');
+    function handleTriggerEnter(e: Event) {
+      showFn(e.target as HTMLElement);
     }
 
-    function handleTriggerFocus() {}
+    function handleTriggerFocus(e: Event) {
+      showFn(e.target as HTMLElement);
+    }
 
-    function handleTriggerBlur() {}
+    function handleTriggerBlur() {
+      hideFn();
+    }
 
-    onMounted(() => {
-      if ($reference.value && $floating.value) {
-        computePosition($reference.value, $floating.value, {
-          placement: props.placement,
-          middleware: [
-            offset(6),
-            flip(),
-            shift({ padding: 5 }),
-            arrow({ element: $arrow.value as HTMLElement }),
-          ],
-        }).then(({ x, y, placement, middlewareData }) => {
-          popoverStyle.value = {
-            left: `${x}px`,
-            top: `${y}px`,
-          };
-
-          const arrowData = middlewareData.arrow;
-          let arrowX = null;
-          let arrowY = null;
-          if (arrowData != null) {
-            arrowX = arrowData.x;
-            arrowY = arrowData.y;
-          }
-          const staticSide = {
-            top: 'bottom',
-            right: 'left',
-            bottom: 'top',
-            left: 'right',
-          }[placement.split('-')[0]];
-          arrowStyle.value = {
-            left: arrowX != null ? `${arrowX}px` : '',
-            top: arrowY != null ? `${arrowY}px` : '',
-            right: '',
-            bottom: '',
-            transform: 'rotate(45deg)',
-            [staticSide as string]: '-4px',
-          };
-        });
+    function showFn($target: HTMLElement) {
+      if (show.value) {
+        cancelHide();
+        return;
       }
-    });
+      // 鼠标移动到悬浮内容上
+      if ($target.classList.contains('nt-popover')) return;
+      show.value = true;
+      nextTick(() => {
+        if ($reference.value && $floating.value) {
+          computePosition($reference.value, $floating.value, {
+            placement: props.placement,
+            middleware: [
+              offset(6 - (props.showArrow ? 0 : 4)),
+              flip(),
+              shift({ padding: 5 }),
+            ],
+          }).then(({ x, y, placement }) => {
+            popoverStyle.value = {
+              left: `${x}px`,
+              top: `${y}px`,
+            };
+
+            place.value = placement;
+          });
+        }
+      });
+    }
+
+    /**
+     * 处理点击组件外部区域的事件。
+     * 当点击组件外部时，调用 hideFn 函数隐藏弹出框。
+     */
+    function handleOutside() {
+      hideFn();
+    }
 
     return () => {
       return [
-        slots.trigger != null ? h(slots.trigger()[0], triggerProps) : null,
+        slots.trigger != null
+          ? props.trigger === 'click'
+            ? withDirectives(
+                h(slots.trigger()[0], { ...triggerProps, ref: $reference }),
+                [[Clickoutside, handleOutside]],
+              )
+            : h(slots.trigger()[0], { ...triggerProps, ref: $reference })
+          : null,
         h(
           Teleport,
           { to: 'body' },
@@ -106,21 +130,27 @@ export default defineComponent({
             { name: 'nt-opacity' },
             {
               default: () =>
-                h(
-                  'div',
-                  {
-                    class: 'nt-popover',
-                    ref: $floating,
-                    style: popoverStyle.value,
-                  },
-                  [
-                    slots.default != null ? slots.default() : undefined,
-                    h('span', {
-                      class: 'nt-popover-arrow',
-                      ref: $arrow,
-                      style: arrowStyle.value,
-                    }),
-                  ],
+                withDirectives(
+                  h(
+                    'div',
+                    {
+                      class: [
+                        'nt-popover',
+                        `nt-popover-${place.value}`,
+                        attrs.class,
+                      ],
+                      style: popoverStyle.value,
+                      ...triggerProps,
+                      ref: $floating,
+                    },
+                    [
+                      slots.default != null ? slots.default() : undefined,
+                      props.showArrow
+                        ? h('span', { class: 'nt-popover-arrow' })
+                        : null,
+                    ],
+                  ),
+                  [[vShow, show.value]],
                 ),
             },
           ),
@@ -130,25 +160,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-#tooltip {
-  width: max-content;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #222;
-  color: white;
-  font-weight: bold;
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 90%;
-}
-#arrow {
-  position: absolute;
-  background: #222;
-  width: 8px;
-  height: 8px;
-  transform: rotate(45deg);
-}
-</style>

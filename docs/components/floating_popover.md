@@ -15,10 +15,13 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue" v-pre>
-  <script setup lang="ts">
-  </script>
   <template>
-    <hr />
+    <nt-floating-popover>
+      <template #trigger>
+        <a>悬浮</a>
+      </template>
+      <span>悬浮内容</span>
+    </nt-floating-popover>
   </template>
   </textarea>
   <template #preview>
@@ -31,3 +34,9 @@
   </template>
   </CodePreview>
 </ClientOnly>
+
+## API
+
+### Popover Props
+
+[同 Popover Props 相同](/components/popover#popover-props)

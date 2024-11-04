@@ -11,7 +11,7 @@ type noop = (...args: any[]) => any;
  * const debouncedFunction = useDebounce(() => console.log('Debounced!'), 300);
  * window.addEventListener('scroll', debouncedFunction);
  */
-export default function useDebounce<T extends noop>(fn: T, interval: 500) {
+export default function useDebounce<T extends noop>(fn: T, interval = 500) {
   let _t: number | null = null;
 
   function cancel() {
@@ -33,5 +33,5 @@ export default function useDebounce<T extends noop>(fn: T, interval: 500) {
     cancel();
   });
 
-  return debounce;
+  return { run: debounce, cancel };
 }
