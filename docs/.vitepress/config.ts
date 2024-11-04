@@ -130,6 +130,10 @@ export default defineConfig({
             text: 'ColorPicker 颜色选择',
             link: '/components/colorpicker',
           },
+          {
+            text: 'Select 选择器',
+            link: '/components/select',
+          },
         ],
       },
       {

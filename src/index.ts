@@ -84,3 +84,4 @@ export { default as ThemeSelect } from './components/theme/ThemeSelect.vue';
 export { default as ThemeSwitch } from './components/theme/ThemeSwitch.vue';
 export { default as ThemeRadio } from './components/theme/ThemeRadio.vue';
 export { default as ThemeColor } from './components/theme/ThemeColor.vue';
+export { default as Select } from "./components/Select.vue";

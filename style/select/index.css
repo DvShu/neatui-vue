@@ -1,0 +1,21 @@
+.nt-select {
+  display: inline-flex;
+  height: var(--nt-form-edit-height, 32px);
+  width: 100%;
+  border: 1px solid var(--nt-border-color, #dedede);
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+.nt-select:hover {
+  border-color: var(--nt-primary-color-light1, #9254de);
+}
+.nt-select--arrow,
+.nt-select-placeholder {
+  color: #999;
+}
