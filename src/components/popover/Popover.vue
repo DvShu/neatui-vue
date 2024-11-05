@@ -8,10 +8,9 @@ import {
   Transition,
   nextTick,
   withDirectives,
-  onMounted,
-  watch,
   vShow,
 } from 'vue';
+import type { Ref } from 'vue';
 import { popoverProps } from './constant';
 import Clickoutside from '../../directives/clickoutside';
 import { round } from 'ph-utils';
@@ -42,36 +41,8 @@ export default defineComponent({
 
     const posStyle = ref({});
 
-    onMounted(() => {
-      if (props.visible === true) {
-        showVisible();
-      }
-    });
-
-    watch(
-      () => props.visible,
-      () => {
-        if (props.visible === true) {
-          showVisible();
-        } else {
-          show.value = false;
-        }
-      },
-    );
-
-    function showVisible() {
-      if (props.to != null) {
-        if (props.to instanceof HTMLElement) {
-          showFn(props.to);
-        } else if (typeof props.to === 'string') {
-          showFn(elem(props.to)[0]);
-        } else {
-          showFn(props.to.value);
-        }
-      }
-    }
-
     function showFn($target: HTMLElement) {
+      if (props.disabled) return;
       if (show.value) {
         clearHide();
         return;
@@ -89,7 +60,8 @@ export default defineComponent({
           crossPos = poss[1] || '';
         }
         let x = 0,
-          y = 0;
+          y = 0,
+          width: number | undefined = undefined;
         // 获取滚动容器
         const container = document.documentElement;
         // 滚动条水平方向滚动距离
@@ -98,20 +70,33 @@ export default defineComponent({
         const scrollTop = container.scrollTop;
 
         if ($popover.value != null) {
-          const popoverRect = $popover.value.getBoundingClientRect();
+          let popoverRect = $popover.value.getBoundingClientRect();
           const targetRect = $target.getBoundingClientRect();
+
+          if (props.width != null) {
+            if (props.width === 'trigger') {
+              width = targetRect.width;
+            } else {
+              width = props.width;
+            }
+          }
+          if (width != null) {
+            popoverRect.width = width;
+          }
           // 获取水平、垂直方向弹窗坐标点偏移
           const yOffset = getPopoverOffsetY(
             targetRect,
             popoverRect,
             mainPos,
             crossPos,
+            props.offset,
           );
           const xOffset = getPopoverOffsetX(
             targetRect,
             popoverRect,
             mainPos,
             crossPos,
+            props.offset,
           );
           // 碰撞检测
           const impactRes = impactDetect(
@@ -123,6 +108,7 @@ export default defineComponent({
             scrollTop,
             xOffset,
             yOffset,
+            props.offset,
           );
           x = impactRes.x;
           y = impactRes.y;
@@ -130,10 +116,14 @@ export default defineComponent({
           crossPos = impactRes.crossAlign;
         }
 
-        posStyle.value = {
+        const tmpPosStyle: any = {
           top: `${round(y)}px`,
           left: `${round(x)}px`,
         };
+        if (width != null) {
+          tmpPosStyle.width = `${width}px`;
+        }
+        posStyle.value = tmpPosStyle;
         place.value =
           `${mainPos}${crossPos === '' ? '' : '-' + crossPos}` as any;
       });
@@ -165,6 +155,19 @@ export default defineComponent({
       show.value = false;
     }
 
+    function showPopover(reference?: HTMLElement | string | Ref<HTMLElement>) {
+      const refer = reference || props.reference;
+      if (refer != null) {
+        if (refer instanceof HTMLElement) {
+          showFn(refer);
+        } else if (typeof refer === 'string') {
+          showFn(elem(refer)[0]);
+        } else {
+          showFn(refer.value);
+        }
+      }
+    }
+
     function handleClick(e: Event) {
       const $target = e.currentTarget as HTMLElement;
       // 点击的不是 popover 元素，才切换 popover
@@ -186,15 +189,26 @@ export default defineComponent({
       hideFn();
     }
 
+    function toggle(reference?: HTMLElement | string | Ref<HTMLElement>) {
+      if (show.value) {
+        close();
+      } else {
+        showPopover(reference);
+      }
+    }
+
     expose({
-      close,
+      hide: close,
+      show: showPopover,
+      toggle,
+      isShow: () => show.value,
     });
 
     return () => {
       const firstVNode = getFirstTriggerVNode(slots);
 
       const prop: any = {};
-      if (props.visible == null) {
+      if (props.trigger != null && props.trigger !== 'manual') {
         if (props.trigger === 'hover') {
           prop.onMouseenter = handleMouseEnter;
           prop.onMouseleave = hanldeMouseLeave;

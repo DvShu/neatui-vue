@@ -70,16 +70,17 @@ export function cloneDeep(obj: any) {
  */
 export function getPopoverOffsetY(
   targetRect: DOMRect,
-  popoverRect: DOMRect,
+  popoverRect: DomRectPos,
   mainAlign: string,
   crossAlign: string,
+  offset = 10,
 ) {
   let topDiff = 0;
   // 计算 垂直 偏移
   if (mainAlign === 'top') {
-    topDiff = popoverRect.height + 8;
+    topDiff = popoverRect.height + offset;
   } else if (mainAlign === 'bottom') {
-    topDiff = -(targetRect.height + 8);
+    topDiff = -(targetRect.height + offset);
   } else if (mainAlign === 'left' || mainAlign === 'right') {
     if (crossAlign === '') {
       topDiff = popoverRect.height / 2 - targetRect.height / 2;
@@ -90,18 +91,28 @@ export function getPopoverOffsetY(
   return topDiff;
 }
 
+type DomRectPos = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  left: number;
+  top: number;
+};
+
 export function getPopoverOffsetX(
   targetRect: DOMRect,
-  popoverRect: DOMRect,
+  popoverRect: DomRectPos,
   mainAlign: string,
   crossAlign: string,
+  offset = 10,
 ) {
   let leftDiff = 0;
   // 计算 水平 偏移
   if (mainAlign === 'left') {
-    leftDiff = popoverRect.width + 8;
+    leftDiff = popoverRect.width + offset;
   } else if (mainAlign === 'right') {
-    leftDiff = -(targetRect.width + 8);
+    leftDiff = -(targetRect.width + offset);
   } else if (mainAlign === 'top' || mainAlign === 'bottom') {
     if (crossAlign === '') {
       leftDiff = popoverRect.width / 2 - targetRect.width / 2;
@@ -114,13 +125,14 @@ export function getPopoverOffsetX(
 
 export function impactDetect(
   targetRect: DOMRect,
-  popoverRect: DOMRect,
+  popoverRect: DomRectPos,
   mainAlign: string,
   crossAlign: string,
   scrollLeft: number,
   scrollTop: number,
   leftDiff: number,
   topDiff: number,
+  offset = 10,
 ) {
   const maxHeight = window.innerHeight + scrollTop - 10;
   const maxWidth = window.innerWidth + scrollLeft - 10;
@@ -135,7 +147,13 @@ export function impactDetect(
     } else {
       mainAlign = 'top';
     }
-    topDiff = getPopoverOffsetY(targetRect, popoverRect, mainAlign, crossAlign);
+    topDiff = getPopoverOffsetY(
+      targetRect,
+      popoverRect,
+      mainAlign,
+      crossAlign,
+      offset,
+    );
     y = targetRect.top + scrollTop - topDiff;
   }
 
@@ -167,6 +185,7 @@ export function impactDetect(
       popoverRect,
       mainAlign,
       crossAlign,
+      offset,
     );
     x = targetRect.left + scrollLeft - leftDiff;
   }
@@ -187,8 +206,20 @@ export function impactDetect(
     );
     x = targetRect.left + scrollLeft - leftDiff;
   }
-  topDiff = getPopoverOffsetY(targetRect, popoverRect, mainAlign, crossAlign);
-  leftDiff = getPopoverOffsetX(targetRect, popoverRect, mainAlign, crossAlign);
+  topDiff = getPopoverOffsetY(
+    targetRect,
+    popoverRect,
+    mainAlign,
+    crossAlign,
+    offset,
+  );
+  leftDiff = getPopoverOffsetX(
+    targetRect,
+    popoverRect,
+    mainAlign,
+    crossAlign,
+    offset,
+  );
   x = targetRect.left + scrollLeft - leftDiff;
   y = targetRect.top + scrollTop - topDiff;
   return {

@@ -8,10 +8,16 @@
   import { Popover, Button } from '../../src'
   import { ref } from 'vue'
 
-  const show = ref(false)
+  const $popover = ref();
 
   function toggleShow() {
-    show.value = !show.value
+    if ($popover.value != null) {
+      if ($popover.value.isShow()) {
+        $popover.value.hide();
+      } else {
+        $popover.value.show('#popoverTo');
+      }
+    }
   }
 
   function click1() {
@@ -224,7 +230,7 @@
   </CodePreview>
 </ClientOnly>
 
-### 受控模式
+### 非受控模式
 
 不需要自动弹出，需要进行手动控制是否展示；通过传递 `visible` 属性设置是否展示，然后设置 `to` 属性指向弹层对标节点。
 
@@ -233,21 +239,21 @@
   <textarea lang="vue-html">
   <script setup>
   import { ref } from 'vue'
-  const show = ref(false)
+  const $popover = ref()
   function toggleShow() {
-    show.value = !show.value
+    $popover.value.toggle();
   }
   </script>
   <template>
     <span id="popoverTo">对标元素</span>
     <nt-button @click='toggleShow' class="ml-10">弹出/隐藏</nt-button>
-    <nt-popover to="#popoverTo" content="提示内容" :visible="show"></nt-popover>
+    <nt-popover reference="#popoverTo" ref="$popover" content="提示内容" trigger="manual"></nt-popover>
   </template>
   </textarea>
   <template #preview>
     <span id="popoverTo">对标元素</span>
     <Button @click='toggleShow' class="ml-10">弹出/隐藏</Button>
-    <Popover to="#popoverTo" content="提示内容" :visible="show"></Popover>
+    <Popover ref="$popover" content="提示内容" trigger="manual"></Popover>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -282,11 +288,10 @@
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `trigger` | 触发方式 | `hover`、`click` | `hover` |
+| `trigger` | 触发方式, `manual` 非受控模式, 手动调用 `show` 显示, `hide` 隐藏 | `hover`、`click`、`manual` | `hover` |
 | `content` | 显示内容, 也可以通过 `default-slot` 显示 | `string` | - |
 | `placement` | 弹出位置 | `top-start`、`top`、`top-end`、`left-start`、`left`、`left-end`、`right-start`、`right`、`right-end`、`bottom-start`、`bottom`、`bottom-end` | `top` |
-| `visible` | 受控模式显示与隐藏 | `boolean` | - |
-| `to` | 受控模式下起泡对标元素 | `HTMLElement`、`string`、`Ref<HTMLElement>` | - |
+| `reference` | 非受控模式, 手动指定目标元素 | `HTMLElement \| string \| Ref<HTMLElement>` | - |
 
 ### Popover Slots
 
@@ -301,4 +306,7 @@
 <!-- prettier-ignore -->
 | 名称 | 说明 | 类型 |
 | --- | --- | --- |
-| `close` | 关闭弹层 | `() => void` |
+| `hide` | 隐藏弹层 | `() => void` |
+| `show` | 非受控模式, 显示弹层 | `(reference?: HTMLElement \| string \| Ref<HTMLElement>) => void` |
+| `isShow` | 是否显示 | `() => boolean` |
+| `toggle` | 非受控模式, 切换弹层显示或隐藏 | `(reference?: HTMLElement \| string \| Ref<HTMLElement>) => void` |

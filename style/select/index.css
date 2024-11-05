@@ -19,3 +19,34 @@
 .nt-select-placeholder {
   color: #999;
 }
+.nt-select--arrow {
+  transition: transform 0.3s ease-in-out;
+  transform: rotate3d(0, 0, 1, 0deg);
+}
+.nt-select--arrow.nt-expanded {
+  transform: rotate3d(0, 0, 1, 180deg);
+}
+.nt-select-list {
+  max-height: 190px;
+  overflow: auto;
+}
+.nt-select-popover {
+  padding: 0;
+}
+.nt-select-option {
+  box-sizing: border-box;
+  height: var(--nt-form-edit-height, 32px);
+  line-height: var(--nt-form-edit-height, 32px);
+  padding: 0 10px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+.nt-select-option:hover {
+  background-color: var(--nt-primary-color-light4, #efdbff);
+}
+.nt-select-option--selected {
+  color: var(--nt-primary-color-light1, #9254de);
+  font-weight: 600;
+}

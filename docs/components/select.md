@@ -10,7 +10,35 @@
 ## 演示
 
 <script setup>
-  import { Select } from "../../src"
+  import { Select } from "../../src";
+
+  function getRandomChineseCharacter() {
+    const start = 0x4E00;
+    const end = 0x9FA5;
+
+    const randomCode = Math.floor(Math.random() * (end - start + 1)) + start;
+    const randomChar = String.fromCharCode(randomCode);
+
+    return randomChar;
+  }
+
+  function getRandomName(length) {
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+      result += getRandomChineseCharacter();
+    }
+
+    return result;
+  }
+
+  const options = [];
+  for (let i = 0; i < 15; i++) {
+    options.push({
+      label: getRandomName(i % 2 === 0 ? 2 : 3),
+      value: i
+    })
+  }
 </script>
 
 ### 使用
@@ -27,7 +55,7 @@
   </template>
   </textarea>
   <template #preview>
-    <Select></Select>
+    <Select :options="options"></Select>
   </template>
   </CodePreview>
 </ClientOnly>
