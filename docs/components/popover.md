@@ -292,6 +292,7 @@
 | `content` | 显示内容, 也可以通过 `default-slot` 显示 | `string` | - |
 | `placement` | 弹出位置 | `top-start`、`top`、`top-end`、`left-start`、`left`、`left-end`、`right-start`、`right`、`right-end`、`bottom-start`、`bottom`、`bottom-end` | `top` |
 | `reference` | 非受控模式, 手动指定目标元素 | `HTMLElement \| string \| Ref<HTMLElement>` | - |
+| `destroy-on-hide` | 隐藏时销毁 `DOM` 结构; `false` 隐藏时未销毁只是设置 `display: none` | `boolean` | `false` |
 
 ### Popover Slots
 

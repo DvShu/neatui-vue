@@ -217,6 +217,32 @@ export default defineComponent({
         }
       }
 
+      function renderPopover() {
+        const popoverConent = h(
+          'div',
+          {
+            ...attrs,
+            class: ['nt-popover', `nt-popover-${place.value}`, attrs.class],
+            style: [attrs.style, posStyle.value],
+            ref: $popover,
+            ...prop,
+          },
+          [
+            slots.default != null
+              ? slots.default()
+              : props.content != null
+                ? h('span', props.content)
+                : null,
+            props.showArrow ? h('span', { class: 'nt-popover-arrow' }) : null,
+          ],
+        );
+        console.log(props.destroyOnHide);
+        if (props.destroyOnHide) {
+          return show.value ? popoverConent : null;
+        }
+        return withDirectives(popoverConent, [[vShow, show.value]]);
+      }
+
       return [
         firstVNode
           ? props.trigger === 'click'
@@ -232,34 +258,7 @@ export default defineComponent({
             Transition,
             { name: 'nt-opacity' },
             {
-              default: () =>
-                withDirectives(
-                  h(
-                    'div',
-                    {
-                      ...attrs,
-                      class: [
-                        'nt-popover',
-                        `nt-popover-${place.value}`,
-                        attrs.class,
-                      ],
-                      style: [attrs.style, posStyle.value],
-                      ref: $popover,
-                      ...prop,
-                    },
-                    [
-                      slots.default != null
-                        ? slots.default()
-                        : props.content != null
-                          ? h('span', props.content)
-                          : null,
-                      props.showArrow
-                        ? h('span', { class: 'nt-popover-arrow' })
-                        : null,
-                    ],
-                  ),
-                  [[vShow, show.value]],
-                ),
+              default: () => renderPopover(),
             },
           ),
         ),

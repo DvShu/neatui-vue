@@ -50,4 +50,9 @@ export const popoverProps = {
     type: Number,
     default: 10,
   },
+  /** 是否在隐藏时删除节点, 如果为 true 则删除, 否则只是设置 display: none */
+  destroyOnHide: {
+    type: Boolean,
+    default: false,
+  },
 };
