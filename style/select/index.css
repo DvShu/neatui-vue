@@ -42,11 +42,13 @@
   color: #333;
   font-size: 14px;
   transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .nt-select-option:hover {
   background-color: var(--nt-primary-color-light4, #efdbff);
 }
 .nt-select-option--selected {
   color: var(--nt-primary-color-light1, #9254de);
-  font-weight: 600;
 }

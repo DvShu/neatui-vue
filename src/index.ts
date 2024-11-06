@@ -25,6 +25,7 @@ export { default as SunIcon } from './components/icon/Sun.vue';
 export { default as MoonIcon } from './components/icon/Moon.vue';
 export { default as ThemeDefaultIcon } from './components/icon/ThemeDefault.vue';
 export { default as FontIcon } from './components/icon/IconFont.vue';
+export { default as SelectIcon } from './components/icon/Search.vue';
 
 export { default as Input } from './components/input/Input.vue';
 export { default as MdInput } from './components/input/MdInput.vue';
@@ -84,4 +85,4 @@ export { default as ThemeSelect } from './components/theme/ThemeSelect.vue';
 export { default as ThemeSwitch } from './components/theme/ThemeSwitch.vue';
 export { default as ThemeRadio } from './components/theme/ThemeRadio.vue';
 export { default as ThemeColor } from './components/theme/ThemeColor.vue';
-export { default as Select } from "./components/Select.vue";
+export { default as Select } from './components/Select.vue';

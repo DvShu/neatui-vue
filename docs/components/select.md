@@ -11,34 +11,13 @@
 
 <script setup>
   import { Select } from "../../src";
+  import { ref } from 'vue';
 
-  function getRandomChineseCharacter() {
-    const start = 0x4E00;
-    const end = 0x9FA5;
+  const fruits = ["苹果", "香蕉", "橙子", "葡萄", "柠檬", "草莓", "樱桃", "芒果", "猕猴桃", "杨梅", "菠萝", "西瓜", "哈密瓜", "桃子", "梨", "柿子", "榴莲", "椰子", "龙眼", "荔枝"];
 
-    const randomCode = Math.floor(Math.random() * (end - start + 1)) + start;
-    const randomChar = String.fromCharCode(randomCode);
+  const options = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
 
-    return randomChar;
-  }
-
-  function getRandomName(length) {
-    let result = '';
-
-    for (let i = 0; i < length; i++) {
-      result += getRandomChineseCharacter();
-    }
-
-    return result;
-  }
-
-  const options = [];
-  for (let i = 0; i < 15; i++) {
-    options.push({
-      label: getRandomName(i % 2 === 0 ? 2 : 3),
-      value: i
-    })
-  }
+  const selectedValue = ref(0);
 </script>
 
 ### 使用
@@ -55,7 +34,7 @@
   </template>
   </textarea>
   <template #preview>
-    <Select :options="options"></Select>
+    <Select :options="options" v-model="selectedValue"></Select>
   </template>
   </CodePreview>
 </ClientOnly>
