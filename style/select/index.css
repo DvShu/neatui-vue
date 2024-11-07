@@ -1,6 +1,6 @@
 .nt-select {
   display: inline-flex;
-  height: var(--nt-form-edit-height, 32px);
+  min-height: var(--nt-form-edit-height, 32px);
   width: 100%;
   border: 1px solid var(--nt-border-color, #dedede);
   transition: all 0.3s ease-in-out;
@@ -9,8 +9,9 @@
   cursor: pointer;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 4px 10px;
   border-radius: 4px;
+  gap: 5px;
 }
 .nt-select:hover {
   border-color: var(--nt-primary-color-light1, #9254de);
@@ -19,7 +20,19 @@
 .nt-select-placeholder {
   color: #999;
 }
+.nt-select-inner {
+  font-size: 0;
+  overflow: hidden;
+}
+.nt-select-main {
+  display: flex;
+  gap: 5px;
+  flex-flow: row wrap;
+  font-size: 14px;
+  line-height: 1;
+}
 .nt-select--arrow {
+  flex-shrink: 0;
   transition: transform 0.3s ease-in-out;
   transform: rotate3d(0, 0, 1, 0deg);
 }
@@ -51,4 +64,5 @@
 }
 .nt-select-option--selected {
   color: var(--nt-primary-color-light1, #9254de);
+  font-weight: 600;
 }

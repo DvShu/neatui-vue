@@ -1,10 +1,19 @@
 <script lang="ts">
-import { useId, ref, defineComponent, h, withDirectives, onMounted } from 'vue';
+import {
+  useId,
+  ref,
+  defineComponent,
+  h,
+  withDirectives,
+  onMounted,
+  watch,
+} from 'vue';
 import type { PropType, VNode } from 'vue';
 import ArrowDown from './icon/ArrowDown.vue';
 import Popover from './popover/Popover.vue';
 import Clickoutside from '../directives/clickoutside';
 import SelectIcon from './icon/Select.vue';
+import Tag from './Tag.vue';
 
 type SelectOption = {
   class?: string;
@@ -56,7 +65,7 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue'],
-  setup(props, { attrs }) {
+  setup(props, { attrs, emit }) {
     const id = useId();
     const popoverComp = ref();
     const expand = ref(false);
@@ -82,21 +91,32 @@ export default defineComponent({
       }
     }
 
-    onMounted(() => {
-      const modelValue = props.modelValue;
-      if (modelValue != null) {
-        const tmpLabels = [];
-        const option = props.options.find((option: SelectOption) => {
+    function updateSelectedLabels(v?: any | any[]) {
+      if (v != null) {
+        let tmpLabels = [];
+        const option = props.options.filter((option: SelectOption) => {
           const optionValue = option[props.valueField];
-          return optionValue === modelValue || modelValue.includes(optionValue);
+          return (
+            optionValue === v || (Array.isArray(v) && v.includes(optionValue))
+          );
         });
         if (option != null) {
-          tmpLabels.push(option[props.labelField]);
+          tmpLabels = option.map((option: SelectOption) => {
+            return option[props.labelField];
+          });
         }
         selectedLabels.value = tmpLabels;
-        console.log(tmpLabels);
       }
-    });
+    }
+
+    updateSelectedLabels(props.modelValue);
+
+    watch(
+      () => props.modelValue,
+      (v) => {
+        updateSelectedLabels(v);
+      },
+    );
 
     function isOptionSelect(value: any) {
       let isSelect = false;
@@ -111,6 +131,41 @@ export default defineComponent({
       return isSelect;
     }
 
+    function handleOptionClick(option: SelectOption) {
+      const label = option[props.labelField];
+      const value = option[props.valueField];
+      let oldValue = props.modelValue;
+      let oldLabels = [...selectedLabels.value];
+      if (props.multiple === true) {
+        if (oldValue == null) {
+          oldValue = [value];
+          oldLabels = [label];
+        } else {
+          if (Array.isArray(oldValue)) {
+            oldValue = [...oldValue];
+            let i = oldValue.indexOf(value);
+            if (i === -1) {
+              oldValue.push(value);
+              oldLabels.push('label');
+            } else {
+              oldValue.splice(i, 1);
+              oldLabels.splice(i, 1);
+            }
+          } else {
+            if (oldValue !== value) {
+              oldValue = [oldValue, value];
+              oldLabels.push(label);
+            }
+          }
+        }
+      } else {
+        oldValue = value;
+        oldLabels = [label];
+      }
+      // selectedLabels.value = oldLabels;
+      emit('update:modelValue', oldValue);
+    }
+
     function optionNodes() {
       return props.options.map((option: SelectOption) => {
         const isSelect = isOptionSelect(option[props.valueField]);
@@ -122,6 +177,7 @@ export default defineComponent({
               option.class,
               isSelect ? 'nt-select-option--selected' : undefined,
             ],
+            onClick: () => handleOptionClick(option),
           },
           [
             option.render == null
@@ -130,6 +186,18 @@ export default defineComponent({
             isSelect ? h(SelectIcon) : undefined,
           ],
         );
+      });
+    }
+
+    function renderSelectedLabels() {
+      if (selectedLabels.value.length === 0) {
+        return h('span', { class: 'nt-select-placeholder' }, props.placeholder);
+      }
+      if (!props.multiple) {
+        return h('span', selectedLabels.value[0]);
+      }
+      return selectedLabels.value.map((label) => {
+        return h(Tag, null, { default: () => label });
       });
     }
 
@@ -146,7 +214,8 @@ export default defineComponent({
           [
             h(
               'div',
-              h('span', { class: 'nt-select-placeholder' }, props.placeholder),
+              { class: 'nt-select-inner' },
+              h('div', { class: 'nt-select-main' }, renderSelectedLabels()),
             ),
             h(ArrowDown, {
               class: [

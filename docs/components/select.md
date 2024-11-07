@@ -17,7 +17,7 @@
 
   const options = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
 
-  const selectedValue = ref(0);
+  const selectedValue = ref([]);
 </script>
 
 ### 使用

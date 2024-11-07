@@ -62,16 +62,17 @@ export default defineComponent({
         let x = 0,
           y = 0,
           width: number | undefined = undefined;
-        // 获取滚动容器
-        const container = document.documentElement;
-        // 滚动条水平方向滚动距离
-        const scrollLeft = container.scrollLeft;
-        // 滚动条垂直方向滚动距离
-        const scrollTop = container.scrollTop;
 
         if ($popover.value != null) {
           let popoverRect = $popover.value.getBoundingClientRect();
           const targetRect = $target.getBoundingClientRect();
+
+          // 获取滚动容器
+          let container = document.documentElement;
+          // 滚动条水平方向滚动距离
+          const scrollLeft = container.scrollLeft;
+          // 滚动条垂直方向滚动距离
+          const scrollTop = container.scrollTop;
 
           if (props.width != null) {
             if (props.width === 'trigger') {
@@ -236,7 +237,6 @@ export default defineComponent({
             props.showArrow ? h('span', { class: 'nt-popover-arrow' }) : null,
           ],
         );
-        console.log(props.destroyOnHide);
         if (props.destroyOnHide) {
           return show.value ? popoverConent : null;
         }
