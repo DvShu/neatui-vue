@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.22.0](https://github.com/DvShu/neatui-vue/compare/v0.20.2...v0.22.0) (2024-11-17)
+
+### Features
+
+- **Select** 新增 select 组件 ([725f507](https://github.com/DvShu/neatui-vue/commit/725f507))
+- **Popover** Popover 支持传递 width、offset 属性 ([fe7c41b](https://github.com/DvShu/neatui-vue/commit/fe7c41b))
+- **Popover** Popover 支持隐藏时销毁节点 ([7098063](https://github.com/DvShu/neatui-vue/commit/7098063))
+
 ## [0.20.2](https://github.com/DvShu/neatui-vue/compare/v0.20.1...v0.20.2) (2024-11-04)
 
 ### Features
