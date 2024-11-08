@@ -64,5 +64,4 @@
 }
 .nt-select-option--selected {
   color: var(--nt-primary-color-light1, #9254de);
-  font-weight: 600;
 }

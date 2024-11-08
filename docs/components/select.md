@@ -17,12 +17,38 @@
 
   const options = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
 
-  const selectedValue = ref([]);
+  const selectedValue = ref('');
+
+  const value1 = ref([]);
 </script>
 
 ### 使用
 
 基础用法
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue" v-pre>
+  <script setup lang="ts">
+    const fruits = ["苹果", "香蕉", "橙子", "葡萄", "柠檬", "草莓", "樱桃", "芒果", "猕猴桃", "杨梅", "菠萝", "西瓜", "哈密瓜", "桃子", "梨", "柿子", "榴莲", "椰子", "龙眼", "荔枝"];
+    //-
+    const options = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
+    //-
+    const value = ref('')
+  </script>
+  <template>
+    <nt-select :options="options" v-model="value" style="width:180px;"></nt-select>
+  </template>
+  </textarea>
+  <template #preview>
+    <Select :options="options" v-model="selectedValue" style="width:180px;"></Select>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 多选
+
+设置 `multiple` 属性即可启用多选， 此时 `v-model` 的值为当前选中值所组成的数组。默认情况下选中值会以 <a href="/neatui-vue/components/tag" target="_blank">Tag</a> 组件的形式展现， 你也可以设置 `collapse-tags` 属性将它们合并为一段文字。
 
 <ClientOnly>
   <CodePreview>
@@ -34,7 +60,7 @@
   </template>
   </textarea>
   <template #preview>
-    <Select :options="options" v-model="selectedValue"></Select>
+    <Select :options="options" v-model="value1" multiple style="width:180px;"></Select>
   </template>
   </CodePreview>
 </ClientOnly>

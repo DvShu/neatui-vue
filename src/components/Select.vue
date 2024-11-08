@@ -1,13 +1,5 @@
 <script lang="ts">
-import {
-  useId,
-  ref,
-  defineComponent,
-  h,
-  withDirectives,
-  onMounted,
-  watch,
-} from 'vue';
+import { useId, ref, defineComponent, h, withDirectives, watch } from 'vue';
 import type { PropType, VNode } from 'vue';
 import ArrowDown from './icon/ArrowDown.vue';
 import Popover from './popover/Popover.vue';
@@ -72,10 +64,27 @@ export default defineComponent({
     /** 选择的标签列表 */
     const selectedLabels = ref<string[]>([]);
 
-    function handleOutside() {
-      if (popoverComp.value != null) {
-        popoverComp.value.hide();
-        expand.value = false;
+    function handleOutside(e: Event) {
+      let $target = e.target as HTMLElement;
+      let needClose = true;
+      if (props.multiple) {
+        // 多选且点击的是下拉框则不关闭下拉框
+        do {
+          if ($target.classList.contains('nt-select-popover')) {
+            needClose = false;
+            break;
+          }
+          if ($target.tagName === 'BODY') {
+            break;
+          }
+          $target = $target.parentElement as HTMLElement;
+        } while ($target != null);
+      }
+      if (needClose) {
+        if (popoverComp.value != null) {
+          popoverComp.value.hide();
+          expand.value = false;
+        }
       }
     }
 
@@ -131,7 +140,8 @@ export default defineComponent({
       return isSelect;
     }
 
-    function handleOptionClick(option: SelectOption) {
+    function handleOptionClick(e: Event, option: SelectOption) {
+      e.stopPropagation();
       const label = option[props.labelField];
       const value = option[props.valueField];
       let oldValue = props.modelValue;
@@ -177,7 +187,7 @@ export default defineComponent({
               option.class,
               isSelect ? 'nt-select-option--selected' : undefined,
             ],
-            onClick: () => handleOptionClick(option),
+            onClick: (e: Event) => handleOptionClick(e, option),
           },
           [
             option.render == null
