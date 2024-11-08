@@ -28,3 +28,19 @@
   --nt-tag-bg: var(--nt-success-color-light5, #fcffe6);
   --nt-tag-border-color: var(--nt-success-color, #a0d911);
 }
+.nt-tag--close {
+  margin-left: 5px;
+  font-size: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.nt-tag--close:hover {
+  background-color: var(--nt-tag-color, #1890ff);
+  color: #ffffff;
+}
