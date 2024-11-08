@@ -84,7 +84,7 @@ function createDocumentHandler(
     ) {
       return;
     }
-    binding.value(target);
+    binding.value(e);
   };
 }
 
