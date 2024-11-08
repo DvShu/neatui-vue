@@ -5,7 +5,11 @@
 ## 演示
 
 <script setup>
-  import { Tag } from "../../src"
+  import { Tag } from "../../src";
+
+  function handleTagClose() {
+    console.log("close")
+  }
 </script>
 
 ### 基础用法
@@ -23,6 +27,28 @@
   </CodePreview>
 </ClientOnly>
 
+### 可移除标签
+
+设置 `closable` 属性可以定义一个标签是否可移除。 它接受一个 `Boolean`。 当 `Tag` 被移除时会触发 `close` 事件。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue" v-pre>
+  <script setup lang="ts">
+    function handleTagClose() {
+      console.log("close");
+    }
+  </script>
+  <template>
+    <nt-tag closable @close="handleTagClose">标签</nt-tag>
+  </template>
+  </textarea>
+  <template #preview>
+    <Tag closable @close="handleTagClose">标签</Tag>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Tag Props
@@ -32,6 +58,7 @@
 | --- | --- | --- | --- |
 | `type` | 类型 | `primary \| success \| error` | `primary` |
 | `color` | 颜色, 自定义颜色 | `string` | - |
+| `closable` | 是否可移除 | `boolean` | `false` |
 
 ### Css Variables
 
