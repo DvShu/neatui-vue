@@ -20,6 +20,8 @@
   const selectedValue = ref('');
 
   const value1 = ref([]);
+
+  const value2 = ref([]);
 </script>
 
 ### 使用
@@ -34,7 +36,7 @@
     //-
     const options = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
     //-
-    const value = ref('')
+    const value = ref('');
   </script>
   <template>
     <nt-select :options="options" v-model="value" style="width:180px;"></nt-select>
@@ -61,6 +63,14 @@
   </textarea>
   <template #preview>
     <Select :options="options" v-model="value1" multiple style="width:180px;"></Select>
+    <Select
+      :options="options"
+      v-model="value2"
+      multiple
+      style="width:180px;"
+      class="ml-10"
+      collapse-tags
+    ></Select>
   </template>
   </CodePreview>
 </ClientOnly>

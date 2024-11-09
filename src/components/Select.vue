@@ -1,11 +1,22 @@
 <script lang="ts">
-import { useId, ref, defineComponent, h, withDirectives, watch } from 'vue';
+import {
+  useId,
+  ref,
+  defineComponent,
+  h,
+  withDirectives,
+  watch,
+  nextTick,
+  onMounted,
+  onUnmounted,
+} from 'vue';
 import type { PropType, VNode } from 'vue';
 import ArrowDown from './icon/ArrowDown.vue';
 import Popover from './popover/Popover.vue';
 import Clickoutside from '../directives/clickoutside';
 import SelectIcon from './icon/Select.vue';
 import Tag from './Tag.vue';
+import { elem } from 'ph-utils/dom';
 
 type SelectOption = {
   class?: string;
@@ -55,6 +66,11 @@ export default defineComponent({
     modelValue: {
       type: [String, Number, Array] as PropType<any | any[]>,
     },
+    /** 多选时是否将选中值按文字的形式展示 */
+    collapseTags: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { attrs, emit }) {
@@ -101,24 +117,25 @@ export default defineComponent({
     }
 
     function updateSelectedLabels(v?: any | any[]) {
+      let tmpLabels: string[] = [];
       if (v != null) {
-        let tmpLabels = [];
-        const option = props.options.filter((option: SelectOption) => {
-          const optionValue = option[props.valueField];
-          return (
-            optionValue === v || (Array.isArray(v) && v.includes(optionValue))
+        let newV = Array.isArray(v) ? v : [v];
+        for (let i = 0, len = newV.length; i < len; i++) {
+          const value = newV[i];
+          const valueOption = props.options.find(
+            (option) => option[props.valueField] === value,
           );
-        });
-        if (option != null) {
-          tmpLabels = option.map((option: SelectOption) => {
-            return option[props.labelField];
-          });
+          if (valueOption != null) {
+            tmpLabels.push(valueOption[props.labelField]);
+          }
         }
-        selectedLabels.value = tmpLabels;
       }
+      selectedLabels.value = tmpLabels;
     }
 
     updateSelectedLabels(props.modelValue);
+
+    let resizeObserver: ResizeObserver | undefined;
 
     watch(
       () => props.modelValue,
@@ -126,6 +143,24 @@ export default defineComponent({
         updateSelectedLabels(v);
       },
     );
+
+    onMounted(() => {
+      if (resizeObserver == null) {
+        resizeObserver = new ResizeObserver(() => {
+          if (popoverComp.value != null) {
+            popoverComp.value.updatePosition();
+          }
+        });
+        resizeObserver.observe(elem(`#${id}`)[0]);
+      }
+    });
+
+    onUnmounted(() => {
+      if (resizeObserver != null) {
+        resizeObserver.disconnect();
+        resizeObserver = undefined;
+      }
+    });
 
     function isOptionSelect(value: any) {
       let isSelect = false;
@@ -142,37 +177,29 @@ export default defineComponent({
 
     function handleOptionClick(e: Event, option: SelectOption) {
       e.stopPropagation();
-      const label = option[props.labelField];
       const value = option[props.valueField];
       let oldValue = props.modelValue;
-      let oldLabels = [...selectedLabels.value];
       if (props.multiple === true) {
         if (oldValue == null) {
           oldValue = [value];
-          oldLabels = [label];
         } else {
           if (Array.isArray(oldValue)) {
             oldValue = [...oldValue];
             let i = oldValue.indexOf(value);
             if (i === -1) {
               oldValue.push(value);
-              oldLabels.push('label');
             } else {
               oldValue.splice(i, 1);
-              oldLabels.splice(i, 1);
             }
           } else {
             if (oldValue !== value) {
               oldValue = [oldValue, value];
-              oldLabels.push(label);
             }
           }
         }
       } else {
         oldValue = value;
-        oldLabels = [label];
       }
-      // selectedLabels.value = oldLabels;
       emit('update:modelValue', oldValue);
     }
 
@@ -199,6 +226,27 @@ export default defineComponent({
       });
     }
 
+    function handleDeleteSelect(index: number) {
+      let oldValue = [...props.modelValue];
+      oldValue.splice(index, 1);
+      emit('update:modelValue', oldValue);
+    }
+
+    function renderTag(value: any, index: number = 0, closable = true) {
+      return h(
+        Tag,
+        {
+          closable,
+          type: 'info',
+          onClose: (e: Event) => {
+            handleDeleteSelect(index);
+            e.stopPropagation();
+          },
+        },
+        { default: () => value },
+      );
+    }
+
     function renderSelectedLabels() {
       if (selectedLabels.value.length === 0) {
         return h('span', { class: 'nt-select-placeholder' }, props.placeholder);
@@ -206,8 +254,16 @@ export default defineComponent({
       if (!props.multiple) {
         return h('span', selectedLabels.value[0]);
       }
-      return selectedLabels.value.map((label) => {
-        return h(Tag, null, { default: () => label });
+      if (props.collapseTags) {
+        return [
+          renderTag(selectedLabels.value[0]),
+          selectedLabels.value.length > 1
+            ? renderTag(`+${selectedLabels.value.length - 1}`, 0, false)
+            : null,
+        ];
+      }
+      return selectedLabels.value.map((item, i) => {
+        return renderTag(item, i);
       });
     }
 
@@ -216,10 +272,10 @@ export default defineComponent({
         h(
           'div',
           {
-            class: 'nt-select',
+            ...attrs,
+            class: ['nt-select', attrs.class],
             id: id,
             onClick: handleSelectClick,
-            ...attrs,
           },
           [
             h(

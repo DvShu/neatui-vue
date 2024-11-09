@@ -28,6 +28,11 @@
   --nt-tag-bg: var(--nt-success-color-light5, #fcffe6);
   --nt-tag-border-color: var(--nt-success-color, #a0d911);
 }
+.nt-tag--info {
+  --nt-tag-color: var(--nt-info-color, #999999);
+  --nt-tag-bg: var(--nt-info-color-light9, #f5f5f5);
+  --nt-tag-border-color: var(--nt-border-color, #dedede);
+}
 .nt-tag--close {
   margin-left: 5px;
   font-size: 12px;

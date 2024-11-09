@@ -21,13 +21,6 @@ import {
   impactDetect,
 } from '../../utils';
 
-function getFirstTriggerVNode(slots: any): VNode | null {
-  if (slots.trigger != null) {
-    return slots.trigger()[0];
-  }
-  return null;
-}
-
 export default defineComponent({
   props: popoverProps,
   inheritAttrs: false,
@@ -41,92 +34,97 @@ export default defineComponent({
 
     const posStyle = ref({});
 
+    function renderTrigger(triggerProp: any): VNode {
+      return h((slots as any).trigger()[0], triggerProp);
+    }
+
+    function updatePosition($referece: HTMLElement) {
+      // 获取水平和垂直方向的位置
+      let mainPos = 'bottom';
+      let crossPos = '';
+      const poss = props.placement.split('-');
+      if (poss != null) {
+        mainPos = poss[0];
+        crossPos = poss[1] || '';
+      }
+      let x = 0,
+        y = 0,
+        width: number | undefined = undefined;
+
+      if ($popover.value != null) {
+        let popoverRect = $popover.value.getBoundingClientRect();
+        const targetRect = $referece.getBoundingClientRect();
+
+        // 获取滚动容器
+        let container = document.documentElement;
+        // 滚动条水平方向滚动距离
+        const scrollLeft = container.scrollLeft;
+        // 滚动条垂直方向滚动距离
+        const scrollTop = container.scrollTop;
+
+        if (props.width != null) {
+          if (props.width === 'trigger') {
+            width = targetRect.width;
+          } else {
+            width = props.width;
+          }
+        }
+        if (width != null) {
+          popoverRect.width = width;
+        }
+        // 获取水平、垂直方向弹窗坐标点偏移
+        const yOffset = getPopoverOffsetY(
+          targetRect,
+          popoverRect,
+          mainPos,
+          crossPos,
+          props.offset,
+        );
+        const xOffset = getPopoverOffsetX(
+          targetRect,
+          popoverRect,
+          mainPos,
+          crossPos,
+          props.offset,
+        );
+        // 碰撞检测
+        const impactRes = impactDetect(
+          targetRect,
+          popoverRect,
+          mainPos,
+          crossPos,
+          scrollLeft,
+          scrollTop,
+          xOffset,
+          yOffset,
+          props.offset,
+        );
+        x = impactRes.x;
+        y = impactRes.y;
+        mainPos = impactRes.mainAlign;
+        crossPos = impactRes.crossAlign;
+      }
+
+      const tmpPosStyle: any = {
+        top: `${round(y)}px`,
+        left: `${round(x)}px`,
+      };
+      if (width != null) {
+        tmpPosStyle.width = `${width}px`;
+      }
+      posStyle.value = tmpPosStyle;
+      place.value = `${mainPos}${crossPos === '' ? '' : '-' + crossPos}` as any;
+    }
+
     function showFn($target: HTMLElement) {
       if (props.disabled) return;
       if (show.value) {
         clearHide();
         return;
       }
-      if ($target.classList.contains('nt-popover')) return;
       show.value = true;
-
       nextTick(() => {
-        // 获取水平和垂直方向的位置
-        let mainPos = 'bottom';
-        let crossPos = '';
-        const poss = props.placement.split('-');
-        if (poss != null) {
-          mainPos = poss[0];
-          crossPos = poss[1] || '';
-        }
-        let x = 0,
-          y = 0,
-          width: number | undefined = undefined;
-
-        if ($popover.value != null) {
-          let popoverRect = $popover.value.getBoundingClientRect();
-          const targetRect = $target.getBoundingClientRect();
-
-          // 获取滚动容器
-          let container = document.documentElement;
-          // 滚动条水平方向滚动距离
-          const scrollLeft = container.scrollLeft;
-          // 滚动条垂直方向滚动距离
-          const scrollTop = container.scrollTop;
-
-          if (props.width != null) {
-            if (props.width === 'trigger') {
-              width = targetRect.width;
-            } else {
-              width = props.width;
-            }
-          }
-          if (width != null) {
-            popoverRect.width = width;
-          }
-          // 获取水平、垂直方向弹窗坐标点偏移
-          const yOffset = getPopoverOffsetY(
-            targetRect,
-            popoverRect,
-            mainPos,
-            crossPos,
-            props.offset,
-          );
-          const xOffset = getPopoverOffsetX(
-            targetRect,
-            popoverRect,
-            mainPos,
-            crossPos,
-            props.offset,
-          );
-          // 碰撞检测
-          const impactRes = impactDetect(
-            targetRect,
-            popoverRect,
-            mainPos,
-            crossPos,
-            scrollLeft,
-            scrollTop,
-            xOffset,
-            yOffset,
-            props.offset,
-          );
-          x = impactRes.x;
-          y = impactRes.y;
-          mainPos = impactRes.mainAlign;
-          crossPos = impactRes.crossAlign;
-        }
-
-        const tmpPosStyle: any = {
-          top: `${round(y)}px`,
-          left: `${round(x)}px`,
-        };
-        if (width != null) {
-          tmpPosStyle.width = `${width}px`;
-        }
-        posStyle.value = tmpPosStyle;
-        place.value =
-          `${mainPos}${crossPos === '' ? '' : '-' + crossPos}` as any;
+        updatePosition($target);
       });
     }
 
@@ -169,6 +167,21 @@ export default defineComponent({
       }
     }
 
+    function updatePopoverPosition(
+      reference?: HTMLElement | string | Ref<HTMLElement>,
+    ) {
+      const refer = reference || props.reference;
+      if (refer != null && show.value) {
+        if (refer instanceof HTMLElement) {
+          updatePosition(refer);
+        } else if (typeof refer === 'string') {
+          updatePosition(elem(refer)[0]);
+        } else {
+          updatePosition(refer.value);
+        }
+      }
+    }
+
     function handleClick(e: Event) {
       const $target = e.currentTarget as HTMLElement;
       // 点击的不是 popover 元素，才切换 popover
@@ -202,12 +215,11 @@ export default defineComponent({
       hide: close,
       show: showPopover,
       toggle,
+      updatePosition: updatePopoverPosition,
       isShow: () => show.value,
     });
 
     return () => {
-      const firstVNode = getFirstTriggerVNode(slots);
-
       const prop: any = {};
       if (props.trigger != null && props.trigger !== 'manual') {
         if (props.trigger === 'hover') {
@@ -244,12 +256,12 @@ export default defineComponent({
       }
 
       return [
-        firstVNode
+        slots.trigger != null
           ? props.trigger === 'click'
-            ? withDirectives(h(firstVNode, prop), [
+            ? withDirectives(renderTrigger(prop), [
                 [Clickoutside, handleOutside],
               ])
-            : h(firstVNode, prop)
+            : renderTrigger(prop)
           : null,
         h(
           Teleport,

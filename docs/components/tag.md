@@ -20,6 +20,7 @@
   <CodePreview>
   <textarea lang="vue-html">
   <nt-tag type="primary" class="ml-10">标签</nt-tag>
+  <nt-tag type="info" class="ml-10">标签</nt-tag>
   <nt-tag type="success" class="ml-10">标签</nt-tag>
   <nt-tag type="error" class="ml-10">标签</nt-tag>
   <nt-tag class="ml-10" color="#409eff">标签</nt-tag>
@@ -45,6 +46,29 @@
   </textarea>
   <template #preview>
     <Tag closable @close="handleTagClose">标签</Tag>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 动画
+
+如果想给标签添加显示或移除时的动画，只需要 [添加渐变](/css-util#_1-vue3-transition-渐变) 即可。如果是一个标签列表就需要配合 [Vue3 TransitionGroup](https://cn.vuejs.org/guide/built-ins/transition-group) 组件。
+
+> 注意：列表中的每个元素都必须有一个独一无二的 `key attribute`。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <template>
+    <Transition appear name="nt-scale">
+      <nt-tag type="primary">标签</nt-tag>
+    </Transition>
+  </template>
+  </textarea>
+  <template #preview>
+    <Transition appear name="nt-scale">
+      <Tag type="primary">标签</Tag>
+    </Transition>
   </template>
   </CodePreview>
 </ClientOnly>

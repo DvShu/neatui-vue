@@ -311,3 +311,4 @@
 | `show` | 非受控模式, 显示弹层 | `(reference?: HTMLElement \| string \| Ref<HTMLElement>) => void` |
 | `isShow` | 是否显示 | `() => boolean` |
 | `toggle` | 非受控模式, 切换弹层显示或隐藏 | `(reference?: HTMLElement \| string \| Ref<HTMLElement>) => void` |
+| `updatePosition` | 更新弹层位置 | `(reference?: HTMLElement \| string \| Ref<HTMLElement>) => void` |
