@@ -1,12 +1,10 @@
 <template>
-  <Transition appear name="nt-scale">
-    <div :class="['nt-tag', `nt-tag--${type}`]" :style="styleObj">
-      <div class="nt-tag--content"><slot></slot></div>
-      <i v-if="closable" class="nt-tag--close" @click="handleClose">
-        <Close></Close>
-      </i>
-    </div>
-  </Transition>
+  <div :class="['nt-tag', `nt-tag--${type}`]" :style="styleObj">
+    <div class="nt-tag--content"><slot></slot></div>
+    <i v-if="closable" class="nt-tag--close" @click="handleClose">
+      <Close></Close>
+    </i>
+  </div>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
@@ -16,7 +14,7 @@ import Close from './icon/Close.vue';
 
 const props = withDefaults(
   defineProps<{
-    type?: 'primary' | 'error' | 'success';
+    type?: 'primary' | 'error' | 'success' | 'info';
     color?: string;
     /** 是否可关闭 */
     closable?: boolean;
@@ -29,8 +27,8 @@ const props = withDefaults(
 
 const emits = defineEmits(['close']);
 
-function handleClose() {
-  emits('close');
+function handleClose(e: Event) {
+  emits('close', e);
 }
 
 const styleObj = computed(() => {
