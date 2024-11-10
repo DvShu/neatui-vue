@@ -82,4 +82,21 @@
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| x | x | x | x |
+| `model-value / v-model` | 选中项绑定值 | `string、number、array` | - |
+| `placeholder` | 占位符 | `string` | 请选择 |
+| `disabled` | 是否禁用 | `boolean` | `false` |
+| `label-field` | 选项 `label` 的字段名 | `string` | `label` |
+| `value-field` | 选项 `value` 的字段名 | `string` | `value` |
+| `options` | 配置选项内容 | `SelectOption[]` | - |
+| `multiple` | 是否多选 | `boolean` | `false` |
+| `collapse-tags` | 多选时是否将选中值按文字的形式展示 | `boolean` | `false` |
+
+#### SelectOption Property
+
+<!-- prettier-ignore -->
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `label` | 选项标签 | `string` | - |
+| `value` | 选项值 | `string、number` | - |
+| `class` | 自定义一个选项的类名 | `string` | - |
+| `render` | 渲染整个选项 | `(option: SelectOption, isSelect: boolean, selectedValues?: any \| any[]) => VNode[] \| VNode` | - |
