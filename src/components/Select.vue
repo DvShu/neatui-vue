@@ -6,15 +6,16 @@ import {
   h,
   withDirectives,
   watch,
-  nextTick,
   onMounted,
   onUnmounted,
+  nextTick,
 } from 'vue';
 import type { PropType, VNode } from 'vue';
 import ArrowDown from './icon/ArrowDown.vue';
 import Popover from './popover/Popover.vue';
 import Clickoutside from '../directives/clickoutside';
 import SelectIcon from './icon/Select.vue';
+import MaskClose from './icon/MaskClose.vue';
 import Tag from './Tag.vue';
 import { elem } from 'ph-utils/dom';
 
@@ -71,12 +72,18 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    /** 是否可清空 */
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { attrs, emit }) {
     const id = useId();
     const popoverComp = ref();
     const expand = ref(false);
+    const showClear = ref(false);
     /** 选择的标签列表 */
     const selectedLabels = ref<string[]>([]);
 
@@ -100,6 +107,7 @@ export default defineComponent({
         if (popoverComp.value != null) {
           popoverComp.value.hide();
           expand.value = false;
+          unvislbleClear();
         }
       }
     }
@@ -109,6 +117,7 @@ export default defineComponent({
         if (expand.value === true) {
           popoverComp.value.hide();
           expand.value = false;
+          unvislbleClear();
         } else {
           expand.value = true;
           popoverComp.value.show();
@@ -131,6 +140,15 @@ export default defineComponent({
         }
       }
       selectedLabels.value = tmpLabels;
+      nextTick(() => {
+        if (props.multiple && expand.value) {
+          if (selectedLabels.value.length > 0) {
+            visibleClear();
+          } else {
+            unvislbleClear();
+          }
+        }
+      });
     }
 
     updateSelectedLabels(props.modelValue);
@@ -232,6 +250,28 @@ export default defineComponent({
       emit('update:modelValue', oldValue);
     }
 
+    function handleClearSelect(e: Event) {
+      if (props.multiple) {
+        emit('update:modelValue', []);
+      } else {
+        emit('update:modelValue', undefined);
+      }
+      unvislbleClear();
+      e.stopPropagation();
+    }
+
+    function visibleClear() {
+      if (selectedLabels.value.length > 0 && props.clearable) {
+        showClear.value = true;
+      }
+    }
+
+    function unvislbleClear() {
+      if (props.clearable && showClear.value) {
+        showClear.value = false;
+      }
+    }
+
     function renderTag(value: any, index: number = 0, closable = true) {
       return h(
         Tag,
@@ -273,9 +313,15 @@ export default defineComponent({
           'div',
           {
             ...attrs,
-            class: ['nt-select', attrs.class],
+            class: [
+              'nt-select',
+              expand.value ? 'nt-select--active' : undefined,
+              attrs.class,
+            ],
             id: id,
             onClick: handleSelectClick,
+            onMouseenter: visibleClear,
+            onMouseleave: unvislbleClear,
           },
           [
             h(
@@ -289,6 +335,12 @@ export default defineComponent({
                 expand.value ? 'nt-expanded' : undefined,
               ],
             }),
+            showClear.value
+              ? h(MaskClose, {
+                  class: 'nt-select--clear',
+                  onClick: handleClearSelect,
+                })
+              : undefined,
           ],
         ),
         [[Clickoutside, handleOutside]],
