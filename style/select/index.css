@@ -13,12 +13,24 @@
   border-radius: 4px;
   gap: 5px;
 }
+.nt-select--active,
 .nt-select:hover {
   border-color: var(--nt-primary-color-light1, #9254de);
 }
 .nt-select--arrow,
 .nt-select-placeholder {
   color: #999;
+}
+.nt-select--clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #afafaf;
+  transition: color 0.3s ease-in-out;
+}
+.nt-select--clear:hover {
+  color: #929292;
 }
 .nt-select-inner {
   font-size: 0;

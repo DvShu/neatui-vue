@@ -55,10 +55,16 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue" v-pre>
-  <script setup lang="ts">
-  </script>
   <template>
-    <hr />
+    <nt-select :options="options" v-model="value1" multiple style="width:180px;"></nt-select>
+    <nt-select
+      :options="options"
+      v-model="value2"
+      multiple
+      style="width:180px;"
+      class="ml-10"
+      collapse-tags
+    ></nt-select>
   </template>
   </textarea>
   <template #preview>
@@ -70,6 +76,38 @@
       style="width:180px;"
       class="ml-10"
       collapse-tags
+    ></Select>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 可清空
+
+设置 `clearable` 属性，则可将选择器清空。使用清除图标来清除选择。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+  </script>
+  <template>
+  </template>
+  </textarea>
+  <template #preview>
+    <Select
+      :options="options"
+      v-model="selectedValue"
+      style="width:180px;"
+      clearable
+    ></Select>
+    <Select
+      :options="options"
+      v-model="value2"
+      multiple
+      style="width:180px;"
+      class="ml-10"
+      collapse-tags
+      clearable
     ></Select>
   </template>
   </CodePreview>
@@ -90,8 +128,9 @@
 | `options` | 配置选项内容 | `SelectOption[]` | - |
 | `multiple` | 是否多选 | `boolean` | `false` |
 | `collapse-tags` | 多选时是否将选中值按文字的形式展示 | `boolean` | `false` |
+| `clearable` | 是否可清空 | `boolean` | `false` |
 
-#### SelectOption Property
+### SelectOption Property
 
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 |
