@@ -88,9 +88,13 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue">
-  <script setup>
-  </script>
   <template>
+  <nt-select
+    :options="options"
+    v-model="selectedValue"
+    style="width:180px;"
+    clearable
+  ></nt-select>
   </template>
   </textarea>
   <template #preview>
@@ -113,6 +117,31 @@
   </CodePreview>
 </ClientOnly>
 
+### 过滤选项
+
+可以利用过滤功能快速查找选项。
+
+为 `nt-select` 添加 `filterable` 属性即可启用搜索功能。 默认情况下，`Select` 会找出所有 `label` 属性包含输入值的选项。 如果希望使用其他的搜索逻辑，可以通过传入一个 `filter` 函数来实现。 `filter` 为一个 `Function`，它会在输入值发生变化时调用，参数为当前输入值以及当前选项，返回值为 `boolean` 表明当前选项是否符合过滤。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue">
+  <script setup>
+  </script>
+  <template>
+  </template>
+  </textarea>
+  <template #preview>
+    <Select
+      :options="options"
+      v-model="selectedValue"
+      style="width:180px;"
+      filterable
+    ></Select>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
 ## API
 
 ### Select Props
@@ -129,6 +158,8 @@
 | `multiple` | 是否多选 | `boolean` | `false` |
 | `collapse-tags` | 多选时是否将选中值按文字的形式展示 | `boolean` | `false` |
 | `clearable` | 是否可清空 | `boolean` | `false` |
+| `filterable` | 是否启用过滤 | `boolean` | `false` |
+| `filter` | 自定义的过滤函数 | `(match: string, option: SelectOption) => boolean` | - |
 
 ### SelectOption Property
 

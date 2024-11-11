@@ -77,6 +77,17 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    /** 是否启用过滤 */
+    filterable: {
+      type: Boolean,
+      default: false,
+    },
+    /** 自定义过滤函数 */
+    filter: {
+      type: Function as PropType<
+        (match: string, option: SelectOption) => boolean
+      >,
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { attrs, emit }) {
@@ -288,23 +299,36 @@ export default defineComponent({
     }
 
     function renderSelectedLabels() {
-      if (selectedLabels.value.length === 0) {
-        return h('span', { class: 'nt-select-placeholder' }, props.placeholder);
+      const chidren = [];
+      let selectLen = selectedLabels.value.length;
+      if (selectLen > 0) {
+        if (!props.multiple) {
+          chidren.push(h('span', selectedLabels.value[0]));
+        } else {
+          if (props.collapseTags) {
+            chidren.push(renderTag(selectedLabels.value[0]));
+            if (selectLen > 1) {
+              chidren.push(renderTag(`+${selectLen - 1}`, 0, false));
+            }
+          } else {
+            for (let i = 0; i < selectLen; i++) {
+              const item = selectedLabels.value[i];
+              chidren.push(renderTag(item, i));
+            }
+          }
+        }
+      } else {
+        if (!props.filterable) {
+          chidren.push(
+            h('span', { class: 'nt-select-placeholder' }, props.placeholder),
+          );
+        }
       }
-      if (!props.multiple) {
-        return h('span', selectedLabels.value[0]);
+      if (props.filterable) {
+        chidren.push(h('input', { placeholder: props.placeholder }));
       }
-      if (props.collapseTags) {
-        return [
-          renderTag(selectedLabels.value[0]),
-          selectedLabels.value.length > 1
-            ? renderTag(`+${selectedLabels.value.length - 1}`, 0, false)
-            : null,
-        ];
-      }
-      return selectedLabels.value.map((item, i) => {
-        return renderTag(item, i);
-      });
+
+      return chidren;
     }
 
     return () => [
