@@ -278,6 +278,10 @@ export default defineComponent({
         oldValue = value;
       }
       setSearchValue(!props.multiple ? label : '');
+      if (searchInput.value != null) {
+        searchInput.value.placeholder = '';
+        searchInput.value.focus();
+      }
       emit('update:modelValue', oldValue);
     }
 
@@ -308,6 +312,9 @@ export default defineComponent({
       let oldValue = [...props.modelValue];
       oldValue.splice(index, 1);
       emit('update:modelValue', oldValue);
+      if (oldValue.length === 0 && searchInput.value != null) {
+        searchInput.value.placeholder = props.placeholder;
+      }
     }
 
     function handleClearSelect(e: Event) {
@@ -354,6 +361,9 @@ export default defineComponent({
         $input.placeholder = $input.value;
         $input.value = '';
       }
+      if (selectedLabels.value.length > 0) {
+        $input.placeholder = '';
+      }
     }
 
     function onSearchBlur() {
@@ -367,6 +377,13 @@ export default defineComponent({
     function onSearchInput(e: Event) {
       const $target = e.target as HTMLInputElement;
       handleSearchInput($target.value);
+    }
+
+    function onSearchKeydown(e: KeyboardEvent) {
+      let len = selectedLabels.value.length;
+      if (e.key === 'Backspace' && len > 0) {
+        handleDeleteSelect(len - 1);
+      }
     }
 
     function renderSelectedLabels() {
@@ -415,6 +432,7 @@ export default defineComponent({
               onFocus: onSearchFocus,
               onBlur: onSearchBlur,
               onInput: onSearchInput,
+              onKeydown: onSearchKeydown,
             }),
           ),
         );
