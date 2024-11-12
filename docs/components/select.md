@@ -138,6 +138,15 @@
       style="width:180px;"
       filterable
     ></Select>
+    <Select
+      :options="options"
+      v-model="value2"
+      multiple
+      style="width:180px;"
+      class="ml-10"
+      collapse-tags
+      filterable
+    ></Select>
   </template>
   </CodePreview>
 </ClientOnly>
