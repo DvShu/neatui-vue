@@ -18,6 +18,7 @@ import SelectIcon from './icon/Select.vue';
 import MaskClose from './icon/MaskClose.vue';
 import Tag from './Tag.vue';
 import { elem } from 'ph-utils/dom';
+import useDebounce from '../hooks/useDebounce';
 
 type SelectOption = {
   class?: string;
@@ -97,6 +98,12 @@ export default defineComponent({
     const showClear = ref(false);
     /** 选择的标签列表 */
     const selectedLabels = ref<string[]>([]);
+    const searchInput = ref<HTMLInputElement>();
+    const options = ref(filterOption(''));
+
+    const { run: handleSearchInput, cancel } = useDebounce((match: string) => {
+      options.value = filterOption(match);
+    }, 300);
 
     function handleOutside(e: Event) {
       let $target = e.target as HTMLElement;
@@ -119,6 +126,7 @@ export default defineComponent({
           popoverComp.value.hide();
           expand.value = false;
           unvislbleClear();
+          toggleSearchFocus(false);
         }
       }
     }
@@ -129,10 +137,29 @@ export default defineComponent({
           popoverComp.value.hide();
           expand.value = false;
           unvislbleClear();
+          toggleSearchFocus(false);
         } else {
           expand.value = true;
           popoverComp.value.show();
+          toggleSearchFocus(true);
         }
+      }
+    }
+
+    function toggleSearchFocus(focus = true) {
+      if (searchInput.value != null) {
+        if (focus) {
+          searchInput.value.focus();
+          options.value = filterOption('');
+        } else {
+          searchInput.value.blur();
+        }
+      }
+    }
+
+    function setSearchValue(val: string = '') {
+      if (searchInput.value != null) {
+        searchInput.value.value = val;
       }
     }
 
@@ -189,6 +216,7 @@ export default defineComponent({
         resizeObserver.disconnect();
         resizeObserver = undefined;
       }
+      cancel();
     });
 
     function isOptionSelect(value: any) {
@@ -204,9 +232,29 @@ export default defineComponent({
       return isSelect;
     }
 
+    function filterOption(match: string) {
+      const opts = [];
+      for (let i = 0, len = props.options.length; i < len; i++) {
+        const thisOption = props.options[i];
+        let isFil = true;
+        if (match) {
+          if (props.filter != null) {
+            isFil = props.filter(match, thisOption.value);
+          } else {
+            isFil = thisOption[props.labelField].includes(match);
+          }
+        }
+        if (isFil) {
+          opts.push(thisOption);
+        }
+      }
+      return opts;
+    }
+
     function handleOptionClick(e: Event, option: SelectOption) {
       e.stopPropagation();
       const value = option[props.valueField];
+      const label = option[props.labelField];
       let oldValue = props.modelValue;
       if (props.multiple === true) {
         if (oldValue == null) {
@@ -229,11 +277,12 @@ export default defineComponent({
       } else {
         oldValue = value;
       }
+      setSearchValue(!props.multiple ? label : '');
       emit('update:modelValue', oldValue);
     }
 
     function optionNodes() {
-      return props.options.map((option: SelectOption) => {
+      return options.value.map((option: SelectOption) => {
         const isSelect = isOptionSelect(option[props.valueField]);
         return h(
           'li',
@@ -293,9 +342,31 @@ export default defineComponent({
             handleDeleteSelect(index);
             e.stopPropagation();
           },
+          class: 'nt-select-item',
         },
         { default: () => value },
       );
+    }
+
+    function onSearchFocus(e: Event) {
+      const $input = e.target as HTMLInputElement;
+      if ($input.value !== '') {
+        $input.placeholder = $input.value;
+        $input.value = '';
+      }
+    }
+
+    function onSearchBlur() {
+      if (selectedLabels.value.length > 0 && !props.multiple) {
+        setSearchValue(selectedLabels.value[0]);
+      } else {
+        setSearchValue('');
+      }
+    }
+
+    function onSearchInput(e: Event) {
+      const $target = e.target as HTMLInputElement;
+      handleSearchInput($target.value);
     }
 
     function renderSelectedLabels() {
@@ -303,7 +374,11 @@ export default defineComponent({
       let selectLen = selectedLabels.value.length;
       if (selectLen > 0) {
         if (!props.multiple) {
-          chidren.push(h('span', selectedLabels.value[0]));
+          if (!props.filterable) {
+            chidren.push(
+              h('span', { class: 'nt-select-item' }, selectedLabels.value[0]),
+            );
+          }
         } else {
           if (props.collapseTags) {
             chidren.push(renderTag(selectedLabels.value[0]));
@@ -320,12 +395,29 @@ export default defineComponent({
       } else {
         if (!props.filterable) {
           chidren.push(
-            h('span', { class: 'nt-select-placeholder' }, props.placeholder),
+            h(
+              'span',
+              { class: 'nt-select-item nt-select-placeholder' },
+              props.placeholder,
+            ),
           );
         }
       }
       if (props.filterable) {
-        chidren.push(h('input', { placeholder: props.placeholder }));
+        chidren.push(
+          h(
+            'div',
+            { class: 'nt-select-item nt-select-search' },
+            h('input', {
+              class: 'nt-select--input',
+              placeholder: props.placeholder,
+              ref: searchInput,
+              onFocus: onSearchFocus,
+              onBlur: onSearchBlur,
+              onInput: onSearchInput,
+            }),
+          ),
+        );
       }
 
       return chidren;
@@ -348,11 +440,7 @@ export default defineComponent({
             onMouseleave: unvislbleClear,
           },
           [
-            h(
-              'div',
-              { class: 'nt-select-inner' },
-              h('div', { class: 'nt-select-main' }, renderSelectedLabels()),
-            ),
+            h('div', { class: 'nt-select-main' }, renderSelectedLabels()),
             h(ArrowDown, {
               class: [
                 'nt-select--arrow',

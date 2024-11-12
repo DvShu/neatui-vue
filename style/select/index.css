@@ -19,7 +19,7 @@
 }
 .nt-select--arrow,
 .nt-select-placeholder {
-  color: #999;
+  color: #a8abb2;
 }
 .nt-select--clear {
   position: absolute;
@@ -32,16 +32,21 @@
 .nt-select--clear:hover {
   color: #929292;
 }
-.nt-select-inner {
-  font-size: 0;
-  overflow: hidden;
-}
 .nt-select-main {
   display: flex;
   gap: 5px;
   flex-flow: row wrap;
   font-size: 14px;
   line-height: 1;
+  flex-grow: 1;
+  overflow: hidden;
+}
+.nt-select-item {
+  flex-shrink: 0;
+}
+.nt-select-search {
+  flex-grow: 1;
+  display: inline-flex;
 }
 .nt-select--arrow {
   flex-shrink: 0;
@@ -76,4 +81,18 @@
 }
 .nt-select-option--selected {
   color: var(--nt-primary-color-light1, #9254de);
+}
+.nt-select--input {
+  min-width: 15px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  width: 0;
+  flex-grow: 1;
+}
+.nt-select--input::placeholder {
+  color: #a8abb2;
 }
