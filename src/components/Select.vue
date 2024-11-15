@@ -89,8 +89,13 @@ export default defineComponent({
         (match: string, option: SelectOption) => boolean
       >,
     },
+    /** 是否启用远程搜索 */
+    remote: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'search'],
   setup(props, { attrs, emit }) {
     const id = useId();
     const popoverComp = ref();
@@ -102,7 +107,17 @@ export default defineComponent({
     const options = ref(filterOption(''));
 
     const { run: handleSearchInput, cancel } = useDebounce((match: string) => {
-      options.value = filterOption(match);
+      if (props.remote === true) {
+        emit('search', match);
+      } else {
+        const newValue = filterOption(match);
+        options.value = newValue;
+        if (newValue.length !== options.value.length) {
+          nextTick(() => {
+            updatePopoverPosition();
+          });
+        }
+      }
     }, 300);
 
     function handleOutside(e: Event) {
@@ -200,12 +215,23 @@ export default defineComponent({
       },
     );
 
+    watch(
+      () => props.options,
+      (v) => {
+        const oldLen = options.value.length;
+        options.value = v;
+        if (v.length !== oldLen) {
+          nextTick(() => {
+            updatePopoverPosition();
+          });
+        }
+      },
+    );
+
     onMounted(() => {
       if (resizeObserver == null) {
         resizeObserver = new ResizeObserver(() => {
-          if (popoverComp.value != null) {
-            popoverComp.value.updatePosition();
-          }
+          updatePopoverPosition();
         });
         resizeObserver.observe(elem(`#${id}`)[0]);
       }
@@ -218,6 +244,12 @@ export default defineComponent({
       }
       cancel();
     });
+
+    function updatePopoverPosition() {
+      if (popoverComp.value != null) {
+        popoverComp.value.updatePosition();
+      }
+    }
 
     function isOptionSelect(value: any) {
       let isSelect = false;
@@ -286,7 +318,7 @@ export default defineComponent({
     }
 
     function optionNodes() {
-      return options.value.map((option: SelectOption) => {
+      let children = options.value.map((option: SelectOption) => {
         const isSelect = isOptionSelect(option[props.valueField]);
         return h(
           'li',
@@ -306,6 +338,14 @@ export default defineComponent({
           ],
         );
       });
+      if (children == null || children.length === 0) {
+        children.push(
+          h('li', { class: 'nt-select-option nt-select-option--empty' }, [
+            h('span', '无数据'),
+          ]),
+        );
+      }
+      return children;
     }
 
     function handleDeleteSelect(index: number) {
