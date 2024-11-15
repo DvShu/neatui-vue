@@ -17,11 +17,20 @@
 
   const options = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
 
+  const options2 = ref(options);
   const selectedValue = ref('');
 
   const value1 = ref([]);
 
   const value2 = ref([]);
+
+  function handleSearch(val) {
+    console.log(val);
+    setTimeout(() => {
+      // options2.value = fruits.slice(11, 15).map((item, i) => { return { value: i, label: item } });
+      options2.value = []
+    }, 1500);
+  }
 </script>
 
 ### 使用
@@ -126,9 +135,13 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue">
-  <script setup>
-  </script>
   <template>
+    <nt-select
+      :options="options"
+      v-model="selectedValue"
+      style="width:180px;"
+      filterable
+    ></nt-select>
   </template>
   </textarea>
   <template #preview>
@@ -146,6 +159,34 @@
       class="ml-10"
       collapse-tags
       filterable
+    ></Select>
+  </template>
+  </CodePreview>
+</ClientOnly>
+
+### 远程搜索
+
+搜索框和远程数据结合，输入关键字以从远程服务器中查找数据。
+
+为了启用远程搜索，需要将 `filterable` 和 `remote` 同时设置为 `true`，同时监听 `on-search` 事件，事件参数为输入的值, 可以在事件中搜索远程结果，并重新更新 `options` 选项 。
+
+<ClientOnly>
+  <CodePreview>
+  <textarea lang="vue" v-pre>
+  <script setup lang="ts">
+  </script>
+  <template>
+    <hr />
+  </template>
+  </textarea>
+  <template #preview>
+    <Select
+      :options="options2"
+      v-model="selectedValue"
+      style="width:180px;"
+      filterable
+      remote
+      @search="handleSearch"
     ></Select>
   </template>
   </CodePreview>

@@ -61,6 +61,7 @@
   overflow: auto;
 }
 .nt-select-popover {
+  --nt-select-option-hover-color: var(--nt-primary-color-light4, #efdbff);
   padding: 0;
 }
 .nt-select-option {
@@ -76,8 +77,14 @@
   justify-content: space-between;
   align-items: center;
 }
+.nt-select-option--empty {
+  --nt-select-option-hover-color: #ffffff;
+  justify-content: center;
+  cursor: default;
+  color: var(--nt-info-color, #999);
+}
 .nt-select-option:hover {
-  background-color: var(--nt-primary-color-light4, #efdbff);
+  background-color: var(--nt-select-option-hover-color);
 }
 .nt-select-option--selected {
   color: var(--nt-primary-color-light1, #9254de);
