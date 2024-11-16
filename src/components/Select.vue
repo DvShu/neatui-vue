@@ -15,6 +15,7 @@ import ArrowDown from './icon/ArrowDown.vue';
 import Popover from './popover/Popover.vue';
 import Clickoutside from '../directives/clickoutside';
 import SelectIcon from './icon/Select.vue';
+import LoadingIcon from './icon/Loading.vue';
 import MaskClose from './icon/MaskClose.vue';
 import Tag from './Tag.vue';
 import { elem } from 'ph-utils/dom';
@@ -91,6 +92,11 @@ export default defineComponent({
     },
     /** 是否启用远程搜索 */
     remote: {
+      type: Boolean,
+      default: false,
+    },
+    /** 是否为加载状态, 通常为远程搜索时使用 */
+    loading: {
       type: Boolean,
       default: false,
     },
@@ -509,6 +515,11 @@ export default defineComponent({
               ? h(MaskClose, {
                   class: 'nt-select--clear',
                   onClick: handleClearSelect,
+                })
+              : undefined,
+            props.loading
+              ? h(LoadingIcon, {
+                  class: 'nt-select--loading nt-rotate-anim',
                 })
               : undefined,
           ],

@@ -24,11 +24,17 @@
 
   const value2 = ref([]);
 
+  const loading = ref(false);
+
   function handleSearch(val) {
-    console.log(val);
+    loading.value = true;
     setTimeout(() => {
-      // options2.value = fruits.slice(11, 15).map((item, i) => { return { value: i, label: item } });
-      options2.value = []
+      if (val) {
+        options2.value = fruits.filter((item) => item.includes(val)).map((item, i) => { return { value: i, label: item } })
+      } else {
+        options2.value = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
+      }
+      loading.value = false;
     }, 1500);
   }
 </script>
@@ -174,9 +180,35 @@
   <CodePreview>
   <textarea lang="vue" v-pre>
   <script setup lang="ts">
+    const fruits = ["苹果", "香蕉", "橙子", "葡萄", "柠檬", "草莓", "樱桃", "芒果", "猕猴桃", "杨梅", "菠萝", "西瓜", "哈密瓜", "桃子", "梨", "柿子", "榴莲", "椰子", "龙眼", "荔枝"];
+    const options = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
+    //-
+    const loading = ref(false);
+    const options2 = ref(options);
+    const selectedValue = ref('');
+    //-
+    function handleSearch(val) {
+      loading.value = true;
+      setTimeout(() => {
+        if (val) {
+          options2.value = fruits.filter((item) => item.includes(val)).map((item, i) => { return { value: i, label: item } })
+        } else {
+          options2.value = fruits.slice(0, 10).map((item, i) => { return { value: i, label: item } });
+        }
+        loading.value = false;
+      }, 1500);
+    }
   </script>
   <template>
-    <hr />
+    <nt-select
+      :options="options2"
+      v-model="selectedValue"
+      style="width:180px;"
+      filterable
+      remote
+      @search="handleSearch"
+      :loading="loading"
+    ></nt-select>
   </template>
   </textarea>
   <template #preview>
@@ -187,6 +219,7 @@
       filterable
       remote
       @search="handleSearch"
+      :loading="loading"
     ></Select>
   </template>
   </CodePreview>
@@ -210,6 +243,8 @@
 | `clearable` | 是否可清空 | `boolean` | `false` |
 | `filterable` | 是否启用过滤 | `boolean` | `false` |
 | `filter` | 自定义的过滤函数 | `(match: string, option: SelectOption) => boolean` | - |
+| `remote` | 是否启用远程搜索 | `boolean` | `false` |
+| `loading` | 是否为加载状态, 通常为远程搜索时使用 | `boolean` | `false` |
 
 ### SelectOption Property
 
@@ -220,3 +255,10 @@
 | `value` | 选项值 | `string、number` | - |
 | `class` | 自定义一个选项的类名 | `string` | - |
 | `render` | 渲染整个选项 | `(option: SelectOption, isSelect: boolean, selectedValues?: any \| any[]) => VNode[] \| VNode` | - |
+
+### Select Events
+
+<!-- prettier-ignore -->
+| 事件名 | 说明 | 类型 |
+| --- | --- | --- |
+| `search` | 远程搜索时触发 | `(search: string): void` |
