@@ -21,12 +21,21 @@
 .nt-select-placeholder {
   color: #a8abb2;
 }
-.nt-select--clear {
+.nt-select--clear,
+.nt-select--loading {
   position: absolute;
   right: 10px;
   top: 50%;
-  transform: translateY(-50%);
+}
+.nt-select--loading {
+  background-color: #ffffff;
+  transform: translate3d(0, -50%, 0);
+  color: var(--nt-primary-color, #9254de);
+  animation: nt-select-loading 1.5s infinite linear;
+}
+.nt-select--clear {
   color: #afafaf;
+  transform: translate3d(0, -50%, 0);
   transition: color 0.3s ease-in-out;
 }
 .nt-select--clear:hover {
@@ -102,4 +111,14 @@
 }
 .nt-select--input::placeholder {
   color: #a8abb2;
+}
+
+/* 旋转动画 */
+@keyframes nt-select-loading {
+  from {
+    transform: translate3d(0, -50%, 0) rotate3d(0, 0, 1, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0) rotate3d(0, 0, 1, 360deg);
+  }
 }
