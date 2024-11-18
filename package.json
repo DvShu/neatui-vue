@@ -10,8 +10,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "inspect:eslint": "eslint --inspect-config",
-    "push": "pwsh scripts/publish.ps1 push",
-    "pull": "pwsh scripts/publish.ps1 publish"
+    "publish": "node scripts/publish.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
