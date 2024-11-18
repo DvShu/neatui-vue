@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.22.1](https://github.com/DvShu/neatui-vue/compare/v0.22.0...v0.22.1) (2024-11-18)
+
+### Bug Fixes
+
+- **Select** 增加筛选、远程搜索、加载状态 ([f4a129b](https://github.com/DvShu/neatui-vue/commit/f4a129b7b886c8b9dbb92f54070f16ac995401c3))
+
 ## [0.22.0](https://github.com/DvShu/neatui-vue/compare/v0.20.2...v0.22.0) (2024-11-17)
 
 ### Features
