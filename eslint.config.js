@@ -6,7 +6,7 @@ import markdown from '@eslint/markdown';
 
 export default [
   { files: ['src/**/*.{js,ts,vue}', 'docs/**/*.md'] },
-  { languageOptions: { globals: globals.browser } },
+  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],
