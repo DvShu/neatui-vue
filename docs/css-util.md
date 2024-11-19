@@ -3,7 +3,11 @@
 ### 1.1 引入样式
 
 ```ts
+<<<<<<< HEAD
 import 'litos-ui-vue/style/util/transition.css';
+=======
+import '@asteres/litos-ui-vue/style/util/transition.css';
+>>>>>>> 0c57b7ee (rename: litos-ui-vue)
 ```
 
 <script setup>
@@ -102,7 +106,11 @@ const show2 = ref(true)
 ### 引入样式
 
 ```ts
+<<<<<<< HEAD
 import 'litos-ui-vue/style/util/animation.css';
+=======
+import '@asteres/litos-ui-vue/style/util/animation.css';
+>>>>>>> 0c57b7ee (rename: litos-ui-vue)
 ```
 
 ### 使用
