@@ -19,11 +19,11 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-tag type="primary" class="ml-10">标签</nt-tag>
-  <nt-tag type="info" class="ml-10">标签</nt-tag>
-  <nt-tag type="success" class="ml-10">标签</nt-tag>
-  <nt-tag type="error" class="ml-10">标签</nt-tag>
-  <nt-tag class="ml-10" color="#409eff">标签</nt-tag>
+  <lt-tag type="primary" class="ml-10">标签</lt-tag>
+  <lt-tag type="info" class="ml-10">标签</lt-tag>
+  <lt-tag type="success" class="ml-10">标签</lt-tag>
+  <lt-tag type="error" class="ml-10">标签</lt-tag>
+  <lt-tag class="ml-10" color="#409eff">标签</lt-tag>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -41,7 +41,7 @@
     }
   </script>
   <template>
-    <nt-tag closable @close="handleTagClose">标签</nt-tag>
+    <lt-tag closable @close="handleTagClose">标签</lt-tag>
   </template>
   </textarea>
   <template #preview>
@@ -61,7 +61,7 @@
   <textarea lang="vue">
   <template>
     <Transition appear name="nt-scale">
-      <nt-tag type="primary">标签</nt-tag>
+      <lt-tag type="primary">标签</lt-tag>
     </Transition>
   </template>
   </textarea>

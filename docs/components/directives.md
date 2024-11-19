@@ -15,7 +15,7 @@ function handleOutside() {
 ```
 
 ```vue-html [template]
-<nt-input placeholder="输入过滤" v-clickoutside="handleOutside"></nt-input>
+<lt-input placeholder="输入过滤" v-clickoutside="handleOutside"></lt-input>
 ```
 
 :::

@@ -70,11 +70,11 @@
     const show = ref(false);
   </script>
   <template>
-    <nt-button type="primary" @click="show = true">显示 Dialog</nt-button>
+    <lt-button type="primary" @click="show = true">显示 Dialog</lt-button>
     <!---->
-    <nt-dialog v-model="show" title="Title">
+    <lt-dialog v-model="show" title="Title">
       这是内容
-    </nt-dialog>
+    </lt-dialog>
   </template>
   </textarea>
   <template #preview>
@@ -100,15 +100,15 @@
     const show = ref(false);
   </script>
   <template>
-    <nt-button type="primary" @click="show1 = true">显示 Dialog</nt-button>
+    <lt-button type="primary" @click="show1 = true">显示 Dialog</lt-button>
     <!---->
-    <nt-dialog v-model="show1" width="300px">
+    <lt-dialog v-model="show1" width="300px">
       <template #header>
         <InfoIcon />
         <span>提示</span>
       </template>
       提示内容
-    </nt-dialog>
+    </lt-dialog>
   </template>
   </textarea>
   <template #preview>
@@ -157,11 +157,11 @@
     }
   </script>
   <template>
-    <nt-button type="primary" @click="show3 = true">显示 Dialog</nt-button>
+    <lt-button type="primary" @click="show3 = true">显示 Dialog</lt-button>
     <!---->
-    <nt-dialog v-model="show3" title="Title" main-class="edit-dialog" :before-close="handleBeforeClose">
+    <lt-dialog v-model="show3" title="Title" main-class="edit-dialog" :before-close="handleBeforeClose">
       这是内容
-    </nt-dialog>
+    </lt-dialog>
   </template>
   </textarea>
   <template #preview>
@@ -187,11 +187,11 @@
     const show4 = ref(false);
   </script>
   <template>
-    <nt-button type="primary" @click="show4 = true">显示 Dialog</nt-button>
+    <lt-button type="primary" @click="show4 = true">显示 Dialog</lt-button>
     <!---->
-    <nt-dialog v-model="show4" title="标题" theme="mobile" :show-close="0" align-center>
+    <lt-dialog v-model="show4" title="标题" theme="mobile" :show-close="0" align-center>
       弹窗内容
-    </nt-dialog>
+    </lt-dialog>
   </template>
   </textarea>
   <template #preview>
@@ -241,9 +241,9 @@
     }
   </script>
   <template>
-    <nt-button @click="openAlert">alert</nt-button>
-    <nt-button @click="openConfirm">confirm</nt-button>
-    <nt-button @click="openPrompt">prompt</nt-button>
+    <lt-button @click="openAlert">alert</lt-button>
+    <lt-button @click="openConfirm">confirm</lt-button>
+    <lt-button @click="openPrompt">prompt</lt-button>
   </template>
   </textarea>
   <template #preview>

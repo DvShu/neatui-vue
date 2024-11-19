@@ -30,38 +30,38 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-tabbar style="border: 1px solid #dedede">
-    <nt-tabbar-item name="Reduction">
+  <lt-tabbar style="border: 1px solid #dedede">
+    <lt-tabbar-item name="Reduction">
       <template #icon>
-        <nt-reduction-icon />
+        <lt-reduction-icon />
       </template>
       <span>Reduction</span>
-    </nt-tabbar-item>
-    <nt-tabbar-item name="RefreshLeft">
+    </lt-tabbar-item>
+    <lt-tabbar-item name="RefreshLeft">
       <template #icon>
-        <nt-refresh-left-icon />
+        <lt-refresh-left-icon />
       </template>
       <span>RefreshLeft</span>
-    </nt-tabbar-item>
-    <nt-tabbar-item name="Search">
+    </lt-tabbar-item>
+    <lt-tabbar-item name="Search">
       <template #icon>
-        <nt-search-icon />
+        <lt-search-icon />
       </template>
       <span>Search</span>
-    </nt-tabbar-item>
-    <nt-tabbar-item name="RefreshRight">
+    </lt-tabbar-item>
+    <lt-tabbar-item name="RefreshRight">
       <template #icon>
-        <nt-refresh-right-icon />
+        <lt-refresh-right-icon />
       </template>
       <span>RefreshRight</span>
-    </nt-tabbar-item>
-    <nt-tabbar-item name="Sort">
+    </lt-tabbar-item>
+    <lt-tabbar-item name="Sort">
       <template #icon>
-        <nt-sort-icon />
+        <lt-sort-icon />
       </template>
       <span>Sort</span>
-    </nt-tabbar-item>
-  </nt-tabbar>
+    </lt-tabbar-item>
+  </lt-tabbar>
   </textarea>
   <template #preview>
     <Tabbar style="border: 1px solid #dedede">
@@ -108,11 +108,11 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-  <nt-tabbar type="bar" v-model='active2'>
-    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
-    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
-    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
-  </nt-tabbar>
+  <lt-tabbar type="bar" v-model='active2'>
+    <lt-tabbar-item name="1">选项1</lt-tabbar-item>
+    <lt-tabbar-item name="2">选项2</lt-tabbar-item>
+    <lt-tabbar-item name="3">选项3</lt-tabbar-item>
+  </lt-tabbar>
   </template>
   <script setup>
   import { ref } from 'vue';
@@ -136,29 +136,29 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-tabbar type="bar" justify-content="center">
-    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
-    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
-    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
-  </nt-tabbar>
+  <lt-tabbar type="bar" justify-content="center">
+    <lt-tabbar-item name="1">选项1</lt-tabbar-item>
+    <lt-tabbar-item name="2">选项2</lt-tabbar-item>
+    <lt-tabbar-item name="3">选项3</lt-tabbar-item>
+  </lt-tabbar>
   <hr />
-  <nt-tabbar type="bar" justify-content="space-between">
-    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
-    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
-    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
-  </nt-tabbar>
+  <lt-tabbar type="bar" justify-content="space-between">
+    <lt-tabbar-item name="1">选项1</lt-tabbar-item>
+    <lt-tabbar-item name="2">选项2</lt-tabbar-item>
+    <lt-tabbar-item name="3">选项3</lt-tabbar-item>
+  </lt-tabbar>
   <hr />
-  <nt-tabbar type="bar" justify-content="space-around">
-    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
-    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
-    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
-  </nt-tabbar>
+  <lt-tabbar type="bar" justify-content="space-around">
+    <lt-tabbar-item name="1">选项1</lt-tabbar-item>
+    <lt-tabbar-item name="2">选项2</lt-tabbar-item>
+    <lt-tabbar-item name="3">选项3</lt-tabbar-item>
+  </lt-tabbar>
   <hr />
-  <nt-tabbar type="bar" justify-content="space-evenly">
-    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
-    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
-    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
-  </nt-tabbar>
+  <lt-tabbar type="bar" justify-content="space-evenly">
+    <lt-tabbar-item name="1">选项1</lt-tabbar-item>
+    <lt-tabbar-item name="2">选项2</lt-tabbar-item>
+    <lt-tabbar-item name="3">选项3</lt-tabbar-item>
+  </lt-tabbar>
   </textarea>
   <template #preview>
     <Tabbar type="bar" justify-content="center">
@@ -196,17 +196,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-tabbar type="card">
-    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
-    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
-    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
-  </nt-tabbar>
+  <lt-tabbar type="card">
+    <lt-tabbar-item name="1">选项1</lt-tabbar-item>
+    <lt-tabbar-item name="2">选项2</lt-tabbar-item>
+    <lt-tabbar-item name="3">选项3</lt-tabbar-item>
+  </lt-tabbar>
   <hr />
-  <nt-tabbar type="card" :gap="5">
-    <nt-tabbar-item name="1">选项1</nt-tabbar-item>
-    <nt-tabbar-item name="2">选项2</nt-tabbar-item>
-    <nt-tabbar-item name="3">选项3</nt-tabbar-item>
-  </nt-tabbar>
+  <lt-tabbar type="card" :gap="5">
+    <lt-tabbar-item name="1">选项1</lt-tabbar-item>
+    <lt-tabbar-item name="2">选项2</lt-tabbar-item>
+    <lt-tabbar-item name="3">选项3</lt-tabbar-item>
+  </lt-tabbar>
   </textarea>
   <template #preview>
     <Tabbar type="card">

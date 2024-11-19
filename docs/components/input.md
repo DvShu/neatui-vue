@@ -31,7 +31,7 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-input placeholder="请输入内容"></nt-input>
+<lt-input placeholder="请输入内容"></lt-input>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -59,7 +59,7 @@
     }
   </script>
   <template>
-    <nt-input v-model="inputInt" placeholder="请输入正整数" :parser="numericParse"></nt-input>
+    <lt-input v-model="inputInt" placeholder="请输入正整数" :parser="numericParse"></lt-input>
   </template>
   </textarea>
   <template #preview>
@@ -96,7 +96,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-input placeholder="请输入内容" disabled></nt-input>
+  <lt-input placeholder="请输入内容" disabled></lt-input>
   </textarea>
   </CodePreview>
 </ClientOnly>

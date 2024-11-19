@@ -11,8 +11,8 @@ import { Image, Tooltip, ImagePreview } from '../../src'
 const show = ref(false)
 
 const imgs = [
-  '/neatui-vue/img1.svg',
-  '/neatui-vue/img2.svg',
+  '/litos-ui-vue/img1.svg',
+  '/litos-ui-vue/img2.svg',
   'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
 ]
 </script>
@@ -22,7 +22,7 @@ const imgs = [
 <ClientOnly>
   <CodePreview class="mt-15">
     <textarea lang="vue-html">
-    <nt-image src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg" width="100px"></nt-image>
+    <lt-image src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg" width="100px"></lt-image>
     </textarea>
   </CodePreview>
 </ClientOnly>
@@ -34,41 +34,41 @@ const imgs = [
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="fill"></nt-image>
-  <nt-image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="contain"></nt-image>
-  <nt-image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="cover"></nt-image>
-  <nt-image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="none"></nt-image>
-  <nt-image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="scale-down"></nt-image>
+  <lt-image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="fill"></lt-image>
+  <lt-image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="contain"></lt-image>
+  <lt-image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="cover"></lt-image>
+  <lt-image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="none"></lt-image>
+  <lt-image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="scale-down"></lt-image>
   </textarea>
     <template #preview>
       <div class="grid grid-cols-5">
         <Tooltip content="被替换的内容正好填充元素的内容框。整个对象将完全填充此框。如果对象的宽高比与内容框不相匹配，那么该对象将被拉伸以适应内容框">
           <div class="demo-img-item">
-            <Image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="fill"></Image>
+            <Image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="fill"></Image>
             <span class="mt-15">fill</span>
           </div>
         </Tooltip>
         <Tooltip content="被替换的内容将被缩放，以在填充元素的内容框时保持其宽高比。整个对象在填充盒子的同时保留其长宽比">
           <div class="demo-img-item">
-            <Image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="contain"></Image>
+            <Image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="contain"></Image>
             <span class="mt-15">contain</span>
           </div>
         </Tooltip>
         <Tooltip content="被替换的内容在保持其宽高比的同时填充元素的整个内容框。如果对象的宽高比与内容框不相匹配，该对象将被剪裁以适应内容框">
           <div class="demo-img-item">
-            <Image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="cover"></Image>
+            <Image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="cover"></Image>
             <span class="mt-15">cover</span>
           </div>
         </Tooltip>
         <Tooltip content="被替换的内容将保持其原有的尺寸">
           <div class="demo-img-item">
-            <Image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="none"></Image>
+            <Image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="none"></Image>
             <span class="mt-15">none</span>
           </div>
         </Tooltip>
         <Tooltip content="内容的尺寸与 none 或 contain 中的一个相同，取决于它们两个之间谁得到的对象尺寸会更小一些">
           <div class="demo-img-item">
-            <Image src="/neatui-vue/img1.svg" width="100px" height="100px" fit="scale-down"></Image>
+            <Image src="/litos-ui-vue/img1.svg" width="100px" height="100px" fit="scale-down"></Image>
             <span class="mt-15">scale-down</span>
           </div>
         </Tooltip>
@@ -84,10 +84,10 @@ const imgs = [
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-image src="/neatui-vue/img2.svg" width="100px" height="100px" placeholder="/neatui-vue/img_loading.png"></nt-image>
+  <lt-image src="/litos-ui-vue/img2.svg" width="100px" height="100px" placeholder="/litos-ui-vue/img_loading.png"></lt-image>
   </textarea>
   <template #preview>
-    <Image src="/neatui-vue/img2.svg" width="100px" height="100px" placeholder="/neatui-vue/img_loading.png"></Image>
+    <Image src="/litos-ui-vue/img2.svg" width="100px" height="100px" placeholder="/litos-ui-vue/img_loading.png"></Image>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -99,9 +99,9 @@ const imgs = [
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-image src="/neatui-vue/img3.svg" width="100px" height="100px" fallback="/neatui-vue/loading_error.png"></nt-image>
-  <nt-image
-    src="/neatui-vue/img3.svg"
+  <lt-image src="/litos-ui-vue/img3.svg" width="100px" height="100px" fallback="/litos-ui-vue/loading_error.png"></lt-image>
+  <lt-image
+    src="/litos-ui-vue/img3.svg"
     width="100px"
     height="100px"
     custom-fallback
@@ -110,12 +110,12 @@ const imgs = [
     <template #fallback>
       <div style="height: 100%;background-color: gray;display:flex;justify-content:center;align-items:center;color:#fff;">Error</div>
     </template>
-  </nt-image>
+  </lt-image>
   </textarea>
   <template #preview>
-    <Image src="/neatui-vue/img3.svg" width="100px" height="100px" fallback="/neatui-vue/loading_error.png"></Image>
+    <Image src="/litos-ui-vue/img3.svg" width="100px" height="100px" fallback="/litos-ui-vue/loading_error.png"></Image>
     <Image
-      src="/neatui-vue/img3.svg"
+      src="/litos-ui-vue/img3.svg"
       width="100px"
       height="100px"
       custom-fallback
@@ -136,10 +136,10 @@ const imgs = [
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-image src="/neatui-vue/img2.svg" width="100px" height="100px" preview-disable></nt-image>
+  <lt-image src="/litos-ui-vue/img2.svg" width="100px" height="100px" preview-disable></lt-image>
   </textarea>
   <template #preview>
-    <Image src="/neatui-vue/img2.svg" width="100px" height="100px" preview-disable></Image>
+    <Image src="/litos-ui-vue/img2.svg" width="100px" height="100px" preview-disable></Image>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -153,14 +153,14 @@ const imgs = [
   <textarea lang="vue">
   <script setup>
     const imgs = [
-      '/neatui-vue/img1.svg',
-      '/neatui-vue/img2.svg',
+      '/litos-ui-vue/img1.svg',
+      '/litos-ui-vue/img2.svg',
       'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
     ]
   </script>
 
   <template>
-    <nt-image v-for="src,index in imgs" :key="index" :src="src" :preview-src-list="imgs" :initial-index="index" width="100px"></nt-image>
+    <lt-image v-for="src,index in imgs" :key="index" :src="src" :preview-src-list="imgs" :initial-index="index" width="100px"></lt-image>
   </template>
   </textarea>
   <template #preview>
@@ -176,10 +176,10 @@ const imgs = [
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-image src="/neatui-vue/img2.svg" width="100px" height="100px" loading="lazy"></nt-image>
+  <lt-image src="/litos-ui-vue/img2.svg" width="100px" height="100px" loading="lazy"></lt-image>
   </textarea>
   <template #preview>
-    <Image src="/neatui-vue/img2.svg" width="100px" height="100px" loading="lazy"></Image>
+    <Image src="/litos-ui-vue/img2.svg" width="100px" height="100px" loading="lazy"></Image>
   </template>
   </CodePreview>
 </ClientOnly>
@@ -197,8 +197,8 @@ const imgs = [
     import { ref } from 'vue';
     const show = ref(false);
     const imgs = [
-      '/neatui-vue/img1.svg',
-      '/neatui-vue/img2.svg',
+      '/litos-ui-vue/img1.svg',
+      '/litos-ui-vue/img2.svg',
       'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
     ]
   </script>
@@ -210,11 +210,11 @@ const imgs = [
       class="demo-img"
       @click="show = true"
     />
-    <nt-image-preview
+    <lt-image-preview
       v-model:show="show"
       :url-list="imgs"
       :initial-index="0"
-    ></nt-image-preview>
+    ></lt-image-preview>
   </template>
   <style>
     .demo-img {

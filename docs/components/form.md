@@ -49,7 +49,7 @@
   <textarea lang="vue">
   <script setup lang="ts">
     import { reactive, watch, ref } from 'vue'
-    import { useFormReset } from '@asteres/neatui-vue'
+    import { useFormReset } from '@asteres/litos-ui-vue'
     const { formFields, resetFields } = useFormReset({
       username: '',
       password: ''
@@ -71,18 +71,18 @@
     }
   </script>
   <template>
-    <nt-form :model="formFields" :rules="rules" >
-      <nt-form-item label="用户名" required name="username" >
-        <nt-input placeholder="请输入用户名" v-model="formFields.username"></nt-input>
-      </nt-form-item>
-      <nt-form-item label="密码" required name="password">
-        <nt-input placeholder="请输入密码" v-model="formFields.password"></nt-input>
-      </nt-form-item>
-      <nt-form-item label="">
-        <nt-button html-type="submit">提交</nt-button>
-        <nt-button type="normal" @click="handleReset">重置</nt-button>
-      </nt-form-item>
-    </nt-form>
+    <lt-form :model="formFields" :rules="rules" >
+      <lt-form-item label="用户名" required name="username" >
+        <lt-input placeholder="请输入用户名" v-model="formFields.username"></lt-input>
+      </lt-form-item>
+      <lt-form-item label="密码" required name="password">
+        <lt-input placeholder="请输入密码" v-model="formFields.password"></lt-input>
+      </lt-form-item>
+      <lt-form-item label="">
+        <lt-button html-type="submit">提交</lt-button>
+        <lt-button type="normal" @click="handleReset">重置</lt-button>
+      </lt-form-item>
+    </lt-form>
   </template>
   </textarea>
   <template #preview>
@@ -111,17 +111,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-form inline>
-    <nt-form-item label="用户名" required name="username">
-      <nt-input placeholder="请输入用户名"></nt-input>
-    </nt-form-item>
-    <nt-form-item label="密码" required name="password">
-      <nt-input placeholder="请输入密码"></nt-input>
-    </nt-form-item>
-    <nt-form-item>
-      <nt-button html-type="submit">提交</nt-button>
-    </nt-form-item>
-  </nt-form>
+  <lt-form inline>
+    <lt-form-item label="用户名" required name="username">
+      <lt-input placeholder="请输入用户名"></lt-input>
+    </lt-form-item>
+    <lt-form-item label="密码" required name="password">
+      <lt-input placeholder="请输入密码"></lt-input>
+    </lt-form-item>
+    <lt-form-item>
+      <lt-button html-type="submit">提交</lt-button>
+    </lt-form-item>
+  </lt-form>
   </textarea>
   <template #preview>
     <Form inline>
@@ -152,9 +152,9 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-form-item label="开关">
-    <nt-switch />
-  </nt-form-item>
+  <lt-form-item label="开关">
+    <lt-switch />
+  </lt-form-item>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -168,17 +168,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html" v-pre>
-  <nt-form label-position="right">
-    <nt-form-item label="用户名">
-      <nt-input placeholder="请输入用户名"></nt-input>
-    </nt-form-item>
-    <nt-form-item label="密码">
-      <nt-input placeholder="请输入密码"></nt-input>
-    </nt-form-item>
-    <nt-form-item label="">
-      <nt-button html-type="submit">提交</nt-button>
-    </nt-form-item>
-  </nt-form>
+  <lt-form label-position="right">
+    <lt-form-item label="用户名">
+      <lt-input placeholder="请输入用户名"></lt-input>
+    </lt-form-item>
+    <lt-form-item label="密码">
+      <lt-input placeholder="请输入密码"></lt-input>
+    </lt-form-item>
+    <lt-form-item label="">
+      <lt-button html-type="submit">提交</lt-button>
+    </lt-form-item>
+  </lt-form>
   </textarea>
   <template #preview>
     <Form :label-position="formAlign">

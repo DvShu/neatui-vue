@@ -23,7 +23,7 @@
     const open = ref(true);
   </script>
   <template>
-    <nt-switch v-model="open"></nt-switch>
+    <lt-switch v-model="open"></lt-switch>
   </template>
   </textarea>
   <template #preview>
@@ -40,7 +40,7 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-switch v-model="open" checked-text="Y" unchecked-text="N"></nt-switch>
+    <lt-switch v-model="open" checked-text="Y" unchecked-text="N"></lt-switch>
   </template>
   </textarea>
   <template #preview>
@@ -57,12 +57,12 @@
   <CodePreview>
   <textarea lang="vue-html">
   <template>
-    <nt-switch v-model="open">
+    <lt-switch v-model="open">
       <template #action="slotProp">
-        <nt-moon-icon v-if="slotProp.checked"></nt-moon-icon>
-        <nt-sun-icon v-else></nt-sun-icon>
+        <lt-moon-icon v-if="slotProp.checked"></lt-moon-icon>
+        <lt-sun-icon v-else></lt-sun-icon>
       </template>
-    </nt-switch>
+    </lt-switch>
   </template>
   </textarea>
   <template #preview>

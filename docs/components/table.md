@@ -347,7 +347,7 @@
     }]
   </script>
   <template>
-    <nt-table :data="dataSource" :columns="columns"></nt-table>
+    <lt-table :data="dataSource" :columns="columns"></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -364,7 +364,7 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-table :data="dataSource" :columns="columns" :stripe="false"></nt-table>
+    <lt-table :data="dataSource" :columns="columns" :stripe="false"></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -381,7 +381,7 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-table :data="dataSource" :columns="columns" border></nt-table>
+    <lt-table :data="dataSource" :columns="columns" border></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -398,7 +398,7 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-table :data="[]" :columns="columns"></nt-table>
+    <lt-table :data="[]" :columns="columns"></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -461,7 +461,7 @@
     }]
   </script>
   <template>
-    <nt-table :data="dataSource2" :columns="columns" fixed-head style="max-height:200px;" class="nt-scrollbar"></nt-table>
+    <lt-table :data="dataSource2" :columns="columns" fixed-head style="max-height:200px;" class="nt-scrollbar"></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -471,7 +471,7 @@
 </ClientOnly>
 
 > 1. 设置 `max-height` 可以通过直接设置 `style`；也可以通过 [tailwindcss-max-height](https://www.tailwindcss.cn/docs/max-height#setting-the-maximum-height)
-> 2. 如果想改变滚动条样式，参考 [工具样式-滚动条](../css-util#_2-滚动条样式)；引入样式表，然后给 `Table` 组件, 添加 `nt-scrollbar` 的类名: `<nt-table ... fixed-head class="max-h-24 nt-scrollbar"></nt-table>`
+> 2. 如果想改变滚动条样式，参考 [工具样式-滚动条](../css-util#_2-滚动条样式)；引入样式表，然后给 `Table` 组件, 添加 `nt-scrollbar` 的类名: `<lt-table ... fixed-head class="max-h-24 nt-scrollbar"></lt-table>`
 
 ### 排序
 
@@ -502,7 +502,7 @@
   const defaultSort = { key: 'age', order: 'desc' }
   </script>
   <template>
-    <nt-table :data="dataSource1" :columns="columns3" :default-sort="defaultSort"></nt-table>
+    <lt-table :data="dataSource1" :columns="columns3" :default-sort="defaultSort"></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -527,7 +527,7 @@
     }
   </script>
   <template>
-    <nt-table :data="dataSource1" :columns="columns3" :render-summary="renderSummary"></nt-table>
+    <lt-table :data="dataSource1" :columns="columns3" :render-summary="renderSummary"></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -567,7 +567,7 @@
     }]
   </script>
   <template>
-    <nt-table :data="dataSource1" :columns="columns4" border></nt-table>
+    <lt-table :data="dataSource1" :columns="columns4" border></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -584,7 +584,7 @@
   <CodePreview>
   <textarea lang="vue-html">
   <template>
-    <nt-table :data="dataSource3" :columns="columns5" border></nt-table>
+    <lt-table :data="dataSource3" :columns="columns5" border></lt-table>
   </template>
   </textarea>
   <template #preview>
@@ -648,7 +648,7 @@
     }]
   </script>
   <template>
-    <nt-table :data="dataSource4" :columns="columns6" border></nt-table>
+    <lt-table :data="dataSource4" :columns="columns6" border></lt-table>
   </template>
   </textarea>
   <template #preview>

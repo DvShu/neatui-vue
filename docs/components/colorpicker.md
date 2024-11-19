@@ -24,7 +24,7 @@
     const color = ref('#722ed1');
   </script>
   <template>
-    <nt-color-picker v-model="color"></nt-color-picker>
+    <lt-color-picker v-model="color"></lt-color-picker>
   </template>
   </textarea>
   <template #preview>

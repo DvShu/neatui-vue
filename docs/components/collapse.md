@@ -20,17 +20,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse>
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse>
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -42,17 +42,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse v-model='active1' arrow-placement="right">
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse v-model='active1' arrow-placement="right">
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   <template #preview>
     <Collapse v-model="active1">
@@ -77,17 +77,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse :default-expanded-names='["1"]'>
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse :default-expanded-names='["1"]'>
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   <template #preview>
   <Collapse accordion>
@@ -112,17 +112,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse arrow-placement="right">
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse arrow-placement="right">
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -134,17 +134,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse arrow-placement="right" header-justify="space-between">
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse arrow-placement="right" header-justify="space-between">
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -156,17 +156,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse arrow-placement="right" header-justify="space-between" background>
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse arrow-placement="right" header-justify="space-between" background>
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -178,17 +178,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse arrow-placement="right" header-justify="space-between" background gap="10px">
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse arrow-placement="right" header-justify="space-between" background gap="10px">
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -200,17 +200,17 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse arrow-placement="right" header-justify="space-between" background border-radius="5px" gap="10px">
-    <nt-collapse-item title="红灯" name="1" >
+  <lt-collapse arrow-placement="right" header-justify="space-between" background border-radius="5px" gap="10px">
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -222,7 +222,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-collapse
+  <lt-collapse
     arrow-placement="right"
     header-justify="space-between"
     background
@@ -230,16 +230,16 @@
     gap="10px"
     grid
   >
-    <nt-collapse-item title="红灯" name="1" >
+    <lt-collapse-item title="红灯" name="1" >
       <div>红灯 - 停</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="绿灯" name="2" >
+    </lt-collapse-item>
+    <lt-collapse-item title="绿灯" name="2" >
       <div>绿灯 - 行</div>
-    </nt-collapse-item>
-    <nt-collapse-item title="黄灯" name="3" >
+    </lt-collapse-item>
+    <lt-collapse-item title="黄灯" name="3" >
       <div>黄灯 - 注意</div>
-    </nt-collapse-item>
-  </nt-collapse>
+    </lt-collapse-item>
+  </lt-collapse>
   </textarea>
   </CodePreview>
 </ClientOnly>

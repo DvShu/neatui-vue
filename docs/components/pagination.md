@@ -24,7 +24,7 @@
     }
   </script>
   <template>
-    <nt-pagination :total="100" @change="handlePageChange"></nt-pagination>
+    <lt-pagination :total="100" @change="handlePageChange"></lt-pagination>
   </template>
   </textarea>
   <template #preview>
@@ -40,11 +40,11 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-pagination :total="100" align="start"></nt-pagination>
+  <lt-pagination :total="100" align="start"></lt-pagination>
   <hr />
-  <nt-pagination :total="100" align="center"></nt-pagination>
+  <lt-pagination :total="100" align="center"></lt-pagination>
   <hr />
-  <nt-pagination :total="100" align="end"></nt-pagination>
+  <lt-pagination :total="100" align="end"></lt-pagination>
   </textarea>
   <template #preview>
     <Pagination :total="100" align="start"></Pagination>
@@ -67,11 +67,11 @@
     const singleHide = ref(false)
   </script>
   <template>
-    <nt-form-item label="单页隐藏">
-      <nt-switch v-model="singleHide" />
-    </nt-form-item>
+    <lt-form-item label="单页隐藏">
+      <lt-switch v-model="singleHide" />
+    </lt-form-item>
     <hr />
-    <nt-pagination :page-count="1" :hide-on-single-page="singleHide"></nt-pagination>
+    <lt-pagination :page-count="1" :hide-on-single-page="singleHide"></lt-pagination>
   </template>
   </textarea>
   <template #preview>
@@ -91,7 +91,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-pagination :page-count="100" simple></nt-pagination>
+  <lt-pagination :page-count="100" simple></lt-pagination>
   </textarea>
   <template #preview>
     <Pagination :page-count="100" simple></Pagination>

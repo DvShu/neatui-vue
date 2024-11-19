@@ -3,7 +3,7 @@
 ### 1.1 引入样式
 
 ```ts
-import '@asteres/neatui-vue/style/util/transition.css';
+import '@asteres/litos-ui-vue/style/util/transition.css';
 ```
 
 <script setup>
@@ -27,7 +27,7 @@ const show2 = ref(true)
 
 <ClientOnly><CodePreview class="mb-15">
 <textarea lang="vue-html">
-<nt-button @click="show = !show">Toggle</nt-button>
+<lt-button @click="show = !show">Toggle</lt-button>
 <Transition name="nt-opacity">
 
 <p v-if="show">Hello world</p>
@@ -47,7 +47,7 @@ const show2 = ref(true)
 
 <ClientOnly><CodePreview class="mb-15">
 <textarea lang="vue-html">
-<nt-button @click="show = !show">Toggle</nt-button>
+<lt-button @click="show = !show">Toggle</lt-button>
 <Transition name="nt-fadein">
 
 <p v-if="show">Hello world</p>
@@ -74,7 +74,7 @@ const show2 = ref(true)
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-button @click="show = !show">Toggle</nt-button>
+  <lt-button @click="show = !show">Toggle</lt-button>
     <Transition name="nt-opacity">
   <p v-if="show">Hello world</p>
   </Transition>
@@ -102,7 +102,7 @@ const show2 = ref(true)
 ### 引入样式
 
 ```ts
-import '@asteres/neatui-vue/style/util/animation.css';
+import '@asteres/litos-ui-vue/style/util/animation.css';
 ```
 
 ### 使用
@@ -114,7 +114,7 @@ import '@asteres/neatui-vue/style/util/animation.css';
 所有的动画的 `class` 规则为: `nt-` + 动画名称 + `-anim`；例如旋转动画为: `nt-rotate-anim`
 
 ```html
-<nt-loading-icon class="nt-rotate-anim" />
+<lt-loading-icon class="nt-rotate-anim" />
 ```
 
 #### 通过 `css animation` 使用动画名称
@@ -123,7 +123,7 @@ import '@asteres/neatui-vue/style/util/animation.css';
 
 ```vue
 <template>
-  <nt-loading-icon class="custome-rotate" />
+  <lt-loading-icon class="custome-rotate" />
 </template>
 
 <style>
@@ -149,7 +149,7 @@ import '@asteres/neatui-vue/style/util/animation.css';
 ### 引入滚动条样式表
 
 ```ts
-import '@asteres/neatui-vue/style/util/scrollbar.css';
+import '@asteres/litos-ui-vue/style/util/scrollbar.css';
 ```
 
 ### 使用

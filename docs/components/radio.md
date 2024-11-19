@@ -25,12 +25,12 @@
     const allowService = ref(false);
   </script>
   <template>
-    <nt-radio v-model="allowService">
+    <lt-radio v-model="allowService">
       <span>
         <span>同意</span>
         <a href='#'>隐私协议</a>
       </span>
-    </nt-radio>
+    </lt-radio>
   </template>
   </textarea>
   <template #preview>
@@ -51,7 +51,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-radio label="禁用" disabled></nt-radio>
+  <lt-radio label="禁用" disabled></lt-radio>
   </textarea>
   <template #preview>
     <Radio label="禁用" disabled />
@@ -71,10 +71,10 @@
     const sex = ref('0');
   </script>
   <template>
-    <nt-radio-group v-model="sex">
-      <nt-radio label="男" value="0" />
-      <nt-radio label="女" value="1" />
-    </nt-radio-group>
+    <lt-radio-group v-model="sex">
+      <lt-radio label="男" value="0" />
+      <lt-radio label="女" value="1" />
+    </lt-radio-group>
   </template>
   </textarea>
   <template #preview>
@@ -94,10 +94,10 @@
   <CodePreview>
   <textarea lang="vue-html">
   <template>
-    <nt-radio-group v-model="sex">
-      <nt-radio label="男" value="0" type="button" />
-      <nt-radio label="女" value="1" type="button" />
-    </nt-radio-group>
+    <lt-radio-group v-model="sex">
+      <lt-radio label="男" value="0" type="button" />
+      <lt-radio label="女" value="1" type="button" />
+    </lt-radio-group>
   </template>
   </textarea>
   <template #preview>

@@ -12,15 +12,15 @@ import { Card, Button } from '../../src'
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-card header-text="card title">
+<lt-card header-text="card title">
 <template v-slot:default>
 
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<nt-button text>按钮</nt-button>
+<lt-button text>按钮</lt-button>
 </template>
-</nt-card>
+</lt-card>
 </textarea>
 <template #preview>
 <Card header-text="card title">
@@ -40,12 +40,12 @@ import { Card, Button } from '../../src'
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-card header-text="card title" :show-header="false">
+<lt-card header-text="card title" :show-header="false">
 <template v-slot:default>
 
 <div>卡片内容</div>
 </template>
-</nt-card>
+</lt-card>
 </textarea>
 <template #preview>
 <Card header-text="card title" :show-header="false">
@@ -62,15 +62,15 @@ import { Card, Button } from '../../src'
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-card header-text="card title" show-footer footer-text="底部区域">
+<lt-card header-text="card title" show-footer footer-text="底部区域">
 <template v-slot:default>
 
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<nt-button text>按钮</nt-button>
+<lt-button text>按钮</lt-button>
 </template>
-</nt-card>
+</lt-card>
 </textarea>
 <template #preview>
 <Card header-text="card title" show-footer footer-text="底部区域">
@@ -90,7 +90,7 @@ import { Card, Button } from '../../src'
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-card :show-footer="true">
+<lt-card :show-footer="true">
 <template v-slot:header>
 <span style="color: red">卡片标题</span>
 </template>
@@ -99,12 +99,12 @@ import { Card, Button } from '../../src'
 <div>卡片内容</div>
 </template>
 <template v-slot:header-extra>
-<nt-button text>按钮</nt-button>
+<lt-button text>按钮</lt-button>
 </template>
 <template v-slot:footer>
 <span style="color: orange">卡片标题</span>
 </template>
-</nt-card>
+</lt-card>
 </textarea>
 <template #preview>
 <Card :show-footer="true">
@@ -134,30 +134,30 @@ import { Card, Button } from '../../src'
 <textarea lang="vue-html">
 
   <div class="grid grid-cols-3 gap-4">
-    <nt-card header-text="卡片标题1">
+    <lt-card header-text="卡片标题1">
       <template v-slot:default>
         <div>卡片内容1</div>
       </template>
       <template v-slot:header-extra>
-        <nt-button text>按钮</nt-button>
+        <lt-button text>按钮</lt-button>
       </template>
-    </nt-card>
-    <nt-card header-text="卡片标题2">
+    </lt-card>
+    <lt-card header-text="卡片标题2">
       <template v-slot:default>
         <div>卡片内容2</div>
       </template>
       <template v-slot:header-extra>
-        <nt-button text>按钮</nt-button>
+        <lt-button text>按钮</lt-button>
       </template>
-    </nt-card>
-    <nt-card header-text="卡片标题3">
+    </lt-card>
+    <lt-card header-text="卡片标题3">
       <template v-slot:default>
         <div>卡片内容3</div>
       </template>
       <template v-slot:header-extra>
-        <nt-button text>按钮</nt-button>
+        <lt-button text>按钮</lt-button>
       </template>
-    </nt-card>
+    </lt-card>
   </div>
   </textarea>
   <template #preview>

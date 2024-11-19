@@ -363,7 +363,7 @@ npm install @tanstack/vue-table
     ]
   </script>
   <template>
-    <nt-tanstack-table :data="data" :columns="columns" border></nt-tanstack-table>
+    <lt-tanstack-table :data="data" :columns="columns" border></lt-tanstack-table>
   </template>
   </textarea>
   <template #preview>
@@ -429,12 +429,12 @@ npm install @tanstack/vue-table
     ]
   </script>
   <template>
-    <nt-tanstack-table
+    <lt-tanstack-table
       :data="data"
       :columns="columns1"
       fixed-head
       style="max-height:150px;"
-    ></nt-tanstack-table>
+    ></lt-tanstack-table>
   </template>
   </textarea>
   <template #preview>
@@ -456,7 +456,7 @@ npm install @tanstack/vue-table
     }, ...columns]
   </script>
   <template>
-    <nt-tanstack-table :data="data" :columns="columns2"></nt-tanstack-table>
+    <lt-tanstack-table :data="data" :columns="columns2"></lt-tanstack-table>
   </template>
   </textarea>
   <template #preview>
@@ -472,7 +472,7 @@ npm install @tanstack/vue-table
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-    <nt-tanstack-table :data="data" :columns="columns2" :multi-selection="false"></nt-tanstack-table>
+    <lt-tanstack-table :data="data" :columns="columns2" :multi-selection="false"></lt-tanstack-table>
   </textarea>
   <template #preview>
     <TanstackTable :data="data" :columns="columns2" :multi-selection="false"></TanstackTable>
@@ -495,7 +495,7 @@ npm install @tanstack/vue-table
     }]
   </script>
   <template>
-    <nt-tanstack-table :data="data" :columns="columns3"></nt-tanstack-table>
+    <lt-tanstack-table :data="data" :columns="columns3"></lt-tanstack-table>
   </template>
   </textarea>
   <template #preview>
@@ -568,7 +568,7 @@ npm install @tanstack/vue-table
     ]
   </script>
   <template>
-    <nt-tanstack-table :data="data1" :columns="columns4" border></nt-tanstack-table>
+    <lt-tanstack-table :data="data1" :columns="columns4" border></lt-tanstack-table>
   </template>
   </textarea>
   <template #preview>
@@ -625,7 +625,7 @@ npm install @tanstack/vue-table
     ]
   </script>
   <template>
-    <nt-tanstack-table :data="data2" :columns="columns5"></nt-tanstack-table>
+    <lt-tanstack-table :data="data2" :columns="columns5"></lt-tanstack-table>
   </template>
   </textarea>
   <template #preview>
@@ -652,7 +652,7 @@ npm install @tanstack/vue-table
     }
   </script>
   <template>
-    <nt-tanstack-table :data="data" :columns="columns" :expandable="expandable"></nt-tanstack-table>
+    <lt-tanstack-table :data="data" :columns="columns" :expandable="expandable"></lt-tanstack-table>
   </template>
   </textarea>
   <template #preview>

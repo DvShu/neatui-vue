@@ -54,18 +54,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DvShu/neatui-vue.git"
+    "url": "git+https://github.com/DvShu/litos-ui-vue.git"
   },
   "keywords": [
-    "neatui-vue",
+    "litos-ui-vue",
     "neatui",
     "vue",
     "ui framework",
     "component library"
   ],
-  "homepage": "https://dvshu.github.io/neatui-vue/",
+  "homepage": "https://dvshu.github.io/litos-ui-vue/",
   "bugs": {
-    "url": "https://github.com/DvShu/neatui-vue/issues"
+    "url": "https://github.com/DvShu/litos-ui-vue/issues"
   },
   "license": "MulanPSL-2.0",
   "dependencies": {

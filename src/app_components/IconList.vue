@@ -42,7 +42,7 @@ for (const path in modules) {
 }
 
 async function handleCopyIcon(name: string) {
-  await copy(`<nt-${name}-icon />`);
+  await copy(`<lt-${name}-icon />`);
   Message.success('复制成功');
 }
 </script>
