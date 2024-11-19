@@ -1,5 +1,5 @@
 {
-  "name": "@asteres/neatui-vue",
+  "name": "litos-ui-vue",
   "description": "基于 Vue3 的 UI 组件库",
   "version": "0.22.2",
   "type": "module",
