@@ -4,7 +4,11 @@
 
 ```ts
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'litos-ui-vue/style/util/transition.css';
+=======
+import '@asteres/litos-ui-vue/style/util/transition.css';
+>>>>>>> 0c57b7ee (rename: litos-ui-vue)
 =======
 import '@asteres/litos-ui-vue/style/util/transition.css';
 >>>>>>> 0c57b7ee (rename: litos-ui-vue)
@@ -107,7 +111,11 @@ const show2 = ref(true)
 
 ```ts
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'litos-ui-vue/style/util/animation.css';
+=======
+import '@asteres/litos-ui-vue/style/util/animation.css';
+>>>>>>> 0c57b7ee (rename: litos-ui-vue)
 =======
 import '@asteres/litos-ui-vue/style/util/animation.css';
 >>>>>>> 0c57b7ee (rename: litos-ui-vue)
@@ -157,7 +165,11 @@ import '@asteres/litos-ui-vue/style/util/animation.css';
 ### 引入滚动条样式表
 
 ```ts
+<<<<<<< HEAD
 import 'litos-ui-vue/style/util/scrollbar.css';
+=======
+import '@asteres/litos-ui-vue/style/util/scrollbar.css';
+>>>>>>> 0c57b7ee (rename: litos-ui-vue)
 ```
 
 ### 使用

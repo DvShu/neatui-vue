@@ -48,12 +48,20 @@ export default defineConfig({
 在 `main.ts` 中引入全局 CSS 变量文件
 
 ```js
+<<<<<<< HEAD
 import 'litos-ui-vue/style/vars.css';
+=======
+import '@asteres/litos-ui-vue/style/vars.css';
+>>>>>>> 0c57b7ee (rename: litos-ui-vue)
 ```
 
 ## 文档
 
+<<<<<<< HEAD
 [中文文档](https://dvshu.github.io/litos-ui-vue/)
+=======
+[中文 文档](https://dvshu.github.io/litos-ui-vue/)
+>>>>>>> 0c57b7ee (rename: litos-ui-vue)
 
 ## [更新记录](https://github.com/DvShu/litos-ui-vue/blob/main/CHANGELOG.md)
 
