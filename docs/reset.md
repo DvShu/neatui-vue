@@ -5,7 +5,7 @@
 例如，在 `main.ts` 中引入
 
 ```ts
-import '@asteres/neatui-vue/style/reset.css';
+import '@asteres/litos-ui-vue/style/reset.css';
 ```
 
 重置样式包含如下内容：

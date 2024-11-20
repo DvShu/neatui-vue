@@ -12,7 +12,7 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-qrcode text="Hello World"></nt-qrcode>
+<lt-qrcode text="Hello World"></lt-qrcode>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -22,7 +22,7 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-qrcode text="Hello World" fill="#4998f4" :size="120"></nt-qrcode>
+<lt-qrcode text="Hello World" fill="#4998f4" :size="120"></lt-qrcode>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -33,7 +33,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-    <nt-qrcode text="Hello World" icon-src="/neatui-vue/img_loading.png"></nt-qrcode>
+    <lt-qrcode text="Hello World" icon-src="/litos-ui-vue/img_loading.png"></lt-qrcode>
   </textarea>
   </CodePreview>
 </ClientOnly>

@@ -67,10 +67,10 @@ createApp(App).use(router).mount('#app');
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html" v-pre>
-  <nt-theme-button></nt-theme-button>
-  <nt-theme-select class="ml-10"></nt-theme-select>
-  <nt-theme-switch class="ml-10"></nt-theme-switch>
-  <nt-theme-radio class="mt-15"></nt-theme-radio>
+  <lt-theme-button></lt-theme-button>
+  <lt-theme-select class="ml-10"></lt-theme-select>
+  <lt-theme-switch class="ml-10"></lt-theme-switch>
+  <lt-theme-radio class="mt-15"></lt-theme-radio>
   </textarea>
   <template #preview>
     <ThemeButton></ThemeButton>
@@ -113,17 +113,17 @@ initTheme().then();
     });
   </script>
   <template>
-    <nt-radio-group v-model="theme">
-      <nt-radio value="auto" type="button">
-        <nt-theme-default-icon></nt-theme-default-icon>
-      </nt-radio>
-      <nt-radio value="light" type="button">
-        <nt-sun-icon></nt-sun-icon>
-      </nt-radio>
-      <nt-radio value="dark" type="button">
-        <nt-moon-icon></nt-moon-icon>
-      </nt-radio>
-    </nt-radio-group>
+    <lt-radio-group v-model="theme">
+      <lt-radio value="auto" type="button">
+        <lt-theme-default-icon></lt-theme-default-icon>
+      </lt-radio>
+      <lt-radio value="light" type="button">
+        <lt-sun-icon></lt-sun-icon>
+      </lt-radio>
+      <lt-radio value="dark" type="button">
+        <lt-moon-icon></lt-moon-icon>
+      </lt-radio>
+    </lt-radio-group>
   </template>
   </textarea>
   <template #preview>
@@ -149,7 +149,7 @@ initTheme().then();
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html" v-pre>
-  <nt-theme-color></nt-theme-color>
+  <lt-theme-color></lt-theme-color>
   </textarea>
   <template #preview>
     <ThemeColor @change='handleColorChange'></ThemeColor>

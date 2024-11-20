@@ -16,12 +16,12 @@
   <CodePreview>
   <textarea lang="vue" v-pre>
   <template>
-    <nt-floating-popover>
+    <lt-floating-popover>
       <template #trigger>
         <a>悬浮</a>
       </template>
       <span>悬浮内容</span>
-    </nt-floating-popover>
+    </lt-floating-popover>
   </template>
   </textarea>
   <template #preview>

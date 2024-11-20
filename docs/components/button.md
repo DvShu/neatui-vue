@@ -15,8 +15,8 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-button type="normal">Default</nt-button>
-  <nt-button type="primary" class="ml-10">Primary</nt-button>
+  <lt-button type="normal">Default</lt-button>
+  <lt-button type="primary" class="ml-10">Primary</lt-button>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -28,8 +28,8 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-button type="normal" text>Default</nt-button>
-  <nt-button type="primary" text class="ml-10">Primary</nt-button>
+  <lt-button type="normal" text>Default</lt-button>
+  <lt-button type="primary" text class="ml-10">Primary</lt-button>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -40,8 +40,8 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-button disabled type="normal">Default</nt-button>
-<nt-button type="text" class="ml-10" disabled>Text</nt-button>
+<lt-button disabled type="normal">Default</lt-button>
+<lt-button type="text" class="ml-10" disabled>Text</lt-button>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -51,8 +51,8 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-button loading type="normal">Default</nt-button>
-<nt-button type="primary" loading class="ml-10">Primary</nt-button>
+<lt-button loading type="normal">Default</lt-button>
+<lt-button type="primary" loading class="ml-10">Primary</lt-button>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -62,8 +62,8 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-button block type="normal">Default</nt-button>
-<nt-button type="primary" block class="mt-15">Text</nt-button>
+<lt-button block type="normal">Default</lt-button>
+<lt-button type="primary" block class="mt-15">Text</lt-button>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -73,8 +73,8 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-button circle type="normal">D</nt-button>
-<nt-button type="primary" round class="ml-10">Text</nt-button>
+<lt-button circle type="normal">D</lt-button>
+<lt-button type="primary" round class="ml-10">Text</lt-button>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -84,13 +84,13 @@
 
 <ClientOnly><CodePreview>
 <textarea lang="vue-html">
-<nt-button circle type="normal">
-<nt-search-icon></nt-search-icon>
-</nt-button>
-<nt-button type="primary" round class="ml-10">
-<nt-search-icon></nt-search-icon>
+<lt-button circle type="normal">
+<lt-search-icon></lt-search-icon>
+</lt-button>
+<lt-button type="primary" round class="ml-10">
+<lt-search-icon></lt-search-icon>
 <span>Search</span>
-</nt-button>
+</lt-button>
 </textarea>
 </CodePreview></ClientOnly>
 
@@ -101,7 +101,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-button type="primary" ghost>透明按钮</nt-button>
+  <lt-button type="primary" ghost>透明按钮</lt-button>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -111,9 +111,9 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-button color="#722ed1">按钮</nt-button>
-  <nt-button color="#eb2f96" ghost class="ml-10">按钮</nt-button>
-  <nt-button color="#4998f4" text class="ml-10">按钮</nt-button>
+  <lt-button color="#722ed1">按钮</lt-button>
+  <lt-button color="#eb2f96" ghost class="ml-10">按钮</lt-button>
+  <lt-button color="#4998f4" text class="ml-10">按钮</lt-button>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -126,8 +126,8 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-button type="blue">蓝色按钮</nt-button>
-    <nt-button type="gradient" class="ml-10">渐变按钮</nt-button>
+    <lt-button type="blue">蓝色按钮</lt-button>
+    <lt-button type="gradient" class="ml-10">渐变按钮</lt-button>
   </template>
   <style>
     .nt-btn-blue {

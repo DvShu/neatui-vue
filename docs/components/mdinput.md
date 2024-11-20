@@ -26,7 +26,7 @@
     const value = ref('')
   </script>
   <template>
-    <nt-md-input v-model="value" label="姓名"></nt-md-input>
+    <lt-md-input v-model="value" label="姓名"></lt-md-input>
   </template>
   </textarea>
   <template #preview>
@@ -42,7 +42,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-md-input v-model="value" label="姓名" outline></nt-md-input>
+  <lt-md-input v-model="value" label="姓名" outline></lt-md-input>
   </textarea>
   <template #preview>
     <MdInput v-model="value" label="姓名" outline></MdInput>

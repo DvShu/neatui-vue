@@ -54,7 +54,7 @@
     const value = ref('');
   </script>
   <template>
-    <nt-select :options="options" v-model="value" style="width:180px;"></nt-select>
+    <lt-select :options="options" v-model="value" style="width:180px;"></lt-select>
   </template>
   </textarea>
   <template #preview>
@@ -65,21 +65,21 @@
 
 ### 多选
 
-设置 `multiple` 属性即可启用多选， 此时 `v-model` 的值为当前选中值所组成的数组。默认情况下选中值会以 <a href="/neatui-vue/components/tag" target="_blank">Tag</a> 组件的形式展现， 你也可以设置 `collapse-tags` 属性将它们合并为一段文字。
+设置 `multiple` 属性即可启用多选， 此时 `v-model` 的值为当前选中值所组成的数组。默认情况下选中值会以 <a href="/litos-ui-vue/components/tag" target="_blank">Tag</a> 组件的形式展现， 你也可以设置 `collapse-tags` 属性将它们合并为一段文字。
 
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue" v-pre>
   <template>
-    <nt-select :options="options" v-model="value1" multiple style="width:180px;"></nt-select>
-    <nt-select
+    <lt-select :options="options" v-model="value1" multiple style="width:180px;"></lt-select>
+    <lt-select
       :options="options"
       v-model="value2"
       multiple
       style="width:180px;"
       class="ml-10"
       collapse-tags
-    ></nt-select>
+    ></lt-select>
   </template>
   </textarea>
   <template #preview>
@@ -104,12 +104,12 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-  <nt-select
+  <lt-select
     :options="options"
     v-model="selectedValue"
     style="width:180px;"
     clearable
-  ></nt-select>
+  ></lt-select>
   </template>
   </textarea>
   <template #preview>
@@ -142,12 +142,12 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-select
+    <lt-select
       :options="options"
       v-model="selectedValue"
       style="width:180px;"
       filterable
-    ></nt-select>
+    ></lt-select>
   </template>
   </textarea>
   <template #preview>
@@ -200,7 +200,7 @@
     }
   </script>
   <template>
-    <nt-select
+    <lt-select
       :options="options2"
       v-model="selectedValue"
       style="width:180px;"
@@ -208,7 +208,7 @@
       remote
       @search="handleSearch"
       :loading="loading"
-    ></nt-select>
+    ></lt-select>
   </template>
   </textarea>
   <template #preview>

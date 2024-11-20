@@ -5,7 +5,7 @@
 ## 引入
 
 ```js
-import '@asteres/neatui-vue/style/util/tabs.css';
+import '@asteres/litos-ui-vue/style/util/tabs.css';
 ```
 
 ## 演示
@@ -70,10 +70,10 @@ const registRules = [
   </script>
   <template>
   <div class="nt-tabs">
-    <nt-tabbar v-model="active" type="bar">
-      <nt-tabbar-item name="1">标签一</nt-tabbar-item>
-      <nt-tabbar-item name="2">标签二</nt-tabbar-item>
-    </nt-tabbar>
+    <lt-tabbar v-model="active" type="bar">
+      <lt-tabbar-item name="1">标签一</lt-tabbar-item>
+      <lt-tabbar-item name="2">标签二</lt-tabbar-item>
+    </lt-tabbar>
     <div class="nt-tabs-content">
       <div v-if="active === '1'">标签一</div>
       <div v-if="active === '2'">标签二</div>
@@ -147,38 +147,38 @@ const registRules = [
   <template>
     <div class="login-form-wrapper">
       <div class="nt-tabs">
-        <nt-tabbar v-model="templateType" type="bar" justify-content="space-evenly">
-          <nt-tabbar-item name="login">登录</nt-tabbar-item>
-          <nt-tabbar-item name="regist">注册</nt-tabbar-item>
-        </nt-tabbar>
+        <lt-tabbar v-model="templateType" type="bar" justify-content="space-evenly">
+          <lt-tabbar-item name="login">登录</lt-tabbar-item>
+          <lt-tabbar-item name="regist">注册</lt-tabbar-item>
+        </lt-tabbar>
         <div class="nt-tabs-content">
           <!-- 登录 -->
-          <nt-form v-if="templateType === 'login'" :model="loginParams" :rules="loginRules">
-            <nt-form-item label="用户名" required name="username">
-              <nt-input placeholder="请输入用户名" v-model="loginParams.username"></nt-input>
-            </nt-form-item>
-            <nt-form-item label="密码" required name="password">
-              <nt-input placeholder="请输入密码" v-model="loginParams.password" html-type="password"></nt-input>
-            </nt-form-item>
-            <nt-form-item label="">
-              <nt-button html-type="submit">提交</nt-button>
-            </nt-form-item>
-          </nt-form>
+          <lt-form v-if="templateType === 'login'" :model="loginParams" :rules="loginRules">
+            <lt-form-item label="用户名" required name="username">
+              <lt-input placeholder="请输入用户名" v-model="loginParams.username"></lt-input>
+            </lt-form-item>
+            <lt-form-item label="密码" required name="password">
+              <lt-input placeholder="请输入密码" v-model="loginParams.password" html-type="password"></lt-input>
+            </lt-form-item>
+            <lt-form-item label="">
+              <lt-button html-type="submit">提交</lt-button>
+            </lt-form-item>
+          </lt-form>
           <!-- 注册 -->
-          <nt-form v-if="templateType === 'regist'" :model="registParams" :rules="registRules">
-            <nt-form-item label="用户名" required name="username">
-              <nt-input placeholder="请输入用户名" v-model="registParams.username"></nt-input>
-            </nt-form-item>
-            <nt-form-item label="密码" required name="password">
-              <nt-input placeholder="请输入密码" v-model="registParams.password" html-type="password"></nt-input>
-            </nt-form-item>
-            <nt-form-item label="确认密码" required name="password2">
-              <nt-input placeholder="再次输入密码" v-model="registParams.password2" html-type="password"></nt-input>
-            </nt-form-item>
-            <nt-form-item label="">
-              <nt-button html-type="submit">提交</nt-button>
-            </nt-form-item>
-          </nt-form>
+          <lt-form v-if="templateType === 'regist'" :model="registParams" :rules="registRules">
+            <lt-form-item label="用户名" required name="username">
+              <lt-input placeholder="请输入用户名" v-model="registParams.username"></lt-input>
+            </lt-form-item>
+            <lt-form-item label="密码" required name="password">
+              <lt-input placeholder="请输入密码" v-model="registParams.password" html-type="password"></lt-input>
+            </lt-form-item>
+            <lt-form-item label="确认密码" required name="password2">
+              <lt-input placeholder="再次输入密码" v-model="registParams.password2" html-type="password"></lt-input>
+            </lt-form-item>
+            <lt-form-item label="">
+              <lt-button html-type="submit">提交</lt-button>
+            </lt-form-item>
+          </lt-form>
         </div>
       </div>
     </div>
@@ -239,10 +239,10 @@ const registRules = [
   </script>
   <template>
   <div class="nt-tabs">
-    <nt-tabbar v-model="active" type="card">
-      <nt-tabbar-item name="1">标签一</nt-tabbar-item>
-      <nt-tabbar-item name="2">标签二</nt-tabbar-item>
-    </nt-tabbar>
+    <lt-tabbar v-model="active" type="card">
+      <lt-tabbar-item name="1">标签一</lt-tabbar-item>
+      <lt-tabbar-item name="2">标签二</lt-tabbar-item>
+    </lt-tabbar>
     <div class="nt-tabs-content">
       <div v-if="active === '1'">标签一</div>
       <div v-if="active === '2'">标签二</div>
@@ -269,7 +269,7 @@ const registRules = [
 
 ```html
 <div class="nt-tabs">
-  <nt-tabbar></nt-tabbar>
+  <lt-tabbar></lt-tabbar>
   <div class="nt-tabs-content">
     <!-- 内容区域-->
   </div>

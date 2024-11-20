@@ -19,9 +19,9 @@ import { Tooltip } from '../../src'
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-tooltip content="提示内容">
+  <lt-tooltip content="提示内容">
       <span>显示提示</span>
-  </nt-tooltip>
+  </lt-tooltip>
   </textarea>
   <template #preview>
     <Tooltip content="提示内容">

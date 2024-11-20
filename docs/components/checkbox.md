@@ -38,7 +38,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-checkbox label="Option1" v-model="isCheckOption"></nt-checkbox>
+  <lt-checkbox label="Option1" v-model="isCheckOption"></lt-checkbox>
   </textarea>
   <template #preview>
     <Checkbox label="Option1" v-model="isCheckOption"></Checkbox>
@@ -53,7 +53,7 @@
 <ClientOnly>
   <CodePreview>
   <textarea lang="vue-html">
-  <nt-checkbox label="Option1" disabled></nt-checkbox>
+  <lt-checkbox label="Option1" disabled></lt-checkbox>
   </textarea>
   </CodePreview>
 </ClientOnly>
@@ -71,9 +71,9 @@
     const checkedCities = ref(['CD', 'SZ']);
   </script>
   <template>
-    <nt-checkbox-group v-model="checkedCities">
-      <nt-checkbox v-for="city in cities" :key="city[0]" :value="city[0]" :label="city[1]"></nt-checkbox>
-    </nt-checkbox-group>
+    <lt-checkbox-group v-model="checkedCities">
+      <lt-checkbox v-for="city in cities" :key="city[0]" :value="city[0]" :label="city[1]"></lt-checkbox>
+    </lt-checkbox-group>
   </template>
   </textarea>
   <template #preview>
@@ -109,23 +109,23 @@
     }
   </script>
   <template>
-    <nt-checkbox
+    <lt-checkbox
       v-model="checkAll"
       label="全选"
       :indeterminate="isIndeterminate"
       @change="handleCheckAllChange"
     />
-    <nt-checkbox-group
+    <lt-checkbox-group
       v-model="checkedCities"
       @change="handleGroupChange"
     >
-      <nt-checkbox
+      <lt-checkbox
         v-for="city in cities"
         :key="city[0]"
         :value="city[0]"
         :label="city[1]"
-      ></nt-checkbox>
-    </nt-checkbox-group>
+      ></lt-checkbox>
+    </lt-checkbox-group>
   </template>
   </textarea>
   <template #preview>
@@ -163,15 +163,15 @@
     const checkedCities = ref(['CD', 'SZ']);
   </script>
   <template>
-    <nt-checkbox-group v-model="checkedCities">
-      <nt-checkbox
+    <lt-checkbox-group v-model="checkedCities">
+      <lt-checkbox
         v-for="city in cities"
         :key="city[0]"
         :value="city[0]"
         :label="city[1]"
         type="button"
-      ></nt-checkbox>
-    </nt-checkbox-group>
+      ></lt-checkbox>
+    </lt-checkbox-group>
   </template>
   </textarea>
   <template #preview>

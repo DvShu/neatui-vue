@@ -101,7 +101,7 @@
   <CodePreview>
   <textarea lang="vue">
   <template>
-    <nt-polygon shape="rhombus" background="red"></nt-polygon>
+    <lt-polygon shape="rhombus" background="red"></lt-polygon>
   </template>
   <style>
     .nt-polygon-rhombus {

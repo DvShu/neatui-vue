@@ -29,7 +29,7 @@
     ]
   </script>
   <template>
-    <nt-select-ori :options="options"></nt-select-ori>
+    <lt-select-ori :options="options"></lt-select-ori>
   </template>
   </textarea>
   <template #preview>
