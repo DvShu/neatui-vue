@@ -5,7 +5,7 @@
 ## 引入
 
 ```js
-import '@asteres/litos-ui-vue/style/util/tabs.css';
+import 'litos-ui-vue/style/util/tabs.css';
 ```
 
 ## 演示

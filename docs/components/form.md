@@ -49,7 +49,7 @@
   <textarea lang="vue">
   <script setup lang="ts">
     import { reactive, watch, ref } from 'vue'
-    import { useFormReset } from '@asteres/litos-ui-vue'
+    import { useFormReset } from 'litos-ui-vue'
     const { formFields, resetFields } = useFormReset({
       username: '',
       password: ''
