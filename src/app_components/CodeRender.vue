@@ -18,19 +18,18 @@ function parseAttributes(child: Element) {
 }
 
 const parseComponent = function (name: string) {
-  if (name.startsWith('nt-')) {
+  if (name.startsWith('lt-')) {
     let tagname = parseAsyncComponentName(name);
+    console.log(tagname);
     if (tagname in modules) {
       return modules[tagname];
-    } else {
-      tagname;
     }
   }
   return name;
 };
 
 function parseAsyncComponentName(tagName: string): string {
-  if (tagName.startsWith('nt-')) {
+  if (tagName.startsWith('lt-')) {
     let name = tagName.substring(3);
     let nameItmes = name.split('-');
     nameItmes = nameItmes.map(
