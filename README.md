@@ -9,7 +9,7 @@
 1. 安装 UI 库
 
 ```shell
-npm install @asteres/litos-ui-vue
+npm install litos-ui-vue
 ```
 
 2. 安装自动导入插件
@@ -25,18 +25,18 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import NeatuiResolver from 'litos-ui-vue-resolver';
+import LitosUiResolver from 'litos-ui-vue-resolver';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [NeatuiResolver()],
+      resolvers: [LitosUiResolver()],
       dts: 'src/auto-imports.d.ts',
     }),
     Components({
-      resolvers: [NeatuiResolver()],
+      resolvers: [LitosUiResolver()],
       dts: 'src/components.d.ts',
     }),
   ],
@@ -48,12 +48,12 @@ export default defineConfig({
 在 `main.ts` 中引入全局 CSS 变量文件
 
 ```js
-import '@asteres/litos-ui-vue/style/vars.css';
+import 'litos-ui-vue/style/vars.css';
 ```
 
 ## 文档
 
-[中文 文档](https://dvshu.github.io/litos-ui-vue/)
+[中文文档](https://dvshu.github.io/litos-ui-vue/)
 
 ## [更新记录](https://github.com/DvShu/litos-ui-vue/blob/main/CHANGELOG.md)
 
