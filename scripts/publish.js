@@ -25,6 +25,7 @@ const commitHistory = []
 
 // 监听输出
 shell.stdout.on('data', (data) => {
+  console.log(data.toString())
   if (step === 2) {
     // 获取提交信息成功
     commitHistory.push(data);
@@ -32,22 +33,22 @@ shell.stdout.on('data', (data) => {
   step++;
 });
 
-shell.stdout.on('end', () => {
-  switch (step) {
-    case 0:
-      // 切换到主分支// 切换到主分支成功后, 使用 rebase 合并 dev -> main
-      shell.stdin.write('git rebase dev\n');
-      break;
-    case 1:
-      // 合并 dev -> main 成功后, 获取历史提交信息
-      shell.stdin.write('git log --format="%H--%s" -n 10\n');
-      break;
-    case 2:
-      // 获取提交信息成功
-      console.log(commitHistory);
-      break;
-  }
-})
+// shell.stdout.on('end', () => {
+//   // switch (step) {
+//   //   case 0:
+//   //     // 切换到主分支// 切换到主分支成功后, 使用 rebase 合并 dev -> main
+//   //     shell.stdin.write('git rebase dev\n');
+//   //     break;
+//   //   case 1:
+//   //     // 合并 dev -> main 成功后, 获取历史提交信息
+//   //     shell.stdin.write('git log --format="%H--%s" -n 10\n');
+//   //     break;
+//   //   case 2:
+//   //     // 获取提交信息成功
+//   //     console.log(commitHistory);
+//   //     break;
+//   // }
+// })
 
 shell.stderr.on('data', (data) => {
   console.error(`stderr: ${data}`);
@@ -55,5 +56,5 @@ shell.stderr.on('data', (data) => {
 });
 
 // 1. 切换到主分支
-shell.stdin.write('git checkout main\n');
+shell.stdin.write('git status\n');
 step++;
