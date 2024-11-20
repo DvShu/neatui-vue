@@ -21,8 +21,18 @@ const shell = spawn('powershell.exe', {
 
 let step = 0;
 
+const commitHistory = []
+
 // 监听输出
 shell.stdout.on('data', (data) => {
+  if (step === 2) {
+    // 获取提交信息成功
+    commitHistory.push(data);
+  }
+  step++;
+});
+
+shell.stdout.on('end', () => {
   switch (step) {
     case 0:
       // 切换到主分支// 切换到主分支成功后, 使用 rebase 合并 dev -> main
@@ -34,11 +44,10 @@ shell.stdout.on('data', (data) => {
       break;
     case 2:
       // 获取提交信息成功
-      console.log(data);
+      console.log(commitHistory);
       break;
   }
-  step++;
-});
+})
 
 shell.stderr.on('data', (data) => {
   console.error(`stderr: ${data}`);
