@@ -7,32 +7,32 @@ UI库除了依赖于 Vue3 外，还依赖于 [ph-utils](https://gitee.com/toward
 ### 1. 安装依赖
 
 ```sh
-npm install ph-utils @asteres/litos-ui-vue
+npm install ph-utils litos-ui-vue
 ```
 
 ### 2. 按需引入
 
-当前按需引入只支持在 `Vite` 中配合自动导入实现；[unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components)、[unplugin-auto-import](https://www.npmjs.com/package/unplugin-auto-import)、[litos-ui-vue-resolver](https://www.npmjs.com/package/litos-ui-vue-resolver)。
+当前按需引入只支持在 `Vite` 中配合自动导入实现；[unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components)、[unplugin-auto-import](https://www.npmjs.com/package/unplugin-auto-import)、[litos-ui-vue-resolver](https://www.npmjs.com/package/litos-ui-resolver)。
 
 ```sh
-npm install unplugin-vue-components unplugin-auto-import litos-ui-vue-resolver -D
+npm install unplugin-vue-components unplugin-auto-import litos-ui-resolver -D
 ```
 
 在 `vite.config.ts` 的 `plugins` 添加如下代码：
 
 ```ts
 import Components from 'unplugin-vue-components/vite';
-import NeatuiResolver from 'litos-ui-vue-resolver';
+import LitosUiResolver from 'litos-ui-resolver/vue';
 
 plugins: [
   // ...
   AutoImport({
-    resolvers: [NeatuiResolver()],
+    resolvers: [LitosUiResolver()],
     dts: 'src/auto-imports.d.ts',
   }),
   Components({
     dts: 'src/components.d.ts',
-    resolvers: [NeatuiResolver()],
+    resolvers: [LitosUiResolver()],
   }),
 ];
 ```
@@ -40,8 +40,8 @@ plugins: [
 当然如果不想自动引入，也可以手动引入组件和样式文件，例如：
 
 ```ts
-import { Button } from '@asteres/litos-ui-vue';
-import '@asteres/litos-ui-vue/style/button/index.css';
+import { Button } from 'litos-ui-vue';
+import 'litos-ui-vue/style/button/index.css';
 ```
 
 ### 3. 全局CSS样式
@@ -49,7 +49,7 @@ import '@asteres/litos-ui-vue/style/button/index.css';
 组件库的样式全部使用 `CSS` 变量控制，为了让样式可控变得简单化，所以需要手动引入全局变量文件；在入口文件，如 `main.ts` 中引入
 
 ```ts
-import '@asteres/litos-ui-vue/style/vars.css';
+import 'litos-ui-vue/style/vars.css';
 ```
 
 该变量样式文件包含如下内容
@@ -67,7 +67,7 @@ import '@asteres/litos-ui-vue/style/vars.css';
 1. 在 `main.ts` 引入样式表
 
 ```ts
-import '@asteres/litos-ui-vue/style/vars.css';
+import 'litos-ui-vue/style/vars.css';
 import './style.css';
 ```
 

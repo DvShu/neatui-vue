@@ -15,7 +15,7 @@
 由于使用不是特别频繁，所以没有封装为组件，在需要时手动引入样式表
 
 ```ts
-import '@asteres/litos-ui-vue/style/container.css';
+import 'litos-ui-vue/style/container.css';
 ```
 
 <script setup>

@@ -3,7 +3,7 @@
 ### 1.1 引入样式
 
 ```ts
-import '@asteres/litos-ui-vue/style/util/transition.css';
+import 'litos-ui-vue/style/util/transition.css';
 ```
 
 <script setup>
@@ -102,7 +102,7 @@ const show2 = ref(true)
 ### 引入样式
 
 ```ts
-import '@asteres/litos-ui-vue/style/util/animation.css';
+import 'litos-ui-vue/style/util/animation.css';
 ```
 
 ### 使用
@@ -149,7 +149,7 @@ import '@asteres/litos-ui-vue/style/util/animation.css';
 ### 引入滚动条样式表
 
 ```ts
-import '@asteres/litos-ui-vue/style/util/scrollbar.css';
+import 'litos-ui-vue/style/util/scrollbar.css';
 ```
 
 ### 使用
