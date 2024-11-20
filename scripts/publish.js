@@ -30,8 +30,7 @@ shell.stdout.on('data', (data) => {
     // 获取提交信息成功
     commitHistory.push(data);
   }
-  step++;
-});
+})
 
 // shell.stdout.on('end', () => {
 //   // switch (step) {
