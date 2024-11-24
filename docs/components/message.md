@@ -53,7 +53,7 @@ NtMessage.error("这是一条错误的提示信息")
 
 ## 手动关闭
 
-将 `duration` 属性设置为 `0``, 可以使 Message` 不自动消失。然后显示消息的函数会返回一个消息 `id`, 通过手动调用 `close` 手动关闭
+将 `duration` 属性设置为 `0`, 可以使 Message`不自动消失。然后显示消息的函数会返回一个消息`id`, 通过手动调用 `close` 手动关闭
 
 <ClientOnly><CodePreview>
 <textarea lang="ts">
@@ -91,19 +91,21 @@ duration: 5000
 
 ### Message 配置项
 
-| 名称          | 类型     | 默认值 | 说明                                                           |
-| ------------- | -------- | ------ | -------------------------------------------------------------- |
-| `message`     | `string` | -      | 消息正文内容                                                   |
-| `duration`    | `number` | `3000` | 消息显示的持续时间，单位为毫秒。如果设置为 `0`，则不会自动关闭 |
-| `type`        | `string` | `info` | 消息类型，可选值为 `success`、`warning`、`error`、`info`       |
-| `customClass` | `string` | -      | 自定义类名                                                     |
+<!-- prettier-ignore -->
+| 名称 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `message` | `string` | - | 消息正文内容 |
+| `duration` | `number` | `3000` | 消息显示的持续时间，单位为毫秒。如果设置为 `0`，则不会自动关闭 |
+| `type` | `string` | `info` | 消息类型，可选值为 `success`、`warning`、`error`、`info` |
+| `customClass` | `string` | - | 自定义类名 |
 
 ### Message 方法
 
-| 名称      | 参数         | 说明                                          | 返回类型 |
-| --------- | ------------ | --------------------------------------------- | -------- |
-| `info`    | `{...}`      | 显示普通提示信息, 参数为配置项, 返回消息 `id` | `string` |
-| `success` | `{...}`      | 显示成功提示信息                              | `string` |
-| `warn`    | `{...}`      | 显示警告提示信息                              | `string` |
-| `error`   | `{...}`      | 显示错误提示信息                              | `string` |
-| `close`   | `id: string` | 手动关闭消息                                  | -        |
+<!-- prettier-ignore -->
+| 名称 | 参数 | 说明 | 返回类型 |
+| --- | --- | --- | --- |
+| `info` | `{...}` | 显示普通提示信息, 参数为配置项, 返回消息 `id` | `string` |
+| `success` | `{...}` | 显示成功提示信息 | `string` |
+| `warn` | `{...}` | 显示警告提示信息 | `string` |
+| `error` | `{...}` | 显示错误提示信息 | `string` |
+| `close` | `id: string` | 手动关闭消息 | - |
