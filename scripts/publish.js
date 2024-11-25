@@ -50,9 +50,18 @@ shell.stdout.on('data', (data) => {
 // })
 
 shell.stderr.on('data', (data) => {
-  console.error(`stderr: ${data}`);
-  console.log(typeof data);
-  shell.stdin.end();
+  const errmsg = data.toString();
+  if (errmsg.includes('error') || errmsg.includes('Error')) {
+    console.error(errmsg);
+    shell.stdin.end();
+    return;
+  }
+  if (errmsg.includes('Switched to branch')) {
+    // 分支切换成功
+  }
+});
+shell.stderr.on('end', () => {
+  console.log('stderr end');
 });
 
 // 1. 切换到主分支
