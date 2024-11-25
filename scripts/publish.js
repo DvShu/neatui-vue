@@ -21,7 +21,7 @@ const shell = spawn('powershell.exe', {
 
 let step = 0;
 
-const commitHistory = []
+const commitHistory = [];
 
 // 监听输出
 shell.stdout.on('data', (data) => {
@@ -47,10 +47,11 @@ shell.stdout.on('end', () => {
       console.log(commitHistory);
       break;
   }
-})
+});
 
 shell.stderr.on('data', (data) => {
   console.error(`stderr: ${data}`);
+  console.log(typeof data);
   shell.stdin.end();
 });
 
