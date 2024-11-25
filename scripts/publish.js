@@ -25,7 +25,11 @@ const commitHistory = [];
 
 // 监听输出
 shell.stdout.on('data', (data) => {
+<<<<<<< HEAD
   console.log(data.toString());
+=======
+  console.log('data: ' + data);
+>>>>>>> 1891f2bf (docs)
   if (step === 2) {
     // 获取提交信息成功
     commitHistory.push(data);
