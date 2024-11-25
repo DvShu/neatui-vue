@@ -21,16 +21,16 @@ const shell = spawn('powershell.exe', {
 
 let step = 0;
 
-const commitHistory = []
+const commitHistory = [];
 
 // 监听输出
 shell.stdout.on('data', (data) => {
-  console.log(data.toString())
+  console.log(data.toString());
   if (step === 2) {
     // 获取提交信息成功
     commitHistory.push(data);
   }
-})
+});
 
 // shell.stdout.on('end', () => {
 //   // switch (step) {
@@ -51,6 +51,7 @@ shell.stdout.on('data', (data) => {
 
 shell.stderr.on('data', (data) => {
   console.error(`stderr: ${data}`);
+  console.log(typeof data);
   shell.stdin.end();
 });
 
