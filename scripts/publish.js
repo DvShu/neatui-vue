@@ -25,6 +25,7 @@ const commitHistory = [];
 
 // 监听输出
 shell.stdout.on('data', (data) => {
+  console.log('data');
   if (step === 2) {
     // 获取提交信息成功
     commitHistory.push(data);
@@ -33,6 +34,7 @@ shell.stdout.on('data', (data) => {
 });
 
 shell.stdout.on('end', () => {
+  console.log('end');
   switch (step) {
     case 0:
       // 切换到主分支// 切换到主分支成功后, 使用 rebase 合并 dev -> main
@@ -50,9 +52,18 @@ shell.stdout.on('end', () => {
 });
 
 shell.stderr.on('data', (data) => {
-  console.error(`stderr: ${data}`);
-  console.log(typeof data);
-  shell.stdin.end();
+  const errmsg = data.toString();
+  if (errmsg.includes('error') || errmsg.includes('Error')) {
+    console.error(errmsg);
+    shell.stdin.end();
+    return;
+  }
+  if (errmsg.includes('Switched to branch')) {
+    // 分支切换成功
+  }
+});
+shell.stderr.on('end', () => {
+  console.log('stderr end');
 });
 
 // 1. 切换到主分支
