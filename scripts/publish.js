@@ -60,10 +60,8 @@ shell.stderr.on('data', (data) => {
   }
   if (errmsg.includes('Switched to branch')) {
     // 分支切换成功
+    console.log('checkout success');
   }
-});
-shell.stderr.on('end', () => {
-  console.log('stderr end');
 });
 
 // 1. 切换到主分支
